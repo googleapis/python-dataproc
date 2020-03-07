@@ -4269,8 +4269,7 @@ PrestoJob = _reflection.GeneratedProtocolMessageType(
         ),
         DESCRIPTOR=_PRESTOJOB,
         __module__="google.cloud.dataproc_v1.proto.jobs_pb2",
-        __doc__="""A Dataproc job for running
-  `Presto <https://prestosql.io/>`__ queries
+        __doc__="""A Dataproc job for running `Presto <https://prestosql.io/>`__ queries
   
   
   Attributes:
