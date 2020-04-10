@@ -177,7 +177,7 @@ class ClusterControllerGrpcTransport(object):
     def list_clusters(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.list_clusters`.
 
-        Lists all regions/{region}/clusters in a project.
+        Lists all regions/{region}/clusters in a project alphabetically.
 
         Returns:
             Callable: A callable which accepts the appropriate
