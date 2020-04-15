@@ -40,7 +40,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         "\n\034com.google.cloud.dataproc.v1B\026WorkflowTemplatesProtoP\001Z@google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataproc"
     ),
     serialized_pb=_b(
-        '\n7google/cloud/dataproc_v1/proto/workflow_templates.proto\x12\x18google.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a-google/cloud/dataproc_v1/proto/clusters.proto\x1a)google/cloud/dataproc_v1/proto/jobs.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto"\xcd\x05\n\x10WorkflowTemplate\x12\x0f\n\x02id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x14\n\x07version\x18\x03 \x01(\x05\x42\x03\xe0\x41\x01\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12K\n\x06labels\x18\x06 \x03(\x0b\x32\x36.google.cloud.dataproc.v1.WorkflowTemplate.LabelsEntryB\x03\xe0\x41\x01\x12K\n\tplacement\x18\x07 \x01(\x0b\x32\x33.google.cloud.dataproc.v1.WorkflowTemplatePlacementB\x03\xe0\x41\x02\x12\x37\n\x04jobs\x18\x08 \x03(\x0b\x32$.google.cloud.dataproc.v1.OrderedJobB\x03\xe0\x41\x02\x12\x44\n\nparameters\x18\t \x03(\x0b\x32+.google.cloud.dataproc.v1.TemplateParameterB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01:\xca\x01\xea\x41\xc6\x01\n(dataproc.googleapis.com/WorkflowTemplate\x12Iprojects/{project}/regions/{region}/workflowTemplates/{workflow_template}\x12Mprojects/{project}/locations/{location}/workflowTemplates/{workflow_template} \x01"\xb4\x01\n\x19WorkflowTemplatePlacement\x12\x43\n\x0fmanaged_cluster\x18\x01 \x01(\x0b\x32(.google.cloud.dataproc.v1.ManagedClusterH\x00\x12\x45\n\x10\x63luster_selector\x18\x02 \x01(\x0b\x32).google.cloud.dataproc.v1.ClusterSelectorH\x00\x42\x0b\n\tplacement"\xe3\x01\n\x0eManagedCluster\x12\x19\n\x0c\x63luster_name\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12<\n\x06\x63onfig\x18\x03 \x01(\x0b\x32\'.google.cloud.dataproc.v1.ClusterConfigB\x03\xe0\x41\x02\x12I\n\x06labels\x18\x04 \x03(\x0b\x32\x34.google.cloud.dataproc.v1.ManagedCluster.LabelsEntryB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xb5\x01\n\x0f\x43lusterSelector\x12\x11\n\x04zone\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12Y\n\x0e\x63luster_labels\x18\x02 \x03(\x0b\x32<.google.cloud.dataproc.v1.ClusterSelector.ClusterLabelsEntryB\x03\xe0\x41\x02\x1a\x34\n\x12\x43lusterLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xe7\x04\n\nOrderedJob\x12\x14\n\x07step_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x39\n\nhadoop_job\x18\x02 \x01(\x0b\x32#.google.cloud.dataproc.v1.HadoopJobH\x00\x12\x37\n\tspark_job\x18\x03 \x01(\x0b\x32".google.cloud.dataproc.v1.SparkJobH\x00\x12;\n\x0bpyspark_job\x18\x04 \x01(\x0b\x32$.google.cloud.dataproc.v1.PySparkJobH\x00\x12\x35\n\x08hive_job\x18\x05 \x01(\x0b\x32!.google.cloud.dataproc.v1.HiveJobH\x00\x12\x33\n\x07pig_job\x18\x06 \x01(\x0b\x32 .google.cloud.dataproc.v1.PigJobH\x00\x12>\n\rspark_sql_job\x18\x07 \x01(\x0b\x32%.google.cloud.dataproc.v1.SparkSqlJobH\x00\x12\x45\n\x06labels\x18\x08 \x03(\x0b\x32\x30.google.cloud.dataproc.v1.OrderedJob.LabelsEntryB\x03\xe0\x41\x01\x12@\n\nscheduling\x18\t \x01(\x0b\x32\'.google.cloud.dataproc.v1.JobSchedulingB\x03\xe0\x41\x01\x12"\n\x15prerequisite_step_ids\x18\n \x03(\tB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\n\n\x08job_type"\x9d\x01\n\x11TemplateParameter\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06\x66ields\x18\x02 \x03(\tB\x03\xe0\x41\x02\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x46\n\nvalidation\x18\x04 \x01(\x0b\x32-.google.cloud.dataproc.v1.ParameterValidationB\x03\xe0\x41\x01"\xa1\x01\n\x13ParameterValidation\x12:\n\x05regex\x18\x01 \x01(\x0b\x32).google.cloud.dataproc.v1.RegexValidationH\x00\x12;\n\x06values\x18\x02 \x01(\x0b\x32).google.cloud.dataproc.v1.ValueValidationH\x00\x42\x11\n\x0fvalidation_type"\'\n\x0fRegexValidation\x12\x14\n\x07regexes\x18\x01 \x03(\tB\x03\xe0\x41\x02"&\n\x0fValueValidation\x12\x13\n\x06values\x18\x01 \x03(\tB\x03\xe0\x41\x02"\xaf\x05\n\x10WorkflowMetadata\x12\x15\n\x08template\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x03\x12G\n\x0e\x63reate_cluster\x18\x03 \x01(\x0b\x32*.google.cloud.dataproc.v1.ClusterOperationB\x03\xe0\x41\x03\x12;\n\x05graph\x18\x04 \x01(\x0b\x32\'.google.cloud.dataproc.v1.WorkflowGraphB\x03\xe0\x41\x03\x12G\n\x0e\x64\x65lete_cluster\x18\x05 \x01(\x0b\x32*.google.cloud.dataproc.v1.ClusterOperationB\x03\xe0\x41\x03\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x30.google.cloud.dataproc.v1.WorkflowMetadata.StateB\x03\xe0\x41\x03\x12\x19\n\x0c\x63luster_name\x18\x07 \x01(\tB\x03\xe0\x41\x03\x12N\n\nparameters\x18\x08 \x03(\x0b\x32:.google.cloud.dataproc.v1.WorkflowMetadata.ParametersEntry\x12\x33\n\nstart_time\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x31\n\x08\x65nd_time\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x19\n\x0c\x63luster_uuid\x18\x0b \x01(\tB\x03\xe0\x41\x03\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"8\n\x05State\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07RUNNING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03"T\n\x10\x43lusterOperation\x12\x19\n\x0coperation_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x12\n\x05\x65rror\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x11\n\x04\x64one\x18\x03 \x01(\x08\x42\x03\xe0\x41\x03"K\n\rWorkflowGraph\x12:\n\x05nodes\x18\x01 \x03(\x0b\x32&.google.cloud.dataproc.v1.WorkflowNodeB\x03\xe0\x41\x03"\xa3\x02\n\x0cWorkflowNode\x12\x14\n\x07step_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12"\n\x15prerequisite_step_ids\x18\x02 \x03(\tB\x03\xe0\x41\x03\x12\x13\n\x06job_id\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12\x44\n\x05state\x18\x05 \x01(\x0e\x32\x30.google.cloud.dataproc.v1.WorkflowNode.NodeStateB\x03\xe0\x41\x03\x12\x12\n\x05\x65rror\x18\x06 \x01(\tB\x03\xe0\x41\x03"j\n\tNodeState\x12\x1a\n\x16NODE_STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x42LOCKED\x10\x01\x12\x0c\n\x08RUNNABLE\x10\x02\x12\x0b\n\x07RUNNING\x10\x03\x12\r\n\tCOMPLETED\x10\x04\x12\n\n\x06\x46\x41ILED\x10\x05"\xa4\x01\n\x1d\x43reateWorkflowTemplateRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x41\n\x08template\x18\x02 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02"r\n\x1aGetWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01"\xad\x02\n"InstantiateWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\nrequest_id\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x65\n\nparameters\x18\x06 \x03(\x0b\x32L.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest.ParametersEntryB\x03\xe0\x41\x01\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xc8\x01\n(InstantiateInlineWorkflowTemplateRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x41\n\x08template\x18\x02 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x03 \x01(\tB\x03\xe0\x41\x01"b\n\x1dUpdateWorkflowTemplateRequest\x12\x41\n\x08template\x18\x01 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02"\x91\x01\n\x1cListWorkflowTemplatesRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01"\x81\x01\n\x1dListWorkflowTemplatesResponse\x12\x42\n\ttemplates\x18\x01 \x03(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x03\x12\x1c\n\x0fnext_page_token\x18\x02 \x01(\tB\x03\xe0\x41\x03"u\n\x1d\x44\x65leteWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x32\xe6\x10\n\x17WorkflowTemplateService\x12\x9b\x02\n\x16\x43reateWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"\x9b\x01\x82\xd3\xe4\x93\x02\x82\x01"5/v1/{parent=projects/*/locations/*}/workflowTemplates:\x08templateZ?"3/v1/{parent=projects/*/regions/*}/workflowTemplates:\x08template\xda\x41\x0fparent,template\x12\xf4\x01\n\x13GetWorkflowTemplate\x12\x34.google.cloud.dataproc.v1.GetWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"{\x82\xd3\xe4\x93\x02n\x12\x35/v1/{name=projects/*/locations/*/workflowTemplates/*}Z5\x12\x33/v1/{name=projects/*/regions/*/workflowTemplates/*}\xda\x41\x04name\x12\xd5\x02\n\x1bInstantiateWorkflowTemplate\x12<.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest\x1a\x1d.google.longrunning.Operation"\xd8\x01\x82\xd3\xe4\x93\x02\x8c\x01"A/v1/{name=projects/*/locations/*/workflowTemplates/*}:instantiate:\x01*ZD"?/v1/{name=projects/*/regions/*/workflowTemplates/*}:instantiate:\x01*\xda\x41\x04name\xda\x41\x0fname,parameters\xca\x41)\n\x15google.protobuf.Empty\x12\x10WorkflowMetadata\x12\xf4\x02\n!InstantiateInlineWorkflowTemplate\x12\x42.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest\x1a\x1d.google.longrunning.Operation"\xeb\x01\x82\xd3\xe4\x93\x02\xa6\x01"G/v1/{parent=projects/*/locations/*}/workflowTemplates:instantiateInline:\x08templateZQ"E/v1/{parent=projects/*/regions/*}/workflowTemplates:instantiateInline:\x08template\xda\x41\x0fparent,template\xca\x41)\n\x15google.protobuf.Empty\x12\x10WorkflowMetadata\x12\xa6\x02\n\x16UpdateWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"\xa6\x01\x82\xd3\xe4\x93\x02\x94\x01\x1a>/v1/{template.name=projects/*/locations/*/workflowTemplates/*}:\x08templateZH\x1a</v1/{template.name=projects/*/regions/*/workflowTemplates/*}:\x08template\xda\x41\x08template\x12\x87\x02\n\x15ListWorkflowTemplates\x12\x36.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest\x1a\x37.google.cloud.dataproc.v1.ListWorkflowTemplatesResponse"}\x82\xd3\xe4\x93\x02n\x12\x35/v1/{parent=projects/*/locations/*}/workflowTemplatesZ5\x12\x33/v1/{parent=projects/*/regions/*}/workflowTemplates\xda\x41\x06parent\x12\xe6\x01\n\x16\x44\x65leteWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest\x1a\x16.google.protobuf.Empty"{\x82\xd3\xe4\x93\x02n*5/v1/{name=projects/*/locations/*/workflowTemplates/*}Z5*3/v1/{name=projects/*/regions/*/workflowTemplates/*}\xda\x41\x04name\x1aK\xca\x41\x17\x64\x61taproc.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformBz\n\x1c\x63om.google.cloud.dataproc.v1B\x16WorkflowTemplatesProtoP\x01Z@google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataprocb\x06proto3'
+        '\n7google/cloud/dataproc_v1/proto/workflow_templates.proto\x12\x18google.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a-google/cloud/dataproc_v1/proto/clusters.proto\x1a)google/cloud/dataproc_v1/proto/jobs.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto"\xcd\x05\n\x10WorkflowTemplate\x12\x0f\n\x02id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x14\n\x07version\x18\x03 \x01(\x05\x42\x03\xe0\x41\x01\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12K\n\x06labels\x18\x06 \x03(\x0b\x32\x36.google.cloud.dataproc.v1.WorkflowTemplate.LabelsEntryB\x03\xe0\x41\x01\x12K\n\tplacement\x18\x07 \x01(\x0b\x32\x33.google.cloud.dataproc.v1.WorkflowTemplatePlacementB\x03\xe0\x41\x02\x12\x37\n\x04jobs\x18\x08 \x03(\x0b\x32$.google.cloud.dataproc.v1.OrderedJobB\x03\xe0\x41\x02\x12\x44\n\nparameters\x18\t \x03(\x0b\x32+.google.cloud.dataproc.v1.TemplateParameterB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01:\xca\x01\xea\x41\xc6\x01\n(dataproc.googleapis.com/WorkflowTemplate\x12Iprojects/{project}/regions/{region}/workflowTemplates/{workflow_template}\x12Mprojects/{project}/locations/{location}/workflowTemplates/{workflow_template} \x01"\xb4\x01\n\x19WorkflowTemplatePlacement\x12\x43\n\x0fmanaged_cluster\x18\x01 \x01(\x0b\x32(.google.cloud.dataproc.v1.ManagedClusterH\x00\x12\x45\n\x10\x63luster_selector\x18\x02 \x01(\x0b\x32).google.cloud.dataproc.v1.ClusterSelectorH\x00\x42\x0b\n\tplacement"\xe3\x01\n\x0eManagedCluster\x12\x19\n\x0c\x63luster_name\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12<\n\x06\x63onfig\x18\x03 \x01(\x0b\x32\'.google.cloud.dataproc.v1.ClusterConfigB\x03\xe0\x41\x02\x12I\n\x06labels\x18\x04 \x03(\x0b\x32\x34.google.cloud.dataproc.v1.ManagedCluster.LabelsEntryB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xb5\x01\n\x0f\x43lusterSelector\x12\x11\n\x04zone\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12Y\n\x0e\x63luster_labels\x18\x02 \x03(\x0b\x32<.google.cloud.dataproc.v1.ClusterSelector.ClusterLabelsEntryB\x03\xe0\x41\x02\x1a\x34\n\x12\x43lusterLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xde\x05\n\nOrderedJob\x12\x14\n\x07step_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x39\n\nhadoop_job\x18\x02 \x01(\x0b\x32#.google.cloud.dataproc.v1.HadoopJobH\x00\x12\x37\n\tspark_job\x18\x03 \x01(\x0b\x32".google.cloud.dataproc.v1.SparkJobH\x00\x12;\n\x0bpyspark_job\x18\x04 \x01(\x0b\x32$.google.cloud.dataproc.v1.PySparkJobH\x00\x12\x35\n\x08hive_job\x18\x05 \x01(\x0b\x32!.google.cloud.dataproc.v1.HiveJobH\x00\x12\x33\n\x07pig_job\x18\x06 \x01(\x0b\x32 .google.cloud.dataproc.v1.PigJobH\x00\x12:\n\x0bspark_r_job\x18\x0b \x01(\x0b\x32#.google.cloud.dataproc.v1.SparkRJobH\x00\x12>\n\rspark_sql_job\x18\x07 \x01(\x0b\x32%.google.cloud.dataproc.v1.SparkSqlJobH\x00\x12\x39\n\npresto_job\x18\x0c \x01(\x0b\x32#.google.cloud.dataproc.v1.PrestoJobH\x00\x12\x45\n\x06labels\x18\x08 \x03(\x0b\x32\x30.google.cloud.dataproc.v1.OrderedJob.LabelsEntryB\x03\xe0\x41\x01\x12@\n\nscheduling\x18\t \x01(\x0b\x32\'.google.cloud.dataproc.v1.JobSchedulingB\x03\xe0\x41\x01\x12"\n\x15prerequisite_step_ids\x18\n \x03(\tB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\n\n\x08job_type"\x9d\x01\n\x11TemplateParameter\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06\x66ields\x18\x02 \x03(\tB\x03\xe0\x41\x02\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x46\n\nvalidation\x18\x04 \x01(\x0b\x32-.google.cloud.dataproc.v1.ParameterValidationB\x03\xe0\x41\x01"\xa1\x01\n\x13ParameterValidation\x12:\n\x05regex\x18\x01 \x01(\x0b\x32).google.cloud.dataproc.v1.RegexValidationH\x00\x12;\n\x06values\x18\x02 \x01(\x0b\x32).google.cloud.dataproc.v1.ValueValidationH\x00\x42\x11\n\x0fvalidation_type"\'\n\x0fRegexValidation\x12\x14\n\x07regexes\x18\x01 \x03(\tB\x03\xe0\x41\x02"&\n\x0fValueValidation\x12\x13\n\x06values\x18\x01 \x03(\tB\x03\xe0\x41\x02"\xaf\x05\n\x10WorkflowMetadata\x12\x15\n\x08template\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x03\x12G\n\x0e\x63reate_cluster\x18\x03 \x01(\x0b\x32*.google.cloud.dataproc.v1.ClusterOperationB\x03\xe0\x41\x03\x12;\n\x05graph\x18\x04 \x01(\x0b\x32\'.google.cloud.dataproc.v1.WorkflowGraphB\x03\xe0\x41\x03\x12G\n\x0e\x64\x65lete_cluster\x18\x05 \x01(\x0b\x32*.google.cloud.dataproc.v1.ClusterOperationB\x03\xe0\x41\x03\x12\x44\n\x05state\x18\x06 \x01(\x0e\x32\x30.google.cloud.dataproc.v1.WorkflowMetadata.StateB\x03\xe0\x41\x03\x12\x19\n\x0c\x63luster_name\x18\x07 \x01(\tB\x03\xe0\x41\x03\x12N\n\nparameters\x18\x08 \x03(\x0b\x32:.google.cloud.dataproc.v1.WorkflowMetadata.ParametersEntry\x12\x33\n\nstart_time\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x31\n\x08\x65nd_time\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x19\n\x0c\x63luster_uuid\x18\x0b \x01(\tB\x03\xe0\x41\x03\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"8\n\x05State\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0b\n\x07RUNNING\x10\x02\x12\x08\n\x04\x44ONE\x10\x03"T\n\x10\x43lusterOperation\x12\x19\n\x0coperation_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x12\n\x05\x65rror\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x11\n\x04\x64one\x18\x03 \x01(\x08\x42\x03\xe0\x41\x03"K\n\rWorkflowGraph\x12:\n\x05nodes\x18\x01 \x03(\x0b\x32&.google.cloud.dataproc.v1.WorkflowNodeB\x03\xe0\x41\x03"\xa3\x02\n\x0cWorkflowNode\x12\x14\n\x07step_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12"\n\x15prerequisite_step_ids\x18\x02 \x03(\tB\x03\xe0\x41\x03\x12\x13\n\x06job_id\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12\x44\n\x05state\x18\x05 \x01(\x0e\x32\x30.google.cloud.dataproc.v1.WorkflowNode.NodeStateB\x03\xe0\x41\x03\x12\x12\n\x05\x65rror\x18\x06 \x01(\tB\x03\xe0\x41\x03"j\n\tNodeState\x12\x1a\n\x16NODE_STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x42LOCKED\x10\x01\x12\x0c\n\x08RUNNABLE\x10\x02\x12\x0b\n\x07RUNNING\x10\x03\x12\r\n\tCOMPLETED\x10\x04\x12\n\n\x06\x46\x41ILED\x10\x05"\xa4\x01\n\x1d\x43reateWorkflowTemplateRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x41\n\x08template\x18\x02 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02"r\n\x1aGetWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01"\xad\x02\n"InstantiateWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\nrequest_id\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x65\n\nparameters\x18\x06 \x03(\x0b\x32L.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest.ParametersEntryB\x03\xe0\x41\x01\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xc8\x01\n(InstantiateInlineWorkflowTemplateRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x41\n\x08template\x18\x02 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x03 \x01(\tB\x03\xe0\x41\x01"b\n\x1dUpdateWorkflowTemplateRequest\x12\x41\n\x08template\x18\x01 \x01(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x02"\x91\x01\n\x1cListWorkflowTemplatesRequest\x12@\n\x06parent\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\x12(dataproc.googleapis.com/WorkflowTemplate\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01"\x81\x01\n\x1dListWorkflowTemplatesResponse\x12\x42\n\ttemplates\x18\x01 \x03(\x0b\x32*.google.cloud.dataproc.v1.WorkflowTemplateB\x03\xe0\x41\x03\x12\x1c\n\x0fnext_page_token\x18\x02 \x01(\tB\x03\xe0\x41\x03"u\n\x1d\x44\x65leteWorkflowTemplateRequest\x12>\n\x04name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(dataproc.googleapis.com/WorkflowTemplate\x12\x14\n\x07version\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x32\xe6\x10\n\x17WorkflowTemplateService\x12\x9b\x02\n\x16\x43reateWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"\x9b\x01\x82\xd3\xe4\x93\x02\x82\x01"5/v1/{parent=projects/*/locations/*}/workflowTemplates:\x08templateZ?"3/v1/{parent=projects/*/regions/*}/workflowTemplates:\x08template\xda\x41\x0fparent,template\x12\xf4\x01\n\x13GetWorkflowTemplate\x12\x34.google.cloud.dataproc.v1.GetWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"{\x82\xd3\xe4\x93\x02n\x12\x35/v1/{name=projects/*/locations/*/workflowTemplates/*}Z5\x12\x33/v1/{name=projects/*/regions/*/workflowTemplates/*}\xda\x41\x04name\x12\xd5\x02\n\x1bInstantiateWorkflowTemplate\x12<.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest\x1a\x1d.google.longrunning.Operation"\xd8\x01\x82\xd3\xe4\x93\x02\x8c\x01"A/v1/{name=projects/*/locations/*/workflowTemplates/*}:instantiate:\x01*ZD"?/v1/{name=projects/*/regions/*/workflowTemplates/*}:instantiate:\x01*\xda\x41\x04name\xda\x41\x0fname,parameters\xca\x41)\n\x15google.protobuf.Empty\x12\x10WorkflowMetadata\x12\xf4\x02\n!InstantiateInlineWorkflowTemplate\x12\x42.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest\x1a\x1d.google.longrunning.Operation"\xeb\x01\x82\xd3\xe4\x93\x02\xa6\x01"G/v1/{parent=projects/*/locations/*}/workflowTemplates:instantiateInline:\x08templateZQ"E/v1/{parent=projects/*/regions/*}/workflowTemplates:instantiateInline:\x08template\xda\x41\x0fparent,template\xca\x41)\n\x15google.protobuf.Empty\x12\x10WorkflowMetadata\x12\xa6\x02\n\x16UpdateWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest\x1a*.google.cloud.dataproc.v1.WorkflowTemplate"\xa6\x01\x82\xd3\xe4\x93\x02\x94\x01\x1a>/v1/{template.name=projects/*/locations/*/workflowTemplates/*}:\x08templateZH\x1a</v1/{template.name=projects/*/regions/*/workflowTemplates/*}:\x08template\xda\x41\x08template\x12\x87\x02\n\x15ListWorkflowTemplates\x12\x36.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest\x1a\x37.google.cloud.dataproc.v1.ListWorkflowTemplatesResponse"}\x82\xd3\xe4\x93\x02n\x12\x35/v1/{parent=projects/*/locations/*}/workflowTemplatesZ5\x12\x33/v1/{parent=projects/*/regions/*}/workflowTemplates\xda\x41\x06parent\x12\xe6\x01\n\x16\x44\x65leteWorkflowTemplate\x12\x37.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest\x1a\x16.google.protobuf.Empty"{\x82\xd3\xe4\x93\x02n*5/v1/{name=projects/*/locations/*/workflowTemplates/*}Z5*3/v1/{name=projects/*/regions/*/workflowTemplates/*}\xda\x41\x04name\x1aK\xca\x41\x17\x64\x61taproc.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformBz\n\x1c\x63om.google.cloud.dataproc.v1B\x16WorkflowTemplatesProtoP\x01Z@google.golang.org/genproto/googleapis/cloud/dataproc/v1;dataprocb\x06proto3'
     ),
     dependencies=[
         google_dot_api_dot_annotations__pb2.DESCRIPTOR,
@@ -77,8 +77,8 @@ _WORKFLOWMETADATA_STATE = _descriptor.EnumDescriptor(
     ],
     containing_type=None,
     serialized_options=None,
-    serialized_start=3361,
-    serialized_end=3417,
+    serialized_start=3480,
+    serialized_end=3536,
 )
 _sym_db.RegisterEnumDescriptor(_WORKFLOWMETADATA_STATE)
 
@@ -113,8 +113,8 @@ _WORKFLOWNODE_NODESTATE = _descriptor.EnumDescriptor(
     ],
     containing_type=None,
     serialized_options=None,
-    serialized_start=3768,
-    serialized_end=3874,
+    serialized_start=3887,
+    serialized_end=3993,
 )
 _sym_db.RegisterEnumDescriptor(_WORKFLOWNODE_NODESTATE)
 
@@ -841,10 +841,46 @@ _ORDEREDJOB = _descriptor.Descriptor(
             file=DESCRIPTOR,
         ),
         _descriptor.FieldDescriptor(
+            name="spark_r_job",
+            full_name="google.cloud.dataproc.v1.OrderedJob.spark_r_job",
+            index=6,
+            number=11,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
             name="spark_sql_job",
             full_name="google.cloud.dataproc.v1.OrderedJob.spark_sql_job",
-            index=6,
+            index=7,
             number=7,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="presto_job",
+            full_name="google.cloud.dataproc.v1.OrderedJob.presto_job",
+            index=8,
+            number=12,
             type=11,
             cpp_type=10,
             label=1,
@@ -861,7 +897,7 @@ _ORDEREDJOB = _descriptor.Descriptor(
         _descriptor.FieldDescriptor(
             name="labels",
             full_name="google.cloud.dataproc.v1.OrderedJob.labels",
-            index=7,
+            index=9,
             number=8,
             type=11,
             cpp_type=10,
@@ -879,7 +915,7 @@ _ORDEREDJOB = _descriptor.Descriptor(
         _descriptor.FieldDescriptor(
             name="scheduling",
             full_name="google.cloud.dataproc.v1.OrderedJob.scheduling",
-            index=8,
+            index=10,
             number=9,
             type=11,
             cpp_type=10,
@@ -897,7 +933,7 @@ _ORDEREDJOB = _descriptor.Descriptor(
         _descriptor.FieldDescriptor(
             name="prerequisite_step_ids",
             full_name="google.cloud.dataproc.v1.OrderedJob.prerequisite_step_ids",
-            index=9,
+            index=11,
             number=10,
             type=9,
             cpp_type=9,
@@ -930,7 +966,7 @@ _ORDEREDJOB = _descriptor.Descriptor(
         )
     ],
     serialized_start=1707,
-    serialized_end=2322,
+    serialized_end=2441,
 )
 
 
@@ -1022,8 +1058,8 @@ _TEMPLATEPARAMETER = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2325,
-    serialized_end=2482,
+    serialized_start=2444,
+    serialized_end=2601,
 )
 
 
@@ -1087,8 +1123,8 @@ _PARAMETERVALIDATION = _descriptor.Descriptor(
             fields=[],
         )
     ],
-    serialized_start=2485,
-    serialized_end=2646,
+    serialized_start=2604,
+    serialized_end=2765,
 )
 
 
@@ -1126,8 +1162,8 @@ _REGEXVALIDATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2648,
-    serialized_end=2687,
+    serialized_start=2767,
+    serialized_end=2806,
 )
 
 
@@ -1165,8 +1201,8 @@ _VALUEVALIDATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2689,
-    serialized_end=2727,
+    serialized_start=2808,
+    serialized_end=2846,
 )
 
 
@@ -1222,8 +1258,8 @@ _WORKFLOWMETADATA_PARAMETERSENTRY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3310,
-    serialized_end=3359,
+    serialized_start=3429,
+    serialized_end=3478,
 )
 
 _WORKFLOWMETADATA = _descriptor.Descriptor(
@@ -1440,8 +1476,8 @@ _WORKFLOWMETADATA = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2730,
-    serialized_end=3417,
+    serialized_start=2849,
+    serialized_end=3536,
 )
 
 
@@ -1515,8 +1551,8 @@ _CLUSTEROPERATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3419,
-    serialized_end=3503,
+    serialized_start=3538,
+    serialized_end=3622,
 )
 
 
@@ -1554,8 +1590,8 @@ _WORKFLOWGRAPH = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3505,
-    serialized_end=3580,
+    serialized_start=3624,
+    serialized_end=3699,
 )
 
 
@@ -1665,8 +1701,8 @@ _WORKFLOWNODE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3583,
-    serialized_end=3874,
+    serialized_start=3702,
+    serialized_end=3993,
 )
 
 
@@ -1724,8 +1760,8 @@ _CREATEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3877,
-    serialized_end=4041,
+    serialized_start=3996,
+    serialized_end=4160,
 )
 
 
@@ -1783,8 +1819,8 @@ _GETWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4043,
-    serialized_end=4157,
+    serialized_start=4162,
+    serialized_end=4276,
 )
 
 
@@ -1840,8 +1876,8 @@ _INSTANTIATEWORKFLOWTEMPLATEREQUEST_PARAMETERSENTRY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3310,
-    serialized_end=3359,
+    serialized_start=3429,
+    serialized_end=3478,
 )
 
 _INSTANTIATEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
@@ -1934,8 +1970,8 @@ _INSTANTIATEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4160,
-    serialized_end=4461,
+    serialized_start=4279,
+    serialized_end=4580,
 )
 
 
@@ -2011,8 +2047,8 @@ _INSTANTIATEINLINEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4464,
-    serialized_end=4664,
+    serialized_start=4583,
+    serialized_end=4783,
 )
 
 
@@ -2050,8 +2086,8 @@ _UPDATEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4666,
-    serialized_end=4764,
+    serialized_start=4785,
+    serialized_end=4883,
 )
 
 
@@ -2127,8 +2163,8 @@ _LISTWORKFLOWTEMPLATESREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4767,
-    serialized_end=4912,
+    serialized_start=4886,
+    serialized_end=5031,
 )
 
 
@@ -2184,8 +2220,8 @@ _LISTWORKFLOWTEMPLATESRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4915,
-    serialized_end=5044,
+    serialized_start=5034,
+    serialized_end=5163,
 )
 
 
@@ -2243,8 +2279,8 @@ _DELETEWORKFLOWTEMPLATEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5046,
-    serialized_end=5163,
+    serialized_start=5165,
+    serialized_end=5282,
 )
 
 _WORKFLOWTEMPLATE_LABELSENTRY.containing_type = _WORKFLOWTEMPLATE
@@ -2304,8 +2340,14 @@ _ORDEREDJOB.fields_by_name[
     "pig_job"
 ].message_type = google_dot_cloud_dot_dataproc__v1_dot_proto_dot_jobs__pb2._PIGJOB
 _ORDEREDJOB.fields_by_name[
+    "spark_r_job"
+].message_type = google_dot_cloud_dot_dataproc__v1_dot_proto_dot_jobs__pb2._SPARKRJOB
+_ORDEREDJOB.fields_by_name[
     "spark_sql_job"
 ].message_type = google_dot_cloud_dot_dataproc__v1_dot_proto_dot_jobs__pb2._SPARKSQLJOB
+_ORDEREDJOB.fields_by_name[
+    "presto_job"
+].message_type = google_dot_cloud_dot_dataproc__v1_dot_proto_dot_jobs__pb2._PRESTOJOB
 _ORDEREDJOB.fields_by_name["labels"].message_type = _ORDEREDJOB_LABELSENTRY
 _ORDEREDJOB.fields_by_name[
     "scheduling"
@@ -2343,11 +2385,23 @@ _ORDEREDJOB.fields_by_name["pig_job"].containing_oneof = _ORDEREDJOB.oneofs_by_n
     "job_type"
 ]
 _ORDEREDJOB.oneofs_by_name["job_type"].fields.append(
+    _ORDEREDJOB.fields_by_name["spark_r_job"]
+)
+_ORDEREDJOB.fields_by_name["spark_r_job"].containing_oneof = _ORDEREDJOB.oneofs_by_name[
+    "job_type"
+]
+_ORDEREDJOB.oneofs_by_name["job_type"].fields.append(
     _ORDEREDJOB.fields_by_name["spark_sql_job"]
 )
 _ORDEREDJOB.fields_by_name[
     "spark_sql_job"
 ].containing_oneof = _ORDEREDJOB.oneofs_by_name["job_type"]
+_ORDEREDJOB.oneofs_by_name["job_type"].fields.append(
+    _ORDEREDJOB.fields_by_name["presto_job"]
+)
+_ORDEREDJOB.fields_by_name["presto_job"].containing_oneof = _ORDEREDJOB.oneofs_by_name[
+    "job_type"
+]
 _TEMPLATEPARAMETER.fields_by_name["validation"].message_type = _PARAMETERVALIDATION
 _PARAMETERVALIDATION.fields_by_name["regex"].message_type = _REGEXVALIDATION
 _PARAMETERVALIDATION.fields_by_name["values"].message_type = _VALUEVALIDATION
@@ -2456,8 +2510,6 @@ WorkflowTemplate = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_WORKFLOWTEMPLATE,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A Dataproc workflow template resource.
-  
-  
   Attributes:
       name:
           Output only. The resource name of the workflow template, as
@@ -2516,11 +2568,8 @@ WorkflowTemplatePlacement = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_WORKFLOWTEMPLATEPLACEMENT,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
-        __doc__="""Specifies workflow execution target.
-  
-  Either ``managed_cluster`` or ``cluster_selector`` is required.
-  
-  
+        __doc__="""Specifies workflow execution target.  Either ``managed_cluster`` or
+  ``cluster_selector`` is required.
   Attributes:
       placement:
           Required. Specifies where workflow executes; either on a
@@ -2553,8 +2602,6 @@ ManagedCluster = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_MANAGEDCLUSTER,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""Cluster that is managed by the workflow.
-  
-  
   Attributes:
       cluster_name:
           Required. The cluster name prefix. A unique cluster name will
@@ -2591,10 +2638,7 @@ ClusterSelector = _reflection.GeneratedProtocolMessageType(
         ),
         DESCRIPTOR=_CLUSTERSELECTOR,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
-        __doc__="""A selector that chooses target cluster for jobs based on
-  metadata.
-  
-  
+        __doc__="""A selector that chooses target cluster for jobs based on metadata.
   Attributes:
       zone:
           Optional. The zone where workflow process executes. This
@@ -2627,8 +2671,6 @@ OrderedJob = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_ORDEREDJOB,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A job executed by the workflow.
-  
-  
   Attributes:
       step_id:
           Required. The step id. The id must be unique among all jobs
@@ -2641,6 +2683,10 @@ OrderedJob = _reflection.GeneratedProtocolMessageType(
           hyphen. Must consist of between 3 and 50 characters.
       job_type:
           Required. The job definition.
+      spark_r_job:
+          Spark R job
+      presto_job:
+          Presto job
       labels:
           Optional. The labels to associate with this job.  Label keys
           must be between 1 and 63 characters long. Label values must be between
@@ -2665,12 +2711,10 @@ TemplateParameter = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_TEMPLATEPARAMETER,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
-        __doc__="""A configurable parameter that replaces one or more fields
-  in the template. Parameterizable fields: - Labels - File uris - Job
-  properties - Job arguments - Script variables - Main class (in HadoopJob
-  and SparkJob) - Zone (in ClusterSelector)
-  
-  
+        __doc__="""A configurable parameter that replaces one or more fields in the
+  template. Parameterizable fields: - Labels - File uris - Job
+  properties - Job arguments - Script variables - Main class (in
+  HadoopJob and SparkJob) - Zone (in ClusterSelector)
   Attributes:
       name:
           Required. Parameter name. The parameter name is used as the
@@ -2732,8 +2776,6 @@ ParameterValidation = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_PARAMETERVALIDATION,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""Configuration for parameter validation.
-  
-  
   Attributes:
       validation_type:
           Required. The type of validation to be performed.
@@ -2754,8 +2796,6 @@ RegexValidation = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_REGEXVALIDATION,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""Validation based on regular expressions.
-  
-  
   Attributes:
       regexes:
           Required. RE2 regular expressions used to validate the
@@ -2774,8 +2814,6 @@ ValueValidation = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_VALUEVALIDATION,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""Validation based on a list of allowed values.
-  
-  
   Attributes:
       values:
           Required. List of allowed values for the parameter.
@@ -2801,8 +2839,6 @@ WorkflowMetadata = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_WORKFLOWMETADATA,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A Dataproc workflow template resource.
-  
-  
   Attributes:
       template:
           Output only. The resource name of the workflow template as
@@ -2851,8 +2887,6 @@ ClusterOperation = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_CLUSTEROPERATION,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""The cluster operation triggered by a workflow.
-  
-  
   Attributes:
       operation_id:
           Output only. The id of the cluster operation.
@@ -2873,8 +2907,6 @@ WorkflowGraph = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_WORKFLOWGRAPH,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""The workflow graph.
-  
-  
   Attributes:
       nodes:
           Output only. The workflow nodes.
@@ -2891,8 +2923,6 @@ WorkflowNode = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_WORKFLOWNODE,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""The workflow node.
-  
-  
   Attributes:
       step_id:
           Output only. The name of the node.
@@ -2918,8 +2948,6 @@ CreateWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_CREATEWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to create a workflow template.
-  
-  
   Attributes:
       parent:
           Required. The resource name of the region or location, as
@@ -2946,8 +2974,6 @@ GetWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GETWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to fetch a workflow template.
-  
-  
   Attributes:
       name:
           Required. The resource name of the workflow template, as
@@ -2986,8 +3012,6 @@ InstantiateWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_INSTANTIATEWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to instantiate a workflow template.
-  
-  
   Attributes:
       name:
           Required. The resource name of the workflow template, as
@@ -3034,8 +3058,6 @@ InstantiateInlineWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageT
         DESCRIPTOR=_INSTANTIATEINLINEWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to instantiate an inline workflow template.
-  
-  
   Attributes:
       parent:
           Required. The resource name of the region or location, as
@@ -3071,8 +3093,6 @@ UpdateWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_UPDATEWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to update a workflow template.
-  
-  
   Attributes:
       template:
           Required. The updated workflow template.  The
@@ -3090,8 +3110,6 @@ ListWorkflowTemplatesRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_LISTWORKFLOWTEMPLATESREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
         __doc__="""A request to list workflow templates in a project.
-  
-  
   Attributes:
       parent:
           Required. The resource name of the region or location, as
@@ -3121,10 +3139,7 @@ ListWorkflowTemplatesResponse = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_LISTWORKFLOWTEMPLATESRESPONSE,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
-        __doc__="""A response to a request to list workflow templates in a
-  project.
-  
-  
+        __doc__="""A response to a request to list workflow templates in a project.
   Attributes:
       templates:
           Output only. WorkflowTemplates list.
@@ -3145,11 +3160,8 @@ DeleteWorkflowTemplateRequest = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_DELETEWORKFLOWTEMPLATEREQUEST,
         __module__="google.cloud.dataproc_v1.proto.workflow_templates_pb2",
-        __doc__="""A request to delete a workflow template.
-  
-  Currently started workflows will remain running.
-  
-  
+        __doc__="""A request to delete a workflow template.  Currently started workflows
+  will remain running.
   Attributes:
       name:
           Required. The resource name of the workflow template, as
@@ -3253,8 +3265,8 @@ _WORKFLOWTEMPLATESERVICE = _descriptor.ServiceDescriptor(
     serialized_options=_b(
         "\312A\027dataproc.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform"
     ),
-    serialized_start=5166,
-    serialized_end=7316,
+    serialized_start=5285,
+    serialized_end=7435,
     methods=[
         _descriptor.MethodDescriptor(
             name="CreateWorkflowTemplate",
