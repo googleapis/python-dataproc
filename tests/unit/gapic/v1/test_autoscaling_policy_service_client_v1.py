@@ -61,6 +61,51 @@ class CustomException(Exception):
 
 
 class TestAutoscalingPolicyServiceClient(object):
+    def test_create_autoscaling_policy(self):
+        # Setup Expected Response
+        id_ = "id3355"
+        name = "name3373707"
+        expected_response = {"id": id_, "name": name}
+        expected_response = autoscaling_policies_pb2.AutoscalingPolicy(
+            **expected_response
+        )
+
+        # Mock the API response
+        channel = ChannelStub(responses=[expected_response])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
+        with patch as create_channel:
+            create_channel.return_value = channel
+            client = dataproc_v1.AutoscalingPolicyServiceClient()
+
+        # Setup Request
+        parent = client.region_path("[PROJECT]", "[REGION]")
+        policy = {}
+
+        response = client.create_autoscaling_policy(parent, policy)
+        assert expected_response == response
+
+        assert len(channel.requests) == 1
+        expected_request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
+            parent=parent, policy=policy
+        )
+        actual_request = channel.requests[0][1]
+        assert expected_request == actual_request
+
+    def test_create_autoscaling_policy_exception(self):
+        # Mock the API response
+        channel = ChannelStub(responses=[CustomException()])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
+        with patch as create_channel:
+            create_channel.return_value = channel
+            client = dataproc_v1.AutoscalingPolicyServiceClient()
+
+        # Setup request
+        parent = client.region_path("[PROJECT]", "[REGION]")
+        policy = {}
+
+        with pytest.raises(CustomException):
+            client.create_autoscaling_policy(parent, policy)
+
     def test_update_autoscaling_policy(self):
         # Setup Expected Response
         id_ = "id3355"
@@ -104,51 +149,6 @@ class TestAutoscalingPolicyServiceClient(object):
         with pytest.raises(CustomException):
             client.update_autoscaling_policy(policy)
 
-    def test_create_autoscaling_policy(self):
-        # Setup Expected Response
-        id_ = "id3355"
-        name = "name3373707"
-        expected_response = {"id": id_, "name": name}
-        expected_response = autoscaling_policies_pb2.AutoscalingPolicy(
-            **expected_response
-        )
-
-        # Mock the API response
-        channel = ChannelStub(responses=[expected_response])
-        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
-        with patch as create_channel:
-            create_channel.return_value = channel
-            client = dataproc_v1.AutoscalingPolicyServiceClient()
-
-        # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
-        policy = {}
-
-        response = client.create_autoscaling_policy(parent, policy)
-        assert expected_response == response
-
-        assert len(channel.requests) == 1
-        expected_request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
-            parent=parent, policy=policy
-        )
-        actual_request = channel.requests[0][1]
-        assert expected_request == actual_request
-
-    def test_create_autoscaling_policy_exception(self):
-        # Mock the API response
-        channel = ChannelStub(responses=[CustomException()])
-        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
-        with patch as create_channel:
-            create_channel.return_value = channel
-            client = dataproc_v1.AutoscalingPolicyServiceClient()
-
-        # Setup request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
-        policy = {}
-
-        with pytest.raises(CustomException):
-            client.create_autoscaling_policy(parent, policy)
-
     def test_get_autoscaling_policy(self):
         # Setup Expected Response
         id_ = "id3355"
@@ -166,7 +166,9 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.autoscaling_policy_path(
+            "[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]"
+        )
 
         response = client.get_autoscaling_policy(name)
         assert expected_response == response
@@ -187,7 +189,9 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup request
-        name = "name3373707"
+        name = client.autoscaling_policy_path(
+            "[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]"
+        )
 
         with pytest.raises(CustomException):
             client.get_autoscaling_policy(name)
@@ -210,7 +214,7 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
 
         paged_list_response = client.list_autoscaling_policies(parent)
         resources = list(paged_list_response)
@@ -233,7 +237,7 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
 
         paged_list_response = client.list_autoscaling_policies(parent)
         with pytest.raises(CustomException):
@@ -247,7 +251,9 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.autoscaling_policy_path(
+            "[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]"
+        )
 
         client.delete_autoscaling_policy(name)
 
@@ -267,7 +273,9 @@ class TestAutoscalingPolicyServiceClient(object):
             client = dataproc_v1.AutoscalingPolicyServiceClient()
 
         # Setup request
-        name = "name3373707"
+        name = client.autoscaling_policy_path(
+            "[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]"
+        )
 
         with pytest.raises(CustomException):
             client.delete_autoscaling_policy(name)

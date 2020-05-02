@@ -674,7 +674,7 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Lists all regions/{region}/clusters in a project alphabetically.
+        Lists all regions/{region}/clusters in a project.
 
         Example:
             >>> from google.cloud import dataproc_v1

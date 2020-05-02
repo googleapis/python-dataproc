@@ -38,8 +38,6 @@ from google.cloud.dataproc_v1.gapic import workflow_template_service_client_conf
 from google.cloud.dataproc_v1.gapic.transports import (
     workflow_template_service_grpc_transport,
 )
-from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2
-from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1.proto import clusters_pb2
 from google.cloud.dataproc_v1.proto import clusters_pb2_grpc
 from google.cloud.dataproc_v1.proto import jobs_pb2
@@ -88,15 +86,6 @@ class WorkflowTemplateServiceClient(object):
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
-
-    @classmethod
-    def location_path(cls, project, location):
-        """Return a fully-qualified location string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}/locations/{location}",
-            project=project,
-            location=location,
-        )
 
     @classmethod
     def region_path(cls, project, region):
@@ -244,7 +233,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
             >>>
             >>> # TODO: Initialize `template`:
             >>> template = {}
@@ -335,8 +324,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
+            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
             >>>
             >>> response = client.get_workflow_template(name)
 
@@ -438,8 +426,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
+            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
             >>>
             >>> response = client.instantiate_workflow_template(name)
             >>>
@@ -574,7 +561,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
             >>>
             >>> # TODO: Initialize `template`:
             >>> template = {}
@@ -768,7 +755,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
             >>>
             >>> # Iterate over all results
             >>> for element in client.list_workflow_templates(parent):
@@ -880,8 +867,7 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
+            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
             >>>
             >>> client.delete_workflow_template(name)
 

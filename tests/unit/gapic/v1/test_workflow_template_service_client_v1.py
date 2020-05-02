@@ -80,7 +80,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
         template = {}
 
         response = client.create_workflow_template(parent, template)
@@ -102,7 +102,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
         template = {}
 
         with pytest.raises(CustomException):
@@ -124,7 +124,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         response = client.get_workflow_template(name)
         assert expected_response == response
@@ -143,7 +145,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         with pytest.raises(CustomException):
             client.get_workflow_template(name)
@@ -165,7 +169,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         response = client.instantiate_workflow_template(name)
         result = response.result()
@@ -194,7 +200,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         response = client.instantiate_workflow_template(name)
         exception = response.exception()
@@ -217,7 +225,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
         template = {}
 
         response = client.instantiate_inline_workflow_template(parent, template)
@@ -248,7 +256,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
         template = {}
 
         response = client.instantiate_inline_workflow_template(parent, template)
@@ -315,7 +323,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
 
         paged_list_response = client.list_workflow_templates(parent)
         resources = list(paged_list_response)
@@ -338,7 +346,7 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup request
-        parent = client.location_path("[PROJECT]", "[LOCATION]")
+        parent = client.region_path("[PROJECT]", "[REGION]")
 
         paged_list_response = client.list_workflow_templates(parent)
         with pytest.raises(CustomException):
@@ -352,7 +360,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup Request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         client.delete_workflow_template(name)
 
@@ -372,7 +382,9 @@ class TestWorkflowTemplateServiceClient(object):
             client = dataproc_v1.WorkflowTemplateServiceClient()
 
         # Setup request
-        name = "name3373707"
+        name = client.workflow_template_path(
+            "[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]"
+        )
 
         with pytest.raises(CustomException):
             client.delete_workflow_template(name)

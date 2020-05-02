@@ -28,18 +28,14 @@ class Component(enum.IntEnum):
       ANACONDA (int): The Anaconda python distribution.
       HIVE_WEBHCAT (int): The Hive Web HCatalog (the REST service for accessing HCatalog).
       JUPYTER (int): The Jupyter Notebook.
-      PRESTO (int): The Presto query engine.
       ZEPPELIN (int): The Zeppelin notebook.
-      ZOOKEEPER (int): The Zookeeper service.
     """
 
     COMPONENT_UNSPECIFIED = 0
     ANACONDA = 5
     HIVE_WEBHCAT = 3
     JUPYTER = 1
-    PRESTO = 6
     ZEPPELIN = 4
-    ZOOKEEPER = 8
 
 
 class ClusterOperationStatus(object):

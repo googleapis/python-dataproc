@@ -38,15 +38,7 @@ from google.cloud.dataproc_v1beta2.gapic.transports import (
 )
 from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2
 from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2_grpc
-from google.cloud.dataproc_v1beta2.proto import clusters_pb2
-from google.cloud.dataproc_v1beta2.proto import clusters_pb2_grpc
-from google.cloud.dataproc_v1beta2.proto import jobs_pb2
-from google.cloud.dataproc_v1beta2.proto import jobs_pb2_grpc
-from google.cloud.dataproc_v1beta2.proto import operations_pb2 as proto_operations_pb2
-from google.longrunning import operations_pb2 as longrunning_operations_pb2
-from google.protobuf import duration_pb2
 from google.protobuf import empty_pb2
-from google.protobuf import field_mask_pb2
 
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-dataproc").version
@@ -86,22 +78,13 @@ class AutoscalingPolicyServiceClient(object):
     from_service_account_json = from_service_account_file
 
     @classmethod
-    def autoscaling_policy_path(cls, project, location, autoscaling_policy):
+    def autoscaling_policy_path(cls, project, region, autoscaling_policy):
         """Return a fully-qualified autoscaling_policy string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}",
+            "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}",
             project=project,
-            location=location,
+            region=region,
             autoscaling_policy=autoscaling_policy,
-        )
-
-    @classmethod
-    def location_path(cls, project, location):
-        """Return a fully-qualified location string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}/locations/{location}",
-            project=project,
-            location=location,
         )
 
     @classmethod
@@ -240,7 +223,7 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
             >>>
             >>> # TODO: Initialize `policy`:
             >>> policy = {}
@@ -403,8 +386,7 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
+            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
             >>>
             >>> response = client.get_autoscaling_policy(name)
 
@@ -483,7 +465,7 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> parent = client.location_path('[PROJECT]', '[LOCATION]')
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
             >>>
             >>> # Iterate over all results
             >>> for element in client.list_autoscaling_policies(parent):
@@ -595,8 +577,7 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
+            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
             >>>
             >>> client.delete_autoscaling_policy(name)
 

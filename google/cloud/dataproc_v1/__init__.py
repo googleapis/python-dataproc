@@ -46,17 +46,17 @@ class JobControllerClient(job_controller_client.JobControllerClient):
     enums = enums
 
 
-class AutoscalingPolicyServiceClient(
-    autoscaling_policy_service_client.AutoscalingPolicyServiceClient
-):
-    __doc__ = autoscaling_policy_service_client.AutoscalingPolicyServiceClient.__doc__
-    enums = enums
-
-
 class WorkflowTemplateServiceClient(
     workflow_template_service_client.WorkflowTemplateServiceClient
 ):
     __doc__ = workflow_template_service_client.WorkflowTemplateServiceClient.__doc__
+    enums = enums
+
+
+class AutoscalingPolicyServiceClient(
+    autoscaling_policy_service_client.AutoscalingPolicyServiceClient
+):
+    __doc__ = autoscaling_policy_service_client.AutoscalingPolicyServiceClient.__doc__
     enums = enums
 
 
@@ -65,6 +65,6 @@ __all__ = (
     "types",
     "ClusterControllerClient",
     "JobControllerClient",
-    "AutoscalingPolicyServiceClient",
     "WorkflowTemplateServiceClient",
+    "AutoscalingPolicyServiceClient",
 )

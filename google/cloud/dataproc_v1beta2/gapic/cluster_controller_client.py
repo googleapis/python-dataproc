@@ -36,6 +36,8 @@ from google.cloud.dataproc_v1beta2.gapic import enums
 from google.cloud.dataproc_v1beta2.gapic.transports import (
     cluster_controller_grpc_transport,
 )
+from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2
+from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1beta2.proto import clusters_pb2
 from google.cloud.dataproc_v1beta2.proto import clusters_pb2_grpc
 from google.cloud.dataproc_v1beta2.proto import operations_pb2 as proto_operations_pb2
@@ -684,7 +686,7 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Lists all regions/{region}/clusters in a project alphabetically.
+        Lists all regions/{region}/clusters in a project.
 
         Example:
             >>> from google.cloud import dataproc_v1beta2
@@ -877,5 +879,5 @@ class ClusterControllerClient(object):
             operation,
             self.transport._operations_client,
             empty_pb2.Empty,
-            metadata_type=proto_operations_pb2.ClusterOperationMetadata,
+            metadata_type=clusters_pb2.DiagnoseClusterResults,
         )

@@ -30,6 +30,6 @@ __all__ = (
     "types",
     "ClusterControllerClient",
     "JobControllerClient",
-    "AutoscalingPolicyServiceClient",
     "WorkflowTemplateServiceClient",
+    "AutoscalingPolicyServiceClient",
 )
