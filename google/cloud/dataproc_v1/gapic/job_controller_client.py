@@ -26,12 +26,16 @@ import google.api_core.gapic_v1.client_info
 import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
+import google.api_core.operation
+import google.api_core.operations_v1
 import google.api_core.page_iterator
 import grpc
 
 from google.cloud.dataproc_v1.gapic import enums
 from google.cloud.dataproc_v1.gapic import job_controller_client_config
 from google.cloud.dataproc_v1.gapic.transports import job_controller_grpc_transport
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1.proto import clusters_pb2
 from google.cloud.dataproc_v1.proto import clusters_pb2_grpc
 from google.cloud.dataproc_v1.proto import jobs_pb2
@@ -226,16 +230,8 @@ class JobControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.Job`
-            request_id (str): Optional. A unique id used to identify the request. If the server
-                receives two ``SubmitJobRequest`` requests with the same id, then the
-                second request will be ignored and the first ``Job`` created and stored
-                in the backend is returned.
-
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
-
-                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+            request_id (str): A Dataproc job for running `Apache
+                Spark <http://spark.apache.org/>`__ applications on YARN.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -394,24 +390,18 @@ class JobControllerClient(object):
                 of resources in a page.
             cluster_name (str): Optional. If set, the returned jobs list includes only jobs that were
                 submitted to the named cluster.
-            job_state_matcher (~google.cloud.dataproc_v1.types.JobStateMatcher): Optional. Specifies enumerated categories of jobs to list. (default =
-                match ALL jobs).
-
-                If ``filter`` is provided, ``jobStateMatcher`` will be ignored.
-            filter_ (str): Optional. A filter constraining the jobs to list. Filters are
-                case-sensitive and have the following syntax:
-
-                [field = value] AND [field [= value]] ...
-
-                where **field** is ``status.state`` or ``labels.[KEY]``, and ``[KEY]``
-                is a label key. **value** can be ``*`` to match all values.
-                ``status.state`` can be either ``ACTIVE`` or ``NON_ACTIVE``. Only the
-                logical ``AND`` operator is supported; space-separated items are treated
-                as having an implicit ``AND`` operator.
-
-                Example filter:
-
-                status.state = ACTIVE AND labels.env = staging AND labels.starred = \*
+            job_state_matcher (~google.cloud.dataproc_v1.types.JobStateMatcher): Optional. If true, all instances in the cluster will only have
+                internal IP addresses. By default, clusters are not restricted to
+                internal IP addresses, and will have ephemeral external IP addresses
+                assigned to each instance. This ``internal_ip_only`` restriction can
+                only be enabled for subnetwork enabled networks, and all off-cluster
+                dependencies must be configured to be accessible without external IP
+                addresses.
+            filter_ (str): Required. The specification of the main method to call to drive the
+                job. Specify either the jar file that contains the main class or the
+                main class name. To pass both a main jar and a main class in that jar,
+                add the jar to ``CommonJob.jar_file_uris``, and then specify the main
+                class name in ``main_class``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -513,11 +503,34 @@ class JobControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.Job`
-            update_mask (Union[dict, ~google.cloud.dataproc_v1.types.FieldMask]): Required. Specifies the path, relative to Job, of the field to update.
-                For example, to update the labels of a Job the update\_mask parameter
-                would be specified as labels, and the ``PATCH`` request body would
-                specify the new value. Note: Currently, labels is the only field that
-                can be updated.
+            update_mask (Union[dict, ~google.cloud.dataproc_v1.types.FieldMask]): Should this field be parsed lazily? Lazy applies only to
+                message-type fields. It means that when the outer message is initially
+                parsed, the inner message's contents will not be parsed but instead
+                stored in encoded form. The inner message will actually be parsed when
+                it is first accessed.
+
+                This is only a hint. Implementations are free to choose whether to use
+                eager or lazy parsing regardless of the value of this option. However,
+                setting this option true suggests that the protocol author believes that
+                using lazy parsing on this field is worth the additional bookkeeping
+                overhead typically needed to implement it.
+
+                This option does not affect the public interface of any generated code;
+                all method signatures remain the same. Furthermore, thread-safety of the
+                interface is not affected by this option; const methods remain safe to
+                call from multiple threads concurrently, while non-const methods
+                continue to require exclusive access.
+
+                Note that implementations may choose not to check required fields within
+                a lazy sub-message. That is, calling IsInitialized() on the outer
+                message may return true even if the inner message has missing required
+                fields. This is necessary because otherwise the inner message would have
+                to be parsed in order to perform the check, defeating the purpose of
+                lazy parsing. An implementation which chooses not to check required
+                fields must be consistent about it. That is, for any particular
+                sub-message, the implementation must either *always* check its required
+                fields, or *never* check its required fields, regardless of whether or
+                not the message has been parsed.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.FieldMask`
@@ -572,11 +585,44 @@ class JobControllerClient(object):
         metadata=None,
     ):
         """
-        Starts a job cancellation request. To access the job resource after
-        cancellation, call
-        `regions/{region}/jobs.list <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list>`__
-        or
-        `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
+        A Location identifies a piece of source code in a .proto file which
+        corresponds to a particular definition. This information is intended to
+        be useful to IDEs, code indexers, documentation generators, and similar
+        tools.
+
+        For example, say we have a file like: message Foo { optional string foo
+        = 1; } Let's look at just the field definition: optional string foo = 1;
+        ^ ^^ ^^ ^ ^^^ a bc de f ghi We have the following locations: span path
+        represents [a,i) [ 4, 0, 2, 0 ] The whole field definition. [a,b) [ 4,
+        0, 2, 0, 4 ] The label (optional). [c,d) [ 4, 0, 2, 0, 5 ] The type
+        (string). [e,f) [ 4, 0, 2, 0, 1 ] The name (foo). [g,h) [ 4, 0, 2, 0, 3
+        ] The number (1).
+
+        Notes:
+
+        -  A location may refer to a repeated field itself (i.e. not to any
+           particular index within it). This is used whenever a set of elements
+           are logically enclosed in a single code segment. For example, an
+           entire extend block (possibly containing multiple extension
+           definitions) will have an outer location whose path refers to the
+           "extensions" repeated field without an index.
+        -  Multiple locations may have the same path. This happens when a single
+           logical declaration is spread out across multiple places. The most
+           obvious example is the "extend" block again -- there may be multiple
+           extend blocks in the same scope, each of which will have the same
+           path.
+        -  A location's span is not always a subset of its parent's span. For
+           example, the "extendee" of an extension declaration appears at the
+           beginning of the "extend" block and is shared by all extensions
+           within the block.
+        -  Just because a location's span is a subset of some other location's
+           span does not mean that it is a descendant. For example, a "group"
+           defines both a type and a field in a single declaration. Thus, the
+           locations corresponding to the type and field and their components
+           will overlap.
+        -  Code which tries to interpret locations should probably be designed
+           to ignore those that it doesn't understand, as more types of
+           locations could be recorded in the future.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -646,8 +692,7 @@ class JobControllerClient(object):
         metadata=None,
     ):
         """
-        Deletes the job from the project. If the job is active, the delete
-        fails, and the response returns ``FAILED_PRECONDITION``.
+        The request message for ``Operations.WaitOperation``.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -702,4 +747,95 @@ class JobControllerClient(object):
         )
         self._inner_api_calls["delete_job"](
             request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
+    def submit_job_as_operation(
+        self,
+        project_id,
+        region,
+        job,
+        request_id=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Submits job to a cluster.
+
+        Example:
+            >>> from google.cloud import dataproc_v1
+            >>>
+            >>> client = dataproc_v1.JobControllerClient()
+            >>>
+            >>> # TODO: Initialize `project_id`:
+            >>> project_id = ''
+            >>>
+            >>> # TODO: Initialize `region`:
+            >>> region = ''
+            >>>
+            >>> # TODO: Initialize `job`:
+            >>> job = {}
+            >>>
+            >>> response = client.submit_job_as_operation(project_id, region, job)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
+        Args:
+            project_id (str): Required. The ID of the Google Cloud Platform project that the job
+                belongs to.
+            region (str): Required. The Dataproc region in which to handle the request.
+            job (Union[dict, ~google.cloud.dataproc_v1.types.Job]): Required. The job resource.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.dataproc_v1.types.Job`
+            request_id (str): A Dataproc job for running `Apache
+                Spark <http://spark.apache.org/>`__ applications on YARN.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1.types._OperationFuture` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "submit_job_as_operation" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "submit_job_as_operation"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.submit_job_as_operation,
+                default_retry=self._method_configs["SubmitJobAsOperation"].retry,
+                default_timeout=self._method_configs["SubmitJobAsOperation"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = jobs_pb2.SubmitJobRequest(
+            project_id=project_id, region=region, job=job, request_id=request_id
+        )
+        operation = self._inner_api_calls["submit_job_as_operation"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+        return google.api_core.operation.from_gapic(
+            operation,
+            self.transport._operations_client,
+            jobs_pb2.Job,
+            metadata_type=jobs_pb2.JobMetadata,
         )

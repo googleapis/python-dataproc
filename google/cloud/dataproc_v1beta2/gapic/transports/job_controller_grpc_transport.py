@@ -16,6 +16,7 @@
 
 
 import google.api_core.grpc_helpers
+import google.api_core.operations_v1
 
 from google.cloud.dataproc_v1beta2.proto import jobs_pb2_grpc
 
@@ -72,6 +73,13 @@ class JobControllerGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {"job_controller_stub": jobs_pb2_grpc.JobControllerStub(channel)}
+
+        # Because this API includes a method that returns a
+        # long-running operation (proto: google.longrunning.Operation),
+        # instantiate an LRO client.
+        self._operations_client = google.api_core.operations_v1.OperationsClient(
+            channel
+        )
 
     @classmethod
     def create_channel(
@@ -161,11 +169,16 @@ class JobControllerGrpcTransport(object):
     def cancel_job(self):
         """Return the gRPC stub for :meth:`JobControllerClient.cancel_job`.
 
-        Starts a job cancellation request. To access the job resource after
-        cancellation, call
-        `regions/{region}/jobs.list <https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list>`__
-        or
-        `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get>`__.
+        Required. The resource name of the workflow template, as described
+        in https://cloud.google.com/apis/design/resource_names.
+
+        -  For ``projects.regions.workflowTemplates.delete``, the resource name
+           of the template has the following format:
+           ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
+
+        -  For ``projects.locations.workflowTemplates.instantiate``, the
+           resource name of the template has the following format:
+           ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -178,8 +191,10 @@ class JobControllerGrpcTransport(object):
     def delete_job(self):
         """Return the gRPC stub for :meth:`JobControllerClient.delete_job`.
 
-        Deletes the job from the project. If the job is active, the delete
-        fails, and the response returns ``FAILED_PRECONDITION``.
+        Output only. Indicates whether the job is completed. If the value is
+        ``false``, the job is still in progress. If ``true``, the job is
+        completed, and ``status.state`` field will indicate if it was
+        successful, failed, or cancelled.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -187,3 +202,16 @@ class JobControllerGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["job_controller_stub"].DeleteJob
+
+    @property
+    def submit_job_as_operation(self):
+        """Return the gRPC stub for :meth:`JobControllerClient.submit_job_as_operation`.
+
+        Submits job to a cluster.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["job_controller_stub"].SubmitJobAsOperation

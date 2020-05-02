@@ -26,6 +26,8 @@ import google.api_core.gapic_v1.client_info
 import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
+import google.api_core.operation
+import google.api_core.operations_v1
 import google.api_core.page_iterator
 import grpc
 
@@ -228,16 +230,11 @@ class JobControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1beta2.types.Job`
-            request_id (str): Optional. A unique id used to identify the request. If the server
-                receives two ``SubmitJobRequest`` requests with the same id, then the
-                second request will be ignored and the first ``Job`` created and stored
-                in the backend is returned.
-
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
-
-                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+            request_id (str): Optional. The Kubernetes Engine config for Dataproc clusters
+                deployed to Kubernetes. Setting this is considered mutually exclusive
+                with Compute Engine-based options such as ``gce_cluster_config``,
+                ``master_config``, ``worker_config``, ``secondary_worker_config``, and
+                ``autoscaling_config``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -396,24 +393,19 @@ class JobControllerClient(object):
                 of resources in a page.
             cluster_name (str): Optional. If set, the returned jobs list includes only jobs that were
                 submitted to the named cluster.
-            job_state_matcher (~google.cloud.dataproc_v1beta2.types.JobStateMatcher): Optional. Specifies enumerated categories of jobs to list. (default =
-                match ALL jobs).
+            job_state_matcher (~google.cloud.dataproc_v1beta2.types.JobStateMatcher): Input and output type names. These are resolved in the same way as
+                FieldDescriptorProto.type_name, but must refer to a message type.
+            filter_ (str): Optional. A unique id used to identify the request. If the server
+                receives two ``CreateClusterRequest`` requests with the same id, then
+                the second request will be ignored and the first
+                ``google.longrunning.Operation`` created and stored in the backend is
+                returned.
 
-                If ``filter`` is provided, ``jobStateMatcher`` will be ignored.
-            filter_ (str): Optional. A filter constraining the jobs to list. Filters are
-                case-sensitive and have the following syntax:
+                It is recommended to always set this value to a
+                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
 
-                [field = value] AND [field [= value]] ...
-
-                where **field** is ``status.state`` or ``labels.[KEY]``, and ``[KEY]``
-                is a label key. **value** can be ``*`` to match all values.
-                ``status.state`` can be either ``ACTIVE`` or ``NON_ACTIVE``. Only the
-                logical ``AND`` operator is supported; space-separated items are treated
-                as having an implicit ``AND`` operator.
-
-                Example filter:
-
-                status.state = ACTIVE AND labels.env = staging AND labels.starred = \*
+                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+                (_), and hyphens (-). The maximum length is 40 characters.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -515,11 +507,8 @@ class JobControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1beta2.types.Job`
-            update_mask (Union[dict, ~google.cloud.dataproc_v1beta2.types.FieldMask]): Required. Specifies the path, relative to Job, of the field to update.
-                For example, to update the labels of a Job the update\_mask parameter
-                would be specified as labels, and the ``PATCH`` request body would
-                specify the new value. Note: Currently, labels is the only field that
-                can be updated.
+            update_mask (Union[dict, ~google.cloud.dataproc_v1beta2.types.FieldMask]): Optional. The target GKE cluster to deploy to. Format:
+                'projects/{project}/locations/{location}/clusters/{cluster_id}'
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1beta2.types.FieldMask`
@@ -574,11 +563,16 @@ class JobControllerClient(object):
         metadata=None,
     ):
         """
-        Starts a job cancellation request. To access the job resource after
-        cancellation, call
-        `regions/{region}/jobs.list <https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list>`__
-        or
-        `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get>`__.
+        Required. The resource name of the workflow template, as described
+        in https://cloud.google.com/apis/design/resource_names.
+
+        -  For ``projects.regions.workflowTemplates.delete``, the resource name
+           of the template has the following format:
+           ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
+
+        -  For ``projects.locations.workflowTemplates.instantiate``, the
+           resource name of the template has the following format:
+           ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
 
         Example:
             >>> from google.cloud import dataproc_v1beta2
@@ -648,8 +642,10 @@ class JobControllerClient(object):
         metadata=None,
     ):
         """
-        Deletes the job from the project. If the job is active, the delete
-        fails, and the response returns ``FAILED_PRECONDITION``.
+        Output only. Indicates whether the job is completed. If the value is
+        ``false``, the job is still in progress. If ``true``, the job is
+        completed, and ``status.state`` field will indicate if it was
+        successful, failed, or cancelled.
 
         Example:
             >>> from google.cloud import dataproc_v1beta2
@@ -704,4 +700,98 @@ class JobControllerClient(object):
         )
         self._inner_api_calls["delete_job"](
             request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
+    def submit_job_as_operation(
+        self,
+        project_id,
+        region,
+        job,
+        request_id=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Submits job to a cluster.
+
+        Example:
+            >>> from google.cloud import dataproc_v1beta2
+            >>>
+            >>> client = dataproc_v1beta2.JobControllerClient()
+            >>>
+            >>> # TODO: Initialize `project_id`:
+            >>> project_id = ''
+            >>>
+            >>> # TODO: Initialize `region`:
+            >>> region = ''
+            >>>
+            >>> # TODO: Initialize `job`:
+            >>> job = {}
+            >>>
+            >>> response = client.submit_job_as_operation(project_id, region, job)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
+        Args:
+            project_id (str): Required. The ID of the Google Cloud Platform project that the job
+                belongs to.
+            region (str): Required. The Dataproc region in which to handle the request.
+            job (Union[dict, ~google.cloud.dataproc_v1beta2.types.Job]): Required. The job resource.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.dataproc_v1beta2.types.Job`
+            request_id (str): Optional. The Kubernetes Engine config for Dataproc clusters
+                deployed to Kubernetes. Setting this is considered mutually exclusive
+                with Compute Engine-based options such as ``gce_cluster_config``,
+                ``master_config``, ``worker_config``, ``secondary_worker_config``, and
+                ``autoscaling_config``.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1beta2.types._OperationFuture` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "submit_job_as_operation" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "submit_job_as_operation"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.submit_job_as_operation,
+                default_retry=self._method_configs["SubmitJobAsOperation"].retry,
+                default_timeout=self._method_configs["SubmitJobAsOperation"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = jobs_pb2.SubmitJobRequest(
+            project_id=project_id, region=region, job=job, request_id=request_id
+        )
+        operation = self._inner_api_calls["submit_job_as_operation"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+        return google.api_core.operation.from_gapic(
+            operation,
+            self.transport._operations_client,
+            jobs_pb2.Job,
+            metadata_type=jobs_pb2.JobMetadata,
         )

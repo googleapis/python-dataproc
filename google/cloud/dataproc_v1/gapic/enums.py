@@ -28,14 +28,18 @@ class Component(enum.IntEnum):
       ANACONDA (int): The Anaconda python distribution.
       HIVE_WEBHCAT (int): The Hive Web HCatalog (the REST service for accessing HCatalog).
       JUPYTER (int): The Jupyter Notebook.
+      PRESTO (int): The Presto query engine.
       ZEPPELIN (int): The Zeppelin notebook.
+      ZOOKEEPER (int): The Zookeeper service.
     """
 
     COMPONENT_UNSPECIFIED = 0
     ANACONDA = 5
     HIVE_WEBHCAT = 3
     JUPYTER = 1
+    PRESTO = 6
     ZEPPELIN = 4
+    ZOOKEEPER = 8
 
 
 class ClusterOperationStatus(object):
@@ -167,8 +171,9 @@ class ListJobsRequest(object):
 
         Attributes:
           ALL (int): Match all jobs, regardless of state.
-          ACTIVE (int): Only match jobs in non-terminal states: PENDING, RUNNING, or
-          CANCEL\_PENDING.
+          ACTIVE (int): Optional. This token is included in the response if there are more
+          results to fetch. To fetch additional results, provide this value as the
+          ``page_token`` in a subsequent ListJobsRequest.
           NON_ACTIVE (int): Only match jobs in terminal states: CANCELLED, DONE, or ERROR.
         """
 
@@ -180,9 +185,10 @@ class ListJobsRequest(object):
 class LoggingConfig(object):
     class Level(enum.IntEnum):
         """
-        The Log4j level for job execution. When running an `Apache
-        Hive <http://hive.apache.org/>`__ job, Cloud Dataproc configures the
-        Hive client to an equivalent verbosity level.
+        A Dataproc job for running `Apache Hadoop
+        MapReduce <https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html>`__
+        jobs on `Apache Hadoop
+        YARN <https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html>`__.
 
         Attributes:
           LEVEL_UNSPECIFIED (int): Level is unspecified. Use default level for log4j.
@@ -276,7 +282,10 @@ class YarnApplication(object):
         Attributes:
           STATE_UNSPECIFIED (int): Status is unspecified.
           NEW (int): Status is NEW.
-          NEW_SAVING (int): Status is NEW\_SAVING.
+          NEW_SAVING (int): Optional. A mapping of property names to values, used to configure
+          Hadoop. Properties that conflict with values set by the Dataproc API may
+          be overwritten. Can include properties set in /etc/hadoop/conf/*-site
+          and classes in user code.
           SUBMITTED (int): Status is SUBMITTED.
           ACCEPTED (int): Status is ACCEPTED.
           RUNNING (int): Status is RUNNING.

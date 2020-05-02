@@ -110,6 +110,22 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         return self._channel
 
     @property
+    def update_autoscaling_policy(self):
+        """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.update_autoscaling_policy`.
+
+        Denotes a field as output only. This indicates that the field is
+        provided in responses, but including the field in a request does nothing
+        (the server *must* ignore it and *must not* throw an error as a result
+        of the field's presence).
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["autoscaling_policy_service_stub"].UpdateAutoscalingPolicy
+
+    @property
     def create_autoscaling_policy(self):
         """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.create_autoscaling_policy`.
 
@@ -121,22 +137,6 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["autoscaling_policy_service_stub"].CreateAutoscalingPolicy
-
-    @property
-    def update_autoscaling_policy(self):
-        """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.update_autoscaling_policy`.
-
-        Updates (replaces) autoscaling policy.
-
-        Disabled check for update\_mask, because all updates will be full
-        replacements.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["autoscaling_policy_service_stub"].UpdateAutoscalingPolicy
 
     @property
     def get_autoscaling_policy(self):

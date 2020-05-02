@@ -34,6 +34,8 @@ import grpc
 from google.cloud.dataproc_v1.gapic import cluster_controller_client_config
 from google.cloud.dataproc_v1.gapic import enums
 from google.cloud.dataproc_v1.gapic.transports import cluster_controller_grpc_transport
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1.proto import clusters_pb2
 from google.cloud.dataproc_v1.proto import clusters_pb2_grpc
 from google.cloud.dataproc_v1.proto import operations_pb2 as proto_operations_pb2
@@ -203,9 +205,10 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Creates a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        JSON name of this field. The value is set by protocol compiler. If
+        the user has set a "json_name" option on this field, that option's value
+        will be used. Otherwise, it's deduced from the field's name by
+        converting it to camelCase.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -240,17 +243,7 @@ class ClusterControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.Cluster`
-            request_id (str): Optional. A unique id used to identify the request. If the server
-                receives two ``CreateClusterRequest`` requests with the same id, then
-                the second request will be ignored and the first
-                ``google.longrunning.Operation`` created and stored in the backend is
-                returned.
-
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
-
-                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+            request_id (str): The request message for ``Operations.CancelOperation``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -308,9 +301,14 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Updates a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        The normal response of the operation in case of success. If the
+        original method returns no data on success, such as ``Delete``, the
+        response is ``google.protobuf.Empty``. If the original method is
+        standard ``Get``/``Create``/``Update``, the response should be the
+        resource. For other methods, the response should have the type
+        ``XxxResponse``, where ``Xxx`` is the original method name. For example,
+        if the original method name is ``TakeSnapshot()``, the inferred response
+        type is ``TakeSnapshotResponse``.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -352,92 +350,68 @@ class ClusterControllerClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.Cluster`
-            update_mask (Union[dict, ~google.cloud.dataproc_v1.types.FieldMask]): Required. Specifies the path, relative to ``Cluster``, of the field to
-                update. For example, to change the number of workers in a cluster to 5,
-                the ``update_mask`` parameter would be specified as
-                ``config.worker_config.num_instances``, and the ``PATCH`` request body
-                would specify the new value, as follows:
+            update_mask (Union[dict, ~google.cloud.dataproc_v1.types.FieldMask]): Protocol Buffers - Google's data interchange format Copyright 2008
+                Google Inc. All rights reserved.
+                https://developers.google.com/protocol-buffers/
+
+                Redistribution and use in source and binary forms, with or without
+                modification, are permitted provided that the following conditions are
+                met:
 
                 ::
 
-                     {
-                       "config":{
-                         "workerConfig":{
-                           "numInstances":"5"
-                         }
-                       }
-                     }
+                    * Redistributions of source code must retain the above copyright
 
-                Similarly, to change the number of preemptible workers in a cluster to
-                5, the ``update_mask`` parameter would be
-                ``config.secondary_worker_config.num_instances``, and the ``PATCH``
-                request body would be set as follows:
+                notice, this list of conditions and the following disclaimer. \*
+                Redistributions in binary form must reproduce the above copyright
+                notice, this list of conditions and the following disclaimer in the
+                documentation and/or other materials provided with the distribution. \*
+                Neither the name of Google Inc. nor the names of its contributors may be
+                used to endorse or promote products derived from this software without
+                specific prior written permission.
 
-                ::
-
-                     {
-                       "config":{
-                         "secondaryWorkerConfig":{
-                           "numInstances":"5"
-                         }
-                       }
-                     }
-
-                Note: Currently, only the following fields can be updated:
-
-                .. raw:: html
-
-                     <table>
-                     <tbody>
-                     <tr>
-                     <td><strong>Mask</strong></td>
-                     <td><strong>Purpose</strong></td>
-                     </tr>
-                     <tr>
-                     <td><strong><em>labels</em></strong></td>
-                     <td>Update labels</td>
-                     </tr>
-                     <tr>
-                     <td><strong><em>config.worker_config.num_instances</em></strong></td>
-                     <td>Resize primary worker group</td>
-                     </tr>
-                     <tr>
-                     <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
-                     <td>Resize secondary worker group</td>
-                     </tr>
-                     <tr>
-                     <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
-                     change autoscaling policies</td>
-                     </tr>
-                     </tbody>
-                     </table>
+                THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+                IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+                TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+                PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+                OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+                EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+                PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+                PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+                LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+                NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.FieldMask`
-            graceful_decommission_timeout (Union[dict, ~google.cloud.dataproc_v1.types.Duration]): Optional. Timeout for graceful YARN decomissioning. Graceful
-                decommissioning allows removing nodes from the cluster without
-                interrupting jobs in progress. Timeout specifies how long to wait for
-                jobs in progress to finish before forcefully removing nodes (and
-                potentially interrupting jobs). Default timeout is 0 (for forceful
-                decommission), and the maximum allowed timeout is 1 day. (see JSON
-                representation of
-                `Duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__).
+            graceful_decommission_timeout (Union[dict, ~google.cloud.dataproc_v1.types.Duration]): Optional. Commands to execute on each node after config is
+                completed. By default, executables are run on master and all worker
+                nodes. You can test a node's ``role`` metadata to run an executable on a
+                master or worker node, as shown below using ``curl`` (you can also use
+                ``wget``):
 
-                Only supported on Dataproc image versions 1.2 and higher.
+                ::
+
+                    ROLE=$(curl -H Metadata-Flavor:Google
+                    http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
+                    if [[ "${ROLE}" == 'Master' ]]; then
+                      ... master specific actions ...
+                    else
+                      ... worker specific actions ...
+                    fi
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.Duration`
-            request_id (str): Optional. A unique id used to identify the request. If the server
-                receives two ``UpdateClusterRequest`` requests with the same id, then
-                the second request will be ignored and the first
-                ``google.longrunning.Operation`` created and stored in the backend is
-                returned.
+            request_id (str): Required. The resource name of the workflow template, as described
+                in https://cloud.google.com/apis/design/resource_names.
 
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
+                -  For ``projects.regions.workflowTemplates.instantiate``, the resource
+                   name of the template has the following format:
+                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
 
-                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+                -  For ``projects.locations.workflowTemplates.instantiate``, the
+                   resource name of the template has the following format:
+                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -499,9 +473,9 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Deletes a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        If the value is ``false``, it means the operation is still in
+        progress. If ``true``, the operation is completed, and either ``error``
+        or ``response`` is available.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -533,19 +507,23 @@ class ClusterControllerClient(object):
                 belongs to.
             region (str): Required. The Dataproc region in which to handle the request.
             cluster_name (str): Required. The cluster name.
-            cluster_uuid (str): Optional. Specifying the ``cluster_uuid`` means the RPC should fail
-                (with error NOT\_FOUND) if cluster with specified UUID does not exist.
-            request_id (str): Optional. A unique id used to identify the request. If the server
-                receives two ``DeleteClusterRequest`` requests with the same id, then
-                the second request will be ignored and the first
-                ``google.longrunning.Operation`` created and stored in the backend is
-                returned.
+            cluster_uuid (str): Whether the message is an automatically generated map entry type for
+                the maps field.
 
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
+                For maps fields: map<KeyType, ValueType> map_field = 1; The parsed
+                descriptor looks like: message MapFieldEntry { option map_entry = true;
+                optional KeyType key = 1; optional ValueType value = 2; } repeated
+                MapFieldEntry map_field = 1;
 
-                The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+                Implementations may choose not to generate the map_entry=true message,
+                but use a native map in the target language to hold the keys and values.
+                The reflection APIs in such implementations still need to work as if the
+                field is a repeated message field.
+
+                NOTE: Do not set the option in .proto files. Always use the maps syntax
+                instead. The option should only be implicitly set by the proto compiler
+                parser.
+            request_id (str): The request message for ``Operations.DeleteOperation``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -674,7 +652,7 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Lists all regions/{region}/clusters in a project.
+        Lists all regions/{region}/clusters in a project alphabetically.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -705,26 +683,9 @@ class ClusterControllerClient(object):
             project_id (str): Required. The ID of the Google Cloud Platform project that the cluster
                 belongs to.
             region (str): Required. The Dataproc region in which to handle the request.
-            filter_ (str): Optional. A filter constraining the clusters to list. Filters are
-                case-sensitive and have the following syntax:
-
-                field = value [AND [field = value]] ...
-
-                where **field** is one of ``status.state``, ``clusterName``, or
-                ``labels.[KEY]``, and ``[KEY]`` is a label key. **value** can be ``*``
-                to match all values. ``status.state`` can be one of the following:
-                ``ACTIVE``, ``INACTIVE``, ``CREATING``, ``RUNNING``, ``ERROR``,
-                ``DELETING``, or ``UPDATING``. ``ACTIVE`` contains the ``CREATING``,
-                ``UPDATING``, and ``RUNNING`` states. ``INACTIVE`` contains the
-                ``DELETING`` and ``ERROR`` states. ``clusterName`` is the name of the
-                cluster provided at creation time. Only the logical ``AND`` operator is
-                supported; space-separated items are treated as having an implicit
-                ``AND`` operator.
-
-                Example filter:
-
-                status.state = ACTIVE AND clusterName = mycluster AND labels.env =
-                staging AND labels.starred = \*
+            filter_ (str): Output only. Time when this state was entered (see JSON
+                representation of
+                `Timestamp <https://developers.google.com/protocol-buffers/docs/proto3#json>`__).
             page_size (int): The maximum number of resources contained in the
                 underlying API response. If page streaming is performed per-
                 resource, this parameter does not affect the return value. If page
@@ -791,11 +752,9 @@ class ClusterControllerClient(object):
         metadata=None,
     ):
         """
-        Gets cluster diagnostic information. The returned ``Operation.metadata``
-        will be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
-        After the operation completes, ``Operation.response`` contains
-        `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
+        The resource has one pattern, but the API owner expects to add more
+        later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+        that from being necessary once there are multiple patterns.)
 
         Example:
             >>> from google.cloud import dataproc_v1

@@ -126,10 +126,13 @@ class AutoscalingPolicyServiceGrpcTransport(object):
     def update_autoscaling_policy(self):
         """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.update_autoscaling_policy`.
 
-        Updates (replaces) autoscaling policy.
+        The name of the request field whose value is mapped to the HTTP
+        request body, or ``*`` for mapping all request fields not captured by
+        the path pattern to the HTTP body, or omitted for not having any HTTP
+        request body.
 
-        Disabled check for update\_mask, because all updates will be full
-        replacements.
+        NOTE: the referred field must be present at the top-level of the request
+        message type.
 
         Returns:
             Callable: A callable which accepts the appropriate

@@ -119,9 +119,10 @@ class ClusterControllerGrpcTransport(object):
     def create_cluster(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.create_cluster`.
 
-        Creates a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        JSON name of this field. The value is set by protocol compiler. If
+        the user has set a "json_name" option on this field, that option's value
+        will be used. Otherwise, it's deduced from the field's name by
+        converting it to camelCase.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -134,9 +135,14 @@ class ClusterControllerGrpcTransport(object):
     def update_cluster(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.update_cluster`.
 
-        Updates a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        The normal response of the operation in case of success. If the
+        original method returns no data on success, such as ``Delete``, the
+        response is ``google.protobuf.Empty``. If the original method is
+        standard ``Get``/``Create``/``Update``, the response should be the
+        resource. For other methods, the response should have the type
+        ``XxxResponse``, where ``Xxx`` is the original method name. For example,
+        if the original method name is ``TakeSnapshot()``, the inferred response
+        type is ``TakeSnapshotResponse``.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -149,9 +155,9 @@ class ClusterControllerGrpcTransport(object):
     def delete_cluster(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.delete_cluster`.
 
-        Deletes a cluster in a project. The returned ``Operation.metadata`` will
-        be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        If the value is ``false``, it means the operation is still in
+        progress. If ``true``, the operation is completed, and either ``error``
+        or ``response`` is available.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -177,7 +183,7 @@ class ClusterControllerGrpcTransport(object):
     def list_clusters(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.list_clusters`.
 
-        Lists all regions/{region}/clusters in a project.
+        Lists all regions/{region}/clusters in a project alphabetically.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -190,11 +196,9 @@ class ClusterControllerGrpcTransport(object):
     def diagnose_cluster(self):
         """Return the gRPC stub for :meth:`ClusterControllerClient.diagnose_cluster`.
 
-        Gets cluster diagnostic information. The returned ``Operation.metadata``
-        will be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
-        After the operation completes, ``Operation.response`` contains
-        `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
+        The resource has one pattern, but the API owner expects to add more
+        later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+        that from being necessary once there are multiple patterns.)
 
         Returns:
             Callable: A callable which accepts the appropriate

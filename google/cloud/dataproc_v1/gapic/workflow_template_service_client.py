@@ -38,6 +38,8 @@ from google.cloud.dataproc_v1.gapic import workflow_template_service_client_conf
 from google.cloud.dataproc_v1.gapic.transports import (
     workflow_template_service_grpc_transport,
 )
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2
+from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1.proto import clusters_pb2
 from google.cloud.dataproc_v1.proto import clusters_pb2_grpc
 from google.cloud.dataproc_v1.proto import jobs_pb2
@@ -86,6 +88,15 @@ class WorkflowTemplateServiceClient(object):
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
+
+    @classmethod
+    def location_path(cls, project, location):
+        """Return a fully-qualified location string."""
+        return google.api_core.path_template.expand(
+            "projects/{project}/locations/{location}",
+            project=project,
+            location=location,
+        )
 
     @classmethod
     def region_path(cls, project, region):
@@ -241,16 +252,32 @@ class WorkflowTemplateServiceClient(object):
             >>> response = client.create_workflow_template(parent, template)
 
         Args:
-            parent (str): Required. The resource name of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            parent (str): A URL/resource name that uniquely identifies the type of the
+                serialized protocol buffer message. This string must contain at least
+                one "/" character. The last segment of the URL's path must represent the
+                fully qualified name of the type (as in
+                ``path/google.protobuf.Duration``). The name should be in a canonical
+                form (e.g., leading "." is not accepted).
 
-                -  For ``projects.regions.workflowTemplates,create``, the resource name
-                   of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
+                In practice, teams usually precompile into the binary all types that
+                they expect it to use in the context of Any. However, for URLs which use
+                the scheme ``http``, ``https``, or no scheme, one can optionally set up
+                a type server that maps type URLs to message definitions as follows:
 
-                -  For ``projects.locations.workflowTemplates.create``, the resource
-                   name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
+                -  If no scheme is provided, ``https`` is assumed.
+                -  An HTTP GET on the URL must yield a ``google.protobuf.Type`` value in
+                   binary format, or produce an error.
+                -  Applications are allowed to cache lookup results based on the URL, or
+                   have them precompiled into a binary to avoid any lookup. Therefore,
+                   binary compatibility needs to be preserved on changes to types. (Use
+                   versioned type names to manage breaking changes.)
+
+                Note: this functionality is not currently available in the official
+                protobuf release, and it is not used for type URLs beginning with
+                type.googleapis.com.
+
+                Schemes other than ``http``, ``https`` (or the empty scheme) might be
+                used with implementation specific semantics.
             template (Union[dict, ~google.cloud.dataproc_v1.types.WorkflowTemplate]): Required. The Dataproc workflow template to create.
 
                 If a dict is provided, it must be of the same form as the protobuf
@@ -324,21 +351,15 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> response = client.get_workflow_template(name)
 
         Args:
-            name (str): Required. The resource name of the workflow template, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.workflowTemplates.get``, the resource name of
-                   the template has the following format:
-                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
-
-                -  For ``projects.locations.workflowTemplates.get``, the resource name
-                   of the template has the following format:
-                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+            name (str): Output only. The job status. Additional application-specific status
+                information may be contained in the type_job and yarn_applications
+                fields.
             version (int): Optional. The version of workflow template to retrieve. Only previously
                 instantiated versions can be retrieved.
 
@@ -404,29 +425,17 @@ class WorkflowTemplateServiceClient(object):
         metadata=None,
     ):
         """
-        Instantiates a template and begins execution.
-
-        The returned Operation can be used to track execution of workflow by
-        polling ``operations.get``. The Operation will complete when entire
-        workflow is finished.
-
-        The running workflow can be aborted via ``operations.cancel``. This will
-        cause any inflight jobs to be cancelled and workflow-owned clusters to
-        be deleted.
-
-        The ``Operation.metadata`` will be
-        `WorkflowMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata>`__.
-        Also see `Using
-        WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
-
-        On successful completion, ``Operation.response`` will be ``Empty``.
+        Optional. Whether to continue executing queries if a query fails.
+        The default value is ``false``. Setting to ``true`` can be useful when
+        executing independent parallel queries.
 
         Example:
             >>> from google.cloud import dataproc_v1
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> response = client.instantiate_workflow_template(name)
             >>>
@@ -440,31 +449,21 @@ class WorkflowTemplateServiceClient(object):
             >>> metadata = response.metadata()
 
         Args:
-            name (str): Required. The resource name of the workflow template, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.workflowTemplates.instantiate``, the resource
-                   name of the template has the following format:
-                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
-
-                -  For ``projects.locations.workflowTemplates.instantiate``, the
-                   resource name of the template has the following format:
-                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+            name (str): The Compute Engine metadata entries to add to all instances (see
+                `Project and instance
+                metadata <https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata>`__).
             version (int): Optional. The version of workflow template to instantiate. If specified,
                 the workflow will be instantiated only if the current version of
                 the workflow template has the supplied version.
 
                 This option cannot be used to instantiate a previous version of
                 workflow template.
-            request_id (str): Optional. A tag that prevents multiple concurrent workflow instances
-                with the same tag from running. This mitigates risk of concurrent
-                instances started due to retries.
-
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
-
-                The tag must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+            request_id (str): Signed fractions of a second at nanosecond resolution of the span of
+                time. Durations less than one second are represented with a 0
+                ``seconds`` field and a positive or negative ``nanos`` field. For
+                durations of one second or more, a non-zero value for the ``nanos``
+                field must be of the same sign as the ``seconds`` field. Must be from
+                -999,999,999 to +999,999,999 inclusive.
             parameters (dict[str -> str]): Optional. Map from parameter names to values that should be used for those
                 parameters. Values may not exceed 100 characters.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -535,26 +534,16 @@ class WorkflowTemplateServiceClient(object):
         metadata=None,
     ):
         """
-        Instantiates a template and begins execution.
+        Optional. The `Dataproc service
+        account <https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc>`__
+        (also see `VM Data Plane
+        identity <https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity>`__)
+        used by Dataproc cluster VM instances to access Google Cloud Platform
+        services.
 
-        This method is equivalent to executing the sequence
-        ``CreateWorkflowTemplate``, ``InstantiateWorkflowTemplate``,
-        ``DeleteWorkflowTemplate``.
-
-        The returned Operation can be used to track execution of workflow by
-        polling ``operations.get``. The Operation will complete when entire
-        workflow is finished.
-
-        The running workflow can be aborted via ``operations.cancel``. This will
-        cause any inflight jobs to be cancelled and workflow-owned clusters to
-        be deleted.
-
-        The ``Operation.metadata`` will be
-        `WorkflowMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata>`__.
-        Also see `Using
-        WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
-
-        On successful completion, ``Operation.response`` will be ``Empty``.
+        If not specified, the `Compute Engine default service
+        account <https://cloud.google.com/compute/docs/access/service-accounts#default_service_account>`__
+        is used.
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -578,29 +567,42 @@ class WorkflowTemplateServiceClient(object):
             >>> metadata = response.metadata()
 
         Args:
-            parent (str): Required. The resource name of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            parent (str): Each of the definitions above may have "options" attached. These are
+                just annotations which may cause code to be generated slightly
+                differently or may contain hints for code that manipulates protocol
+                messages.
 
-                -  For ``projects.regions.workflowTemplates,instantiateinline``, the
-                   resource name of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
+                Clients may define custom options as extensions of the \*Options
+                messages. These extensions may not yet be known at parsing time, so the
+                parser cannot store the values in them. Instead it stores them in a
+                field in the \*Options message called uninterpreted_option. This field
+                must have the same name across all \*Options messages. We then use this
+                field to populate the extensions when we build a descriptor, at which
+                point all protos have been parsed and so all extensions are known.
 
-                -  For ``projects.locations.workflowTemplates.instantiateinline``, the
-                   resource name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
+                Extension numbers for custom options may be chosen as follows:
+
+                -  For options which will only be used within a single application or
+                   organization, or for experimental options, use field numbers 50000
+                   through 99999. It is up to you to ensure that you do not use the same
+                   number for multiple options.
+                -  For options which will be published and used publicly by multiple
+                   independent entities, e-mail
+                   protobuf-global-extension-registry@google.com to reserve extension
+                   numbers. Simply provide your project name (e.g. Objective-C plugin)
+                   and your project website (if available) -- there's no need to explain
+                   how you intend to use them. Usually you only need one extension
+                   number. You can declare multiple options with only one extension
+                   number by putting them in a sub-message. See the Custom Options
+                   section of the docs for examples:
+                   https://developers.google.com/protocol-buffers/docs/proto#options If
+                   this turns out to be popular, a web service will be set up to
+                   automatically assign option numbers.
             template (Union[dict, ~google.cloud.dataproc_v1.types.WorkflowTemplate]): Required. The workflow template to instantiate.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.WorkflowTemplate`
-            request_id (str): Optional. A tag that prevents multiple concurrent workflow instances
-                with the same tag from running. This mitigates risk of concurrent
-                instances started due to retries.
-
-                It is recommended to always set this value to a
-                `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
-
-                The tag must contain only letters (a-z, A-Z), numbers (0-9), underscores
-                (\_), and hyphens (-). The maximum length is 40 characters.
+            request_id (str): See ``HttpRule``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -683,9 +685,9 @@ class WorkflowTemplateServiceClient(object):
             >>> response = client.update_workflow_template(template)
 
         Args:
-            template (Union[dict, ~google.cloud.dataproc_v1.types.WorkflowTemplate]): Required. The updated workflow template.
-
-                The ``template.version`` field must match the current version.
+            template (Union[dict, ~google.cloud.dataproc_v1.types.WorkflowTemplate]): Optional. Whether to continue executing queries if a query fails.
+                The default value is ``false``. Setting to ``true`` can be useful when
+                executing independent parallel queries.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.dataproc_v1.types.WorkflowTemplate`
@@ -772,16 +774,11 @@ class WorkflowTemplateServiceClient(object):
             ...         pass
 
         Args:
-            parent (str): Required. The resource name of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.workflowTemplates,list``, the resource name of
-                   the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
-
-                -  For ``projects.locations.workflowTemplates.list``, the resource name
-                   of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
+            parent (str): If set, all the classes from the .proto file are wrapped in a single
+                outer class with the given name. This applies to both Proto1 (equivalent
+                to the old "--one_java_file" option) and Proto2 (where a .proto always
+                translates to a single class, but you may want to explicitly choose the
+                class name).
             page_size (int): The maximum number of resources contained in the
                 underlying API response. If page streaming is performed per-
                 resource, this parameter does not affect the return value. If page
@@ -867,21 +864,15 @@ class WorkflowTemplateServiceClient(object):
             >>>
             >>> client = dataproc_v1.WorkflowTemplateServiceClient()
             >>>
-            >>> name = client.workflow_template_path('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> client.delete_workflow_template(name)
 
         Args:
-            name (str): Required. The resource name of the workflow template, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.workflowTemplates.delete``, the resource name
-                   of the template has the following format:
-                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
-
-                -  For ``projects.locations.workflowTemplates.instantiate``, the
-                   resource name of the template has the following format:
-                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+            name (str): Denotes a field as required. This indicates that the field **must**
+                be provided as part of the request, and failure to do so will cause an
+                error (usually ``INVALID_ARGUMENT``).
             version (int): Optional. The version of workflow template to delete. If specified,
                 will only delete the template if the current server version matches
                 specified version.

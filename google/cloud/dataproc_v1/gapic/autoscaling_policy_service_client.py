@@ -38,17 +38,7 @@ from google.cloud.dataproc_v1.gapic.transports import (
 )
 from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2
 from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
-from google.cloud.dataproc_v1.proto import clusters_pb2
-from google.cloud.dataproc_v1.proto import clusters_pb2_grpc
-from google.cloud.dataproc_v1.proto import jobs_pb2
-from google.cloud.dataproc_v1.proto import jobs_pb2_grpc
-from google.cloud.dataproc_v1.proto import operations_pb2 as proto_operations_pb2
-from google.cloud.dataproc_v1.proto import workflow_templates_pb2
-from google.cloud.dataproc_v1.proto import workflow_templates_pb2_grpc
-from google.longrunning import operations_pb2 as longrunning_operations_pb2
-from google.protobuf import duration_pb2
 from google.protobuf import empty_pb2
-from google.protobuf import field_mask_pb2
 
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-dataproc").version
@@ -88,13 +78,22 @@ class AutoscalingPolicyServiceClient(object):
     from_service_account_json = from_service_account_file
 
     @classmethod
-    def autoscaling_policy_path(cls, project, region, autoscaling_policy):
+    def autoscaling_policy_path(cls, project, location, autoscaling_policy):
         """Return a fully-qualified autoscaling_policy string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}",
+            "projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}",
             project=project,
-            region=region,
+            location=location,
             autoscaling_policy=autoscaling_policy,
+        )
+
+    @classmethod
+    def location_path(cls, project, location):
+        """Return a fully-qualified location string."""
+        return google.api_core.path_template.expand(
+            "projects/{project}/locations/{location}",
+            project=project,
+            location=location,
         )
 
     @classmethod
@@ -217,94 +216,6 @@ class AutoscalingPolicyServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def create_autoscaling_policy(
-        self,
-        parent,
-        policy,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Creates new autoscaling policy.
-
-        Example:
-            >>> from google.cloud import dataproc_v1
-            >>>
-            >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
-            >>>
-            >>> parent = client.region_path('[PROJECT]', '[REGION]')
-            >>>
-            >>> # TODO: Initialize `policy`:
-            >>> policy = {}
-            >>>
-            >>> response = client.create_autoscaling_policy(parent, policy)
-
-        Args:
-            parent (str): Required. The "resource name" of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.autoscalingPolicies.create``, the resource
-                   name of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
-
-                -  For ``projects.locations.autoscalingPolicies.create``, the resource
-                   name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
-            policy (Union[dict, ~google.cloud.dataproc_v1.types.AutoscalingPolicy]): The autoscaling policy to create.
-
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy`
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "create_autoscaling_policy" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "create_autoscaling_policy"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.create_autoscaling_policy,
-                default_retry=self._method_configs["CreateAutoscalingPolicy"].retry,
-                default_timeout=self._method_configs["CreateAutoscalingPolicy"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
-            parent=parent, policy=policy
-        )
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [("parent", parent)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
-            metadata.append(routing_metadata)
-
-        return self._inner_api_calls["create_autoscaling_policy"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-
     def update_autoscaling_policy(
         self,
         policy,
@@ -313,10 +224,10 @@ class AutoscalingPolicyServiceClient(object):
         metadata=None,
     ):
         """
-        Updates (replaces) autoscaling policy.
-
-        Disabled check for update\_mask, because all updates will be full
-        replacements.
+        Denotes a field as output only. This indicates that the field is
+        provided in responses, but including the field in a request does nothing
+        (the server *must* ignore it and *must not* throw an error as a result
+        of the field's presence).
 
         Example:
             >>> from google.cloud import dataproc_v1
@@ -381,6 +292,86 @@ class AutoscalingPolicyServiceClient(object):
             request, retry=retry, timeout=timeout, metadata=metadata
         )
 
+    def create_autoscaling_policy(
+        self,
+        parent,
+        policy,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Creates new autoscaling policy.
+
+        Example:
+            >>> from google.cloud import dataproc_v1
+            >>>
+            >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
+            >>>
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
+            >>>
+            >>> # TODO: Initialize `policy`:
+            >>> policy = {}
+            >>>
+            >>> response = client.create_autoscaling_policy(parent, policy)
+
+        Args:
+            parent (str): A Dataproc job for running `Apache
+                Hive <https://hive.apache.org/>`__ queries on YARN.
+            policy (Union[dict, ~google.cloud.dataproc_v1.types.AutoscalingPolicy]): Required. The autoscaling policy to create.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "create_autoscaling_policy" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "create_autoscaling_policy"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.create_autoscaling_policy,
+                default_retry=self._method_configs["CreateAutoscalingPolicy"].retry,
+                default_timeout=self._method_configs["CreateAutoscalingPolicy"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
+            parent=parent, policy=policy
+        )
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [("parent", parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
+            metadata.append(routing_metadata)
+
+        return self._inner_api_calls["create_autoscaling_policy"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
     def get_autoscaling_policy(
         self,
         name,
@@ -396,21 +387,22 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
             >>>
-            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> response = client.get_autoscaling_policy(name)
 
         Args:
-            name (str): Required. The "resource name" of the autoscaling policy, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            name (str): Required. The resource name of the region or location, as described
+                in https://cloud.google.com/apis/design/resource_names.
 
-                -  For ``projects.regions.autoscalingPolicies.get``, the resource name
-                   of the policy has the following format:
-                   ``projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}``
+                -  For ``projects.regions.workflowTemplates,create``, the resource name
+                   of the region has the following format:
+                   ``projects/{project_id}/regions/{region}``
 
-                -  For ``projects.locations.autoscalingPolicies.get``, the resource name
-                   of the policy has the following format:
-                   ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+                -  For ``projects.locations.workflowTemplates.create``, the resource
+                   name of the location has the following format:
+                   ``projects/{project_id}/locations/{location}``
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -492,16 +484,37 @@ class AutoscalingPolicyServiceClient(object):
             ...         pass
 
         Args:
-            parent (str): Required. The "resource name" of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            parent (str): Protocol Buffers - Google's data interchange format Copyright 2008
+                Google Inc. All rights reserved.
+                https://developers.google.com/protocol-buffers/
 
-                -  For ``projects.regions.autoscalingPolicies.list``, the resource name
-                   of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
+                Redistribution and use in source and binary forms, with or without
+                modification, are permitted provided that the following conditions are
+                met:
 
-                -  For ``projects.locations.autoscalingPolicies.list``, the resource
-                   name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
+                ::
+
+                    * Redistributions of source code must retain the above copyright
+
+                notice, this list of conditions and the following disclaimer. \*
+                Redistributions in binary form must reproduce the above copyright
+                notice, this list of conditions and the following disclaimer in the
+                documentation and/or other materials provided with the distribution. \*
+                Neither the name of Google Inc. nor the names of its contributors may be
+                used to endorse or promote products derived from this software without
+                specific prior written permission.
+
+                THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+                IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+                TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+                PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+                OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+                EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+                PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+                PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+                LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+                NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             page_size (int): The maximum number of resources contained in the
                 underlying API response. If page streaming is performed per-
                 resource, this parameter does not affect the return value. If page
@@ -587,21 +600,21 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
             >>>
-            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> client.delete_autoscaling_policy(name)
 
         Args:
-            name (str): Required. The "resource name" of the autoscaling policy, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.autoscalingPolicies.delete``, the resource
-                   name of the policy has the following format:
-                   ``projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}``
-
-                -  For ``projects.locations.autoscalingPolicies.delete``, the resource
-                   name of the policy has the following format:
-                   ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+            name (str): Starts asynchronous cancellation on a long-running operation. The
+                server makes a best effort to cancel the operation, but success is not
+                guaranteed. If the server doesn't support this method, it returns
+                ``google.rpc.Code.UNIMPLEMENTED``. Clients can use
+                ``Operations.GetOperation`` or other methods to check whether the
+                cancellation succeeded or whether the operation completed despite
+                cancellation. On successful cancellation, the operation is not deleted;
+                instead, it becomes an operation with an ``Operation.error`` value with
+                a ``google.rpc.Status.code`` of 1, corresponding to ``Code.CANCELLED``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.

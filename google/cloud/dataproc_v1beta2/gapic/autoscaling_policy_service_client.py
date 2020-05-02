@@ -78,13 +78,22 @@ class AutoscalingPolicyServiceClient(object):
     from_service_account_json = from_service_account_file
 
     @classmethod
-    def autoscaling_policy_path(cls, project, region, autoscaling_policy):
+    def autoscaling_policy_path(cls, project, location, autoscaling_policy):
         """Return a fully-qualified autoscaling_policy string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}",
+            "projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}",
             project=project,
-            region=region,
+            location=location,
             autoscaling_policy=autoscaling_policy,
+        )
+
+    @classmethod
+    def location_path(cls, project, location):
+        """Return a fully-qualified location string."""
+        return google.api_core.path_template.expand(
+            "projects/{project}/locations/{location}",
+            project=project,
+            location=location,
         )
 
     @classmethod
@@ -231,16 +240,16 @@ class AutoscalingPolicyServiceClient(object):
             >>> response = client.create_autoscaling_policy(parent, policy)
 
         Args:
-            parent (str): Required. The "resource name" of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            parent (str): Lists operations that match the specified filter in the request. If
+                the server doesn't support this method, it returns ``UNIMPLEMENTED``.
 
-                -  For ``projects.regions.autoscalingPolicies.create``, the resource
-                   name has the following format:
-                   ``projects/{project_id}/regions/{region}``
-
-                -  For ``projects.locations.autoscalingPolicies.create``, the resource
-                   name has the following format:
-                   ``projects/{project_id}/locations/{location}``
+                NOTE: the ``name`` binding allows API services to override the binding
+                to use different resource name schemes, such as ``users/*/operations``.
+                To override the binding, API services can add a binding such as
+                ``"/v1/{name=users/*}/operations"`` to their service configuration. For
+                backwards compatibility, the default name includes the operations
+                collection id, however overriding users must ensure the name binding is
+                the parent resource, without the operations collection id.
             policy (Union[dict, ~google.cloud.dataproc_v1beta2.types.AutoscalingPolicy]): Required. The autoscaling policy to create.
 
                 If a dict is provided, it must be of the same form as the protobuf
@@ -303,10 +312,13 @@ class AutoscalingPolicyServiceClient(object):
         metadata=None,
     ):
         """
-        Updates (replaces) autoscaling policy.
+        The name of the request field whose value is mapped to the HTTP
+        request body, or ``*`` for mapping all request fields not captured by
+        the path pattern to the HTTP body, or omitted for not having any HTTP
+        request body.
 
-        Disabled check for update\_mask, because all updates will be full
-        replacements.
+        NOTE: the referred field must be present at the top-level of the request
+        message type.
 
         Example:
             >>> from google.cloud import dataproc_v1beta2
@@ -386,21 +398,13 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> response = client.get_autoscaling_policy(name)
 
         Args:
-            name (str): Required. The "resource name" of the autoscaling policy, as described in
-                https://cloud.google.com/apis/design/resource\_names.
-
-                -  For ``projects.regions.autoscalingPolicies.get``, the resource name
-                   of the policy has the following format:
-                   ``projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}``
-
-                -  For ``projects.locations.autoscalingPolicies.get``, the resource name
-                   of the policy has the following format:
-                   ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+            name (str): The request message for ``Operations.WaitOperation``.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -482,16 +486,13 @@ class AutoscalingPolicyServiceClient(object):
             ...         pass
 
         Args:
-            parent (str): Required. The "resource name" of the region or location, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            parent (str): Optional. Maximum number of instances for this group. Required for
+                primary workers. Note that by default, clusters will not use secondary
+                workers. Required for secondary workers if the minimum secondary
+                instances is set.
 
-                -  For ``projects.regions.autoscalingPolicies.list``, the resource name
-                   of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
-
-                -  For ``projects.locations.autoscalingPolicies.list``, the resource
-                   name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
+                Primary workers - Bounds: [min_instances, ). Required. Secondary workers
+                - Bounds: [min_instances, ). Default: 0.
             page_size (int): The maximum number of resources contained in the
                 underlying API response. If page streaming is performed per-
                 resource, this parameter does not affect the return value. If page
@@ -577,21 +578,19 @@ class AutoscalingPolicyServiceClient(object):
             >>>
             >>> client = dataproc_v1beta2.AutoscalingPolicyServiceClient()
             >>>
-            >>> name = client.autoscaling_policy_path('[PROJECT]', '[REGION]', '[AUTOSCALING_POLICY]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> client.delete_autoscaling_policy(name)
 
         Args:
-            name (str): Required. The "resource name" of the autoscaling policy, as described in
-                https://cloud.google.com/apis/design/resource\_names.
+            name (str): Optional. Minimum scale-up threshold as a fraction of total cluster
+                size before scaling occurs. For example, in a 20-worker cluster, a
+                threshold of 0.1 means the autoscaler must recommend at least a 2-worker
+                scale-up for the cluster to scale. A threshold of 0 means the autoscaler
+                will scale up on any recommended change.
 
-                -  For ``projects.regions.autoscalingPolicies.delete``, the resource
-                   name of the policy has the following format:
-                   ``projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}``
-
-                -  For ``projects.locations.autoscalingPolicies.delete``, the resource
-                   name of the policy has the following format:
-                   ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+                Bounds: [0.0, 1.0]. Default: 0.0.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.

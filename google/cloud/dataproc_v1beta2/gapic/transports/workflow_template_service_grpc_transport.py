@@ -152,34 +152,6 @@ class WorkflowTemplateServiceGrpcTransport(object):
 
         Instantiates a template and begins execution.
 
-        The returned Operation can be used to track execution of workflow by
-        polling ``operations.get``. The Operation will complete when entire
-        workflow is finished.
-
-        The running workflow can be aborted via ``operations.cancel``. This will
-        cause any inflight jobs to be cancelled and workflow-owned clusters to
-        be deleted.
-
-        The ``Operation.metadata`` will be
-        `WorkflowMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#workflowmetadata>`__.
-        Also see `Using
-        WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
-
-        On successful completion, ``Operation.response`` will be ``Empty``.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["workflow_template_service_stub"].InstantiateWorkflowTemplate
-
-    @property
-    def instantiate_inline_workflow_template(self):
-        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.instantiate_inline_workflow_template`.
-
-        Instantiates a template and begins execution.
-
         This method is equivalent to executing the sequence
         ``CreateWorkflowTemplate``, ``InstantiateWorkflowTemplate``,
         ``DeleteWorkflowTemplate``.
@@ -198,6 +170,28 @@ class WorkflowTemplateServiceGrpcTransport(object):
         WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
 
         On successful completion, ``Operation.response`` will be ``Empty``.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["workflow_template_service_stub"].InstantiateWorkflowTemplate
+
+    @property
+    def instantiate_inline_workflow_template(self):
+        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.instantiate_inline_workflow_template`.
+
+        Optional. The labels to associate with this cluster.
+
+        Label keys must be between 1 and 63 characters long, and must conform to
+        the following PCRE regular expression:
+        [\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}
+
+        Label values must be between 1 and 63 characters long, and must conform
+        to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
+
+        No more than 32 labels can be associated with a given cluster.
 
         Returns:
             Callable: A callable which accepts the appropriate

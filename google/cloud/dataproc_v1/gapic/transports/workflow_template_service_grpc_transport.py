@@ -150,22 +150,9 @@ class WorkflowTemplateServiceGrpcTransport(object):
     def instantiate_workflow_template(self):
         """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.instantiate_workflow_template`.
 
-        Instantiates a template and begins execution.
-
-        The returned Operation can be used to track execution of workflow by
-        polling ``operations.get``. The Operation will complete when entire
-        workflow is finished.
-
-        The running workflow can be aborted via ``operations.cancel``. This will
-        cause any inflight jobs to be cancelled and workflow-owned clusters to
-        be deleted.
-
-        The ``Operation.metadata`` will be
-        `WorkflowMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata>`__.
-        Also see `Using
-        WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
-
-        On successful completion, ``Operation.response`` will be ``Empty``.
+        Optional. Whether to continue executing queries if a query fails.
+        The default value is ``false``. Setting to ``true`` can be useful when
+        executing independent parallel queries.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -178,26 +165,16 @@ class WorkflowTemplateServiceGrpcTransport(object):
     def instantiate_inline_workflow_template(self):
         """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.instantiate_inline_workflow_template`.
 
-        Instantiates a template and begins execution.
+        Optional. The `Dataproc service
+        account <https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc>`__
+        (also see `VM Data Plane
+        identity <https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity>`__)
+        used by Dataproc cluster VM instances to access Google Cloud Platform
+        services.
 
-        This method is equivalent to executing the sequence
-        ``CreateWorkflowTemplate``, ``InstantiateWorkflowTemplate``,
-        ``DeleteWorkflowTemplate``.
-
-        The returned Operation can be used to track execution of workflow by
-        polling ``operations.get``. The Operation will complete when entire
-        workflow is finished.
-
-        The running workflow can be aborted via ``operations.cancel``. This will
-        cause any inflight jobs to be cancelled and workflow-owned clusters to
-        be deleted.
-
-        The ``Operation.metadata`` will be
-        `WorkflowMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata>`__.
-        Also see `Using
-        WorkflowMetadata <https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata>`__.
-
-        On successful completion, ``Operation.response`` will be ``Empty``.
+        If not specified, the `Compute Engine default service
+        account <https://cloud.google.com/compute/docs/access/service-accounts#default_service_account>`__
+        is used.
 
         Returns:
             Callable: A callable which accepts the appropriate
