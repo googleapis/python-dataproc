@@ -3976,7 +3976,7 @@ HadoopJob = _reflection.GeneratedProtocolMessageType(
           Optional. A mapping of property names to values, used to
           configure Hadoop. Properties that conflict with values set by
           the Dataproc API may be overwritten. Can include properties
-          set in /etc/hadoop/conf/*-site and classes in user code.
+          set in ``/etc/hadoop/conf/*-site`` and classes in user code.
       logging_config:
           Optional. The runtime log config for job execution.
   """,
@@ -4177,7 +4177,7 @@ HiveJob = _reflection.GeneratedProtocolMessageType(
           Optional. A mapping of property names and values, used to
           configure Hive. Properties that conflict with values set by
           the Dataproc API may be overwritten. Can include properties
-          set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-
+          set in ``/etc/hadoop/conf/*-site``.xml, /etc/hive/conf/hive-
           site.xml, and classes in user code.
       jar_file_uris:
           Optional. HCFS URIs of jar files to add to the CLASSPATH of
@@ -4294,7 +4294,7 @@ PigJob = _reflection.GeneratedProtocolMessageType(
           Optional. A mapping of property names to values, used to
           configure Pig. Properties that conflict with values set by the
           Dataproc API may be overwritten. Can include properties set in
-          /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and
+          ``/etc/hadoop/conf/*-site``.xml, /etc/pig/conf/pig.properties, and
           classes in user code.
       jar_file_uris:
           Optional. HCFS URIs of jar files to add to the CLASSPATH of
