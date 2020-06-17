@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-dataproc.git",
-        "sha": "5accf9d1990820744053c6d38f5465fca3ea848d"
+        "sha": "0a20c6fa6b5bbe285806f9e2237bacc394cf7a2f"
       }
     },
     {
