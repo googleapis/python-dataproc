@@ -685,8 +685,8 @@ class ClusterControllerClient(object):
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
-            empty_pb2.Empty,
-            metadata_type=clusters_pb2.DiagnoseClusterResults,
+            clusters_pb2.DiagnoseClusterResults,
+            metadata_type=proto_operations_pb2.ClusterOperationMetadata,
         )
 
     def get_cluster(

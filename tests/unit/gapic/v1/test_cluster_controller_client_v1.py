@@ -261,8 +261,9 @@ class TestClusterControllerClient(object):
 
     def test_diagnose_cluster(self):
         # Setup Expected Response
-        expected_response = {}
-        expected_response = empty_pb2.Empty(**expected_response)
+        output_uri = "outputUri-1273518802"
+        expected_response = {"output_uri": output_uri}
+        expected_response = clusters_pb2.DiagnoseClusterResults(**expected_response)
         operation = operations_pb2.Operation(
             name="operations/test_diagnose_cluster", done=True
         )
