@@ -687,7 +687,7 @@ class ClusterControllerClient(object):
             )
 
         request = clusters_pb2.DiagnoseClusterRequest(
-            project_id=project_id, region=region, cluster_name=cluster_name
+            project_id=project_id, region=region, cluster_name=cluster_name,
         )
         operation = self._inner_api_calls["diagnose_cluster"](
             request, retry=retry, timeout=timeout, metadata=metadata

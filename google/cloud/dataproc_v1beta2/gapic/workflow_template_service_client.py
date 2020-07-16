@@ -579,7 +579,7 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.CreateWorkflowTemplateRequest(
-            parent=parent, template=template
+            parent=parent, template=template,
         )
         if metadata is None:
             metadata = []
@@ -668,7 +668,7 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.GetWorkflowTemplateRequest(
-            name=name, version=version
+            name=name, version=version,
         )
         if metadata is None:
             metadata = []

@@ -287,7 +287,7 @@ class AutoscalingPolicyServiceClient(object):
             )
 
         request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
-            parent=parent, policy=policy
+            parent=parent, policy=policy,
         )
         if metadata is None:
             metadata = []
@@ -364,7 +364,9 @@ class AutoscalingPolicyServiceClient(object):
                 client_info=self._client_info,
             )
 
-        request = autoscaling_policies_pb2.UpdateAutoscalingPolicyRequest(policy=policy)
+        request = autoscaling_policies_pb2.UpdateAutoscalingPolicyRequest(
+            policy=policy,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)

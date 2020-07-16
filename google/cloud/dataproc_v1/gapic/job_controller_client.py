@@ -366,7 +366,7 @@ class JobControllerClient(object):
             )
 
         request = jobs_pb2.SubmitJobRequest(
-            project_id=project_id, region=region, job=job, request_id=request_id
+            project_id=project_id, region=region, job=job, request_id=request_id,
         )
         operation = self._inner_api_calls["submit_job_as_operation"](
             request, retry=retry, timeout=timeout, metadata=metadata
