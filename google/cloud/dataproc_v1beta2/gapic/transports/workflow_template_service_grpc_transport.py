@@ -54,7 +54,7 @@ class WorkflowTemplateServiceGrpcTransport(object):
         # exception (channels come with credentials baked in already).
         if channel is not None and credentials is not None:
             raise ValueError(
-                "The `channel` and `credentials` arguments are mutually " "exclusive."
+                "The `channel` and `credentials` arguments are mutually " "exclusive.",
             )
 
         # Create the channel.
@@ -75,7 +75,7 @@ class WorkflowTemplateServiceGrpcTransport(object):
         self._stubs = {
             "workflow_template_service_stub": workflow_templates_pb2_grpc.WorkflowTemplateServiceStub(
                 channel
-            )
+            ),
         }
 
         # Because this API includes a method that returns a
@@ -116,35 +116,6 @@ class WorkflowTemplateServiceGrpcTransport(object):
             grpc.Channel: A gRPC channel object.
         """
         return self._channel
-
-    @property
-    def create_workflow_template(self):
-        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.create_workflow_template`.
-
-        Creates new workflow template.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["workflow_template_service_stub"].CreateWorkflowTemplate
-
-    @property
-    def get_workflow_template(self):
-        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.get_workflow_template`.
-
-        Retrieves the latest workflow template.
-
-        Can retrieve previously instantiated template by specifying optional
-        version parameter.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["workflow_template_service_stub"].GetWorkflowTemplate
 
     @property
     def instantiate_workflow_template(self):
@@ -207,6 +178,35 @@ class WorkflowTemplateServiceGrpcTransport(object):
         return self._stubs[
             "workflow_template_service_stub"
         ].InstantiateInlineWorkflowTemplate
+
+    @property
+    def create_workflow_template(self):
+        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.create_workflow_template`.
+
+        Creates new workflow template.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["workflow_template_service_stub"].CreateWorkflowTemplate
+
+    @property
+    def get_workflow_template(self):
+        """Return the gRPC stub for :meth:`WorkflowTemplateServiceClient.get_workflow_template`.
+
+        Retrieves the latest workflow template.
+
+        Can retrieve previously instantiated template by specifying optional
+        version parameter.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["workflow_template_service_stub"].GetWorkflowTemplate
 
     @property
     def update_workflow_template(self):

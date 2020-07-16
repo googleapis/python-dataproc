@@ -53,7 +53,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         # exception (channels come with credentials baked in already).
         if channel is not None and credentials is not None:
             raise ValueError(
-                "The `channel` and `credentials` arguments are mutually " "exclusive."
+                "The `channel` and `credentials` arguments are mutually " "exclusive.",
             )
 
         # Create the channel.
@@ -74,7 +74,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         self._stubs = {
             "autoscaling_policy_service_stub": autoscaling_policies_pb2_grpc.AutoscalingPolicyServiceStub(
                 channel
-            )
+            ),
         }
 
     @classmethod
@@ -110,6 +110,19 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         return self._channel
 
     @property
+    def create_autoscaling_policy(self):
+        """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.create_autoscaling_policy`.
+
+        Creates new autoscaling policy.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["autoscaling_policy_service_stub"].CreateAutoscalingPolicy
+
+    @property
     def update_autoscaling_policy(self):
         """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.update_autoscaling_policy`.
 
@@ -124,19 +137,6 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["autoscaling_policy_service_stub"].UpdateAutoscalingPolicy
-
-    @property
-    def create_autoscaling_policy(self):
-        """Return the gRPC stub for :meth:`AutoscalingPolicyServiceClient.create_autoscaling_policy`.
-
-        Creates new autoscaling policy.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["autoscaling_policy_service_stub"].CreateAutoscalingPolicy
 
     @property
     def get_autoscaling_policy(self):

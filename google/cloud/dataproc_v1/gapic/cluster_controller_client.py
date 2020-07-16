@@ -45,7 +45,9 @@ from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-dataproc").version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    "google-cloud-dataproc",
+).version
 
 
 class ClusterControllerClient(object):
@@ -168,12 +170,12 @@ class ClusterControllerClient(object):
                 self.transport = transport
         else:
             self.transport = cluster_controller_grpc_transport.ClusterControllerGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials
+                address=api_endpoint, channel=channel, credentials=credentials,
             )
 
         if client_info is None:
             client_info = google.api_core.gapic_v1.client_info.ClientInfo(
-                gapic_version=_GAPIC_LIBRARY_VERSION
+                gapic_version=_GAPIC_LIBRARY_VERSION,
             )
         else:
             client_info.gapic_version = _GAPIC_LIBRARY_VERSION
@@ -184,7 +186,7 @@ class ClusterControllerClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config["interfaces"][self._INTERFACE_NAME]
+            client_config["interfaces"][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -284,7 +286,10 @@ class ClusterControllerClient(object):
             )
 
         request = clusters_pb2.CreateClusterRequest(
-            project_id=project_id, region=region, cluster=cluster, request_id=request_id
+            project_id=project_id,
+            region=region,
+            cluster=cluster,
+            request_id=request_id,
         )
         operation = self._inner_api_calls["create_cluster"](
             request, retry=retry, timeout=timeout, metadata=metadata
@@ -595,6 +600,95 @@ class ClusterControllerClient(object):
             metadata_type=proto_operations_pb2.ClusterOperationMetadata,
         )
 
+    def diagnose_cluster(
+        self,
+        project_id,
+        region,
+        cluster_name,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Gets cluster diagnostic information. The returned
+        ``Operation.metadata`` will be
+        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        After the operation completes, ``Operation.response`` contains
+        `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
+
+        Example:
+            >>> from google.cloud import dataproc_v1
+            >>>
+            >>> client = dataproc_v1.ClusterControllerClient()
+            >>>
+            >>> # TODO: Initialize `project_id`:
+            >>> project_id = ''
+            >>>
+            >>> # TODO: Initialize `region`:
+            >>> region = ''
+            >>>
+            >>> # TODO: Initialize `cluster_name`:
+            >>> cluster_name = ''
+            >>>
+            >>> response = client.diagnose_cluster(project_id, region, cluster_name)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
+        Args:
+            project_id (str): Required. The ID of the Google Cloud Platform project that the cluster
+                belongs to.
+            region (str): Required. The Dataproc region in which to handle the request.
+            cluster_name (str): Required. The cluster name.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1.types._OperationFuture` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "diagnose_cluster" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "diagnose_cluster"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.diagnose_cluster,
+                default_retry=self._method_configs["DiagnoseCluster"].retry,
+                default_timeout=self._method_configs["DiagnoseCluster"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = clusters_pb2.DiagnoseClusterRequest(
+            project_id=project_id, region=region, cluster_name=cluster_name,
+        )
+        operation = self._inner_api_calls["diagnose_cluster"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+        return google.api_core.operation.from_gapic(
+            operation,
+            self.transport._operations_client,
+            clusters_pb2.DiagnoseClusterResults,
+            metadata_type=proto_operations_pb2.ClusterOperationMetadata,
+        )
+
     def get_cluster(
         self,
         project_id,
@@ -659,7 +753,7 @@ class ClusterControllerClient(object):
             )
 
         request = clusters_pb2.GetClusterRequest(
-            project_id=project_id, region=region, cluster_name=cluster_name
+            project_id=project_id, region=region, cluster_name=cluster_name,
         )
         return self._inner_api_calls["get_cluster"](
             request, retry=retry, timeout=timeout, metadata=metadata
@@ -766,7 +860,7 @@ class ClusterControllerClient(object):
             )
 
         request = clusters_pb2.ListClustersRequest(
-            project_id=project_id, region=region, filter=filter_, page_size=page_size
+            project_id=project_id, region=region, filter=filter_, page_size=page_size,
         )
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
@@ -782,92 +876,3 @@ class ClusterControllerClient(object):
             response_token_field="next_page_token",
         )
         return iterator
-
-    def diagnose_cluster(
-        self,
-        project_id,
-        region,
-        cluster_name,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Gets cluster diagnostic information. The returned
-        ``Operation.metadata`` will be
-        `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
-        After the operation completes, ``Operation.response`` contains
-        `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
-
-        Example:
-            >>> from google.cloud import dataproc_v1
-            >>>
-            >>> client = dataproc_v1.ClusterControllerClient()
-            >>>
-            >>> # TODO: Initialize `project_id`:
-            >>> project_id = ''
-            >>>
-            >>> # TODO: Initialize `region`:
-            >>> region = ''
-            >>>
-            >>> # TODO: Initialize `cluster_name`:
-            >>> cluster_name = ''
-            >>>
-            >>> response = client.diagnose_cluster(project_id, region, cluster_name)
-            >>>
-            >>> def callback(operation_future):
-            ...     # Handle result.
-            ...     result = operation_future.result()
-            >>>
-            >>> response.add_done_callback(callback)
-            >>>
-            >>> # Handle metadata.
-            >>> metadata = response.metadata()
-
-        Args:
-            project_id (str): Required. The ID of the Google Cloud Platform project that the cluster
-                belongs to.
-            region (str): Required. The Dataproc region in which to handle the request.
-            cluster_name (str): Required. The cluster name.
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.cloud.dataproc_v1.types._OperationFuture` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "diagnose_cluster" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "diagnose_cluster"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.diagnose_cluster,
-                default_retry=self._method_configs["DiagnoseCluster"].retry,
-                default_timeout=self._method_configs["DiagnoseCluster"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = clusters_pb2.DiagnoseClusterRequest(
-            project_id=project_id, region=region, cluster_name=cluster_name
-        )
-        operation = self._inner_api_calls["diagnose_cluster"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-        return google.api_core.operation.from_gapic(
-            operation,
-            self.transport._operations_client,
-            empty_pb2.Empty,
-            metadata_type=clusters_pb2.DiagnoseClusterResults,
-        )

@@ -54,7 +54,7 @@ class JobControllerGrpcTransport(object):
         # exception (channels come with credentials baked in already).
         if channel is not None and credentials is not None:
             raise ValueError(
-                "The `channel` and `credentials` arguments are mutually " "exclusive."
+                "The `channel` and `credentials` arguments are mutually " "exclusive.",
             )
 
         # Create the channel.
@@ -72,7 +72,9 @@ class JobControllerGrpcTransport(object):
 
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
-        self._stubs = {"job_controller_stub": jobs_pb2_grpc.JobControllerStub(channel)}
+        self._stubs = {
+            "job_controller_stub": jobs_pb2_grpc.JobControllerStub(channel),
+        }
 
         # Because this API includes a method that returns a
         # long-running operation (proto: google.longrunning.Operation),
@@ -125,6 +127,19 @@ class JobControllerGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["job_controller_stub"].SubmitJob
+
+    @property
+    def submit_job_as_operation(self):
+        """Return the gRPC stub for :meth:`JobControllerClient.submit_job_as_operation`.
+
+        Submits job to a cluster.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["job_controller_stub"].SubmitJobAsOperation
 
     @property
     def get_job(self):
@@ -195,16 +210,3 @@ class JobControllerGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["job_controller_stub"].DeleteJob
-
-    @property
-    def submit_job_as_operation(self):
-        """Return the gRPC stub for :meth:`JobControllerClient.submit_job_as_operation`.
-
-        Submits job to a cluster.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["job_controller_stub"].SubmitJobAsOperation

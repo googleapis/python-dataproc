@@ -53,7 +53,9 @@ from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-dataproc").version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    "google-cloud-dataproc",
+).version
 
 
 class WorkflowTemplateServiceClient(object):
@@ -102,7 +104,7 @@ class WorkflowTemplateServiceClient(object):
     def region_path(cls, project, region):
         """Return a fully-qualified region string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/regions/{region}", project=project, region=region
+            "projects/{project}/regions/{region}", project=project, region=region,
         )
 
     @classmethod
@@ -202,12 +204,12 @@ class WorkflowTemplateServiceClient(object):
                 self.transport = transport
         else:
             self.transport = workflow_template_service_grpc_transport.WorkflowTemplateServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials
+                address=api_endpoint, channel=channel, credentials=credentials,
             )
 
         if client_info is None:
             client_info = google.api_core.gapic_v1.client_info.ClientInfo(
-                gapic_version=_GAPIC_LIBRARY_VERSION
+                gapic_version=_GAPIC_LIBRARY_VERSION,
             )
         else:
             client_info.gapic_version = _GAPIC_LIBRARY_VERSION
@@ -218,7 +220,7 @@ class WorkflowTemplateServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config["interfaces"][self._INTERFACE_NAME]
+            client_config["interfaces"][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -228,183 +230,6 @@ class WorkflowTemplateServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def create_workflow_template(
-        self,
-        parent,
-        template,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Creates new workflow template.
-
-        Example:
-            >>> from google.cloud import dataproc_v1beta2
-            >>>
-            >>> client = dataproc_v1beta2.WorkflowTemplateServiceClient()
-            >>>
-            >>> parent = client.region_path('[PROJECT]', '[REGION]')
-            >>>
-            >>> # TODO: Initialize `template`:
-            >>> template = {}
-            >>>
-            >>> response = client.create_workflow_template(parent, template)
-
-        Args:
-            parent (str): Required. The resource name of the region or location, as described
-                in https://cloud.google.com/apis/design/resource_names.
-
-                -  For ``projects.regions.workflowTemplates,create``, the resource name
-                   of the region has the following format:
-                   ``projects/{project_id}/regions/{region}``
-
-                -  For ``projects.locations.workflowTemplates.create``, the resource
-                   name of the location has the following format:
-                   ``projects/{project_id}/locations/{location}``
-            template (Union[dict, ~google.cloud.dataproc_v1beta2.types.WorkflowTemplate]): Required. The Dataproc workflow template to create.
-
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate`
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "create_workflow_template" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "create_workflow_template"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.create_workflow_template,
-                default_retry=self._method_configs["CreateWorkflowTemplate"].retry,
-                default_timeout=self._method_configs["CreateWorkflowTemplate"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = workflow_templates_pb2.CreateWorkflowTemplateRequest(
-            parent=parent, template=template
-        )
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [("parent", parent)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
-            metadata.append(routing_metadata)
-
-        return self._inner_api_calls["create_workflow_template"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-
-    def get_workflow_template(
-        self,
-        name,
-        version=None,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Retrieves the latest workflow template.
-
-        Can retrieve previously instantiated template by specifying optional
-        version parameter.
-
-        Example:
-            >>> from google.cloud import dataproc_v1beta2
-            >>>
-            >>> client = dataproc_v1beta2.WorkflowTemplateServiceClient()
-            >>>
-            >>> # TODO: Initialize `name`:
-            >>> name = ''
-            >>>
-            >>> response = client.get_workflow_template(name)
-
-        Args:
-            name (str): Required. The resource name of the workflow template, as described
-                in https://cloud.google.com/apis/design/resource_names.
-
-                -  For ``projects.regions.workflowTemplates.get``, the resource name of
-                   the template has the following format:
-                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
-
-                -  For ``projects.locations.workflowTemplates.get``, the resource name
-                   of the template has the following format:
-                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
-            version (int): Optional. The version of workflow template to retrieve. Only previously
-                instantiated versions can be retrieved.
-
-                If unspecified, retrieves the current version.
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "get_workflow_template" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "get_workflow_template"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.get_workflow_template,
-                default_retry=self._method_configs["GetWorkflowTemplate"].retry,
-                default_timeout=self._method_configs["GetWorkflowTemplate"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = workflow_templates_pb2.GetWorkflowTemplateRequest(
-            name=name, version=version
-        )
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [("name", name)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
-            metadata.append(routing_metadata)
-
-        return self._inner_api_calls["get_workflow_template"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-
     def instantiate_workflow_template(
         self,
         name,
@@ -685,6 +510,183 @@ class WorkflowTemplateServiceClient(object):
             metadata_type=workflow_templates_pb2.WorkflowMetadata,
         )
 
+    def create_workflow_template(
+        self,
+        parent,
+        template,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Creates new workflow template.
+
+        Example:
+            >>> from google.cloud import dataproc_v1beta2
+            >>>
+            >>> client = dataproc_v1beta2.WorkflowTemplateServiceClient()
+            >>>
+            >>> parent = client.region_path('[PROJECT]', '[REGION]')
+            >>>
+            >>> # TODO: Initialize `template`:
+            >>> template = {}
+            >>>
+            >>> response = client.create_workflow_template(parent, template)
+
+        Args:
+            parent (str): Required. The resource name of the region or location, as described
+                in https://cloud.google.com/apis/design/resource_names.
+
+                -  For ``projects.regions.workflowTemplates,create``, the resource name
+                   of the region has the following format:
+                   ``projects/{project_id}/regions/{region}``
+
+                -  For ``projects.locations.workflowTemplates.create``, the resource
+                   name of the location has the following format:
+                   ``projects/{project_id}/locations/{location}``
+            template (Union[dict, ~google.cloud.dataproc_v1beta2.types.WorkflowTemplate]): Required. The Dataproc workflow template to create.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "create_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "create_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.create_workflow_template,
+                default_retry=self._method_configs["CreateWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["CreateWorkflowTemplate"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = workflow_templates_pb2.CreateWorkflowTemplateRequest(
+            parent=parent, template=template,
+        )
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [("parent", parent)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
+            metadata.append(routing_metadata)
+
+        return self._inner_api_calls["create_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
+    def get_workflow_template(
+        self,
+        name,
+        version=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Retrieves the latest workflow template.
+
+        Can retrieve previously instantiated template by specifying optional
+        version parameter.
+
+        Example:
+            >>> from google.cloud import dataproc_v1beta2
+            >>>
+            >>> client = dataproc_v1beta2.WorkflowTemplateServiceClient()
+            >>>
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
+            >>>
+            >>> response = client.get_workflow_template(name)
+
+        Args:
+            name (str): Required. The resource name of the workflow template, as described
+                in https://cloud.google.com/apis/design/resource_names.
+
+                -  For ``projects.regions.workflowTemplates.get``, the resource name of
+                   the template has the following format:
+                   ``projects/{project_id}/regions/{region}/workflowTemplates/{template_id}``
+
+                -  For ``projects.locations.workflowTemplates.get``, the resource name
+                   of the template has the following format:
+                   ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+            version (int): Optional. The version of workflow template to retrieve. Only previously
+                instantiated versions can be retrieved.
+
+                If unspecified, retrieves the current version.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1beta2.types.WorkflowTemplate` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "get_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "get_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.get_workflow_template,
+                default_retry=self._method_configs["GetWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["GetWorkflowTemplate"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = workflow_templates_pb2.GetWorkflowTemplateRequest(
+            name=name, version=version,
+        )
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [("name", name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
+            metadata.append(routing_metadata)
+
+        return self._inner_api_calls["get_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
     def update_workflow_template(
         self,
         template,
@@ -744,7 +746,7 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.UpdateWorkflowTemplateRequest(
-            template=template
+            template=template,
         )
         if metadata is None:
             metadata = []
@@ -845,7 +847,7 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.ListWorkflowTemplatesRequest(
-            parent=parent, page_size=page_size
+            parent=parent, page_size=page_size,
         )
         if metadata is None:
             metadata = []
@@ -938,7 +940,7 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.DeleteWorkflowTemplateRequest(
-            name=name, version=version
+            name=name, version=version,
         )
         if metadata is None:
             metadata = []

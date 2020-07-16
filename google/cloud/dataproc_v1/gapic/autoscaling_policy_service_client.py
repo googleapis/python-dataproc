@@ -41,7 +41,9 @@ from google.cloud.dataproc_v1.proto import autoscaling_policies_pb2_grpc
 from google.protobuf import empty_pb2
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-dataproc").version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    "google-cloud-dataproc",
+).version
 
 
 class AutoscalingPolicyServiceClient(object):
@@ -100,7 +102,7 @@ class AutoscalingPolicyServiceClient(object):
     def region_path(cls, project, region):
         """Return a fully-qualified region string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/regions/{region}", project=project, region=region
+            "projects/{project}/regions/{region}", project=project, region=region,
         )
 
     def __init__(
@@ -190,12 +192,12 @@ class AutoscalingPolicyServiceClient(object):
                 self.transport = transport
         else:
             self.transport = autoscaling_policy_service_grpc_transport.AutoscalingPolicyServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials
+                address=api_endpoint, channel=channel, credentials=credentials,
             )
 
         if client_info is None:
             client_info = google.api_core.gapic_v1.client_info.ClientInfo(
-                gapic_version=_GAPIC_LIBRARY_VERSION
+                gapic_version=_GAPIC_LIBRARY_VERSION,
             )
         else:
             client_info.gapic_version = _GAPIC_LIBRARY_VERSION
@@ -206,7 +208,7 @@ class AutoscalingPolicyServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config["interfaces"][self._INTERFACE_NAME]
+            client_config["interfaces"][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -216,82 +218,6 @@ class AutoscalingPolicyServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def update_autoscaling_policy(
-        self,
-        policy,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Updates (replaces) autoscaling policy.
-
-        Disabled check for update_mask, because all updates will be full
-        replacements.
-
-        Example:
-            >>> from google.cloud import dataproc_v1
-            >>>
-            >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
-            >>>
-            >>> # TODO: Initialize `policy`:
-            >>> policy = {}
-            >>>
-            >>> response = client.update_autoscaling_policy(policy)
-
-        Args:
-            policy (Union[dict, ~google.cloud.dataproc_v1.types.AutoscalingPolicy]): Required. The updated autoscaling policy.
-
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy`
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "update_autoscaling_policy" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "update_autoscaling_policy"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.update_autoscaling_policy,
-                default_retry=self._method_configs["UpdateAutoscalingPolicy"].retry,
-                default_timeout=self._method_configs["UpdateAutoscalingPolicy"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = autoscaling_policies_pb2.UpdateAutoscalingPolicyRequest(policy=policy)
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [("policy.name", policy.name)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
-            metadata.append(routing_metadata)
-
-        return self._inner_api_calls["update_autoscaling_policy"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-
     def create_autoscaling_policy(
         self,
         parent,
@@ -361,7 +287,7 @@ class AutoscalingPolicyServiceClient(object):
             )
 
         request = autoscaling_policies_pb2.CreateAutoscalingPolicyRequest(
-            parent=parent, policy=policy
+            parent=parent, policy=policy,
         )
         if metadata is None:
             metadata = []
@@ -377,6 +303,84 @@ class AutoscalingPolicyServiceClient(object):
             metadata.append(routing_metadata)
 
         return self._inner_api_calls["create_autoscaling_policy"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
+    def update_autoscaling_policy(
+        self,
+        policy,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Updates (replaces) autoscaling policy.
+
+        Disabled check for update_mask, because all updates will be full
+        replacements.
+
+        Example:
+            >>> from google.cloud import dataproc_v1
+            >>>
+            >>> client = dataproc_v1.AutoscalingPolicyServiceClient()
+            >>>
+            >>> # TODO: Initialize `policy`:
+            >>> policy = {}
+            >>>
+            >>> response = client.update_autoscaling_policy(policy)
+
+        Args:
+            policy (Union[dict, ~google.cloud.dataproc_v1.types.AutoscalingPolicy]): Required. The updated autoscaling policy.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.cloud.dataproc_v1.types.AutoscalingPolicy` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "update_autoscaling_policy" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "update_autoscaling_policy"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.update_autoscaling_policy,
+                default_retry=self._method_configs["UpdateAutoscalingPolicy"].retry,
+                default_timeout=self._method_configs["UpdateAutoscalingPolicy"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = autoscaling_policies_pb2.UpdateAutoscalingPolicyRequest(
+            policy=policy,
+        )
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [("policy.name", policy.name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
+            metadata.append(routing_metadata)
+
+        return self._inner_api_calls["update_autoscaling_policy"](
             request, retry=retry, timeout=timeout, metadata=metadata
         )
 
@@ -441,7 +445,7 @@ class AutoscalingPolicyServiceClient(object):
                 client_info=self._client_info,
             )
 
-        request = autoscaling_policies_pb2.GetAutoscalingPolicyRequest(name=name)
+        request = autoscaling_policies_pb2.GetAutoscalingPolicyRequest(name=name,)
         if metadata is None:
             metadata = []
         metadata = list(metadata)
@@ -541,7 +545,7 @@ class AutoscalingPolicyServiceClient(object):
             )
 
         request = autoscaling_policies_pb2.ListAutoscalingPoliciesRequest(
-            parent=parent, page_size=page_size
+            parent=parent, page_size=page_size,
         )
         if metadata is None:
             metadata = []
@@ -630,7 +634,7 @@ class AutoscalingPolicyServiceClient(object):
                 client_info=self._client_info,
             )
 
-        request = autoscaling_policies_pb2.DeleteAutoscalingPolicyRequest(name=name)
+        request = autoscaling_policies_pb2.DeleteAutoscalingPolicyRequest(name=name,)
         if metadata is None:
             metadata = []
         metadata = list(metadata)
