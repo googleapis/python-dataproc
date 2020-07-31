@@ -6,6 +6,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -14,2428 +15,4270 @@ _sym_db = _symbol_database.Default()
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
-from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
+from google.longrunning import (
+    operations_pb2 as google_dot_longrunning_dot_operations__pb2,
+)
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='google/cloud/dataproc_v1beta2/proto/jobs.proto',
-  package='google.cloud.dataproc.v1beta2',
-  syntax='proto3',
-  serialized_options=b'\n!com.google.cloud.dataproc.v1beta2B\tJobsProtoP\001ZEgoogle.golang.org/genproto/googleapis/cloud/dataproc/v1beta2;dataproc',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n.google/cloud/dataproc_v1beta2/proto/jobs.proto\x12\x1dgoogle.cloud.dataproc.v1beta2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\x02\n\rLoggingConfig\x12\\\n\x11\x64river_log_levels\x18\x02 \x03(\x0b\x32\x41.google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry\x1aj\n\x14\x44riverLogLevelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x41\n\x05value\x18\x02 \x01(\x0e\x32\x32.google.cloud.dataproc.v1beta2.LoggingConfig.Level:\x02\x38\x01\"p\n\x05Level\x12\x15\n\x11LEVEL_UNSPECIFIED\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\t\n\x05TRACE\x10\x02\x12\t\n\x05\x44\x45\x42UG\x10\x03\x12\x08\n\x04INFO\x10\x04\x12\x08\n\x04WARN\x10\x05\x12\t\n\x05\x45RROR\x10\x06\x12\t\n\x05\x46\x41TAL\x10\x07\x12\x07\n\x03OFF\x10\x08\"\xfb\x02\n\tHadoopJob\x12\x1b\n\x11main_jar_file_uri\x18\x01 \x01(\tH\x00\x12\x14\n\nmain_class\x18\x02 \x01(\tH\x00\x12\x11\n\x04\x61rgs\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x07 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x08\n\x06\x64river\"\xf9\x02\n\x08SparkJob\x12\x1b\n\x11main_jar_file_uri\x18\x01 \x01(\tH\x00\x12\x14\n\nmain_class\x18\x02 \x01(\tH\x00\x12\x11\n\x04\x61rgs\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12P\n\nproperties\x18\x07 \x03(\x0b\x32\x37.google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x08\n\x06\x64river\"\x82\x03\n\nPySparkJob\x12!\n\x14main_python_file_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04\x61rgs\x18\x02 \x03(\tB\x03\xe0\x41\x01\x12\x1d\n\x10python_file_uris\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12R\n\nproperties\x18\x07 \x03(\x0b\x32\x39.google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"!\n\tQueryList\x12\x14\n\x07queries\x18\x01 \x03(\tB\x03\xe0\x41\x02\"\xc4\x03\n\x07HiveJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12Z\n\x10script_variables\x18\x04 \x03(\x0b\x32;.google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12O\n\nproperties\x18\x05 \x03(\x0b\x32\x36.google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries\"\xf9\x03\n\x0bSparkSqlJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12^\n\x10script_variables\x18\x03 \x03(\x0b\x32?.google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12S\n\nproperties\x18\x04 \x03(\x0b\x32:.google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x38 \x03(\tB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x06 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries\"\x8c\x04\n\x06PigJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12Y\n\x10script_variables\x18\x04 \x03(\x0b\x32:.google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12N\n\nproperties\x18\x05 \x03(\x0b\x32\x35.google.cloud.dataproc.v1beta2.PigJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x07 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries\"\xc0\x02\n\tSparkRJob\x12\x1c\n\x0fmain_r_file_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04\x61rgs\x18\x02 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x05 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x06 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x99\x03\n\tPrestoJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1a\n\routput_format\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x63lient_tags\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x06 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x07 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries\"D\n\x0cJobPlacement\x12\x19\n\x0c\x63luster_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x19\n\x0c\x63luster_uuid\x18\x02 \x01(\tB\x03\xe0\x41\x03\"\xe0\x03\n\tJobStatus\x12\x42\n\x05state\x18\x01 \x01(\x0e\x32..google.cloud.dataproc.v1beta2.JobStatus.StateB\x03\xe0\x41\x03\x12\x14\n\x07\x64\x65tails\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x39\n\x10state_start_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12H\n\x08substate\x18\x07 \x01(\x0e\x32\x31.google.cloud.dataproc.v1beta2.JobStatus.SubstateB\x03\xe0\x41\x03\"\xa9\x01\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0e\n\nSETUP_DONE\x10\x08\x12\x0b\n\x07RUNNING\x10\x02\x12\x12\n\x0e\x43\x41NCEL_PENDING\x10\x03\x12\x12\n\x0e\x43\x41NCEL_STARTED\x10\x07\x12\r\n\tCANCELLED\x10\x04\x12\x08\n\x04\x44ONE\x10\x05\x12\t\n\x05\x45RROR\x10\x06\x12\x13\n\x0f\x41TTEMPT_FAILURE\x10\t\"H\n\x08Substate\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\r\n\tSUBMITTED\x10\x01\x12\n\n\x06QUEUED\x10\x02\x12\x10\n\x0cSTALE_STATUS\x10\x03\"<\n\x0cJobReference\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x01\"\xaa\x02\n\x0fYarnApplication\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12H\n\x05state\x18\x02 \x01(\x0e\x32\x34.google.cloud.dataproc.v1beta2.YarnApplication.StateB\x03\xe0\x41\x03\x12\x15\n\x08progress\x18\x03 \x01(\x02\x42\x03\xe0\x41\x03\x12\x19\n\x0ctracking_url\x18\x04 \x01(\tB\x03\xe0\x41\x03\"\x87\x01\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x07\n\x03NEW\x10\x01\x12\x0e\n\nNEW_SAVING\x10\x02\x12\r\n\tSUBMITTED\x10\x03\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x04\x12\x0b\n\x07RUNNING\x10\x05\x12\x0c\n\x08\x46INISHED\x10\x06\x12\n\n\x06\x46\x41ILED\x10\x07\x12\n\n\x06KILLED\x10\x08\"\xe5\t\n\x03Job\x12\x43\n\treference\x18\x01 \x01(\x0b\x32+.google.cloud.dataproc.v1beta2.JobReferenceB\x03\xe0\x41\x01\x12\x43\n\tplacement\x18\x02 \x01(\x0b\x32+.google.cloud.dataproc.v1beta2.JobPlacementB\x03\xe0\x41\x02\x12\x43\n\nhadoop_job\x18\x03 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.HadoopJobB\x03\xe0\x41\x01H\x00\x12\x41\n\tspark_job\x18\x04 \x01(\x0b\x32\'.google.cloud.dataproc.v1beta2.SparkJobB\x03\xe0\x41\x01H\x00\x12\x45\n\x0bpyspark_job\x18\x05 \x01(\x0b\x32).google.cloud.dataproc.v1beta2.PySparkJobB\x03\xe0\x41\x01H\x00\x12?\n\x08hive_job\x18\x06 \x01(\x0b\x32&.google.cloud.dataproc.v1beta2.HiveJobB\x03\xe0\x41\x01H\x00\x12=\n\x07pig_job\x18\x07 \x01(\x0b\x32%.google.cloud.dataproc.v1beta2.PigJobB\x03\xe0\x41\x01H\x00\x12\x44\n\x0bspark_r_job\x18\x15 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.SparkRJobB\x03\xe0\x41\x01H\x00\x12H\n\rspark_sql_job\x18\x0c \x01(\x0b\x32*.google.cloud.dataproc.v1beta2.SparkSqlJobB\x03\xe0\x41\x01H\x00\x12\x43\n\npresto_job\x18\x17 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.PrestoJobB\x03\xe0\x41\x01H\x00\x12=\n\x06status\x18\x08 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12\x45\n\x0estatus_history\x18\r \x03(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12N\n\x11yarn_applications\x18\t \x03(\x0b\x32..google.cloud.dataproc.v1beta2.YarnApplicationB\x03\xe0\x41\x03\x12\x19\n\x0csubmitted_by\x18\n \x01(\tB\x03\xe0\x41\x03\x12\'\n\x1a\x64river_output_resource_uri\x18\x11 \x01(\tB\x03\xe0\x41\x03\x12%\n\x18\x64river_control_files_uri\x18\x0f \x01(\tB\x03\xe0\x41\x03\x12\x43\n\x06labels\x18\x12 \x03(\x0b\x32..google.cloud.dataproc.v1beta2.Job.LabelsEntryB\x03\xe0\x41\x01\x12\x45\n\nscheduling\x18\x14 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.JobSchedulingB\x03\xe0\x41\x01\x12\x15\n\x08job_uuid\x18\x16 \x01(\tB\x03\xe0\x41\x03\x12\x11\n\x04\x64one\x18\x18 \x01(\x08\x42\x03\xe0\x41\x03\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\n\n\x08type_job\"3\n\rJobScheduling\x12\"\n\x15max_failures_per_hour\x18\x01 \x01(\x05\x42\x03\xe0\x41\x01\"\xb3\x01\n\x0bJobMetadata\x12\x13\n\x06job_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12=\n\x06status\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12\x1b\n\x0eoperation_type\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12\x33\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\"\x8f\x01\n\x10SubmitJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x34\n\x03job\x18\x02 \x01(\x0b\x32\".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x04 \x01(\tB\x03\xe0\x41\x01\"R\n\rGetJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\"\xb8\x02\n\x0fListJobsRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x06 \x01(\tB\x03\xe0\x41\x02\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x63luster_name\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12^\n\x11job_state_matcher\x18\x05 \x01(\x0e\x32>.google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcherB\x03\xe0\x41\x01\x12\x13\n\x06\x66ilter\x18\x07 \x01(\tB\x03\xe0\x41\x01\"6\n\x0fJobStateMatcher\x12\x07\n\x03\x41LL\x10\x00\x12\n\n\x06\x41\x43TIVE\x10\x01\x12\x0e\n\nNON_ACTIVE\x10\x02\"\xc1\x01\n\x10UpdateJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x34\n\x03job\x18\x04 \x01(\x0b\x32\".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x02\x12\x34\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x03\xe0\x41\x02\"g\n\x10ListJobsResponse\x12\x35\n\x04jobs\x18\x01 \x03(\x0b\x32\".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x03\x12\x1c\n\x0fnext_page_token\x18\x02 \x01(\tB\x03\xe0\x41\x01\"U\n\x10\x43\x61ncelJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\"U\n\x10\x44\x65leteJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x32\xe7\x0b\n\rJobController\x12\xc2\x01\n\tSubmitJob\x12/.google.cloud.dataproc.v1beta2.SubmitJobRequest\x1a\".google.cloud.dataproc.v1beta2.Job\"`\x82\xd3\xe4\x93\x02@\";/v1beta2/projects/{project_id}/regions/{region}/jobs:submit:\x01*\xda\x41\x17project_id, region, job\x12\xe9\x01\n\x14SubmitJobAsOperation\x12/.google.cloud.dataproc.v1beta2.SubmitJobRequest\x1a\x1d.google.longrunning.Operation\"\x80\x01\x82\xd3\xe4\x93\x02K\"F/v1beta2/projects/{project_id}/regions/{region}/jobs:submitAsOperation:\x01*\xda\x41\x17project_id, region, job\xca\x41\x12\n\x03Job\x12\x0bJobMetadata\x12\xbe\x01\n\x06GetJob\x12,.google.cloud.dataproc.v1beta2.GetJobRequest\x1a\".google.cloud.dataproc.v1beta2.Job\"b\x82\xd3\xe4\x93\x02?\x12=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\xda\x41\x1aproject_id, region, job_id\x12\xdb\x01\n\x08ListJobs\x12..google.cloud.dataproc.v1beta2.ListJobsRequest\x1a/.google.cloud.dataproc.v1beta2.ListJobsResponse\"n\x82\xd3\xe4\x93\x02\x36\x12\x34/v1beta2/projects/{project_id}/regions/{region}/jobs\xda\x41\x12project_id, region\xda\x41\x1aproject_id, region, filter\x12\xac\x01\n\tUpdateJob\x12/.google.cloud.dataproc.v1beta2.UpdateJobRequest\x1a\".google.cloud.dataproc.v1beta2.Job\"J\x82\xd3\xe4\x93\x02\x44\x32=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:\x03job\x12\xce\x01\n\tCancelJob\x12/.google.cloud.dataproc.v1beta2.CancelJobRequest\x1a\".google.cloud.dataproc.v1beta2.Job\"l\x82\xd3\xe4\x93\x02I\"D/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel:\x01*\xda\x41\x1aproject_id, region, job_id\x12\xb8\x01\n\tDeleteJob\x12/.google.cloud.dataproc.v1beta2.DeleteJobRequest\x1a\x16.google.protobuf.Empty\"b\x82\xd3\xe4\x93\x02?*=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\xda\x41\x1aproject_id, region, job_id\x1aK\xca\x41\x17\x64\x61taproc.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformBw\n!com.google.cloud.dataproc.v1beta2B\tJobsProtoP\x01ZEgoogle.golang.org/genproto/googleapis/cloud/dataproc/v1beta2;dataprocb\x06proto3'
-  ,
-  dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
-
+    name="google/cloud/dataproc_v1beta2/proto/jobs.proto",
+    package="google.cloud.dataproc.v1beta2",
+    syntax="proto3",
+    serialized_options=b"\n!com.google.cloud.dataproc.v1beta2B\tJobsProtoP\001ZEgoogle.golang.org/genproto/googleapis/cloud/dataproc/v1beta2;dataproc",
+    create_key=_descriptor._internal_create_key,
+    serialized_pb=b'\n.google/cloud/dataproc_v1beta2/proto/jobs.proto\x12\x1dgoogle.cloud.dataproc.v1beta2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto"\xcb\x02\n\rLoggingConfig\x12\\\n\x11\x64river_log_levels\x18\x02 \x03(\x0b\x32\x41.google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry\x1aj\n\x14\x44riverLogLevelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x41\n\x05value\x18\x02 \x01(\x0e\x32\x32.google.cloud.dataproc.v1beta2.LoggingConfig.Level:\x02\x38\x01"p\n\x05Level\x12\x15\n\x11LEVEL_UNSPECIFIED\x10\x00\x12\x07\n\x03\x41LL\x10\x01\x12\t\n\x05TRACE\x10\x02\x12\t\n\x05\x44\x45\x42UG\x10\x03\x12\x08\n\x04INFO\x10\x04\x12\x08\n\x04WARN\x10\x05\x12\t\n\x05\x45RROR\x10\x06\x12\t\n\x05\x46\x41TAL\x10\x07\x12\x07\n\x03OFF\x10\x08"\xfb\x02\n\tHadoopJob\x12\x1b\n\x11main_jar_file_uri\x18\x01 \x01(\tH\x00\x12\x14\n\nmain_class\x18\x02 \x01(\tH\x00\x12\x11\n\x04\x61rgs\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x07 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x08\n\x06\x64river"\xf9\x02\n\x08SparkJob\x12\x1b\n\x11main_jar_file_uri\x18\x01 \x01(\tH\x00\x12\x14\n\nmain_class\x18\x02 \x01(\tH\x00\x12\x11\n\x04\x61rgs\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12P\n\nproperties\x18\x07 \x03(\x0b\x32\x37.google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x08\n\x06\x64river"\x82\x03\n\nPySparkJob\x12!\n\x14main_python_file_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04\x61rgs\x18\x02 \x03(\tB\x03\xe0\x41\x01\x12\x1d\n\x10python_file_uris\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12R\n\nproperties\x18\x07 \x03(\x0b\x32\x39.google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x08 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"!\n\tQueryList\x12\x14\n\x07queries\x18\x01 \x03(\tB\x03\xe0\x41\x02"\xc4\x03\n\x07HiveJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12Z\n\x10script_variables\x18\x04 \x03(\x0b\x32;.google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12O\n\nproperties\x18\x05 \x03(\x0b\x32\x36.google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries"\xf9\x03\n\x0bSparkSqlJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12^\n\x10script_variables\x18\x03 \x03(\x0b\x32?.google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12S\n\nproperties\x18\x04 \x03(\x0b\x32:.google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x38 \x03(\tB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x06 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries"\x8c\x04\n\x06PigJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12Y\n\x10script_variables\x18\x04 \x03(\x0b\x32:.google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntryB\x03\xe0\x41\x01\x12N\n\nproperties\x18\x05 \x03(\x0b\x32\x35.google.cloud.dataproc.v1beta2.PigJob.PropertiesEntryB\x03\xe0\x41\x01\x12\x1a\n\rjar_file_uris\x18\x06 \x03(\tB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x07 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x36\n\x14ScriptVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries"\xc0\x02\n\tSparkRJob\x12\x1c\n\x0fmain_r_file_uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x11\n\x04\x61rgs\x18\x02 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tfile_uris\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x61rchive_uris\x18\x04 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x05 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x06 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\x99\x03\n\tPrestoJob\x12\x18\n\x0equery_file_uri\x18\x01 \x01(\tH\x00\x12>\n\nquery_list\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.QueryListH\x00\x12 \n\x13\x63ontinue_on_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1a\n\routput_format\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x63lient_tags\x18\x05 \x03(\tB\x03\xe0\x41\x01\x12Q\n\nproperties\x18\x06 \x03(\x0b\x32\x38.google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntryB\x03\xe0\x41\x01\x12I\n\x0elogging_config\x18\x07 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.LoggingConfigB\x03\xe0\x41\x01\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\t\n\x07queries"D\n\x0cJobPlacement\x12\x19\n\x0c\x63luster_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x19\n\x0c\x63luster_uuid\x18\x02 \x01(\tB\x03\xe0\x41\x03"\xe0\x03\n\tJobStatus\x12\x42\n\x05state\x18\x01 \x01(\x0e\x32..google.cloud.dataproc.v1beta2.JobStatus.StateB\x03\xe0\x41\x03\x12\x14\n\x07\x64\x65tails\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x39\n\x10state_start_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12H\n\x08substate\x18\x07 \x01(\x0e\x32\x31.google.cloud.dataproc.v1beta2.JobStatus.SubstateB\x03\xe0\x41\x03"\xa9\x01\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0e\n\nSETUP_DONE\x10\x08\x12\x0b\n\x07RUNNING\x10\x02\x12\x12\n\x0e\x43\x41NCEL_PENDING\x10\x03\x12\x12\n\x0e\x43\x41NCEL_STARTED\x10\x07\x12\r\n\tCANCELLED\x10\x04\x12\x08\n\x04\x44ONE\x10\x05\x12\t\n\x05\x45RROR\x10\x06\x12\x13\n\x0f\x41TTEMPT_FAILURE\x10\t"H\n\x08Substate\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\r\n\tSUBMITTED\x10\x01\x12\n\n\x06QUEUED\x10\x02\x12\x10\n\x0cSTALE_STATUS\x10\x03"<\n\x0cJobReference\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x01"\xaa\x02\n\x0fYarnApplication\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12H\n\x05state\x18\x02 \x01(\x0e\x32\x34.google.cloud.dataproc.v1beta2.YarnApplication.StateB\x03\xe0\x41\x03\x12\x15\n\x08progress\x18\x03 \x01(\x02\x42\x03\xe0\x41\x03\x12\x19\n\x0ctracking_url\x18\x04 \x01(\tB\x03\xe0\x41\x03"\x87\x01\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x07\n\x03NEW\x10\x01\x12\x0e\n\nNEW_SAVING\x10\x02\x12\r\n\tSUBMITTED\x10\x03\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x04\x12\x0b\n\x07RUNNING\x10\x05\x12\x0c\n\x08\x46INISHED\x10\x06\x12\n\n\x06\x46\x41ILED\x10\x07\x12\n\n\x06KILLED\x10\x08"\xe5\t\n\x03Job\x12\x43\n\treference\x18\x01 \x01(\x0b\x32+.google.cloud.dataproc.v1beta2.JobReferenceB\x03\xe0\x41\x01\x12\x43\n\tplacement\x18\x02 \x01(\x0b\x32+.google.cloud.dataproc.v1beta2.JobPlacementB\x03\xe0\x41\x02\x12\x43\n\nhadoop_job\x18\x03 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.HadoopJobB\x03\xe0\x41\x01H\x00\x12\x41\n\tspark_job\x18\x04 \x01(\x0b\x32\'.google.cloud.dataproc.v1beta2.SparkJobB\x03\xe0\x41\x01H\x00\x12\x45\n\x0bpyspark_job\x18\x05 \x01(\x0b\x32).google.cloud.dataproc.v1beta2.PySparkJobB\x03\xe0\x41\x01H\x00\x12?\n\x08hive_job\x18\x06 \x01(\x0b\x32&.google.cloud.dataproc.v1beta2.HiveJobB\x03\xe0\x41\x01H\x00\x12=\n\x07pig_job\x18\x07 \x01(\x0b\x32%.google.cloud.dataproc.v1beta2.PigJobB\x03\xe0\x41\x01H\x00\x12\x44\n\x0bspark_r_job\x18\x15 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.SparkRJobB\x03\xe0\x41\x01H\x00\x12H\n\rspark_sql_job\x18\x0c \x01(\x0b\x32*.google.cloud.dataproc.v1beta2.SparkSqlJobB\x03\xe0\x41\x01H\x00\x12\x43\n\npresto_job\x18\x17 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.PrestoJobB\x03\xe0\x41\x01H\x00\x12=\n\x06status\x18\x08 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12\x45\n\x0estatus_history\x18\r \x03(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12N\n\x11yarn_applications\x18\t \x03(\x0b\x32..google.cloud.dataproc.v1beta2.YarnApplicationB\x03\xe0\x41\x03\x12\x19\n\x0csubmitted_by\x18\n \x01(\tB\x03\xe0\x41\x03\x12\'\n\x1a\x64river_output_resource_uri\x18\x11 \x01(\tB\x03\xe0\x41\x03\x12%\n\x18\x64river_control_files_uri\x18\x0f \x01(\tB\x03\xe0\x41\x03\x12\x43\n\x06labels\x18\x12 \x03(\x0b\x32..google.cloud.dataproc.v1beta2.Job.LabelsEntryB\x03\xe0\x41\x01\x12\x45\n\nscheduling\x18\x14 \x01(\x0b\x32,.google.cloud.dataproc.v1beta2.JobSchedulingB\x03\xe0\x41\x01\x12\x15\n\x08job_uuid\x18\x16 \x01(\tB\x03\xe0\x41\x03\x12\x11\n\x04\x64one\x18\x18 \x01(\x08\x42\x03\xe0\x41\x03\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\n\n\x08type_job"3\n\rJobScheduling\x12"\n\x15max_failures_per_hour\x18\x01 \x01(\x05\x42\x03\xe0\x41\x01"\xb3\x01\n\x0bJobMetadata\x12\x13\n\x06job_id\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12=\n\x06status\x18\x02 \x01(\x0b\x32(.google.cloud.dataproc.v1beta2.JobStatusB\x03\xe0\x41\x03\x12\x1b\n\x0eoperation_type\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12\x33\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03"\x8f\x01\n\x10SubmitJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x34\n\x03job\x18\x02 \x01(\x0b\x32".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x02\x12\x17\n\nrequest_id\x18\x04 \x01(\tB\x03\xe0\x41\x01"R\n\rGetJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02"\xb8\x02\n\x0fListJobsRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x06 \x01(\tB\x03\xe0\x41\x02\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x19\n\x0c\x63luster_name\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12^\n\x11job_state_matcher\x18\x05 \x01(\x0e\x32>.google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcherB\x03\xe0\x41\x01\x12\x13\n\x06\x66ilter\x18\x07 \x01(\tB\x03\xe0\x41\x01"6\n\x0fJobStateMatcher\x12\x07\n\x03\x41LL\x10\x00\x12\n\n\x06\x41\x43TIVE\x10\x01\x12\x0e\n\nNON_ACTIVE\x10\x02"\xc1\x01\n\x10UpdateJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x34\n\x03job\x18\x04 \x01(\x0b\x32".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x02\x12\x34\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x03\xe0\x41\x02"g\n\x10ListJobsResponse\x12\x35\n\x04jobs\x18\x01 \x03(\x0b\x32".google.cloud.dataproc.v1beta2.JobB\x03\xe0\x41\x03\x12\x1c\n\x0fnext_page_token\x18\x02 \x01(\tB\x03\xe0\x41\x01"U\n\x10\x43\x61ncelJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02"U\n\x10\x44\x65leteJobRequest\x12\x17\n\nproject_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06region\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x06job_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x32\xe7\x0b\n\rJobController\x12\xc2\x01\n\tSubmitJob\x12/.google.cloud.dataproc.v1beta2.SubmitJobRequest\x1a".google.cloud.dataproc.v1beta2.Job"`\x82\xd3\xe4\x93\x02@";/v1beta2/projects/{project_id}/regions/{region}/jobs:submit:\x01*\xda\x41\x17project_id, region, job\x12\xe9\x01\n\x14SubmitJobAsOperation\x12/.google.cloud.dataproc.v1beta2.SubmitJobRequest\x1a\x1d.google.longrunning.Operation"\x80\x01\x82\xd3\xe4\x93\x02K"F/v1beta2/projects/{project_id}/regions/{region}/jobs:submitAsOperation:\x01*\xda\x41\x17project_id, region, job\xca\x41\x12\n\x03Job\x12\x0bJobMetadata\x12\xbe\x01\n\x06GetJob\x12,.google.cloud.dataproc.v1beta2.GetJobRequest\x1a".google.cloud.dataproc.v1beta2.Job"b\x82\xd3\xe4\x93\x02?\x12=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\xda\x41\x1aproject_id, region, job_id\x12\xdb\x01\n\x08ListJobs\x12..google.cloud.dataproc.v1beta2.ListJobsRequest\x1a/.google.cloud.dataproc.v1beta2.ListJobsResponse"n\x82\xd3\xe4\x93\x02\x36\x12\x34/v1beta2/projects/{project_id}/regions/{region}/jobs\xda\x41\x12project_id, region\xda\x41\x1aproject_id, region, filter\x12\xac\x01\n\tUpdateJob\x12/.google.cloud.dataproc.v1beta2.UpdateJobRequest\x1a".google.cloud.dataproc.v1beta2.Job"J\x82\xd3\xe4\x93\x02\x44\x32=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:\x03job\x12\xce\x01\n\tCancelJob\x12/.google.cloud.dataproc.v1beta2.CancelJobRequest\x1a".google.cloud.dataproc.v1beta2.Job"l\x82\xd3\xe4\x93\x02I"D/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel:\x01*\xda\x41\x1aproject_id, region, job_id\x12\xb8\x01\n\tDeleteJob\x12/.google.cloud.dataproc.v1beta2.DeleteJobRequest\x1a\x16.google.protobuf.Empty"b\x82\xd3\xe4\x93\x02?*=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\xda\x41\x1aproject_id, region, job_id\x1aK\xca\x41\x17\x64\x61taproc.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformBw\n!com.google.cloud.dataproc.v1beta2B\tJobsProtoP\x01ZEgoogle.golang.org/genproto/googleapis/cloud/dataproc/v1beta2;dataprocb\x06proto3',
+    dependencies=[
+        google_dot_api_dot_annotations__pb2.DESCRIPTOR,
+        google_dot_api_dot_client__pb2.DESCRIPTOR,
+        google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,
+        google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,
+        google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,
+        google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,
+        google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,
+    ],
+)
 
 
 _LOGGINGCONFIG_LEVEL = _descriptor.EnumDescriptor(
-  name='Level',
-  full_name='google.cloud.dataproc.v1beta2.LoggingConfig.Level',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='LEVEL_UNSPECIFIED', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ALL', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='TRACE', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='DEBUG', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='INFO', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='WARN', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ERROR', index=6, number=6,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='FATAL', index=7, number=7,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OFF', index=8, number=8,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=522,
-  serialized_end=634,
+    name="Level",
+    full_name="google.cloud.dataproc.v1beta2.LoggingConfig.Level",
+    filename=None,
+    file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="LEVEL_UNSPECIFIED",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ALL",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="TRACE",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="DEBUG",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="INFO",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="WARN",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ERROR",
+            index=6,
+            number=6,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="FATAL",
+            index=7,
+            number=7,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="OFF",
+            index=8,
+            number=8,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=522,
+    serialized_end=634,
 )
 _sym_db.RegisterEnumDescriptor(_LOGGINGCONFIG_LEVEL)
 
 _JOBSTATUS_STATE = _descriptor.EnumDescriptor(
-  name='State',
-  full_name='google.cloud.dataproc.v1beta2.JobStatus.State',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STATE_UNSPECIFIED', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='PENDING', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='SETUP_DONE', index=2, number=8,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='RUNNING', index=3, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='CANCEL_PENDING', index=4, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='CANCEL_STARTED', index=5, number=7,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='CANCELLED', index=6, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='DONE', index=7, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ERROR', index=8, number=6,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ATTEMPT_FAILURE', index=9, number=9,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4355,
-  serialized_end=4524,
+    name="State",
+    full_name="google.cloud.dataproc.v1beta2.JobStatus.State",
+    filename=None,
+    file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="STATE_UNSPECIFIED",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="PENDING",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="SETUP_DONE",
+            index=2,
+            number=8,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RUNNING",
+            index=3,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CANCEL_PENDING",
+            index=4,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CANCEL_STARTED",
+            index=5,
+            number=7,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="CANCELLED",
+            index=6,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="DONE",
+            index=7,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ERROR",
+            index=8,
+            number=6,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ATTEMPT_FAILURE",
+            index=9,
+            number=9,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=4355,
+    serialized_end=4524,
 )
 _sym_db.RegisterEnumDescriptor(_JOBSTATUS_STATE)
 
 _JOBSTATUS_SUBSTATE = _descriptor.EnumDescriptor(
-  name='Substate',
-  full_name='google.cloud.dataproc.v1beta2.JobStatus.Substate',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNSPECIFIED', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='SUBMITTED', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='QUEUED', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='STALE_STATUS', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4526,
-  serialized_end=4598,
+    name="Substate",
+    full_name="google.cloud.dataproc.v1beta2.JobStatus.Substate",
+    filename=None,
+    file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="UNSPECIFIED",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="SUBMITTED",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="QUEUED",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="STALE_STATUS",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=4526,
+    serialized_end=4598,
 )
 _sym_db.RegisterEnumDescriptor(_JOBSTATUS_SUBSTATE)
 
 _YARNAPPLICATION_STATE = _descriptor.EnumDescriptor(
-  name='State',
-  full_name='google.cloud.dataproc.v1beta2.YarnApplication.State',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STATE_UNSPECIFIED', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NEW', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NEW_SAVING', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='SUBMITTED', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ACCEPTED', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='RUNNING', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='FINISHED', index=6, number=6,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='FAILED', index=7, number=7,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='KILLED', index=8, number=8,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4826,
-  serialized_end=4961,
+    name="State",
+    full_name="google.cloud.dataproc.v1beta2.YarnApplication.State",
+    filename=None,
+    file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="STATE_UNSPECIFIED",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="NEW",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="NEW_SAVING",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="SUBMITTED",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ACCEPTED",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="RUNNING",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="FINISHED",
+            index=6,
+            number=6,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="FAILED",
+            index=7,
+            number=7,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="KILLED",
+            index=8,
+            number=8,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=4826,
+    serialized_end=4961,
 )
 _sym_db.RegisterEnumDescriptor(_YARNAPPLICATION_STATE)
 
 _LISTJOBSREQUEST_JOBSTATEMATCHER = _descriptor.EnumDescriptor(
-  name='JobStateMatcher',
-  full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ALL', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ACTIVE', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NON_ACTIVE', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=6943,
-  serialized_end=6997,
+    name="JobStateMatcher",
+    full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.JobStateMatcher",
+    filename=None,
+    file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
+    values=[
+        _descriptor.EnumValueDescriptor(
+            name="ALL",
+            index=0,
+            number=0,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="ACTIVE",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.EnumValueDescriptor(
+            name="NON_ACTIVE",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    containing_type=None,
+    serialized_options=None,
+    serialized_start=6943,
+    serialized_end=6997,
 )
 _sym_db.RegisterEnumDescriptor(_LISTJOBSREQUEST_JOBSTATEMATCHER)
 
 
 _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY = _descriptor.Descriptor(
-  name='DriverLogLevelsEntry',
-  full_name='google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry.value', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=414,
-  serialized_end=520,
+    name="DriverLogLevelsEntry",
+    full_name="google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry.value",
+            index=1,
+            number=2,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=414,
+    serialized_end=520,
 )
 
 _LOGGINGCONFIG = _descriptor.Descriptor(
-  name='LoggingConfig',
-  full_name='google.cloud.dataproc.v1beta2.LoggingConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='driver_log_levels', full_name='google.cloud.dataproc.v1beta2.LoggingConfig.driver_log_levels', index=0,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_LOGGINGCONFIG_DRIVERLOGLEVELSENTRY, ],
-  enum_types=[
-    _LOGGINGCONFIG_LEVEL,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=303,
-  serialized_end=634,
+    name="LoggingConfig",
+    full_name="google.cloud.dataproc.v1beta2.LoggingConfig",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="driver_log_levels",
+            full_name="google.cloud.dataproc.v1beta2.LoggingConfig.driver_log_levels",
+            index=0,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_LOGGINGCONFIG_DRIVERLOGLEVELSENTRY,],
+    enum_types=[_LOGGINGCONFIG_LEVEL,],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=303,
+    serialized_end=634,
 )
 
 
 _HADOOPJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _HADOOPJOB = _descriptor.Descriptor(
-  name='HadoopJob',
-  full_name='google.cloud.dataproc.v1beta2.HadoopJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='main_jar_file_uri', full_name='google.cloud.dataproc.v1beta2.HadoopJob.main_jar_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='main_class', full_name='google.cloud.dataproc.v1beta2.HadoopJob.main_class', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='args', full_name='google.cloud.dataproc.v1beta2.HadoopJob.args', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.HadoopJob.jar_file_uris', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='file_uris', full_name='google.cloud.dataproc.v1beta2.HadoopJob.file_uris', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='archive_uris', full_name='google.cloud.dataproc.v1beta2.HadoopJob.archive_uris', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.HadoopJob.properties', index=6,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.HadoopJob.logging_config', index=7,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_HADOOPJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='driver', full_name='google.cloud.dataproc.v1beta2.HadoopJob.driver',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=637,
-  serialized_end=1016,
+    name="HadoopJob",
+    full_name="google.cloud.dataproc.v1beta2.HadoopJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="main_jar_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.main_jar_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="main_class",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.main_class",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="args",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.args",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.jar_file_uris",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="file_uris",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.file_uris",
+            index=4,
+            number=5,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="archive_uris",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.archive_uris",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.properties",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.logging_config",
+            index=7,
+            number=8,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_HADOOPJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="driver",
+            full_name="google.cloud.dataproc.v1beta2.HadoopJob.driver",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=637,
+    serialized_end=1016,
 )
 
 
 _SPARKJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _SPARKJOB = _descriptor.Descriptor(
-  name='SparkJob',
-  full_name='google.cloud.dataproc.v1beta2.SparkJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='main_jar_file_uri', full_name='google.cloud.dataproc.v1beta2.SparkJob.main_jar_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='main_class', full_name='google.cloud.dataproc.v1beta2.SparkJob.main_class', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='args', full_name='google.cloud.dataproc.v1beta2.SparkJob.args', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.SparkJob.jar_file_uris', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='file_uris', full_name='google.cloud.dataproc.v1beta2.SparkJob.file_uris', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='archive_uris', full_name='google.cloud.dataproc.v1beta2.SparkJob.archive_uris', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.SparkJob.properties', index=6,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.SparkJob.logging_config', index=7,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_SPARKJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='driver', full_name='google.cloud.dataproc.v1beta2.SparkJob.driver',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=1019,
-  serialized_end=1396,
+    name="SparkJob",
+    full_name="google.cloud.dataproc.v1beta2.SparkJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="main_jar_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.main_jar_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="main_class",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.main_class",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="args",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.args",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.jar_file_uris",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="file_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.file_uris",
+            index=4,
+            number=5,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="archive_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.archive_uris",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.properties",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.logging_config",
+            index=7,
+            number=8,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_SPARKJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="driver",
+            full_name="google.cloud.dataproc.v1beta2.SparkJob.driver",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=1019,
+    serialized_end=1396,
 )
 
 
 _PYSPARKJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _PYSPARKJOB = _descriptor.Descriptor(
-  name='PySparkJob',
-  full_name='google.cloud.dataproc.v1beta2.PySparkJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='main_python_file_uri', full_name='google.cloud.dataproc.v1beta2.PySparkJob.main_python_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='args', full_name='google.cloud.dataproc.v1beta2.PySparkJob.args', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='python_file_uris', full_name='google.cloud.dataproc.v1beta2.PySparkJob.python_file_uris', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.PySparkJob.jar_file_uris', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='file_uris', full_name='google.cloud.dataproc.v1beta2.PySparkJob.file_uris', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='archive_uris', full_name='google.cloud.dataproc.v1beta2.PySparkJob.archive_uris', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.PySparkJob.properties', index=6,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.PySparkJob.logging_config', index=7,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_PYSPARKJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1399,
-  serialized_end=1785,
+    name="PySparkJob",
+    full_name="google.cloud.dataproc.v1beta2.PySparkJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="main_python_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.main_python_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="args",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.args",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="python_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.python_file_uris",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.jar_file_uris",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="file_uris",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.file_uris",
+            index=4,
+            number=5,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="archive_uris",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.archive_uris",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.properties",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.PySparkJob.logging_config",
+            index=7,
+            number=8,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_PYSPARKJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1399,
+    serialized_end=1785,
 )
 
 
 _QUERYLIST = _descriptor.Descriptor(
-  name='QueryList',
-  full_name='google.cloud.dataproc.v1beta2.QueryList',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='queries', full_name='google.cloud.dataproc.v1beta2.QueryList.queries', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1787,
-  serialized_end=1820,
+    name="QueryList",
+    full_name="google.cloud.dataproc.v1beta2.QueryList",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="queries",
+            full_name="google.cloud.dataproc.v1beta2.QueryList.queries",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1787,
+    serialized_end=1820,
 )
 
 
 _HIVEJOB_SCRIPTVARIABLESENTRY = _descriptor.Descriptor(
-  name='ScriptVariablesEntry',
-  full_name='google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2159,
-  serialized_end=2213,
+    name="ScriptVariablesEntry",
+    full_name="google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=2159,
+    serialized_end=2213,
 )
 
 _HIVEJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _HIVEJOB = _descriptor.Descriptor(
-  name='HiveJob',
-  full_name='google.cloud.dataproc.v1beta2.HiveJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='query_file_uri', full_name='google.cloud.dataproc.v1beta2.HiveJob.query_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='query_list', full_name='google.cloud.dataproc.v1beta2.HiveJob.query_list', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='continue_on_failure', full_name='google.cloud.dataproc.v1beta2.HiveJob.continue_on_failure', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='script_variables', full_name='google.cloud.dataproc.v1beta2.HiveJob.script_variables', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.HiveJob.properties', index=4,
-      number=5, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.HiveJob.jar_file_uris', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_HIVEJOB_SCRIPTVARIABLESENTRY, _HIVEJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='queries', full_name='google.cloud.dataproc.v1beta2.HiveJob.queries',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=1823,
-  serialized_end=2275,
+    name="HiveJob",
+    full_name="google.cloud.dataproc.v1beta2.HiveJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="query_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.query_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="query_list",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.query_list",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="continue_on_failure",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.continue_on_failure",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="script_variables",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.script_variables",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.properties",
+            index=4,
+            number=5,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.jar_file_uris",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_HIVEJOB_SCRIPTVARIABLESENTRY, _HIVEJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="queries",
+            full_name="google.cloud.dataproc.v1beta2.HiveJob.queries",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=1823,
+    serialized_end=2275,
 )
 
 
 _SPARKSQLJOB_SCRIPTVARIABLESENTRY = _descriptor.Descriptor(
-  name='ScriptVariablesEntry',
-  full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2159,
-  serialized_end=2213,
+    name="ScriptVariablesEntry",
+    full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=2159,
+    serialized_end=2213,
 )
 
 _SPARKSQLJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _SPARKSQLJOB = _descriptor.Descriptor(
-  name='SparkSqlJob',
-  full_name='google.cloud.dataproc.v1beta2.SparkSqlJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='query_file_uri', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.query_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='query_list', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.query_list', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='script_variables', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.script_variables', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.properties', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.jar_file_uris', index=4,
-      number=56, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.logging_config', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_SPARKSQLJOB_SCRIPTVARIABLESENTRY, _SPARKSQLJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='queries', full_name='google.cloud.dataproc.v1beta2.SparkSqlJob.queries',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=2278,
-  serialized_end=2783,
+    name="SparkSqlJob",
+    full_name="google.cloud.dataproc.v1beta2.SparkSqlJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="query_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.query_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="query_list",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.query_list",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="script_variables",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.script_variables",
+            index=2,
+            number=3,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.properties",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.jar_file_uris",
+            index=4,
+            number=56,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.logging_config",
+            index=5,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_SPARKSQLJOB_SCRIPTVARIABLESENTRY, _SPARKSQLJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="queries",
+            full_name="google.cloud.dataproc.v1beta2.SparkSqlJob.queries",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=2278,
+    serialized_end=2783,
 )
 
 
 _PIGJOB_SCRIPTVARIABLESENTRY = _descriptor.Descriptor(
-  name='ScriptVariablesEntry',
-  full_name='google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2159,
-  serialized_end=2213,
+    name="ScriptVariablesEntry",
+    full_name="google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=2159,
+    serialized_end=2213,
 )
 
 _PIGJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _PIGJOB = _descriptor.Descriptor(
-  name='PigJob',
-  full_name='google.cloud.dataproc.v1beta2.PigJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='query_file_uri', full_name='google.cloud.dataproc.v1beta2.PigJob.query_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='query_list', full_name='google.cloud.dataproc.v1beta2.PigJob.query_list', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='continue_on_failure', full_name='google.cloud.dataproc.v1beta2.PigJob.continue_on_failure', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='script_variables', full_name='google.cloud.dataproc.v1beta2.PigJob.script_variables', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.PigJob.properties', index=4,
-      number=5, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='jar_file_uris', full_name='google.cloud.dataproc.v1beta2.PigJob.jar_file_uris', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.PigJob.logging_config', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_PIGJOB_SCRIPTVARIABLESENTRY, _PIGJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='queries', full_name='google.cloud.dataproc.v1beta2.PigJob.queries',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=2786,
-  serialized_end=3310,
+    name="PigJob",
+    full_name="google.cloud.dataproc.v1beta2.PigJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="query_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.query_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="query_list",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.query_list",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="continue_on_failure",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.continue_on_failure",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="script_variables",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.script_variables",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.properties",
+            index=4,
+            number=5,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="jar_file_uris",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.jar_file_uris",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.logging_config",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_PIGJOB_SCRIPTVARIABLESENTRY, _PIGJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="queries",
+            full_name="google.cloud.dataproc.v1beta2.PigJob.queries",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=2786,
+    serialized_end=3310,
 )
 
 
 _SPARKRJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _SPARKRJOB = _descriptor.Descriptor(
-  name='SparkRJob',
-  full_name='google.cloud.dataproc.v1beta2.SparkRJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='main_r_file_uri', full_name='google.cloud.dataproc.v1beta2.SparkRJob.main_r_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='args', full_name='google.cloud.dataproc.v1beta2.SparkRJob.args', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='file_uris', full_name='google.cloud.dataproc.v1beta2.SparkRJob.file_uris', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='archive_uris', full_name='google.cloud.dataproc.v1beta2.SparkRJob.archive_uris', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.SparkRJob.properties', index=4,
-      number=5, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.SparkRJob.logging_config', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_SPARKRJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3313,
-  serialized_end=3633,
+    name="SparkRJob",
+    full_name="google.cloud.dataproc.v1beta2.SparkRJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="main_r_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.main_r_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="args",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.args",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="file_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.file_uris",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="archive_uris",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.archive_uris",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.properties",
+            index=4,
+            number=5,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.SparkRJob.logging_config",
+            index=5,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_SPARKRJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=3313,
+    serialized_end=3633,
 )
 
 
 _PRESTOJOB_PROPERTIESENTRY = _descriptor.Descriptor(
-  name='PropertiesEntry',
-  full_name='google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=957,
-  serialized_end=1006,
+    name="PropertiesEntry",
+    full_name="google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=957,
+    serialized_end=1006,
 )
 
 _PRESTOJOB = _descriptor.Descriptor(
-  name='PrestoJob',
-  full_name='google.cloud.dataproc.v1beta2.PrestoJob',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='query_file_uri', full_name='google.cloud.dataproc.v1beta2.PrestoJob.query_file_uri', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='query_list', full_name='google.cloud.dataproc.v1beta2.PrestoJob.query_list', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='continue_on_failure', full_name='google.cloud.dataproc.v1beta2.PrestoJob.continue_on_failure', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='output_format', full_name='google.cloud.dataproc.v1beta2.PrestoJob.output_format', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='client_tags', full_name='google.cloud.dataproc.v1beta2.PrestoJob.client_tags', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='properties', full_name='google.cloud.dataproc.v1beta2.PrestoJob.properties', index=5,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='logging_config', full_name='google.cloud.dataproc.v1beta2.PrestoJob.logging_config', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_PRESTOJOB_PROPERTIESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='queries', full_name='google.cloud.dataproc.v1beta2.PrestoJob.queries',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=3636,
-  serialized_end=4045,
+    name="PrestoJob",
+    full_name="google.cloud.dataproc.v1beta2.PrestoJob",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="query_file_uri",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.query_file_uri",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="query_list",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.query_list",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="continue_on_failure",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.continue_on_failure",
+            index=2,
+            number=3,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="output_format",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.output_format",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="client_tags",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.client_tags",
+            index=4,
+            number=5,
+            type=9,
+            cpp_type=9,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="properties",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.properties",
+            index=5,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="logging_config",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.logging_config",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_PRESTOJOB_PROPERTIESENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="queries",
+            full_name="google.cloud.dataproc.v1beta2.PrestoJob.queries",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=3636,
+    serialized_end=4045,
 )
 
 
 _JOBPLACEMENT = _descriptor.Descriptor(
-  name='JobPlacement',
-  full_name='google.cloud.dataproc.v1beta2.JobPlacement',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cluster_name', full_name='google.cloud.dataproc.v1beta2.JobPlacement.cluster_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cluster_uuid', full_name='google.cloud.dataproc.v1beta2.JobPlacement.cluster_uuid', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4047,
-  serialized_end=4115,
+    name="JobPlacement",
+    full_name="google.cloud.dataproc.v1beta2.JobPlacement",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="cluster_name",
+            full_name="google.cloud.dataproc.v1beta2.JobPlacement.cluster_name",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="cluster_uuid",
+            full_name="google.cloud.dataproc.v1beta2.JobPlacement.cluster_uuid",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=4047,
+    serialized_end=4115,
 )
 
 
 _JOBSTATUS = _descriptor.Descriptor(
-  name='JobStatus',
-  full_name='google.cloud.dataproc.v1beta2.JobStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='state', full_name='google.cloud.dataproc.v1beta2.JobStatus.state', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='details', full_name='google.cloud.dataproc.v1beta2.JobStatus.details', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='state_start_time', full_name='google.cloud.dataproc.v1beta2.JobStatus.state_start_time', index=2,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='substate', full_name='google.cloud.dataproc.v1beta2.JobStatus.substate', index=3,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _JOBSTATUS_STATE,
-    _JOBSTATUS_SUBSTATE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4118,
-  serialized_end=4598,
+    name="JobStatus",
+    full_name="google.cloud.dataproc.v1beta2.JobStatus",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="state",
+            full_name="google.cloud.dataproc.v1beta2.JobStatus.state",
+            index=0,
+            number=1,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="details",
+            full_name="google.cloud.dataproc.v1beta2.JobStatus.details",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="state_start_time",
+            full_name="google.cloud.dataproc.v1beta2.JobStatus.state_start_time",
+            index=2,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="substate",
+            full_name="google.cloud.dataproc.v1beta2.JobStatus.substate",
+            index=3,
+            number=7,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[_JOBSTATUS_STATE, _JOBSTATUS_SUBSTATE,],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=4118,
+    serialized_end=4598,
 )
 
 
 _JOBREFERENCE = _descriptor.Descriptor(
-  name='JobReference',
-  full_name='google.cloud.dataproc.v1beta2.JobReference',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.JobReference.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.JobReference.job_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4600,
-  serialized_end=4660,
+    name="JobReference",
+    full_name="google.cloud.dataproc.v1beta2.JobReference",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.JobReference.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.JobReference.job_id",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=4600,
+    serialized_end=4660,
 )
 
 
 _YARNAPPLICATION = _descriptor.Descriptor(
-  name='YarnApplication',
-  full_name='google.cloud.dataproc.v1beta2.YarnApplication',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='google.cloud.dataproc.v1beta2.YarnApplication.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='state', full_name='google.cloud.dataproc.v1beta2.YarnApplication.state', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='progress', full_name='google.cloud.dataproc.v1beta2.YarnApplication.progress', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tracking_url', full_name='google.cloud.dataproc.v1beta2.YarnApplication.tracking_url', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _YARNAPPLICATION_STATE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4663,
-  serialized_end=4961,
+    name="YarnApplication",
+    full_name="google.cloud.dataproc.v1beta2.YarnApplication",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="name",
+            full_name="google.cloud.dataproc.v1beta2.YarnApplication.name",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="state",
+            full_name="google.cloud.dataproc.v1beta2.YarnApplication.state",
+            index=1,
+            number=2,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="progress",
+            full_name="google.cloud.dataproc.v1beta2.YarnApplication.progress",
+            index=2,
+            number=3,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="tracking_url",
+            full_name="google.cloud.dataproc.v1beta2.YarnApplication.tracking_url",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[_YARNAPPLICATION_STATE,],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=4663,
+    serialized_end=4961,
 )
 
 
 _JOB_LABELSENTRY = _descriptor.Descriptor(
-  name='LabelsEntry',
-  full_name='google.cloud.dataproc.v1beta2.Job.LabelsEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='google.cloud.dataproc.v1beta2.Job.LabelsEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='google.cloud.dataproc.v1beta2.Job.LabelsEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6160,
-  serialized_end=6205,
+    name="LabelsEntry",
+    full_name="google.cloud.dataproc.v1beta2.Job.LabelsEntry",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="key",
+            full_name="google.cloud.dataproc.v1beta2.Job.LabelsEntry.key",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="value",
+            full_name="google.cloud.dataproc.v1beta2.Job.LabelsEntry.value",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b"8\001",
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6160,
+    serialized_end=6205,
 )
 
 _JOB = _descriptor.Descriptor(
-  name='Job',
-  full_name='google.cloud.dataproc.v1beta2.Job',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='reference', full_name='google.cloud.dataproc.v1beta2.Job.reference', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='placement', full_name='google.cloud.dataproc.v1beta2.Job.placement', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='hadoop_job', full_name='google.cloud.dataproc.v1beta2.Job.hadoop_job', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='spark_job', full_name='google.cloud.dataproc.v1beta2.Job.spark_job', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='pyspark_job', full_name='google.cloud.dataproc.v1beta2.Job.pyspark_job', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='hive_job', full_name='google.cloud.dataproc.v1beta2.Job.hive_job', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='pig_job', full_name='google.cloud.dataproc.v1beta2.Job.pig_job', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='spark_r_job', full_name='google.cloud.dataproc.v1beta2.Job.spark_r_job', index=7,
-      number=21, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='spark_sql_job', full_name='google.cloud.dataproc.v1beta2.Job.spark_sql_job', index=8,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='presto_job', full_name='google.cloud.dataproc.v1beta2.Job.presto_job', index=9,
-      number=23, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='google.cloud.dataproc.v1beta2.Job.status', index=10,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='status_history', full_name='google.cloud.dataproc.v1beta2.Job.status_history', index=11,
-      number=13, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='yarn_applications', full_name='google.cloud.dataproc.v1beta2.Job.yarn_applications', index=12,
-      number=9, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='submitted_by', full_name='google.cloud.dataproc.v1beta2.Job.submitted_by', index=13,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='driver_output_resource_uri', full_name='google.cloud.dataproc.v1beta2.Job.driver_output_resource_uri', index=14,
-      number=17, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='driver_control_files_uri', full_name='google.cloud.dataproc.v1beta2.Job.driver_control_files_uri', index=15,
-      number=15, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='labels', full_name='google.cloud.dataproc.v1beta2.Job.labels', index=16,
-      number=18, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='scheduling', full_name='google.cloud.dataproc.v1beta2.Job.scheduling', index=17,
-      number=20, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_uuid', full_name='google.cloud.dataproc.v1beta2.Job.job_uuid', index=18,
-      number=22, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='done', full_name='google.cloud.dataproc.v1beta2.Job.done', index=19,
-      number=24, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_JOB_LABELSENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='type_job', full_name='google.cloud.dataproc.v1beta2.Job.type_job',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=4964,
-  serialized_end=6217,
+    name="Job",
+    full_name="google.cloud.dataproc.v1beta2.Job",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="reference",
+            full_name="google.cloud.dataproc.v1beta2.Job.reference",
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="placement",
+            full_name="google.cloud.dataproc.v1beta2.Job.placement",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="hadoop_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.hadoop_job",
+            index=2,
+            number=3,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="spark_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.spark_job",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="pyspark_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.pyspark_job",
+            index=4,
+            number=5,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="hive_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.hive_job",
+            index=5,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="pig_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.pig_job",
+            index=6,
+            number=7,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="spark_r_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.spark_r_job",
+            index=7,
+            number=21,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="spark_sql_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.spark_sql_job",
+            index=8,
+            number=12,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="presto_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.presto_job",
+            index=9,
+            number=23,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="status",
+            full_name="google.cloud.dataproc.v1beta2.Job.status",
+            index=10,
+            number=8,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="status_history",
+            full_name="google.cloud.dataproc.v1beta2.Job.status_history",
+            index=11,
+            number=13,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="yarn_applications",
+            full_name="google.cloud.dataproc.v1beta2.Job.yarn_applications",
+            index=12,
+            number=9,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="submitted_by",
+            full_name="google.cloud.dataproc.v1beta2.Job.submitted_by",
+            index=13,
+            number=10,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="driver_output_resource_uri",
+            full_name="google.cloud.dataproc.v1beta2.Job.driver_output_resource_uri",
+            index=14,
+            number=17,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="driver_control_files_uri",
+            full_name="google.cloud.dataproc.v1beta2.Job.driver_control_files_uri",
+            index=15,
+            number=15,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="labels",
+            full_name="google.cloud.dataproc.v1beta2.Job.labels",
+            index=16,
+            number=18,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="scheduling",
+            full_name="google.cloud.dataproc.v1beta2.Job.scheduling",
+            index=17,
+            number=20,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_uuid",
+            full_name="google.cloud.dataproc.v1beta2.Job.job_uuid",
+            index=18,
+            number=22,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="done",
+            full_name="google.cloud.dataproc.v1beta2.Job.done",
+            index=19,
+            number=24,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_JOB_LABELSENTRY,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name="type_job",
+            full_name="google.cloud.dataproc.v1beta2.Job.type_job",
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[],
+        ),
+    ],
+    serialized_start=4964,
+    serialized_end=6217,
 )
 
 
 _JOBSCHEDULING = _descriptor.Descriptor(
-  name='JobScheduling',
-  full_name='google.cloud.dataproc.v1beta2.JobScheduling',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='max_failures_per_hour', full_name='google.cloud.dataproc.v1beta2.JobScheduling.max_failures_per_hour', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6219,
-  serialized_end=6270,
+    name="JobScheduling",
+    full_name="google.cloud.dataproc.v1beta2.JobScheduling",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="max_failures_per_hour",
+            full_name="google.cloud.dataproc.v1beta2.JobScheduling.max_failures_per_hour",
+            index=0,
+            number=1,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6219,
+    serialized_end=6270,
 )
 
 
 _JOBMETADATA = _descriptor.Descriptor(
-  name='JobMetadata',
-  full_name='google.cloud.dataproc.v1beta2.JobMetadata',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.JobMetadata.job_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='google.cloud.dataproc.v1beta2.JobMetadata.status', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='operation_type', full_name='google.cloud.dataproc.v1beta2.JobMetadata.operation_type', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='start_time', full_name='google.cloud.dataproc.v1beta2.JobMetadata.start_time', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6273,
-  serialized_end=6452,
+    name="JobMetadata",
+    full_name="google.cloud.dataproc.v1beta2.JobMetadata",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.JobMetadata.job_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="status",
+            full_name="google.cloud.dataproc.v1beta2.JobMetadata.status",
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="operation_type",
+            full_name="google.cloud.dataproc.v1beta2.JobMetadata.operation_type",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="start_time",
+            full_name="google.cloud.dataproc.v1beta2.JobMetadata.start_time",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6273,
+    serialized_end=6452,
 )
 
 
 _SUBMITJOBREQUEST = _descriptor.Descriptor(
-  name='SubmitJobRequest',
-  full_name='google.cloud.dataproc.v1beta2.SubmitJobRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.SubmitJobRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.SubmitJobRequest.region', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job', full_name='google.cloud.dataproc.v1beta2.SubmitJobRequest.job', index=2,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='request_id', full_name='google.cloud.dataproc.v1beta2.SubmitJobRequest.request_id', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6455,
-  serialized_end=6598,
+    name="SubmitJobRequest",
+    full_name="google.cloud.dataproc.v1beta2.SubmitJobRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.SubmitJobRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.SubmitJobRequest.region",
+            index=1,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job",
+            full_name="google.cloud.dataproc.v1beta2.SubmitJobRequest.job",
+            index=2,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="request_id",
+            full_name="google.cloud.dataproc.v1beta2.SubmitJobRequest.request_id",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6455,
+    serialized_end=6598,
 )
 
 
 _GETJOBREQUEST = _descriptor.Descriptor(
-  name='GetJobRequest',
-  full_name='google.cloud.dataproc.v1beta2.GetJobRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.GetJobRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.GetJobRequest.region', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.GetJobRequest.job_id', index=2,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6600,
-  serialized_end=6682,
+    name="GetJobRequest",
+    full_name="google.cloud.dataproc.v1beta2.GetJobRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.GetJobRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.GetJobRequest.region",
+            index=1,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.GetJobRequest.job_id",
+            index=2,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6600,
+    serialized_end=6682,
 )
 
 
 _LISTJOBSREQUEST = _descriptor.Descriptor(
-  name='ListJobsRequest',
-  full_name='google.cloud.dataproc.v1beta2.ListJobsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.region', index=1,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='page_size', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.page_size', index=2,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='page_token', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.page_token', index=3,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cluster_name', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.cluster_name', index=4,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_state_matcher', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.job_state_matcher', index=5,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='filter', full_name='google.cloud.dataproc.v1beta2.ListJobsRequest.filter', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _LISTJOBSREQUEST_JOBSTATEMATCHER,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=6685,
-  serialized_end=6997,
+    name="ListJobsRequest",
+    full_name="google.cloud.dataproc.v1beta2.ListJobsRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.region",
+            index=1,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="page_size",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.page_size",
+            index=2,
+            number=2,
+            type=5,
+            cpp_type=1,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="page_token",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.page_token",
+            index=3,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="cluster_name",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.cluster_name",
+            index=4,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_state_matcher",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.job_state_matcher",
+            index=5,
+            number=5,
+            type=14,
+            cpp_type=8,
+            label=1,
+            has_default_value=False,
+            default_value=0,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="filter",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsRequest.filter",
+            index=6,
+            number=7,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[_LISTJOBSREQUEST_JOBSTATEMATCHER,],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=6685,
+    serialized_end=6997,
 )
 
 
 _UPDATEJOBREQUEST = _descriptor.Descriptor(
-  name='UpdateJobRequest',
-  full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest.region', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest.job_id', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job', full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest.job', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='update_mask', full_name='google.cloud.dataproc.v1beta2.UpdateJobRequest.update_mask', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7000,
-  serialized_end=7193,
+    name="UpdateJobRequest",
+    full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest.region",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest.job_id",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job",
+            full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest.job",
+            index=3,
+            number=4,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="update_mask",
+            full_name="google.cloud.dataproc.v1beta2.UpdateJobRequest.update_mask",
+            index=4,
+            number=5,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=7000,
+    serialized_end=7193,
 )
 
 
 _LISTJOBSRESPONSE = _descriptor.Descriptor(
-  name='ListJobsResponse',
-  full_name='google.cloud.dataproc.v1beta2.ListJobsResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='jobs', full_name='google.cloud.dataproc.v1beta2.ListJobsResponse.jobs', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\003', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='next_page_token', full_name='google.cloud.dataproc.v1beta2.ListJobsResponse.next_page_token', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7195,
-  serialized_end=7298,
+    name="ListJobsResponse",
+    full_name="google.cloud.dataproc.v1beta2.ListJobsResponse",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="jobs",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsResponse.jobs",
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\003",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="next_page_token",
+            full_name="google.cloud.dataproc.v1beta2.ListJobsResponse.next_page_token",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\001",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=7195,
+    serialized_end=7298,
 )
 
 
 _CANCELJOBREQUEST = _descriptor.Descriptor(
-  name='CancelJobRequest',
-  full_name='google.cloud.dataproc.v1beta2.CancelJobRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.CancelJobRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.CancelJobRequest.region', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.CancelJobRequest.job_id', index=2,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7300,
-  serialized_end=7385,
+    name="CancelJobRequest",
+    full_name="google.cloud.dataproc.v1beta2.CancelJobRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.CancelJobRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.CancelJobRequest.region",
+            index=1,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.CancelJobRequest.job_id",
+            index=2,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=7300,
+    serialized_end=7385,
 )
 
 
 _DELETEJOBREQUEST = _descriptor.Descriptor(
-  name='DeleteJobRequest',
-  full_name='google.cloud.dataproc.v1beta2.DeleteJobRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='project_id', full_name='google.cloud.dataproc.v1beta2.DeleteJobRequest.project_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='region', full_name='google.cloud.dataproc.v1beta2.DeleteJobRequest.region', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='job_id', full_name='google.cloud.dataproc.v1beta2.DeleteJobRequest.job_id', index=2,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=b'\340A\002', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=7387,
-  serialized_end=7472,
+    name="DeleteJobRequest",
+    full_name="google.cloud.dataproc.v1beta2.DeleteJobRequest",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="project_id",
+            full_name="google.cloud.dataproc.v1beta2.DeleteJobRequest.project_id",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="region",
+            full_name="google.cloud.dataproc.v1beta2.DeleteJobRequest.region",
+            index=1,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.FieldDescriptor(
+            name="job_id",
+            full_name="google.cloud.dataproc.v1beta2.DeleteJobRequest.job_id",
+            index=2,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=b"\340A\002",
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=7387,
+    serialized_end=7472,
 )
 
-_LOGGINGCONFIG_DRIVERLOGLEVELSENTRY.fields_by_name['value'].enum_type = _LOGGINGCONFIG_LEVEL
+_LOGGINGCONFIG_DRIVERLOGLEVELSENTRY.fields_by_name[
+    "value"
+].enum_type = _LOGGINGCONFIG_LEVEL
 _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY.containing_type = _LOGGINGCONFIG
-_LOGGINGCONFIG.fields_by_name['driver_log_levels'].message_type = _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY
+_LOGGINGCONFIG.fields_by_name[
+    "driver_log_levels"
+].message_type = _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY
 _LOGGINGCONFIG_LEVEL.containing_type = _LOGGINGCONFIG
 _HADOOPJOB_PROPERTIESENTRY.containing_type = _HADOOPJOB
-_HADOOPJOB.fields_by_name['properties'].message_type = _HADOOPJOB_PROPERTIESENTRY
-_HADOOPJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
-_HADOOPJOB.oneofs_by_name['driver'].fields.append(
-  _HADOOPJOB.fields_by_name['main_jar_file_uri'])
-_HADOOPJOB.fields_by_name['main_jar_file_uri'].containing_oneof = _HADOOPJOB.oneofs_by_name['driver']
-_HADOOPJOB.oneofs_by_name['driver'].fields.append(
-  _HADOOPJOB.fields_by_name['main_class'])
-_HADOOPJOB.fields_by_name['main_class'].containing_oneof = _HADOOPJOB.oneofs_by_name['driver']
+_HADOOPJOB.fields_by_name["properties"].message_type = _HADOOPJOB_PROPERTIESENTRY
+_HADOOPJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
+_HADOOPJOB.oneofs_by_name["driver"].fields.append(
+    _HADOOPJOB.fields_by_name["main_jar_file_uri"]
+)
+_HADOOPJOB.fields_by_name[
+    "main_jar_file_uri"
+].containing_oneof = _HADOOPJOB.oneofs_by_name["driver"]
+_HADOOPJOB.oneofs_by_name["driver"].fields.append(
+    _HADOOPJOB.fields_by_name["main_class"]
+)
+_HADOOPJOB.fields_by_name["main_class"].containing_oneof = _HADOOPJOB.oneofs_by_name[
+    "driver"
+]
 _SPARKJOB_PROPERTIESENTRY.containing_type = _SPARKJOB
-_SPARKJOB.fields_by_name['properties'].message_type = _SPARKJOB_PROPERTIESENTRY
-_SPARKJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
-_SPARKJOB.oneofs_by_name['driver'].fields.append(
-  _SPARKJOB.fields_by_name['main_jar_file_uri'])
-_SPARKJOB.fields_by_name['main_jar_file_uri'].containing_oneof = _SPARKJOB.oneofs_by_name['driver']
-_SPARKJOB.oneofs_by_name['driver'].fields.append(
-  _SPARKJOB.fields_by_name['main_class'])
-_SPARKJOB.fields_by_name['main_class'].containing_oneof = _SPARKJOB.oneofs_by_name['driver']
+_SPARKJOB.fields_by_name["properties"].message_type = _SPARKJOB_PROPERTIESENTRY
+_SPARKJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
+_SPARKJOB.oneofs_by_name["driver"].fields.append(
+    _SPARKJOB.fields_by_name["main_jar_file_uri"]
+)
+_SPARKJOB.fields_by_name[
+    "main_jar_file_uri"
+].containing_oneof = _SPARKJOB.oneofs_by_name["driver"]
+_SPARKJOB.oneofs_by_name["driver"].fields.append(_SPARKJOB.fields_by_name["main_class"])
+_SPARKJOB.fields_by_name["main_class"].containing_oneof = _SPARKJOB.oneofs_by_name[
+    "driver"
+]
 _PYSPARKJOB_PROPERTIESENTRY.containing_type = _PYSPARKJOB
-_PYSPARKJOB.fields_by_name['properties'].message_type = _PYSPARKJOB_PROPERTIESENTRY
-_PYSPARKJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
+_PYSPARKJOB.fields_by_name["properties"].message_type = _PYSPARKJOB_PROPERTIESENTRY
+_PYSPARKJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
 _HIVEJOB_SCRIPTVARIABLESENTRY.containing_type = _HIVEJOB
 _HIVEJOB_PROPERTIESENTRY.containing_type = _HIVEJOB
-_HIVEJOB.fields_by_name['query_list'].message_type = _QUERYLIST
-_HIVEJOB.fields_by_name['script_variables'].message_type = _HIVEJOB_SCRIPTVARIABLESENTRY
-_HIVEJOB.fields_by_name['properties'].message_type = _HIVEJOB_PROPERTIESENTRY
-_HIVEJOB.oneofs_by_name['queries'].fields.append(
-  _HIVEJOB.fields_by_name['query_file_uri'])
-_HIVEJOB.fields_by_name['query_file_uri'].containing_oneof = _HIVEJOB.oneofs_by_name['queries']
-_HIVEJOB.oneofs_by_name['queries'].fields.append(
-  _HIVEJOB.fields_by_name['query_list'])
-_HIVEJOB.fields_by_name['query_list'].containing_oneof = _HIVEJOB.oneofs_by_name['queries']
+_HIVEJOB.fields_by_name["query_list"].message_type = _QUERYLIST
+_HIVEJOB.fields_by_name["script_variables"].message_type = _HIVEJOB_SCRIPTVARIABLESENTRY
+_HIVEJOB.fields_by_name["properties"].message_type = _HIVEJOB_PROPERTIESENTRY
+_HIVEJOB.oneofs_by_name["queries"].fields.append(
+    _HIVEJOB.fields_by_name["query_file_uri"]
+)
+_HIVEJOB.fields_by_name["query_file_uri"].containing_oneof = _HIVEJOB.oneofs_by_name[
+    "queries"
+]
+_HIVEJOB.oneofs_by_name["queries"].fields.append(_HIVEJOB.fields_by_name["query_list"])
+_HIVEJOB.fields_by_name["query_list"].containing_oneof = _HIVEJOB.oneofs_by_name[
+    "queries"
+]
 _SPARKSQLJOB_SCRIPTVARIABLESENTRY.containing_type = _SPARKSQLJOB
 _SPARKSQLJOB_PROPERTIESENTRY.containing_type = _SPARKSQLJOB
-_SPARKSQLJOB.fields_by_name['query_list'].message_type = _QUERYLIST
-_SPARKSQLJOB.fields_by_name['script_variables'].message_type = _SPARKSQLJOB_SCRIPTVARIABLESENTRY
-_SPARKSQLJOB.fields_by_name['properties'].message_type = _SPARKSQLJOB_PROPERTIESENTRY
-_SPARKSQLJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
-_SPARKSQLJOB.oneofs_by_name['queries'].fields.append(
-  _SPARKSQLJOB.fields_by_name['query_file_uri'])
-_SPARKSQLJOB.fields_by_name['query_file_uri'].containing_oneof = _SPARKSQLJOB.oneofs_by_name['queries']
-_SPARKSQLJOB.oneofs_by_name['queries'].fields.append(
-  _SPARKSQLJOB.fields_by_name['query_list'])
-_SPARKSQLJOB.fields_by_name['query_list'].containing_oneof = _SPARKSQLJOB.oneofs_by_name['queries']
+_SPARKSQLJOB.fields_by_name["query_list"].message_type = _QUERYLIST
+_SPARKSQLJOB.fields_by_name[
+    "script_variables"
+].message_type = _SPARKSQLJOB_SCRIPTVARIABLESENTRY
+_SPARKSQLJOB.fields_by_name["properties"].message_type = _SPARKSQLJOB_PROPERTIESENTRY
+_SPARKSQLJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
+_SPARKSQLJOB.oneofs_by_name["queries"].fields.append(
+    _SPARKSQLJOB.fields_by_name["query_file_uri"]
+)
+_SPARKSQLJOB.fields_by_name[
+    "query_file_uri"
+].containing_oneof = _SPARKSQLJOB.oneofs_by_name["queries"]
+_SPARKSQLJOB.oneofs_by_name["queries"].fields.append(
+    _SPARKSQLJOB.fields_by_name["query_list"]
+)
+_SPARKSQLJOB.fields_by_name[
+    "query_list"
+].containing_oneof = _SPARKSQLJOB.oneofs_by_name["queries"]
 _PIGJOB_SCRIPTVARIABLESENTRY.containing_type = _PIGJOB
 _PIGJOB_PROPERTIESENTRY.containing_type = _PIGJOB
-_PIGJOB.fields_by_name['query_list'].message_type = _QUERYLIST
-_PIGJOB.fields_by_name['script_variables'].message_type = _PIGJOB_SCRIPTVARIABLESENTRY
-_PIGJOB.fields_by_name['properties'].message_type = _PIGJOB_PROPERTIESENTRY
-_PIGJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
-_PIGJOB.oneofs_by_name['queries'].fields.append(
-  _PIGJOB.fields_by_name['query_file_uri'])
-_PIGJOB.fields_by_name['query_file_uri'].containing_oneof = _PIGJOB.oneofs_by_name['queries']
-_PIGJOB.oneofs_by_name['queries'].fields.append(
-  _PIGJOB.fields_by_name['query_list'])
-_PIGJOB.fields_by_name['query_list'].containing_oneof = _PIGJOB.oneofs_by_name['queries']
+_PIGJOB.fields_by_name["query_list"].message_type = _QUERYLIST
+_PIGJOB.fields_by_name["script_variables"].message_type = _PIGJOB_SCRIPTVARIABLESENTRY
+_PIGJOB.fields_by_name["properties"].message_type = _PIGJOB_PROPERTIESENTRY
+_PIGJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
+_PIGJOB.oneofs_by_name["queries"].fields.append(
+    _PIGJOB.fields_by_name["query_file_uri"]
+)
+_PIGJOB.fields_by_name["query_file_uri"].containing_oneof = _PIGJOB.oneofs_by_name[
+    "queries"
+]
+_PIGJOB.oneofs_by_name["queries"].fields.append(_PIGJOB.fields_by_name["query_list"])
+_PIGJOB.fields_by_name["query_list"].containing_oneof = _PIGJOB.oneofs_by_name[
+    "queries"
+]
 _SPARKRJOB_PROPERTIESENTRY.containing_type = _SPARKRJOB
-_SPARKRJOB.fields_by_name['properties'].message_type = _SPARKRJOB_PROPERTIESENTRY
-_SPARKRJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
+_SPARKRJOB.fields_by_name["properties"].message_type = _SPARKRJOB_PROPERTIESENTRY
+_SPARKRJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
 _PRESTOJOB_PROPERTIESENTRY.containing_type = _PRESTOJOB
-_PRESTOJOB.fields_by_name['query_list'].message_type = _QUERYLIST
-_PRESTOJOB.fields_by_name['properties'].message_type = _PRESTOJOB_PROPERTIESENTRY
-_PRESTOJOB.fields_by_name['logging_config'].message_type = _LOGGINGCONFIG
-_PRESTOJOB.oneofs_by_name['queries'].fields.append(
-  _PRESTOJOB.fields_by_name['query_file_uri'])
-_PRESTOJOB.fields_by_name['query_file_uri'].containing_oneof = _PRESTOJOB.oneofs_by_name['queries']
-_PRESTOJOB.oneofs_by_name['queries'].fields.append(
-  _PRESTOJOB.fields_by_name['query_list'])
-_PRESTOJOB.fields_by_name['query_list'].containing_oneof = _PRESTOJOB.oneofs_by_name['queries']
-_JOBSTATUS.fields_by_name['state'].enum_type = _JOBSTATUS_STATE
-_JOBSTATUS.fields_by_name['state_start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_JOBSTATUS.fields_by_name['substate'].enum_type = _JOBSTATUS_SUBSTATE
+_PRESTOJOB.fields_by_name["query_list"].message_type = _QUERYLIST
+_PRESTOJOB.fields_by_name["properties"].message_type = _PRESTOJOB_PROPERTIESENTRY
+_PRESTOJOB.fields_by_name["logging_config"].message_type = _LOGGINGCONFIG
+_PRESTOJOB.oneofs_by_name["queries"].fields.append(
+    _PRESTOJOB.fields_by_name["query_file_uri"]
+)
+_PRESTOJOB.fields_by_name[
+    "query_file_uri"
+].containing_oneof = _PRESTOJOB.oneofs_by_name["queries"]
+_PRESTOJOB.oneofs_by_name["queries"].fields.append(
+    _PRESTOJOB.fields_by_name["query_list"]
+)
+_PRESTOJOB.fields_by_name["query_list"].containing_oneof = _PRESTOJOB.oneofs_by_name[
+    "queries"
+]
+_JOBSTATUS.fields_by_name["state"].enum_type = _JOBSTATUS_STATE
+_JOBSTATUS.fields_by_name[
+    "state_start_time"
+].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_JOBSTATUS.fields_by_name["substate"].enum_type = _JOBSTATUS_SUBSTATE
 _JOBSTATUS_STATE.containing_type = _JOBSTATUS
 _JOBSTATUS_SUBSTATE.containing_type = _JOBSTATUS
-_YARNAPPLICATION.fields_by_name['state'].enum_type = _YARNAPPLICATION_STATE
+_YARNAPPLICATION.fields_by_name["state"].enum_type = _YARNAPPLICATION_STATE
 _YARNAPPLICATION_STATE.containing_type = _YARNAPPLICATION
 _JOB_LABELSENTRY.containing_type = _JOB
-_JOB.fields_by_name['reference'].message_type = _JOBREFERENCE
-_JOB.fields_by_name['placement'].message_type = _JOBPLACEMENT
-_JOB.fields_by_name['hadoop_job'].message_type = _HADOOPJOB
-_JOB.fields_by_name['spark_job'].message_type = _SPARKJOB
-_JOB.fields_by_name['pyspark_job'].message_type = _PYSPARKJOB
-_JOB.fields_by_name['hive_job'].message_type = _HIVEJOB
-_JOB.fields_by_name['pig_job'].message_type = _PIGJOB
-_JOB.fields_by_name['spark_r_job'].message_type = _SPARKRJOB
-_JOB.fields_by_name['spark_sql_job'].message_type = _SPARKSQLJOB
-_JOB.fields_by_name['presto_job'].message_type = _PRESTOJOB
-_JOB.fields_by_name['status'].message_type = _JOBSTATUS
-_JOB.fields_by_name['status_history'].message_type = _JOBSTATUS
-_JOB.fields_by_name['yarn_applications'].message_type = _YARNAPPLICATION
-_JOB.fields_by_name['labels'].message_type = _JOB_LABELSENTRY
-_JOB.fields_by_name['scheduling'].message_type = _JOBSCHEDULING
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['hadoop_job'])
-_JOB.fields_by_name['hadoop_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['spark_job'])
-_JOB.fields_by_name['spark_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['pyspark_job'])
-_JOB.fields_by_name['pyspark_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['hive_job'])
-_JOB.fields_by_name['hive_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['pig_job'])
-_JOB.fields_by_name['pig_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['spark_r_job'])
-_JOB.fields_by_name['spark_r_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['spark_sql_job'])
-_JOB.fields_by_name['spark_sql_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOB.oneofs_by_name['type_job'].fields.append(
-  _JOB.fields_by_name['presto_job'])
-_JOB.fields_by_name['presto_job'].containing_oneof = _JOB.oneofs_by_name['type_job']
-_JOBMETADATA.fields_by_name['status'].message_type = _JOBSTATUS
-_JOBMETADATA.fields_by_name['start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_SUBMITJOBREQUEST.fields_by_name['job'].message_type = _JOB
-_LISTJOBSREQUEST.fields_by_name['job_state_matcher'].enum_type = _LISTJOBSREQUEST_JOBSTATEMATCHER
+_JOB.fields_by_name["reference"].message_type = _JOBREFERENCE
+_JOB.fields_by_name["placement"].message_type = _JOBPLACEMENT
+_JOB.fields_by_name["hadoop_job"].message_type = _HADOOPJOB
+_JOB.fields_by_name["spark_job"].message_type = _SPARKJOB
+_JOB.fields_by_name["pyspark_job"].message_type = _PYSPARKJOB
+_JOB.fields_by_name["hive_job"].message_type = _HIVEJOB
+_JOB.fields_by_name["pig_job"].message_type = _PIGJOB
+_JOB.fields_by_name["spark_r_job"].message_type = _SPARKRJOB
+_JOB.fields_by_name["spark_sql_job"].message_type = _SPARKSQLJOB
+_JOB.fields_by_name["presto_job"].message_type = _PRESTOJOB
+_JOB.fields_by_name["status"].message_type = _JOBSTATUS
+_JOB.fields_by_name["status_history"].message_type = _JOBSTATUS
+_JOB.fields_by_name["yarn_applications"].message_type = _YARNAPPLICATION
+_JOB.fields_by_name["labels"].message_type = _JOB_LABELSENTRY
+_JOB.fields_by_name["scheduling"].message_type = _JOBSCHEDULING
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["hadoop_job"])
+_JOB.fields_by_name["hadoop_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["spark_job"])
+_JOB.fields_by_name["spark_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["pyspark_job"])
+_JOB.fields_by_name["pyspark_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["hive_job"])
+_JOB.fields_by_name["hive_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["pig_job"])
+_JOB.fields_by_name["pig_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["spark_r_job"])
+_JOB.fields_by_name["spark_r_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["spark_sql_job"])
+_JOB.fields_by_name["spark_sql_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOB.oneofs_by_name["type_job"].fields.append(_JOB.fields_by_name["presto_job"])
+_JOB.fields_by_name["presto_job"].containing_oneof = _JOB.oneofs_by_name["type_job"]
+_JOBMETADATA.fields_by_name["status"].message_type = _JOBSTATUS
+_JOBMETADATA.fields_by_name[
+    "start_time"
+].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_SUBMITJOBREQUEST.fields_by_name["job"].message_type = _JOB
+_LISTJOBSREQUEST.fields_by_name[
+    "job_state_matcher"
+].enum_type = _LISTJOBSREQUEST_JOBSTATEMATCHER
 _LISTJOBSREQUEST_JOBSTATEMATCHER.containing_type = _LISTJOBSREQUEST
-_UPDATEJOBREQUEST.fields_by_name['job'].message_type = _JOB
-_UPDATEJOBREQUEST.fields_by_name['update_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
-_LISTJOBSRESPONSE.fields_by_name['jobs'].message_type = _JOB
-DESCRIPTOR.message_types_by_name['LoggingConfig'] = _LOGGINGCONFIG
-DESCRIPTOR.message_types_by_name['HadoopJob'] = _HADOOPJOB
-DESCRIPTOR.message_types_by_name['SparkJob'] = _SPARKJOB
-DESCRIPTOR.message_types_by_name['PySparkJob'] = _PYSPARKJOB
-DESCRIPTOR.message_types_by_name['QueryList'] = _QUERYLIST
-DESCRIPTOR.message_types_by_name['HiveJob'] = _HIVEJOB
-DESCRIPTOR.message_types_by_name['SparkSqlJob'] = _SPARKSQLJOB
-DESCRIPTOR.message_types_by_name['PigJob'] = _PIGJOB
-DESCRIPTOR.message_types_by_name['SparkRJob'] = _SPARKRJOB
-DESCRIPTOR.message_types_by_name['PrestoJob'] = _PRESTOJOB
-DESCRIPTOR.message_types_by_name['JobPlacement'] = _JOBPLACEMENT
-DESCRIPTOR.message_types_by_name['JobStatus'] = _JOBSTATUS
-DESCRIPTOR.message_types_by_name['JobReference'] = _JOBREFERENCE
-DESCRIPTOR.message_types_by_name['YarnApplication'] = _YARNAPPLICATION
-DESCRIPTOR.message_types_by_name['Job'] = _JOB
-DESCRIPTOR.message_types_by_name['JobScheduling'] = _JOBSCHEDULING
-DESCRIPTOR.message_types_by_name['JobMetadata'] = _JOBMETADATA
-DESCRIPTOR.message_types_by_name['SubmitJobRequest'] = _SUBMITJOBREQUEST
-DESCRIPTOR.message_types_by_name['GetJobRequest'] = _GETJOBREQUEST
-DESCRIPTOR.message_types_by_name['ListJobsRequest'] = _LISTJOBSREQUEST
-DESCRIPTOR.message_types_by_name['UpdateJobRequest'] = _UPDATEJOBREQUEST
-DESCRIPTOR.message_types_by_name['ListJobsResponse'] = _LISTJOBSRESPONSE
-DESCRIPTOR.message_types_by_name['CancelJobRequest'] = _CANCELJOBREQUEST
-DESCRIPTOR.message_types_by_name['DeleteJobRequest'] = _DELETEJOBREQUEST
+_UPDATEJOBREQUEST.fields_by_name["job"].message_type = _JOB
+_UPDATEJOBREQUEST.fields_by_name[
+    "update_mask"
+].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
+_LISTJOBSRESPONSE.fields_by_name["jobs"].message_type = _JOB
+DESCRIPTOR.message_types_by_name["LoggingConfig"] = _LOGGINGCONFIG
+DESCRIPTOR.message_types_by_name["HadoopJob"] = _HADOOPJOB
+DESCRIPTOR.message_types_by_name["SparkJob"] = _SPARKJOB
+DESCRIPTOR.message_types_by_name["PySparkJob"] = _PYSPARKJOB
+DESCRIPTOR.message_types_by_name["QueryList"] = _QUERYLIST
+DESCRIPTOR.message_types_by_name["HiveJob"] = _HIVEJOB
+DESCRIPTOR.message_types_by_name["SparkSqlJob"] = _SPARKSQLJOB
+DESCRIPTOR.message_types_by_name["PigJob"] = _PIGJOB
+DESCRIPTOR.message_types_by_name["SparkRJob"] = _SPARKRJOB
+DESCRIPTOR.message_types_by_name["PrestoJob"] = _PRESTOJOB
+DESCRIPTOR.message_types_by_name["JobPlacement"] = _JOBPLACEMENT
+DESCRIPTOR.message_types_by_name["JobStatus"] = _JOBSTATUS
+DESCRIPTOR.message_types_by_name["JobReference"] = _JOBREFERENCE
+DESCRIPTOR.message_types_by_name["YarnApplication"] = _YARNAPPLICATION
+DESCRIPTOR.message_types_by_name["Job"] = _JOB
+DESCRIPTOR.message_types_by_name["JobScheduling"] = _JOBSCHEDULING
+DESCRIPTOR.message_types_by_name["JobMetadata"] = _JOBMETADATA
+DESCRIPTOR.message_types_by_name["SubmitJobRequest"] = _SUBMITJOBREQUEST
+DESCRIPTOR.message_types_by_name["GetJobRequest"] = _GETJOBREQUEST
+DESCRIPTOR.message_types_by_name["ListJobsRequest"] = _LISTJOBSREQUEST
+DESCRIPTOR.message_types_by_name["UpdateJobRequest"] = _UPDATEJOBREQUEST
+DESCRIPTOR.message_types_by_name["ListJobsResponse"] = _LISTJOBSRESPONSE
+DESCRIPTOR.message_types_by_name["CancelJobRequest"] = _CANCELJOBREQUEST
+DESCRIPTOR.message_types_by_name["DeleteJobRequest"] = _DELETEJOBREQUEST
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-LoggingConfig = _reflection.GeneratedProtocolMessageType('LoggingConfig', (_message.Message,), {
-
-  'DriverLogLevelsEntry' : _reflection.GeneratedProtocolMessageType('DriverLogLevelsEntry', (_message.Message,), {
-    'DESCRIPTOR' : _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry)
-    })
-  ,
-  'DESCRIPTOR' : _LOGGINGCONFIG,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """The runtime logging config of the job.
+LoggingConfig = _reflection.GeneratedProtocolMessageType(
+    "LoggingConfig",
+    (_message.Message,),
+    {
+        "DriverLogLevelsEntry": _reflection.GeneratedProtocolMessageType(
+            "DriverLogLevelsEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.LoggingConfig.DriverLogLevelsEntry)
+            },
+        ),
+        "DESCRIPTOR": _LOGGINGCONFIG,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """The runtime logging config of the job.
   
   Attributes:
       driver_log_levels:
@@ -2443,23 +4286,28 @@ LoggingConfig = _reflection.GeneratedProtocolMessageType('LoggingConfig', (_mess
           “root” package name to configure rootLogger. Examples:
           ‘com.google = FATAL’, ‘root = INFO’, ‘org.apache = DEBUG’
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.LoggingConfig)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.LoggingConfig)
+    },
+)
 _sym_db.RegisterMessage(LoggingConfig)
 _sym_db.RegisterMessage(LoggingConfig.DriverLogLevelsEntry)
 
-HadoopJob = _reflection.GeneratedProtocolMessageType('HadoopJob', (_message.Message,), {
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _HADOOPJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _HADOOPJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache Hadoop MapReduce
+HadoopJob = _reflection.GeneratedProtocolMessageType(
+    "HadoopJob",
+    (_message.Message,),
+    {
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _HADOOPJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HadoopJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _HADOOPJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache Hadoop MapReduce
   <https://hadoop.apache.org/docs/current/hadoop-mapreduce-
   client/hadoop-mapreduce-client-core/MapReduceTutorial.html>`__ jobs on
   `Apache Hadoop YARN <https://hadoop.apache.org/docs/r2.7.1/hadoop-
@@ -2506,23 +4354,28 @@ HadoopJob = _reflection.GeneratedProtocolMessageType('HadoopJob', (_message.Mess
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HadoopJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HadoopJob)
+    },
+)
 _sym_db.RegisterMessage(HadoopJob)
 _sym_db.RegisterMessage(HadoopJob.PropertiesEntry)
 
-SparkJob = _reflection.GeneratedProtocolMessageType('SparkJob', (_message.Message,), {
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _SPARKJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _SPARKJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache Spark <http://spark.apache.org/>`__
+SparkJob = _reflection.GeneratedProtocolMessageType(
+    "SparkJob",
+    (_message.Message,),
+    {
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _SPARKJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _SPARKJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache Spark <http://spark.apache.org/>`__
   applications on YARN. The specification of the main method to call to
   drive the job. Specify either the jar file that contains the main
   class or the main class name. To pass both a main jar and a main class
@@ -2561,23 +4414,28 @@ SparkJob = _reflection.GeneratedProtocolMessageType('SparkJob', (_message.Messag
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkJob)
+    },
+)
 _sym_db.RegisterMessage(SparkJob)
 _sym_db.RegisterMessage(SparkJob.PropertiesEntry)
 
-PySparkJob = _reflection.GeneratedProtocolMessageType('PySparkJob', (_message.Message,), {
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _PYSPARKJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _PYSPARKJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache PySpark
+PySparkJob = _reflection.GeneratedProtocolMessageType(
+    "PySparkJob",
+    (_message.Message,),
+    {
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _PYSPARKJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PySparkJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _PYSPARKJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache PySpark
   <https://spark.apache.org/docs/0.9.0/python-programming-guide.html>`__
   applications on YARN.
   
@@ -2612,16 +4470,19 @@ PySparkJob = _reflection.GeneratedProtocolMessageType('PySparkJob', (_message.Me
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PySparkJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PySparkJob)
+    },
+)
 _sym_db.RegisterMessage(PySparkJob)
 _sym_db.RegisterMessage(PySparkJob.PropertiesEntry)
 
-QueryList = _reflection.GeneratedProtocolMessageType('QueryList', (_message.Message,), {
-  'DESCRIPTOR' : _QUERYLIST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A list of queries to run on a cluster.
+QueryList = _reflection.GeneratedProtocolMessageType(
+    "QueryList",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _QUERYLIST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A list of queries to run on a cluster.
   
   Attributes:
       queries:
@@ -2633,29 +4494,36 @@ QueryList = _reflection.GeneratedProtocolMessageType('QueryList', (_message.Mess
           "queries": [          "query1",          "query2",
           "query3;query4",        ]      }    }
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.QueryList)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.QueryList)
+    },
+)
 _sym_db.RegisterMessage(QueryList)
 
-HiveJob = _reflection.GeneratedProtocolMessageType('HiveJob', (_message.Message,), {
-
-  'ScriptVariablesEntry' : _reflection.GeneratedProtocolMessageType('ScriptVariablesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _HIVEJOB_SCRIPTVARIABLESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry)
-    })
-  ,
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _HIVEJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _HIVEJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache Hive <https://hive.apache.org/>`__
+HiveJob = _reflection.GeneratedProtocolMessageType(
+    "HiveJob",
+    (_message.Message,),
+    {
+        "ScriptVariablesEntry": _reflection.GeneratedProtocolMessageType(
+            "ScriptVariablesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _HIVEJOB_SCRIPTVARIABLESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob.ScriptVariablesEntry)
+            },
+        ),
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _HIVEJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _HIVEJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache Hive <https://hive.apache.org/>`__
   queries on YARN.
   
   Attributes:
@@ -2684,31 +4552,38 @@ HiveJob = _reflection.GeneratedProtocolMessageType('HiveJob', (_message.Message,
           the Hive server and Hadoop MapReduce (MR) tasks. Can contain
           Hive SerDes and UDFs.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.HiveJob)
+    },
+)
 _sym_db.RegisterMessage(HiveJob)
 _sym_db.RegisterMessage(HiveJob.ScriptVariablesEntry)
 _sym_db.RegisterMessage(HiveJob.PropertiesEntry)
 
-SparkSqlJob = _reflection.GeneratedProtocolMessageType('SparkSqlJob', (_message.Message,), {
-
-  'ScriptVariablesEntry' : _reflection.GeneratedProtocolMessageType('ScriptVariablesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _SPARKSQLJOB_SCRIPTVARIABLESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry)
-    })
-  ,
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _SPARKSQLJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _SPARKSQLJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache Spark SQL
+SparkSqlJob = _reflection.GeneratedProtocolMessageType(
+    "SparkSqlJob",
+    (_message.Message,),
+    {
+        "ScriptVariablesEntry": _reflection.GeneratedProtocolMessageType(
+            "ScriptVariablesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _SPARKSQLJOB_SCRIPTVARIABLESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob.ScriptVariablesEntry)
+            },
+        ),
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _SPARKSQLJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _SPARKSQLJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache Spark SQL
   <http://spark.apache.org/sql/>`__ queries.
   
   Attributes:
@@ -2732,31 +4607,38 @@ SparkSqlJob = _reflection.GeneratedProtocolMessageType('SparkSqlJob', (_message.
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkSqlJob)
+    },
+)
 _sym_db.RegisterMessage(SparkSqlJob)
 _sym_db.RegisterMessage(SparkSqlJob.ScriptVariablesEntry)
 _sym_db.RegisterMessage(SparkSqlJob.PropertiesEntry)
 
-PigJob = _reflection.GeneratedProtocolMessageType('PigJob', (_message.Message,), {
-
-  'ScriptVariablesEntry' : _reflection.GeneratedProtocolMessageType('ScriptVariablesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _PIGJOB_SCRIPTVARIABLESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry)
-    })
-  ,
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _PIGJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _PIGJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache Pig <https://pig.apache.org/>`__
+PigJob = _reflection.GeneratedProtocolMessageType(
+    "PigJob",
+    (_message.Message,),
+    {
+        "ScriptVariablesEntry": _reflection.GeneratedProtocolMessageType(
+            "ScriptVariablesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _PIGJOB_SCRIPTVARIABLESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob.ScriptVariablesEntry)
+            },
+        ),
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _PIGJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _PIGJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache Pig <https://pig.apache.org/>`__
   queries on YARN.
   
   Attributes:
@@ -2787,24 +4669,29 @@ PigJob = _reflection.GeneratedProtocolMessageType('PigJob', (_message.Message,),
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PigJob)
+    },
+)
 _sym_db.RegisterMessage(PigJob)
 _sym_db.RegisterMessage(PigJob.ScriptVariablesEntry)
 _sym_db.RegisterMessage(PigJob.PropertiesEntry)
 
-SparkRJob = _reflection.GeneratedProtocolMessageType('SparkRJob', (_message.Message,), {
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _SPARKRJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _SPARKRJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Apache SparkR
+SparkRJob = _reflection.GeneratedProtocolMessageType(
+    "SparkRJob",
+    (_message.Message,),
+    {
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _SPARKRJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkRJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _SPARKRJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Apache SparkR
   <https://spark.apache.org/docs/latest/sparkr.html>`__ applications on
   YARN.
   
@@ -2834,23 +4721,28 @@ SparkRJob = _reflection.GeneratedProtocolMessageType('SparkRJob', (_message.Mess
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkRJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SparkRJob)
+    },
+)
 _sym_db.RegisterMessage(SparkRJob)
 _sym_db.RegisterMessage(SparkRJob.PropertiesEntry)
 
-PrestoJob = _reflection.GeneratedProtocolMessageType('PrestoJob', (_message.Message,), {
-
-  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
-    'DESCRIPTOR' : _PRESTOJOB_PROPERTIESENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry)
-    })
-  ,
-  'DESCRIPTOR' : _PRESTOJOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job for running `Presto <https://prestosql.io/>`__ queries.
+PrestoJob = _reflection.GeneratedProtocolMessageType(
+    "PrestoJob",
+    (_message.Message,),
+    {
+        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
+            "PropertiesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _PRESTOJOB_PROPERTIESENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PrestoJob.PropertiesEntry)
+            },
+        ),
+        "DESCRIPTOR": _PRESTOJOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job for running `Presto <https://prestosql.io/>`__ queries.
   **IMPORTANT**: The `Dataproc Presto Optional Component
   <https://cloud.google.com/dataproc/docs/concepts/components/presto>`__
   must be enabled when the cluster is created to submit a Presto job to
@@ -2881,16 +4773,19 @@ PrestoJob = _reflection.GeneratedProtocolMessageType('PrestoJob', (_message.Mess
       logging_config:
           Optional. The runtime log config for job execution.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PrestoJob)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.PrestoJob)
+    },
+)
 _sym_db.RegisterMessage(PrestoJob)
 _sym_db.RegisterMessage(PrestoJob.PropertiesEntry)
 
-JobPlacement = _reflection.GeneratedProtocolMessageType('JobPlacement', (_message.Message,), {
-  'DESCRIPTOR' : _JOBPLACEMENT,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """Dataproc job config.
+JobPlacement = _reflection.GeneratedProtocolMessageType(
+    "JobPlacement",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _JOBPLACEMENT,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """Dataproc job config.
   
   Attributes:
       cluster_name:
@@ -2900,15 +4795,18 @@ JobPlacement = _reflection.GeneratedProtocolMessageType('JobPlacement', (_messag
           Output only. A cluster UUID generated by the Dataproc service
           when the job is submitted.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobPlacement)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobPlacement)
+    },
+)
 _sym_db.RegisterMessage(JobPlacement)
 
-JobStatus = _reflection.GeneratedProtocolMessageType('JobStatus', (_message.Message,), {
-  'DESCRIPTOR' : _JOBSTATUS,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """Dataproc job status.
+JobStatus = _reflection.GeneratedProtocolMessageType(
+    "JobStatus",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _JOBSTATUS,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """Dataproc job status.
   
   Attributes:
       state:
@@ -2922,15 +4820,18 @@ JobStatus = _reflection.GeneratedProtocolMessageType('JobStatus', (_message.Mess
           Output only. Additional state information, which includes
           status reported by the agent.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobStatus)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobStatus)
+    },
+)
 _sym_db.RegisterMessage(JobStatus)
 
-JobReference = _reflection.GeneratedProtocolMessageType('JobReference', (_message.Message,), {
-  'DESCRIPTOR' : _JOBREFERENCE,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """Encapsulates the full scoping used to reference a job.
+JobReference = _reflection.GeneratedProtocolMessageType(
+    "JobReference",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _JOBREFERENCE,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """Encapsulates the full scoping used to reference a job.
   
   Attributes:
       project_id:
@@ -2943,15 +4844,18 @@ JobReference = _reflection.GeneratedProtocolMessageType('JobReference', (_messag
           characters.  If not specified by the caller, the job ID will
           be provided by the server.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobReference)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobReference)
+    },
+)
 _sym_db.RegisterMessage(JobReference)
 
-YarnApplication = _reflection.GeneratedProtocolMessageType('YarnApplication', (_message.Message,), {
-  'DESCRIPTOR' : _YARNAPPLICATION,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A YARN application created by a job. Application information is a
+YarnApplication = _reflection.GeneratedProtocolMessageType(
+    "YarnApplication",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _YARNAPPLICATION,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A YARN application created by a job. Application information is a
   subset of
   org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto.
   **Beta Feature**: This report is available for testing purposes only.
@@ -2971,22 +4875,27 @@ YarnApplication = _reflection.GeneratedProtocolMessageType('YarnApplication', (_
           specific information. The URL uses the internal hostname, and
           requires a proxy server for resolution and, possibly, access.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.YarnApplication)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.YarnApplication)
+    },
+)
 _sym_db.RegisterMessage(YarnApplication)
 
-Job = _reflection.GeneratedProtocolMessageType('Job', (_message.Message,), {
-
-  'LabelsEntry' : _reflection.GeneratedProtocolMessageType('LabelsEntry', (_message.Message,), {
-    'DESCRIPTOR' : _JOB_LABELSENTRY,
-    '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-    # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.Job.LabelsEntry)
-    })
-  ,
-  'DESCRIPTOR' : _JOB,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A Dataproc job resource.
+Job = _reflection.GeneratedProtocolMessageType(
+    "Job",
+    (_message.Message,),
+    {
+        "LabelsEntry": _reflection.GeneratedProtocolMessageType(
+            "LabelsEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _JOB_LABELSENTRY,
+                "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2"
+                # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.Job.LabelsEntry)
+            },
+        ),
+        "DESCRIPTOR": _JOB,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A Dataproc job resource.
   
   Attributes:
       reference:
@@ -3058,16 +4967,19 @@ Job = _reflection.GeneratedProtocolMessageType('Job', (_message.Message,), {
           the job is completed, and ``status.state`` field will indicate
           if it was successful, failed, or cancelled.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.Job)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.Job)
+    },
+)
 _sym_db.RegisterMessage(Job)
 _sym_db.RegisterMessage(Job.LabelsEntry)
 
-JobScheduling = _reflection.GeneratedProtocolMessageType('JobScheduling', (_message.Message,), {
-  'DESCRIPTOR' : _JOBSCHEDULING,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """Job scheduling options.
+JobScheduling = _reflection.GeneratedProtocolMessageType(
+    "JobScheduling",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _JOBSCHEDULING,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """Job scheduling options.
   
   Attributes:
       max_failures_per_hour:
@@ -3077,15 +4989,18 @@ JobScheduling = _reflection.GeneratedProtocolMessageType('JobScheduling', (_mess
           thrashing if driver exits with non-zero code 4 times within 10
           minute window.  Maximum value is 10.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobScheduling)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobScheduling)
+    },
+)
 _sym_db.RegisterMessage(JobScheduling)
 
-JobMetadata = _reflection.GeneratedProtocolMessageType('JobMetadata', (_message.Message,), {
-  'DESCRIPTOR' : _JOBMETADATA,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """Job Operation metadata.
+JobMetadata = _reflection.GeneratedProtocolMessageType(
+    "JobMetadata",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _JOBMETADATA,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """Job Operation metadata.
   
   Attributes:
       job_id:
@@ -3097,15 +5012,18 @@ JobMetadata = _reflection.GeneratedProtocolMessageType('JobMetadata', (_message.
       start_time:
           Output only. Job submission time.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobMetadata)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.JobMetadata)
+    },
+)
 _sym_db.RegisterMessage(JobMetadata)
 
-SubmitJobRequest = _reflection.GeneratedProtocolMessageType('SubmitJobRequest', (_message.Message,), {
-  'DESCRIPTOR' : _SUBMITJOBREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to submit a job.
+SubmitJobRequest = _reflection.GeneratedProtocolMessageType(
+    "SubmitJobRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _SUBMITJOBREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to submit a job.
   
   Attributes:
       project_id:
@@ -3127,15 +5045,18 @@ SubmitJobRequest = _reflection.GeneratedProtocolMessageType('SubmitJobRequest', 
           A-Z), numbers (0-9), underscores (_), and hyphens (-). The
           maximum length is 40 characters.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SubmitJobRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.SubmitJobRequest)
+    },
+)
 _sym_db.RegisterMessage(SubmitJobRequest)
 
-GetJobRequest = _reflection.GeneratedProtocolMessageType('GetJobRequest', (_message.Message,), {
-  'DESCRIPTOR' : _GETJOBREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to get the resource representation for a job in a project.
+GetJobRequest = _reflection.GeneratedProtocolMessageType(
+    "GetJobRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _GETJOBREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to get the resource representation for a job in a project.
   
   Attributes:
       project_id:
@@ -3146,15 +5067,18 @@ GetJobRequest = _reflection.GeneratedProtocolMessageType('GetJobRequest', (_mess
       job_id:
           Required. The job ID.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.GetJobRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.GetJobRequest)
+    },
+)
 _sym_db.RegisterMessage(GetJobRequest)
 
-ListJobsRequest = _reflection.GeneratedProtocolMessageType('ListJobsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _LISTJOBSREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to list jobs in a project.
+ListJobsRequest = _reflection.GeneratedProtocolMessageType(
+    "ListJobsRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _LISTJOBSREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to list jobs in a project.
   
   Attributes:
       project_id:
@@ -3186,15 +5110,18 @@ ListJobsRequest = _reflection.GeneratedProtocolMessageType('ListJobsRequest', (_
           status.state = ACTIVE AND labels.env = staging AND
           labels.starred = \*
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.ListJobsRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.ListJobsRequest)
+    },
+)
 _sym_db.RegisterMessage(ListJobsRequest)
 
-UpdateJobRequest = _reflection.GeneratedProtocolMessageType('UpdateJobRequest', (_message.Message,), {
-  'DESCRIPTOR' : _UPDATEJOBREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to update a job.
+UpdateJobRequest = _reflection.GeneratedProtocolMessageType(
+    "UpdateJobRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _UPDATEJOBREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to update a job.
   
   Attributes:
       project_id:
@@ -3213,15 +5140,18 @@ UpdateJobRequest = _reflection.GeneratedProtocolMessageType('UpdateJobRequest', 
           ``PATCH`` request body would specify the new value. Note:
           Currently, labels is the only field that can be updated.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.UpdateJobRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.UpdateJobRequest)
+    },
+)
 _sym_db.RegisterMessage(UpdateJobRequest)
 
-ListJobsResponse = _reflection.GeneratedProtocolMessageType('ListJobsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _LISTJOBSRESPONSE,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A list of jobs in a project.
+ListJobsResponse = _reflection.GeneratedProtocolMessageType(
+    "ListJobsResponse",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _LISTJOBSRESPONSE,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A list of jobs in a project.
   
   Attributes:
       jobs:
@@ -3232,15 +5162,18 @@ ListJobsResponse = _reflection.GeneratedProtocolMessageType('ListJobsResponse', 
           this value as the ``page_token`` in a subsequent
           ListJobsRequest.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.ListJobsResponse)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.ListJobsResponse)
+    },
+)
 _sym_db.RegisterMessage(ListJobsResponse)
 
-CancelJobRequest = _reflection.GeneratedProtocolMessageType('CancelJobRequest', (_message.Message,), {
-  'DESCRIPTOR' : _CANCELJOBREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to cancel a job.
+CancelJobRequest = _reflection.GeneratedProtocolMessageType(
+    "CancelJobRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _CANCELJOBREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to cancel a job.
   
   Attributes:
       project_id:
@@ -3251,15 +5184,18 @@ CancelJobRequest = _reflection.GeneratedProtocolMessageType('CancelJobRequest', 
       job_id:
           Required. The job ID.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.CancelJobRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.CancelJobRequest)
+    },
+)
 _sym_db.RegisterMessage(CancelJobRequest)
 
-DeleteJobRequest = _reflection.GeneratedProtocolMessageType('DeleteJobRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DELETEJOBREQUEST,
-  '__module__' : 'google.cloud.dataproc_v1beta2.proto.jobs_pb2'
-  ,
-  '__doc__': """A request to delete a job.
+DeleteJobRequest = _reflection.GeneratedProtocolMessageType(
+    "DeleteJobRequest",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _DELETEJOBREQUEST,
+        "__module__": "google.cloud.dataproc_v1beta2.proto.jobs_pb2",
+        "__doc__": """A request to delete a job.
   
   Attributes:
       project_id:
@@ -3270,218 +5206,220 @@ DeleteJobRequest = _reflection.GeneratedProtocolMessageType('DeleteJobRequest', 
       job_id:
           Required. The job ID.
   """,
-  # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.DeleteJobRequest)
-  })
+        # @@protoc_insertion_point(class_scope:google.cloud.dataproc.v1beta2.DeleteJobRequest)
+    },
+)
 _sym_db.RegisterMessage(DeleteJobRequest)
 
 
 DESCRIPTOR._options = None
 _LOGGINGCONFIG_DRIVERLOGLEVELSENTRY._options = None
 _HADOOPJOB_PROPERTIESENTRY._options = None
-_HADOOPJOB.fields_by_name['args']._options = None
-_HADOOPJOB.fields_by_name['jar_file_uris']._options = None
-_HADOOPJOB.fields_by_name['file_uris']._options = None
-_HADOOPJOB.fields_by_name['archive_uris']._options = None
-_HADOOPJOB.fields_by_name['properties']._options = None
-_HADOOPJOB.fields_by_name['logging_config']._options = None
+_HADOOPJOB.fields_by_name["args"]._options = None
+_HADOOPJOB.fields_by_name["jar_file_uris"]._options = None
+_HADOOPJOB.fields_by_name["file_uris"]._options = None
+_HADOOPJOB.fields_by_name["archive_uris"]._options = None
+_HADOOPJOB.fields_by_name["properties"]._options = None
+_HADOOPJOB.fields_by_name["logging_config"]._options = None
 _SPARKJOB_PROPERTIESENTRY._options = None
-_SPARKJOB.fields_by_name['args']._options = None
-_SPARKJOB.fields_by_name['jar_file_uris']._options = None
-_SPARKJOB.fields_by_name['file_uris']._options = None
-_SPARKJOB.fields_by_name['archive_uris']._options = None
-_SPARKJOB.fields_by_name['properties']._options = None
-_SPARKJOB.fields_by_name['logging_config']._options = None
+_SPARKJOB.fields_by_name["args"]._options = None
+_SPARKJOB.fields_by_name["jar_file_uris"]._options = None
+_SPARKJOB.fields_by_name["file_uris"]._options = None
+_SPARKJOB.fields_by_name["archive_uris"]._options = None
+_SPARKJOB.fields_by_name["properties"]._options = None
+_SPARKJOB.fields_by_name["logging_config"]._options = None
 _PYSPARKJOB_PROPERTIESENTRY._options = None
-_PYSPARKJOB.fields_by_name['main_python_file_uri']._options = None
-_PYSPARKJOB.fields_by_name['args']._options = None
-_PYSPARKJOB.fields_by_name['python_file_uris']._options = None
-_PYSPARKJOB.fields_by_name['jar_file_uris']._options = None
-_PYSPARKJOB.fields_by_name['file_uris']._options = None
-_PYSPARKJOB.fields_by_name['archive_uris']._options = None
-_PYSPARKJOB.fields_by_name['properties']._options = None
-_PYSPARKJOB.fields_by_name['logging_config']._options = None
-_QUERYLIST.fields_by_name['queries']._options = None
+_PYSPARKJOB.fields_by_name["main_python_file_uri"]._options = None
+_PYSPARKJOB.fields_by_name["args"]._options = None
+_PYSPARKJOB.fields_by_name["python_file_uris"]._options = None
+_PYSPARKJOB.fields_by_name["jar_file_uris"]._options = None
+_PYSPARKJOB.fields_by_name["file_uris"]._options = None
+_PYSPARKJOB.fields_by_name["archive_uris"]._options = None
+_PYSPARKJOB.fields_by_name["properties"]._options = None
+_PYSPARKJOB.fields_by_name["logging_config"]._options = None
+_QUERYLIST.fields_by_name["queries"]._options = None
 _HIVEJOB_SCRIPTVARIABLESENTRY._options = None
 _HIVEJOB_PROPERTIESENTRY._options = None
-_HIVEJOB.fields_by_name['continue_on_failure']._options = None
-_HIVEJOB.fields_by_name['script_variables']._options = None
-_HIVEJOB.fields_by_name['properties']._options = None
-_HIVEJOB.fields_by_name['jar_file_uris']._options = None
+_HIVEJOB.fields_by_name["continue_on_failure"]._options = None
+_HIVEJOB.fields_by_name["script_variables"]._options = None
+_HIVEJOB.fields_by_name["properties"]._options = None
+_HIVEJOB.fields_by_name["jar_file_uris"]._options = None
 _SPARKSQLJOB_SCRIPTVARIABLESENTRY._options = None
 _SPARKSQLJOB_PROPERTIESENTRY._options = None
-_SPARKSQLJOB.fields_by_name['script_variables']._options = None
-_SPARKSQLJOB.fields_by_name['properties']._options = None
-_SPARKSQLJOB.fields_by_name['jar_file_uris']._options = None
-_SPARKSQLJOB.fields_by_name['logging_config']._options = None
+_SPARKSQLJOB.fields_by_name["script_variables"]._options = None
+_SPARKSQLJOB.fields_by_name["properties"]._options = None
+_SPARKSQLJOB.fields_by_name["jar_file_uris"]._options = None
+_SPARKSQLJOB.fields_by_name["logging_config"]._options = None
 _PIGJOB_SCRIPTVARIABLESENTRY._options = None
 _PIGJOB_PROPERTIESENTRY._options = None
-_PIGJOB.fields_by_name['continue_on_failure']._options = None
-_PIGJOB.fields_by_name['script_variables']._options = None
-_PIGJOB.fields_by_name['properties']._options = None
-_PIGJOB.fields_by_name['jar_file_uris']._options = None
-_PIGJOB.fields_by_name['logging_config']._options = None
+_PIGJOB.fields_by_name["continue_on_failure"]._options = None
+_PIGJOB.fields_by_name["script_variables"]._options = None
+_PIGJOB.fields_by_name["properties"]._options = None
+_PIGJOB.fields_by_name["jar_file_uris"]._options = None
+_PIGJOB.fields_by_name["logging_config"]._options = None
 _SPARKRJOB_PROPERTIESENTRY._options = None
-_SPARKRJOB.fields_by_name['main_r_file_uri']._options = None
-_SPARKRJOB.fields_by_name['args']._options = None
-_SPARKRJOB.fields_by_name['file_uris']._options = None
-_SPARKRJOB.fields_by_name['archive_uris']._options = None
-_SPARKRJOB.fields_by_name['properties']._options = None
-_SPARKRJOB.fields_by_name['logging_config']._options = None
+_SPARKRJOB.fields_by_name["main_r_file_uri"]._options = None
+_SPARKRJOB.fields_by_name["args"]._options = None
+_SPARKRJOB.fields_by_name["file_uris"]._options = None
+_SPARKRJOB.fields_by_name["archive_uris"]._options = None
+_SPARKRJOB.fields_by_name["properties"]._options = None
+_SPARKRJOB.fields_by_name["logging_config"]._options = None
 _PRESTOJOB_PROPERTIESENTRY._options = None
-_PRESTOJOB.fields_by_name['continue_on_failure']._options = None
-_PRESTOJOB.fields_by_name['output_format']._options = None
-_PRESTOJOB.fields_by_name['client_tags']._options = None
-_PRESTOJOB.fields_by_name['properties']._options = None
-_PRESTOJOB.fields_by_name['logging_config']._options = None
-_JOBPLACEMENT.fields_by_name['cluster_name']._options = None
-_JOBPLACEMENT.fields_by_name['cluster_uuid']._options = None
-_JOBSTATUS.fields_by_name['state']._options = None
-_JOBSTATUS.fields_by_name['details']._options = None
-_JOBSTATUS.fields_by_name['state_start_time']._options = None
-_JOBSTATUS.fields_by_name['substate']._options = None
-_JOBREFERENCE.fields_by_name['project_id']._options = None
-_JOBREFERENCE.fields_by_name['job_id']._options = None
-_YARNAPPLICATION.fields_by_name['name']._options = None
-_YARNAPPLICATION.fields_by_name['state']._options = None
-_YARNAPPLICATION.fields_by_name['progress']._options = None
-_YARNAPPLICATION.fields_by_name['tracking_url']._options = None
+_PRESTOJOB.fields_by_name["continue_on_failure"]._options = None
+_PRESTOJOB.fields_by_name["output_format"]._options = None
+_PRESTOJOB.fields_by_name["client_tags"]._options = None
+_PRESTOJOB.fields_by_name["properties"]._options = None
+_PRESTOJOB.fields_by_name["logging_config"]._options = None
+_JOBPLACEMENT.fields_by_name["cluster_name"]._options = None
+_JOBPLACEMENT.fields_by_name["cluster_uuid"]._options = None
+_JOBSTATUS.fields_by_name["state"]._options = None
+_JOBSTATUS.fields_by_name["details"]._options = None
+_JOBSTATUS.fields_by_name["state_start_time"]._options = None
+_JOBSTATUS.fields_by_name["substate"]._options = None
+_JOBREFERENCE.fields_by_name["project_id"]._options = None
+_JOBREFERENCE.fields_by_name["job_id"]._options = None
+_YARNAPPLICATION.fields_by_name["name"]._options = None
+_YARNAPPLICATION.fields_by_name["state"]._options = None
+_YARNAPPLICATION.fields_by_name["progress"]._options = None
+_YARNAPPLICATION.fields_by_name["tracking_url"]._options = None
 _JOB_LABELSENTRY._options = None
-_JOB.fields_by_name['reference']._options = None
-_JOB.fields_by_name['placement']._options = None
-_JOB.fields_by_name['hadoop_job']._options = None
-_JOB.fields_by_name['spark_job']._options = None
-_JOB.fields_by_name['pyspark_job']._options = None
-_JOB.fields_by_name['hive_job']._options = None
-_JOB.fields_by_name['pig_job']._options = None
-_JOB.fields_by_name['spark_r_job']._options = None
-_JOB.fields_by_name['spark_sql_job']._options = None
-_JOB.fields_by_name['presto_job']._options = None
-_JOB.fields_by_name['status']._options = None
-_JOB.fields_by_name['status_history']._options = None
-_JOB.fields_by_name['yarn_applications']._options = None
-_JOB.fields_by_name['submitted_by']._options = None
-_JOB.fields_by_name['driver_output_resource_uri']._options = None
-_JOB.fields_by_name['driver_control_files_uri']._options = None
-_JOB.fields_by_name['labels']._options = None
-_JOB.fields_by_name['scheduling']._options = None
-_JOB.fields_by_name['job_uuid']._options = None
-_JOB.fields_by_name['done']._options = None
-_JOBSCHEDULING.fields_by_name['max_failures_per_hour']._options = None
-_JOBMETADATA.fields_by_name['job_id']._options = None
-_JOBMETADATA.fields_by_name['status']._options = None
-_JOBMETADATA.fields_by_name['operation_type']._options = None
-_JOBMETADATA.fields_by_name['start_time']._options = None
-_SUBMITJOBREQUEST.fields_by_name['project_id']._options = None
-_SUBMITJOBREQUEST.fields_by_name['region']._options = None
-_SUBMITJOBREQUEST.fields_by_name['job']._options = None
-_SUBMITJOBREQUEST.fields_by_name['request_id']._options = None
-_GETJOBREQUEST.fields_by_name['project_id']._options = None
-_GETJOBREQUEST.fields_by_name['region']._options = None
-_GETJOBREQUEST.fields_by_name['job_id']._options = None
-_LISTJOBSREQUEST.fields_by_name['project_id']._options = None
-_LISTJOBSREQUEST.fields_by_name['region']._options = None
-_LISTJOBSREQUEST.fields_by_name['page_size']._options = None
-_LISTJOBSREQUEST.fields_by_name['page_token']._options = None
-_LISTJOBSREQUEST.fields_by_name['cluster_name']._options = None
-_LISTJOBSREQUEST.fields_by_name['job_state_matcher']._options = None
-_LISTJOBSREQUEST.fields_by_name['filter']._options = None
-_UPDATEJOBREQUEST.fields_by_name['project_id']._options = None
-_UPDATEJOBREQUEST.fields_by_name['region']._options = None
-_UPDATEJOBREQUEST.fields_by_name['job_id']._options = None
-_UPDATEJOBREQUEST.fields_by_name['job']._options = None
-_UPDATEJOBREQUEST.fields_by_name['update_mask']._options = None
-_LISTJOBSRESPONSE.fields_by_name['jobs']._options = None
-_LISTJOBSRESPONSE.fields_by_name['next_page_token']._options = None
-_CANCELJOBREQUEST.fields_by_name['project_id']._options = None
-_CANCELJOBREQUEST.fields_by_name['region']._options = None
-_CANCELJOBREQUEST.fields_by_name['job_id']._options = None
-_DELETEJOBREQUEST.fields_by_name['project_id']._options = None
-_DELETEJOBREQUEST.fields_by_name['region']._options = None
-_DELETEJOBREQUEST.fields_by_name['job_id']._options = None
+_JOB.fields_by_name["reference"]._options = None
+_JOB.fields_by_name["placement"]._options = None
+_JOB.fields_by_name["hadoop_job"]._options = None
+_JOB.fields_by_name["spark_job"]._options = None
+_JOB.fields_by_name["pyspark_job"]._options = None
+_JOB.fields_by_name["hive_job"]._options = None
+_JOB.fields_by_name["pig_job"]._options = None
+_JOB.fields_by_name["spark_r_job"]._options = None
+_JOB.fields_by_name["spark_sql_job"]._options = None
+_JOB.fields_by_name["presto_job"]._options = None
+_JOB.fields_by_name["status"]._options = None
+_JOB.fields_by_name["status_history"]._options = None
+_JOB.fields_by_name["yarn_applications"]._options = None
+_JOB.fields_by_name["submitted_by"]._options = None
+_JOB.fields_by_name["driver_output_resource_uri"]._options = None
+_JOB.fields_by_name["driver_control_files_uri"]._options = None
+_JOB.fields_by_name["labels"]._options = None
+_JOB.fields_by_name["scheduling"]._options = None
+_JOB.fields_by_name["job_uuid"]._options = None
+_JOB.fields_by_name["done"]._options = None
+_JOBSCHEDULING.fields_by_name["max_failures_per_hour"]._options = None
+_JOBMETADATA.fields_by_name["job_id"]._options = None
+_JOBMETADATA.fields_by_name["status"]._options = None
+_JOBMETADATA.fields_by_name["operation_type"]._options = None
+_JOBMETADATA.fields_by_name["start_time"]._options = None
+_SUBMITJOBREQUEST.fields_by_name["project_id"]._options = None
+_SUBMITJOBREQUEST.fields_by_name["region"]._options = None
+_SUBMITJOBREQUEST.fields_by_name["job"]._options = None
+_SUBMITJOBREQUEST.fields_by_name["request_id"]._options = None
+_GETJOBREQUEST.fields_by_name["project_id"]._options = None
+_GETJOBREQUEST.fields_by_name["region"]._options = None
+_GETJOBREQUEST.fields_by_name["job_id"]._options = None
+_LISTJOBSREQUEST.fields_by_name["project_id"]._options = None
+_LISTJOBSREQUEST.fields_by_name["region"]._options = None
+_LISTJOBSREQUEST.fields_by_name["page_size"]._options = None
+_LISTJOBSREQUEST.fields_by_name["page_token"]._options = None
+_LISTJOBSREQUEST.fields_by_name["cluster_name"]._options = None
+_LISTJOBSREQUEST.fields_by_name["job_state_matcher"]._options = None
+_LISTJOBSREQUEST.fields_by_name["filter"]._options = None
+_UPDATEJOBREQUEST.fields_by_name["project_id"]._options = None
+_UPDATEJOBREQUEST.fields_by_name["region"]._options = None
+_UPDATEJOBREQUEST.fields_by_name["job_id"]._options = None
+_UPDATEJOBREQUEST.fields_by_name["job"]._options = None
+_UPDATEJOBREQUEST.fields_by_name["update_mask"]._options = None
+_LISTJOBSRESPONSE.fields_by_name["jobs"]._options = None
+_LISTJOBSRESPONSE.fields_by_name["next_page_token"]._options = None
+_CANCELJOBREQUEST.fields_by_name["project_id"]._options = None
+_CANCELJOBREQUEST.fields_by_name["region"]._options = None
+_CANCELJOBREQUEST.fields_by_name["job_id"]._options = None
+_DELETEJOBREQUEST.fields_by_name["project_id"]._options = None
+_DELETEJOBREQUEST.fields_by_name["region"]._options = None
+_DELETEJOBREQUEST.fields_by_name["job_id"]._options = None
 
 _JOBCONTROLLER = _descriptor.ServiceDescriptor(
-  name='JobController',
-  full_name='google.cloud.dataproc.v1beta2.JobController',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=b'\312A\027dataproc.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform',
-  create_key=_descriptor._internal_create_key,
-  serialized_start=7475,
-  serialized_end=8986,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='SubmitJob',
-    full_name='google.cloud.dataproc.v1beta2.JobController.SubmitJob',
+    name="JobController",
+    full_name="google.cloud.dataproc.v1beta2.JobController",
+    file=DESCRIPTOR,
     index=0,
-    containing_service=None,
-    input_type=_SUBMITJOBREQUEST,
-    output_type=_JOB,
-    serialized_options=b'\202\323\344\223\002@\";/v1beta2/projects/{project_id}/regions/{region}/jobs:submit:\001*\332A\027project_id, region, job',
+    serialized_options=b"\312A\027dataproc.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform",
     create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SubmitJobAsOperation',
-    full_name='google.cloud.dataproc.v1beta2.JobController.SubmitJobAsOperation',
-    index=1,
-    containing_service=None,
-    input_type=_SUBMITJOBREQUEST,
-    output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=b'\202\323\344\223\002K\"F/v1beta2/projects/{project_id}/regions/{region}/jobs:submitAsOperation:\001*\332A\027project_id, region, job\312A\022\n\003Job\022\013JobMetadata',
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetJob',
-    full_name='google.cloud.dataproc.v1beta2.JobController.GetJob',
-    index=2,
-    containing_service=None,
-    input_type=_GETJOBREQUEST,
-    output_type=_JOB,
-    serialized_options=b'\202\323\344\223\002?\022=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\332A\032project_id, region, job_id',
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ListJobs',
-    full_name='google.cloud.dataproc.v1beta2.JobController.ListJobs',
-    index=3,
-    containing_service=None,
-    input_type=_LISTJOBSREQUEST,
-    output_type=_LISTJOBSRESPONSE,
-    serialized_options=b'\202\323\344\223\0026\0224/v1beta2/projects/{project_id}/regions/{region}/jobs\332A\022project_id, region\332A\032project_id, region, filter',
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='UpdateJob',
-    full_name='google.cloud.dataproc.v1beta2.JobController.UpdateJob',
-    index=4,
-    containing_service=None,
-    input_type=_UPDATEJOBREQUEST,
-    output_type=_JOB,
-    serialized_options=b'\202\323\344\223\002D2=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:\003job',
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='CancelJob',
-    full_name='google.cloud.dataproc.v1beta2.JobController.CancelJob',
-    index=5,
-    containing_service=None,
-    input_type=_CANCELJOBREQUEST,
-    output_type=_JOB,
-    serialized_options=b'\202\323\344\223\002I\"D/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel:\001*\332A\032project_id, region, job_id',
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='DeleteJob',
-    full_name='google.cloud.dataproc.v1beta2.JobController.DeleteJob',
-    index=6,
-    containing_service=None,
-    input_type=_DELETEJOBREQUEST,
-    output_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
-    serialized_options=b'\202\323\344\223\002?*=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\332A\032project_id, region, job_id',
-    create_key=_descriptor._internal_create_key,
-  ),
-])
+    serialized_start=7475,
+    serialized_end=8986,
+    methods=[
+        _descriptor.MethodDescriptor(
+            name="SubmitJob",
+            full_name="google.cloud.dataproc.v1beta2.JobController.SubmitJob",
+            index=0,
+            containing_service=None,
+            input_type=_SUBMITJOBREQUEST,
+            output_type=_JOB,
+            serialized_options=b'\202\323\344\223\002@";/v1beta2/projects/{project_id}/regions/{region}/jobs:submit:\001*\332A\027project_id, region, job',
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="SubmitJobAsOperation",
+            full_name="google.cloud.dataproc.v1beta2.JobController.SubmitJobAsOperation",
+            index=1,
+            containing_service=None,
+            input_type=_SUBMITJOBREQUEST,
+            output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
+            serialized_options=b'\202\323\344\223\002K"F/v1beta2/projects/{project_id}/regions/{region}/jobs:submitAsOperation:\001*\332A\027project_id, region, job\312A\022\n\003Job\022\013JobMetadata',
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="GetJob",
+            full_name="google.cloud.dataproc.v1beta2.JobController.GetJob",
+            index=2,
+            containing_service=None,
+            input_type=_GETJOBREQUEST,
+            output_type=_JOB,
+            serialized_options=b"\202\323\344\223\002?\022=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\332A\032project_id, region, job_id",
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="ListJobs",
+            full_name="google.cloud.dataproc.v1beta2.JobController.ListJobs",
+            index=3,
+            containing_service=None,
+            input_type=_LISTJOBSREQUEST,
+            output_type=_LISTJOBSRESPONSE,
+            serialized_options=b"\202\323\344\223\0026\0224/v1beta2/projects/{project_id}/regions/{region}/jobs\332A\022project_id, region\332A\032project_id, region, filter",
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="UpdateJob",
+            full_name="google.cloud.dataproc.v1beta2.JobController.UpdateJob",
+            index=4,
+            containing_service=None,
+            input_type=_UPDATEJOBREQUEST,
+            output_type=_JOB,
+            serialized_options=b"\202\323\344\223\002D2=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:\003job",
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="CancelJob",
+            full_name="google.cloud.dataproc.v1beta2.JobController.CancelJob",
+            index=5,
+            containing_service=None,
+            input_type=_CANCELJOBREQUEST,
+            output_type=_JOB,
+            serialized_options=b'\202\323\344\223\002I"D/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}:cancel:\001*\332A\032project_id, region, job_id',
+            create_key=_descriptor._internal_create_key,
+        ),
+        _descriptor.MethodDescriptor(
+            name="DeleteJob",
+            full_name="google.cloud.dataproc.v1beta2.JobController.DeleteJob",
+            index=6,
+            containing_service=None,
+            input_type=_DELETEJOBREQUEST,
+            output_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+            serialized_options=b"\202\323\344\223\002?*=/v1beta2/projects/{project_id}/regions/{region}/jobs/{job_id}\332A\032project_id, region, job_id",
+            create_key=_descriptor._internal_create_key,
+        ),
+    ],
+)
 _sym_db.RegisterServiceDescriptor(_JOBCONTROLLER)
 
-DESCRIPTOR.services_by_name['JobController'] = _JOBCONTROLLER
+DESCRIPTOR.services_by_name["JobController"] = _JOBCONTROLLER
 
 # @@protoc_insertion_point(module_scope)

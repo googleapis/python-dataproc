@@ -28,14 +28,14 @@ class AutoscalingPolicyServiceGrpcTransport(object):
     which can be used to take advantage of advanced
     features of gRPC.
     """
+
     # The scopes needed to make gRPC calls to all of the methods defined
     # in this service.
-    _OAUTH_SCOPES = (
-        'https://www.googleapis.com/auth/cloud-platform',
-    )
+    _OAUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
 
-    def __init__(self, channel=None, credentials=None,
-                 address='dataproc.googleapis.com:443'):
+    def __init__(
+        self, channel=None, credentials=None, address="dataproc.googleapis.com:443"
+    ):
         """Instantiate the transport class.
 
         Args:
@@ -53,8 +53,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         # exception (channels come with credentials baked in already).
         if channel is not None and credentials is not None:
             raise ValueError(
-                'The `channel` and `credentials` arguments are mutually '
-                'exclusive.',
+                "The `channel` and `credentials` arguments are mutually " "exclusive.",
             )
 
         # Create the channel.
@@ -63,8 +62,8 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 address=address,
                 credentials=credentials,
                 options={
-                    'grpc.max_send_message_length': -1,
-                    'grpc.max_receive_message_length': -1,
+                    "grpc.max_send_message_length": -1,
+                    "grpc.max_receive_message_length": -1,
                 }.items(),
             )
 
@@ -73,16 +72,15 @@ class AutoscalingPolicyServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'autoscaling_policy_service_stub': autoscaling_policies_pb2_grpc.AutoscalingPolicyServiceStub(channel),
+            "autoscaling_policy_service_stub": autoscaling_policies_pb2_grpc.AutoscalingPolicyServiceStub(
+                channel
+            ),
         }
-
 
     @classmethod
     def create_channel(
-                cls,
-                address='dataproc.googleapis.com:443',
-                credentials=None,
-                **kwargs):
+        cls, address="dataproc.googleapis.com:443", credentials=None, **kwargs
+    ):
         """Create and return a gRPC channel object.
 
         Args:
@@ -99,10 +97,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
             grpc.Channel: A gRPC channel object.
         """
         return google.api_core.grpc_helpers.create_channel(
-            address,
-            credentials=credentials,
-            scopes=cls._OAUTH_SCOPES,
-            **kwargs
+            address, credentials=credentials, scopes=cls._OAUTH_SCOPES, **kwargs
         )
 
     @property
@@ -125,7 +120,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['autoscaling_policy_service_stub'].CreateAutoscalingPolicy
+        return self._stubs["autoscaling_policy_service_stub"].CreateAutoscalingPolicy
 
     @property
     def update_autoscaling_policy(self):
@@ -141,7 +136,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['autoscaling_policy_service_stub'].UpdateAutoscalingPolicy
+        return self._stubs["autoscaling_policy_service_stub"].UpdateAutoscalingPolicy
 
     @property
     def get_autoscaling_policy(self):
@@ -154,7 +149,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['autoscaling_policy_service_stub'].GetAutoscalingPolicy
+        return self._stubs["autoscaling_policy_service_stub"].GetAutoscalingPolicy
 
     @property
     def list_autoscaling_policies(self):
@@ -167,7 +162,7 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['autoscaling_policy_service_stub'].ListAutoscalingPolicies
+        return self._stubs["autoscaling_policy_service_stub"].ListAutoscalingPolicies
 
     @property
     def delete_autoscaling_policy(self):
@@ -181,4 +176,4 @@ class AutoscalingPolicyServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['autoscaling_policy_service_stub'].DeleteAutoscalingPolicy
+        return self._stubs["autoscaling_policy_service_stub"].DeleteAutoscalingPolicy

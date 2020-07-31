@@ -35,7 +35,9 @@ import grpc
 
 from google.cloud.dataproc_v1beta2.gapic import enums
 from google.cloud.dataproc_v1beta2.gapic import workflow_template_service_client_config
-from google.cloud.dataproc_v1beta2.gapic.transports import workflow_template_service_grpc_transport
+from google.cloud.dataproc_v1beta2.gapic.transports import (
+    workflow_template_service_grpc_transport,
+)
 from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2
 from google.cloud.dataproc_v1beta2.proto import autoscaling_policies_pb2_grpc
 from google.cloud.dataproc_v1beta2.proto import clusters_pb2
@@ -51,9 +53,8 @@ from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 
 
-
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
-    'google-cloud-dataproc',
+    "google-cloud-dataproc",
 ).version
 
 
@@ -63,13 +64,12 @@ class WorkflowTemplateServiceClient(object):
     Dataproc API.
     """
 
-    SERVICE_ADDRESS = 'dataproc.googleapis.com:443'
+    SERVICE_ADDRESS = "dataproc.googleapis.com:443"
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = 'google.cloud.dataproc.v1beta2.WorkflowTemplateService'
-
+    _INTERFACE_NAME = "google.cloud.dataproc.v1beta2.WorkflowTemplateService"
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -85,19 +85,17 @@ class WorkflowTemplateServiceClient(object):
         Returns:
             WorkflowTemplateServiceClient: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
-
 
     @classmethod
     def location_path(cls, project, location):
         """Return a fully-qualified location string."""
         return google.api_core.path_template.expand(
-            'projects/{project}/locations/{location}',
+            "projects/{project}/locations/{location}",
             project=project,
             location=location,
         )
@@ -106,23 +104,28 @@ class WorkflowTemplateServiceClient(object):
     def region_path(cls, project, region):
         """Return a fully-qualified region string."""
         return google.api_core.path_template.expand(
-            'projects/{project}/regions/{region}',
-            project=project,
-            region=region,
+            "projects/{project}/regions/{region}", project=project, region=region,
         )
 
     @classmethod
     def workflow_template_path(cls, project, region, workflow_template):
         """Return a fully-qualified workflow_template string."""
         return google.api_core.path_template.expand(
-            'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}',
+            "projects/{project}/regions/{region}/workflowTemplates/{workflow_template}",
             project=project,
             region=region,
             workflow_template=workflow_template,
         )
 
-    def __init__(self, transport=None, channel=None, credentials=None,
-            client_config=None, client_info=None, client_options=None):
+    def __init__(
+        self,
+        transport=None,
+        channel=None,
+        credentials=None,
+        client_config=None,
+        client_info=None,
+        client_options=None,
+    ):
         """Constructor.
 
         Args:
@@ -158,20 +161,27 @@ class WorkflowTemplateServiceClient(object):
         """
         # Raise deprecation warnings for things we want to go away.
         if client_config is not None:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `client_config` argument is deprecated.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
         else:
             client_config = workflow_template_service_client_config.config
 
         if channel:
-            warnings.warn('The `channel` argument is deprecated; use '
-                          '`transport` instead.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `channel` argument is deprecated; use " "`transport` instead.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
 
         api_endpoint = self.SERVICE_ADDRESS
         if client_options:
             if type(client_options) == dict:
-                client_options = google.api_core.client_options.from_dict(client_options)
+                client_options = google.api_core.client_options.from_dict(
+                    client_options
+                )
             if client_options.api_endpoint:
                 api_endpoint = client_options.api_endpoint
 
@@ -188,15 +198,13 @@ class WorkflowTemplateServiceClient(object):
             else:
                 if credentials:
                     raise ValueError(
-                        'Received both a transport instance and '
-                        'credentials; these are mutually exclusive.'
+                        "Received both a transport instance and "
+                        "credentials; these are mutually exclusive."
                     )
                 self.transport = transport
         else:
             self.transport = workflow_template_service_grpc_transport.WorkflowTemplateServiceGrpcTransport(
-                address=api_endpoint,
-                channel=channel,
-                credentials=credentials,
+                address=api_endpoint, channel=channel, credentials=credentials,
             )
 
         if client_info is None:
@@ -212,7 +220,7 @@ class WorkflowTemplateServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config['interfaces'][self._INTERFACE_NAME],
+            client_config["interfaces"][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -223,15 +231,16 @@ class WorkflowTemplateServiceClient(object):
 
     # Service calls
     def instantiate_workflow_template(
-            self,
-            name,
-            version=None,
-            instance_id=None,
-            request_id=None,
-            parameters=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        name,
+        version=None,
+        instance_id=None,
+        request_id=None,
+        parameters=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Instantiates a template and begins execution.
 
@@ -318,11 +327,15 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'instantiate_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['instantiate_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "instantiate_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "instantiate_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.instantiate_workflow_template,
-                default_retry=self._method_configs['InstantiateWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['InstantiateWorkflowTemplate'].timeout,
+                default_retry=self._method_configs["InstantiateWorkflowTemplate"].retry,
+                default_timeout=self._method_configs[
+                    "InstantiateWorkflowTemplate"
+                ].timeout,
                 client_info=self._client_info,
             )
 
@@ -337,14 +350,18 @@ class WorkflowTemplateServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('name', name)]
+            routing_header = [("name", name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        operation = self._inner_api_calls['instantiate_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        operation = self._inner_api_calls["instantiate_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
@@ -353,14 +370,15 @@ class WorkflowTemplateServiceClient(object):
         )
 
     def instantiate_inline_workflow_template(
-            self,
-            parent,
-            template,
-            instance_id=None,
-            request_id=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        template,
+        instance_id=None,
+        request_id=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Instantiates a template and begins execution.
 
@@ -449,11 +467,17 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'instantiate_inline_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['instantiate_inline_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "instantiate_inline_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "instantiate_inline_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.instantiate_inline_workflow_template,
-                default_retry=self._method_configs['InstantiateInlineWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['InstantiateInlineWorkflowTemplate'].timeout,
+                default_retry=self._method_configs[
+                    "InstantiateInlineWorkflowTemplate"
+                ].retry,
+                default_timeout=self._method_configs[
+                    "InstantiateInlineWorkflowTemplate"
+                ].timeout,
                 client_info=self._client_info,
             )
 
@@ -467,14 +491,18 @@ class WorkflowTemplateServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        operation = self._inner_api_calls['instantiate_inline_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        operation = self._inner_api_calls["instantiate_inline_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
@@ -483,12 +511,13 @@ class WorkflowTemplateServiceClient(object):
         )
 
     def create_workflow_template(
-            self,
-            parent,
-            template,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        template,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Creates new workflow template.
 
@@ -539,38 +568,44 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'create_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['create_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "create_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "create_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.create_workflow_template,
-                default_retry=self._method_configs['CreateWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['CreateWorkflowTemplate'].timeout,
+                default_retry=self._method_configs["CreateWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["CreateWorkflowTemplate"].timeout,
                 client_info=self._client_info,
             )
 
         request = workflow_templates_pb2.CreateWorkflowTemplateRequest(
-            parent=parent,
-            template=template,
+            parent=parent, template=template,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['create_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["create_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def get_workflow_template(
-            self,
-            name,
-            version=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        name,
+        version=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Retrieves the latest workflow template.
 
@@ -622,37 +657,43 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'get_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['get_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "get_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "get_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.get_workflow_template,
-                default_retry=self._method_configs['GetWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['GetWorkflowTemplate'].timeout,
+                default_retry=self._method_configs["GetWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["GetWorkflowTemplate"].timeout,
                 client_info=self._client_info,
             )
 
         request = workflow_templates_pb2.GetWorkflowTemplateRequest(
-            name=name,
-            version=version,
+            name=name, version=version,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('name', name)]
+            routing_header = [("name", name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['get_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["get_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def update_workflow_template(
-            self,
-            template,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        template,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Updates (replaces) workflow template. The updated template
         must contain version that matches the current server version.
@@ -694,11 +735,13 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'update_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['update_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "update_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "update_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.update_workflow_template,
-                default_retry=self._method_configs['UpdateWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['UpdateWorkflowTemplate'].timeout,
+                default_retry=self._method_configs["UpdateWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["UpdateWorkflowTemplate"].timeout,
                 client_info=self._client_info,
             )
 
@@ -709,22 +752,27 @@ class WorkflowTemplateServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('template.name', template.name)]
+            routing_header = [("template.name", template.name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['update_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["update_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def list_workflow_templates(
-            self,
-            parent,
-            page_size=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        page_size=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Lists workflows that match the specified filter in the request.
 
@@ -788,46 +836,55 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'list_workflow_templates' not in self._inner_api_calls:
-            self._inner_api_calls['list_workflow_templates'] = google.api_core.gapic_v1.method.wrap_method(
+        if "list_workflow_templates" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "list_workflow_templates"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.list_workflow_templates,
-                default_retry=self._method_configs['ListWorkflowTemplates'].retry,
-                default_timeout=self._method_configs['ListWorkflowTemplates'].timeout,
+                default_retry=self._method_configs["ListWorkflowTemplates"].retry,
+                default_timeout=self._method_configs["ListWorkflowTemplates"].timeout,
                 client_info=self._client_info,
             )
 
         request = workflow_templates_pb2.ListWorkflowTemplatesRequest(
-            parent=parent,
-            page_size=page_size,
+            parent=parent, page_size=page_size,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
-            method=functools.partial(self._inner_api_calls['list_workflow_templates'], retry=retry, timeout=timeout, metadata=metadata),
+            method=functools.partial(
+                self._inner_api_calls["list_workflow_templates"],
+                retry=retry,
+                timeout=timeout,
+                metadata=metadata,
+            ),
             request=request,
-            items_field='templates',
-            request_token_field='page_token',
-            response_token_field='next_page_token',
+            items_field="templates",
+            request_token_field="page_token",
+            response_token_field="next_page_token",
         )
         return iterator
 
     def delete_workflow_template(
-            self,
-            name,
-            version=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        name,
+        version=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Deletes a workflow template. It does not cancel in-progress workflows.
 
@@ -872,27 +929,32 @@ class WorkflowTemplateServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'delete_workflow_template' not in self._inner_api_calls:
-            self._inner_api_calls['delete_workflow_template'] = google.api_core.gapic_v1.method.wrap_method(
+        if "delete_workflow_template" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "delete_workflow_template"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.delete_workflow_template,
-                default_retry=self._method_configs['DeleteWorkflowTemplate'].retry,
-                default_timeout=self._method_configs['DeleteWorkflowTemplate'].timeout,
+                default_retry=self._method_configs["DeleteWorkflowTemplate"].retry,
+                default_timeout=self._method_configs["DeleteWorkflowTemplate"].timeout,
                 client_info=self._client_info,
             )
 
         request = workflow_templates_pb2.DeleteWorkflowTemplateRequest(
-            name=name,
-            version=version,
+            name=name, version=version,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('name', name)]
+            routing_header = [("name", name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        self._inner_api_calls['delete_workflow_template'](request, retry=retry, timeout=timeout, metadata=metadata)
+        self._inner_api_calls["delete_workflow_template"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )

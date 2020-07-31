@@ -26,10 +26,10 @@ from google.cloud.dataproc_v1 import types
 
 
 __all__ = (
-    'enums',
-    'types',
-    'AutoscalingPolicyServiceClient',
-    'ClusterControllerClient',
-    'JobControllerClient',
-    'WorkflowTemplateServiceClient',
+    "enums",
+    "types",
+    "AutoscalingPolicyServiceClient",
+    "ClusterControllerClient",
+    "JobControllerClient",
+    "WorkflowTemplateServiceClient",
 )

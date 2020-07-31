@@ -38,6 +38,7 @@ class Component(enum.IntEnum):
       ZEPPELIN (int): The Zeppelin notebook.
       ZOOKEEPER (int): The Zookeeper service.
     """
+
     COMPONENT_UNSPECIFIED = 0
     ANACONDA = 5
     DOCKER = 13
@@ -64,6 +65,7 @@ class ClusterOperationStatus(object):
           RUNNING (int): The operation is running.
           DONE (int): The operation is done; either cancelled or completed.
         """
+
         UNKNOWN = 0
         PENDING = 1
         RUNNING = 2
@@ -86,6 +88,7 @@ class ClusterStatus(object):
           STOPPED (int): The cluster is currently stopped. It is not ready for use.
           STARTING (int): The cluster is being started. It is not ready for use.
         """
+
         UNKNOWN = 0
         CREATING = 1
         RUNNING = 2
@@ -95,7 +98,6 @@ class ClusterStatus(object):
         STOPPING = 6
         STOPPED = 7
         STARTING = 8
-
 
     class Substate(enum.IntEnum):
         """
@@ -113,6 +115,7 @@ class ClusterStatus(object):
 
           Applies to RUNNING state.
         """
+
         UNSPECIFIED = 0
         UNHEALTHY = 1
         STALE_STATUS = 2
@@ -140,6 +143,7 @@ class JobStatus(object):
 
           Applies to restartable jobs only.
         """
+
         STATE_UNSPECIFIED = 0
         PENDING = 1
         SETUP_DONE = 8
@@ -150,7 +154,6 @@ class JobStatus(object):
         DONE = 5
         ERROR = 6
         ATTEMPT_FAILURE = 9
-
 
     class Substate(enum.IntEnum):
         """
@@ -172,6 +175,7 @@ class JobStatus(object):
 
           Applies to RUNNING state.
         """
+
         UNSPECIFIED = 0
         SUBMITTED = 1
         QUEUED = 2
@@ -189,6 +193,7 @@ class ListJobsRequest(object):
           CANCEL_PENDING.
           NON_ACTIVE (int): Only match jobs in terminal states: CANCELLED, DONE, or ERROR.
         """
+
         ALL = 0
         ACTIVE = 1
         NON_ACTIVE = 2
@@ -212,6 +217,7 @@ class LoggingConfig(object):
           FATAL (int): Use FATAL level for log4j.
           OFF (int): Turn off log4j.
         """
+
         LEVEL_UNSPECIFIED = 0
         ALL = 1
         TRACE = 2
@@ -235,6 +241,7 @@ class ReservationAffinity(object):
           SPECIFIC_RESERVATION (int): Must consume from a specific reservation. Must specify key value fields
           for specifying the reservations.
         """
+
         TYPE_UNSPECIFIED = 0
         NO_RESERVATION = 1
         ANY_RESERVATION = 2
@@ -252,6 +259,7 @@ class WorkflowMetadata(object):
           RUNNING (int): The operation is running.
           DONE (int): The operation is done; either cancelled or completed.
         """
+
         UNKNOWN = 0
         PENDING = 1
         RUNNING = 2
@@ -272,6 +280,7 @@ class WorkflowNode(object):
           FAILED (int): The node failed. A node can be marked FAILED because
           its ancestor or peer failed.
         """
+
         NODE_STATUS_UNSPECIFIED = 0
         BLOCKED = 1
         RUNNABLE = 2
@@ -297,6 +306,7 @@ class YarnApplication(object):
           FAILED (int): Status is FAILED.
           KILLED (int): Status is KILLED.
         """
+
         STATE_UNSPECIFIED = 0
         NEW = 1
         NEW_SAVING = 2
@@ -306,4 +316,3 @@ class YarnApplication(object):
         FINISHED = 6
         FAILED = 7
         KILLED = 8
-    
