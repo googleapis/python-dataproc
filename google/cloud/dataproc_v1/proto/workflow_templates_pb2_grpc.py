@@ -2,12 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.cloud.dataproc_v1.proto import (
-    workflow_templates_pb2 as google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2,
-)
-from google.longrunning import (
-    operations_pb2 as google_dot_longrunning_dot_operations__pb2,
-)
+from google.cloud.dataproc_v1.proto import workflow_templates_pb2 as google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2
+from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
@@ -23,40 +19,40 @@ class WorkflowTemplateServiceStub(object):
             channel: A grpc.Channel.
         """
         self.CreateWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/CreateWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.CreateWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/CreateWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.CreateWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
+                )
         self.GetWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/GetWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.GetWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/GetWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.GetWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
+                )
         self.InstantiateWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                )
         self.InstantiateInlineWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateInlineWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateInlineWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateInlineWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateInlineWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                )
         self.UpdateWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/UpdateWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.UpdateWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/UpdateWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.UpdateWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
+                )
         self.ListWorkflowTemplates = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/ListWorkflowTemplates",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesRequest.SerializeToString,
-            response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesResponse.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/ListWorkflowTemplates',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesRequest.SerializeToString,
+                response_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesResponse.FromString,
+                )
         self.DeleteWorkflowTemplate = channel.unary_unary(
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/DeleteWorkflowTemplate",
-            request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.DeleteWorkflowTemplateRequest.SerializeToString,
-            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-        )
+                '/google.cloud.dataproc.v1.WorkflowTemplateService/DeleteWorkflowTemplate',
+                request_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.DeleteWorkflowTemplateRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
 
 
 class WorkflowTemplateServiceServicer(object):
@@ -68,8 +64,8 @@ class WorkflowTemplateServiceServicer(object):
         """Creates new workflow template.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def GetWorkflowTemplate(self, request, context):
         """Retrieves the latest workflow template.
@@ -78,8 +74,8 @@ class WorkflowTemplateServiceServicer(object):
         version parameter.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def InstantiateWorkflowTemplate(self, request, context):
         """Instantiates a template and begins execution.
@@ -104,8 +100,8 @@ class WorkflowTemplateServiceServicer(object):
         [Empty][google.protobuf.Empty].
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def InstantiateInlineWorkflowTemplate(self, request, context):
         """Instantiates a template and begins execution.
@@ -134,267 +130,189 @@ class WorkflowTemplateServiceServicer(object):
         [Empty][google.protobuf.Empty].
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def UpdateWorkflowTemplate(self, request, context):
         """Updates (replaces) workflow template. The updated template
         must contain version that matches the current server version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def ListWorkflowTemplates(self, request, context):
         """Lists workflows that match the specified filter in the request.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def DeleteWorkflowTemplate(self, request, context):
         """Deletes a workflow template. It does not cancel in-progress workflows.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details("Method not implemented!")
-        raise NotImplementedError("Method not implemented!")
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_WorkflowTemplateServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        "CreateWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.CreateWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.CreateWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
-        ),
-        "GetWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.GetWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.GetWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
-        ),
-        "InstantiateWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.InstantiateWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
-        ),
-        "InstantiateInlineWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.InstantiateInlineWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateInlineWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
-        ),
-        "UpdateWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.UpdateWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.UpdateWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
-        ),
-        "ListWorkflowTemplates": grpc.unary_unary_rpc_method_handler(
-            servicer.ListWorkflowTemplates,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesRequest.FromString,
-            response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesResponse.SerializeToString,
-        ),
-        "DeleteWorkflowTemplate": grpc.unary_unary_rpc_method_handler(
-            servicer.DeleteWorkflowTemplate,
-            request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.DeleteWorkflowTemplateRequest.FromString,
-            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-        ),
+            'CreateWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.CreateWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
+            ),
+            'GetWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.GetWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
+            ),
+            'InstantiateWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.InstantiateWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'InstantiateInlineWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.InstantiateInlineWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateInlineWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'UpdateWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.UpdateWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.SerializeToString,
+            ),
+            'ListWorkflowTemplates': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWorkflowTemplates,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesRequest.FromString,
+                    response_serializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesResponse.SerializeToString,
+            ),
+            'DeleteWorkflowTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteWorkflowTemplate,
+                    request_deserializer=google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.DeleteWorkflowTemplateRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        "google.cloud.dataproc.v1.WorkflowTemplateService", rpc_method_handlers
-    )
+            'google.cloud.dataproc.v1.WorkflowTemplateService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
-# This class is part of an EXPERIMENTAL API.
+ # This class is part of an EXPERIMENTAL API.
 class WorkflowTemplateService(object):
     """The API interface for managing Workflow Templates in the
     Dataproc API.
     """
 
     @staticmethod
-    def CreateWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def CreateWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/CreateWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/CreateWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.CreateWorkflowTemplateRequest.SerializeToString,
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def GetWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/GetWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/GetWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.GetWorkflowTemplateRequest.SerializeToString,
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def InstantiateWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def InstantiateWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateWorkflowTemplateRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def InstantiateInlineWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def InstantiateInlineWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateInlineWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/InstantiateInlineWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.InstantiateInlineWorkflowTemplateRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def UpdateWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def UpdateWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/UpdateWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/UpdateWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.UpdateWorkflowTemplateRequest.SerializeToString,
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.WorkflowTemplate.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ListWorkflowTemplates(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def ListWorkflowTemplates(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/ListWorkflowTemplates",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/ListWorkflowTemplates',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesRequest.SerializeToString,
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.ListWorkflowTemplatesResponse.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteWorkflowTemplate(
-        request,
-        target,
-        options=(),
-        channel_credentials=None,
-        call_credentials=None,
-        compression=None,
-        wait_for_ready=None,
-        timeout=None,
-        metadata=None,
-    ):
-        return grpc.experimental.unary_unary(
-            request,
+    def DeleteWorkflowTemplate(request,
             target,
-            "/google.cloud.dataproc.v1.WorkflowTemplateService/DeleteWorkflowTemplate",
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/google.cloud.dataproc.v1.WorkflowTemplateService/DeleteWorkflowTemplate',
             google_dot_cloud_dot_dataproc__v1_dot_proto_dot_workflow__templates__pb2.DeleteWorkflowTemplateRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-        )
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
