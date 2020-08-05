@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-dataproc.git",
-        "sha": "380e122da3e7ef329d39f658f6dbfa775c612efc"
+        "sha": "69424f2d7735fece95620520fc83ecf88bde7fbb"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c8fc4b79cc54749520e6fc7726deee7a22d1f988",
-        "internalRef": "323858574"
+        "sha": "6fd07563a2f1a6785066f5955ad9659a315e4492",
+        "internalRef": "324941614"
       }
     },
     {
