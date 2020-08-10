@@ -150,3 +150,19 @@ from google.cloud import dataproc
 status = dataproc.ClusterStatus.State.CREATING
 cluster = dataproc.Cluster(cluster_name="name")
 ```
+
+## Path Helper Methods
+The following path helper methods have been removed. Please construct the paths manually.
+
+```py
+project = 'my-project'
+location = 'project-location'
+region = 'project-region'
+workflow_template = 'template'
+autoscaling_policy = 'policy'
+
+location_path = f'projects/{project}/locations/{location}'
+region_path = f'projects/{project}/regions/{region}'
+workflow_template_path = f'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
+autoscaling_policy_path = f'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
+```

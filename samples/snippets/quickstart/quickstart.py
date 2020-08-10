@@ -77,9 +77,9 @@ def quickstart(project_id, region, cluster_name, job_file_path):
 
     # Termimal states for a job.
     terminal_states = {
-        dataproc.JobStatus.ERROR,
-        dataproc.JobStatus.CANCELLED,
-        dataproc.JobStatus.DONE,
+        dataproc.JobStatus.State.ERROR,
+        dataproc.JobStatus.State.CANCELLED,
+        dataproc.JobStatus.State.DONE,
     }
 
     # Create a timeout such that the job gets cancelled if not in a
