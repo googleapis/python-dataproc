@@ -123,7 +123,7 @@ def quickstart(project_id, region, cluster_name, job_file_path):
 
     print(
         "Job {} finished with state {}:\n{}".format(
-            job_id, job_response.status.State.name, output
+            job_id, job_response.status.state.name, output
         )
     )
 
