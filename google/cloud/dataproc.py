@@ -14,18 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import time
 
-from google.cloud import dataproc_v1beta2
-from google.cloud.dataproc_v1beta2.proto import clusters_pb2
+from __future__ import absolute_import
+
+from google.cloud.dataproc_v1 import AutoscalingPolicyServiceClient
+from google.cloud.dataproc_v1 import ClusterControllerClient
+from google.cloud.dataproc_v1 import JobControllerClient
+from google.cloud.dataproc_v1 import WorkflowTemplateServiceClient
+from google.cloud.dataproc_v1 import enums
+from google.cloud.dataproc_v1 import types
 
 
-class TestSystemClusterController(object):
-    def test_list_clusters(self):
-        project_id = os.environ["PROJECT_ID"]
-
-        client = dataproc_v1beta2.ClusterControllerClient()
-        project_id_2 = project_id
-        region = "global"
-        response = client.list_clusters(project_id_2, region)
+__all__ = (
+    "enums",
+    "types",
+    "AutoscalingPolicyServiceClient",
+    "ClusterControllerClient",
+    "JobControllerClient",
+    "WorkflowTemplateServiceClient",
+)
