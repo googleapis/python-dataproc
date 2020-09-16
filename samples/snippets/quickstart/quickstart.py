@@ -28,7 +28,6 @@ Usage:
 
 import argparse
 import re
-import time
 
 from google.cloud import dataproc_v1 as dataproc
 from google.cloud import storage
