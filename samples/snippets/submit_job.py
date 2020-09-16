@@ -21,10 +21,10 @@
 #    python submit_job.py --project_id <PROJECT_ID> --region <REGION> \
 #        --cluster_name <CLUSTER_NAME>
 
-import sys # noqa
+import sys
 
 # [START dataproc_submit_job]
-import re
+import re # noqa
 
 from google.cloud import dataproc_v1 as dataproc
 from google.cloud import storage
