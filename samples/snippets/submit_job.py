@@ -14,19 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START dataproc_submit_job]
-"""
-This sample walks a user through submitting a Spark job using the Dataproc
-client library.
+# This sample walks a user through submitting a Spark job using the Dataproc
+# client library.
 
-Usage:
-    python submit_job.py --project_id <PROJECT_ID> --region <REGION> \
-        --cluster_name <CLUSTER_NAME>
-"""
+# Usage:
+#    python submit_job.py --project_id <PROJECT_ID> --region <REGION> \
+#        --cluster_name <CLUSTER_NAME>
+
+import sys
 
 # [START dataproc_submit_job]
 import re
-import sys
 
 from google.cloud import dataproc_v1 as dataproc
 from google.cloud import storage
@@ -68,7 +66,7 @@ def submit_job(project_id, region, cluster_name):
     )
 
     print(f"Job finished successfully: {output}")
-
+# [END dataproc_submit_job]
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
@@ -78,4 +76,3 @@ if __name__ == "__main__":
     region = sys.argv[2]
     cluster_name = sys.argv[3]
     submit_job(project_id, region, cluster_name)
-# [END dataproc_submit_job]
