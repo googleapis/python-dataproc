@@ -21,7 +21,7 @@
 #    python submit_job.py --project_id <PROJECT_ID> --region <REGION> \
 #        --cluster_name <CLUSTER_NAME>
 
-import sys
+import sys # noqa
 
 # [START dataproc_submit_job]
 import re
@@ -67,6 +67,7 @@ def submit_job(project_id, region, cluster_name):
 
     print(f"Job finished successfully: {output}")
 # [END dataproc_submit_job]
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
