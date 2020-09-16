@@ -24,6 +24,7 @@ Usage:
         --cluster_name <CLUSTER_NAME>
 """
 
+# [START dataproc_submit_job]
 import re
 import sys
 
@@ -37,14 +38,16 @@ def submit_job(project_id, region, cluster_name):
         'api_endpoint': '{}-dataproc.googleapis.com:443'.format(region)
     })
 
-    # Create the job config. 'main_jar_file_uri' can also be a GCS URL.
+    # Create the job config. 'main_jar_file_uri' can also be a
+    # Google Cloud Storage URL.
     job = {
         'placement': {
             'cluster_name': cluster_name
         },
         'spark_job': {
             'main_class': 'org.apache.spark.examples.SparkPi',
-            'main_jar_file_uri': 'file:///usr/lib/spark/examples/jars/spark-examples.jar'
+            'jar_file_uris': 'file:///usr/lib/spark/examples/jars/spark-examples.jar',
+            'args': ['1000']
         }
     }
 
@@ -53,8 +56,8 @@ def submit_job(project_id, region, cluster_name):
     )
     response = operation.result()
 
-    # Cloud Dataproc job output gets saved to a GCS bucket allocated to it.
-    # Use a regex to obtain the bucket and blob info.
+    # Dataproc job output gets saved to the Google Cloud Storage bucket
+    # allocated to the job. Use a regex to obtain the bucket and blob info.
     matches = re.match("gs://(.*?)/(.*)", response.driver_output_resource_uri)
 
     output = (

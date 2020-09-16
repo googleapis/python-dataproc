@@ -50,10 +50,10 @@ def setup_teardown():
     operation = cluster_client.create_cluster(
         request={"project_id": PROJECT_ID, "region": REGION, "cluster": CLUSTER}
     )
-    result = operation.result()
+    operation.result()
 
     yield
-    
+
     cluster_client.delete_cluster(request={
         "project_id": PROJECT_ID, "region": REGION, "cluster_name": CLUSTER_NAME
     })
