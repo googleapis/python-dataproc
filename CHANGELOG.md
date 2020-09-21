@@ -4,12 +4,12 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
-## [2.1.0](https://www.github.com/googleapis/python-dataproc/compare/v2.0.1...v2.1.0) (2020-09-16)
+## [2.0.2](https://www.github.com/googleapis/python-dataproc/compare/v2.0.1...v2.1.0) (2020-09-16)
 
 
-### Features
+### Documentation
 
-* adding submit_job samples  ([#88](https://www.github.com/googleapis/python-dataproc/issues/88)) ([e7379b5](https://www.github.com/googleapis/python-dataproc/commit/e7379b5ab45a0c1e5b6944330c3e8ae4faa115e8))
+* add `submit_job` samples  ([#88](https://www.github.com/googleapis/python-dataproc/issues/88)) ([e7379b5](https://www.github.com/googleapis/python-dataproc/commit/e7379b5ab45a0c1e5b6944330c3e8ae4faa115e8))
 
 ### [2.0.1](https://www.github.com/googleapis/python-dataproc/compare/v2.0.0...v2.0.1) (2020-09-14)
 
