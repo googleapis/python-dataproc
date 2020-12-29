@@ -116,7 +116,6 @@ __all__ = (
     "CancelJobRequest",
     "Cluster",
     "ClusterConfig",
-    "ClusterControllerClient",
     "ClusterMetrics",
     "ClusterOperation",
     "ClusterOperationMetadata",
@@ -149,6 +148,7 @@ __all__ = (
     "InstantiateInlineWorkflowTemplateRequest",
     "InstantiateWorkflowTemplateRequest",
     "Job",
+    "JobControllerClient",
     "JobMetadata",
     "JobPlacement",
     "JobReference",
@@ -195,5 +195,5 @@ __all__ = (
     "WorkflowTemplatePlacement",
     "WorkflowTemplateServiceClient",
     "YarnApplication",
-    "JobControllerClient",
+    "ClusterControllerClient",
 )
