@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "69697504d9eba1d064820c3085b4750767be6d08",
-        "internalRef": "348952930"
+        "sha": "520682435235d9c503983a360a2090025aa47cd1",
+        "internalRef": "350246057"
       }
     },
     {
@@ -51,6 +51,7 @@
     }
   ],
   "generatedFiles": [
+    ".coveragerc",
     ".flake8",
     ".github/CONTRIBUTING.md",
     ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -103,10 +104,18 @@
     "docs/_static/custom.css",
     "docs/_templates/layout.html",
     "docs/conf.py",
+    "docs/dataproc_v1/autoscaling_policy_service.rst",
+    "docs/dataproc_v1/cluster_controller.rst",
+    "docs/dataproc_v1/job_controller.rst",
     "docs/dataproc_v1/services.rst",
     "docs/dataproc_v1/types.rst",
+    "docs/dataproc_v1/workflow_template_service.rst",
+    "docs/dataproc_v1beta2/autoscaling_policy_service.rst",
+    "docs/dataproc_v1beta2/cluster_controller.rst",
+    "docs/dataproc_v1beta2/job_controller.rst",
     "docs/dataproc_v1beta2/services.rst",
     "docs/dataproc_v1beta2/types.rst",
+    "docs/dataproc_v1beta2/workflow_template_service.rst",
     "docs/multiprocessing.rst",
     "google/cloud/dataproc/__init__.py",
     "google/cloud/dataproc/py.typed",

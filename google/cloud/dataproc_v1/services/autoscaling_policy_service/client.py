@@ -115,6 +115,22 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            AutoscalingPolicyServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -126,7 +142,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            AutoscalingPolicyServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -236,10 +252,10 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.AutoscalingPolicyServiceTransport]): The
+            transport (Union[str, AutoscalingPolicyServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -350,10 +366,10 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         r"""Creates new autoscaling policy.
 
         Args:
-            request (:class:`~.autoscaling_policies.CreateAutoscalingPolicyRequest`):
+            request (google.cloud.dataproc_v1.types.CreateAutoscalingPolicyRequest):
                 The request object. A request to create an autoscaling
                 policy.
-            parent (:class:`str`):
+            parent (str):
                 Required. The "resource name" of the region or location,
                 as described in
                 https://cloud.google.com/apis/design/resource_names.
@@ -367,12 +383,14 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                    the resource name of the location has the following
                    format:
                    ``projects/{project_id}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            policy (:class:`~.autoscaling_policies.AutoscalingPolicy`):
+            policy (google.cloud.dataproc_v1.types.AutoscalingPolicy):
                 Required. The autoscaling policy to
                 create.
+
                 This corresponds to the ``policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -384,7 +402,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                 sent along with the request as metadata.
 
         Returns:
-            ~.autoscaling_policies.AutoscalingPolicy:
+            google.cloud.dataproc_v1.types.AutoscalingPolicy:
                 Describes an autoscaling policy for
                 Dataproc cluster autoscaler.
 
@@ -447,12 +465,13 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         replacements.
 
         Args:
-            request (:class:`~.autoscaling_policies.UpdateAutoscalingPolicyRequest`):
+            request (google.cloud.dataproc_v1.types.UpdateAutoscalingPolicyRequest):
                 The request object. A request to update an autoscaling
                 policy.
-            policy (:class:`~.autoscaling_policies.AutoscalingPolicy`):
+            policy (google.cloud.dataproc_v1.types.AutoscalingPolicy):
                 Required. The updated autoscaling
                 policy.
+
                 This corresponds to the ``policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -464,7 +483,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                 sent along with the request as metadata.
 
         Returns:
-            ~.autoscaling_policies.AutoscalingPolicy:
+            google.cloud.dataproc_v1.types.AutoscalingPolicy:
                 Describes an autoscaling policy for
                 Dataproc cluster autoscaler.
 
@@ -524,10 +543,10 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         r"""Retrieves autoscaling policy.
 
         Args:
-            request (:class:`~.autoscaling_policies.GetAutoscalingPolicyRequest`):
+            request (google.cloud.dataproc_v1.types.GetAutoscalingPolicyRequest):
                 The request object. A request to fetch an autoscaling
                 policy.
-            name (:class:`str`):
+            name (str):
                 Required. The "resource name" of the autoscaling policy,
                 as described in
                 https://cloud.google.com/apis/design/resource_names.
@@ -540,6 +559,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                    the resource name of the policy has the following
                    format:
                    ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -551,7 +571,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                 sent along with the request as metadata.
 
         Returns:
-            ~.autoscaling_policies.AutoscalingPolicy:
+            google.cloud.dataproc_v1.types.AutoscalingPolicy:
                 Describes an autoscaling policy for
                 Dataproc cluster autoscaler.
 
@@ -607,10 +627,10 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         r"""Lists autoscaling policies in the project.
 
         Args:
-            request (:class:`~.autoscaling_policies.ListAutoscalingPoliciesRequest`):
+            request (google.cloud.dataproc_v1.types.ListAutoscalingPoliciesRequest):
                 The request object. A request to list autoscaling
                 policies in a project.
-            parent (:class:`str`):
+            parent (str):
                 Required. The "resource name" of the region or location,
                 as described in
                 https://cloud.google.com/apis/design/resource_names.
@@ -623,6 +643,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                    the resource name of the location has the following
                    format:
                    ``projects/{project_id}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -634,7 +655,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListAutoscalingPoliciesPager:
+            google.cloud.dataproc_v1.services.autoscaling_policy_service.pagers.ListAutoscalingPoliciesPager:
                 A response to a request to list
                 autoscaling policies in a project.
                 Iterating over this object will yield
@@ -703,12 +724,12 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         more clusters.
 
         Args:
-            request (:class:`~.autoscaling_policies.DeleteAutoscalingPolicyRequest`):
+            request (google.cloud.dataproc_v1.types.DeleteAutoscalingPolicyRequest):
                 The request object. A request to delete an autoscaling
                 policy.
                 Autoscaling policies in use by one or more clusters will
                 not be deleted.
-            name (:class:`str`):
+            name (str):
                 Required. The "resource name" of the autoscaling policy,
                 as described in
                 https://cloud.google.com/apis/design/resource_names.
@@ -723,6 +744,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
                    the resource name of the policy has the following
                    format:
                    ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.

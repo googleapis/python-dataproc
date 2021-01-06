@@ -83,6 +83,7 @@ class ClusterControllerAsyncClient:
         ClusterControllerClient.parse_common_location_path
     )
 
+    from_service_account_info = ClusterControllerClient.from_service_account_info
     from_service_account_file = ClusterControllerClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -164,22 +165,24 @@ class ClusterControllerAsyncClient:
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata>`__.
 
         Args:
-            request (:class:`~.clusters.CreateClusterRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.CreateClusterRequest`):
                 The request object. A request to create a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project that the cluster
                 belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            cluster (:class:`~.clusters.Cluster`):
+            cluster (:class:`google.cloud.dataproc_v1beta2.types.Cluster`):
                 Required. The cluster to create.
                 This corresponds to the ``cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -192,13 +195,11 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.clusters.Cluster``: Describes the identifying
-                information, config, and status of a cluster of Compute
-                Engine instances.
+                The result type for the operation will be :class:`google.cloud.dataproc_v1beta2.types.Cluster` Describes the identifying information, config, and status of
+                   a cluster of Compute Engine instances.
 
         """
         # Create or coerce a protobuf request object.
@@ -270,17 +271,19 @@ class ClusterControllerAsyncClient:
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata>`__.
 
         Args:
-            request (:class:`~.clusters.UpdateClusterRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.UpdateClusterRequest`):
                 The request object. A request to update a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project the cluster belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -289,12 +292,12 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``cluster_name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            cluster (:class:`~.clusters.Cluster`):
+            cluster (:class:`google.cloud.dataproc_v1beta2.types.Cluster`):
                 Required. The changes to the cluster.
                 This corresponds to the ``cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (:class:`google.protobuf.field_mask_pb2.FieldMask`):
                 Required. Specifies the path, relative to ``Cluster``,
                 of the field to update. For example, to change the
                 number of workers in a cluster to 5, the ``update_mask``
@@ -365,6 +368,7 @@ class ClusterControllerAsyncClient:
                     autoscaling policies</td>
                     </tr>
                     </table>
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -376,13 +380,11 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.clusters.Cluster``: Describes the identifying
-                information, config, and status of a cluster of Compute
-                Engine instances.
+                The result type for the operation will be :class:`google.cloud.dataproc_v1beta2.types.Cluster` Describes the identifying information, config, and status of
+                   a cluster of Compute Engine instances.
 
         """
         # Create or coerce a protobuf request object.
@@ -458,18 +460,20 @@ class ClusterControllerAsyncClient:
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata>`__.
 
         Args:
-            request (:class:`~.clusters.DeleteClusterRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.DeleteClusterRequest`):
                 The request object. A request to delete a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project that the cluster
                 belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -486,24 +490,22 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -571,19 +573,21 @@ class ClusterControllerAsyncClient:
         project.
 
         Args:
-            request (:class:`~.clusters.GetClusterRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.GetClusterRequest`):
                 The request object. Request to get the resource
                 representation for a cluster in a project.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project that the cluster
                 belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -600,7 +604,7 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.clusters.Cluster:
+            google.cloud.dataproc_v1beta2.types.Cluster:
                 Describes the identifying
                 information, config, and status of a
                 cluster of Compute Engine instances.
@@ -667,19 +671,21 @@ class ClusterControllerAsyncClient:
         alphabetically.
 
         Args:
-            request (:class:`~.clusters.ListClustersRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.ListClustersRequest`):
                 The request object. A request to list the clusters in a
                 project.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project that the cluster
                 belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -707,6 +713,7 @@ class ClusterControllerAsyncClient:
 
                 status.state = ACTIVE AND clusterName = mycluster AND
                 labels.env = staging AND labels.starred = \*
+
                 This corresponds to the ``filter`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -718,7 +725,7 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListClustersAsyncPager:
+            google.cloud.dataproc_v1beta2.services.cluster_controller.pagers.ListClustersAsyncPager:
                 The list of all clusters in a
                 project.
                 Iterating over this object will yield
@@ -798,19 +805,21 @@ class ClusterControllerAsyncClient:
         contains [Empty][google.protobuf.Empty].
 
         Args:
-            request (:class:`~.clusters.DiagnoseClusterRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.DiagnoseClusterRequest`):
                 The request object. A request to collect cluster
                 diagnostic information.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
                 Platform project that the cluster
                 belongs to.
+
                 This corresponds to the ``project_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             region (:class:`str`):
                 Required. The Dataproc region in
                 which to handle the request.
+
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -827,24 +836,22 @@ class ClusterControllerAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.

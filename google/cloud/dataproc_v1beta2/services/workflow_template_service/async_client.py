@@ -93,6 +93,7 @@ class WorkflowTemplateServiceAsyncClient:
         WorkflowTemplateServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = WorkflowTemplateServiceClient.from_service_account_info
     from_service_account_file = WorkflowTemplateServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -171,7 +172,7 @@ class WorkflowTemplateServiceAsyncClient:
         r"""Creates new workflow template.
 
         Args:
-            request (:class:`~.workflow_templates.CreateWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.CreateWorkflowTemplateRequest`):
                 The request object. A request to create a workflow
                 template.
             parent (:class:`str`):
@@ -187,12 +188,14 @@ class WorkflowTemplateServiceAsyncClient:
                    the resource name of the location has the following
                    format:
                    ``projects/{project_id}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            template (:class:`~.workflow_templates.WorkflowTemplate`):
+            template (:class:`google.cloud.dataproc_v1beta2.types.WorkflowTemplate`):
                 Required. The Dataproc workflow
                 template to create.
+
                 This corresponds to the ``template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -204,7 +207,7 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.workflow_templates.WorkflowTemplate:
+            google.cloud.dataproc_v1beta2.types.WorkflowTemplate:
                 A Dataproc workflow template
                 resource.
 
@@ -269,7 +272,7 @@ class WorkflowTemplateServiceAsyncClient:
         specifying optional version parameter.
 
         Args:
-            request (:class:`~.workflow_templates.GetWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.GetWorkflowTemplateRequest`):
                 The request object. A request to fetch a workflow
                 template.
             name (:class:`str`):
@@ -286,6 +289,7 @@ class WorkflowTemplateServiceAsyncClient:
                    resource name of the template has the following
                    format:
                    ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -297,7 +301,7 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.workflow_templates.WorkflowTemplate:
+            google.cloud.dataproc_v1beta2.types.WorkflowTemplate:
                 A Dataproc workflow template
                 resource.
 
@@ -385,7 +389,7 @@ class WorkflowTemplateServiceAsyncClient:
         be [Empty][google.protobuf.Empty].
 
         Args:
-            request (:class:`~.workflow_templates.InstantiateWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.InstantiateWorkflowTemplateRequest`):
                 The request object. A request to instantiate a workflow
                 template.
             name (:class:`str`):
@@ -404,14 +408,16 @@ class WorkflowTemplateServiceAsyncClient:
                    the resource name of the template has the following
                    format:
                    ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            parameters (:class:`Sequence[~.workflow_templates.InstantiateWorkflowTemplateRequest.ParametersEntry]`):
+            parameters (:class:`Sequence[google.cloud.dataproc_v1beta2.types.InstantiateWorkflowTemplateRequest.ParametersEntry]`):
                 Optional. Map from parameter names to
                 values that should be used for those
                 parameters. Values may not exceed 100
                 characters.
+
                 This corresponds to the ``parameters`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -423,24 +429,22 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -536,7 +540,7 @@ class WorkflowTemplateServiceAsyncClient:
         be [Empty][google.protobuf.Empty].
 
         Args:
-            request (:class:`~.workflow_templates.InstantiateInlineWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.InstantiateInlineWorkflowTemplateRequest`):
                 The request object. A request to instantiate an inline
                 workflow template.
             parent (:class:`str`):
@@ -554,12 +558,14 @@ class WorkflowTemplateServiceAsyncClient:
                    the resource name of the location has the following
                    format:
                    ``projects/{project_id}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            template (:class:`~.workflow_templates.WorkflowTemplate`):
+            template (:class:`google.cloud.dataproc_v1beta2.types.WorkflowTemplate`):
                 Required. The workflow template to
                 instantiate.
+
                 This corresponds to the ``template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -571,24 +577,22 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.empty.Empty``: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -659,14 +663,15 @@ class WorkflowTemplateServiceAsyncClient:
         server version.
 
         Args:
-            request (:class:`~.workflow_templates.UpdateWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.UpdateWorkflowTemplateRequest`):
                 The request object. A request to update a workflow
                 template.
-            template (:class:`~.workflow_templates.WorkflowTemplate`):
+            template (:class:`google.cloud.dataproc_v1beta2.types.WorkflowTemplate`):
                 Required. The updated workflow template.
 
                 The ``template.version`` field must match the current
                 version.
+
                 This corresponds to the ``template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -678,7 +683,7 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.workflow_templates.WorkflowTemplate:
+            google.cloud.dataproc_v1beta2.types.WorkflowTemplate:
                 A Dataproc workflow template
                 resource.
 
@@ -742,7 +747,7 @@ class WorkflowTemplateServiceAsyncClient:
         the request.
 
         Args:
-            request (:class:`~.workflow_templates.ListWorkflowTemplatesRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.ListWorkflowTemplatesRequest`):
                 The request object. A request to list workflow templates
                 in a project.
             parent (:class:`str`):
@@ -758,6 +763,7 @@ class WorkflowTemplateServiceAsyncClient:
                    the resource name of the location has the following
                    format:
                    ``projects/{project_id}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -769,7 +775,7 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListWorkflowTemplatesAsyncPager:
+            google.cloud.dataproc_v1beta2.services.workflow_template_service.pagers.ListWorkflowTemplatesAsyncPager:
                 A response to a request to list
                 workflow templates in a project.
                 Iterating over this object will yield
@@ -844,7 +850,7 @@ class WorkflowTemplateServiceAsyncClient:
         rogress workflows.
 
         Args:
-            request (:class:`~.workflow_templates.DeleteWorkflowTemplateRequest`):
+            request (:class:`google.cloud.dataproc_v1beta2.types.DeleteWorkflowTemplateRequest`):
                 The request object. A request to delete a workflow
                 template.
                 Currently started workflows will remain running.
@@ -863,6 +869,7 @@ class WorkflowTemplateServiceAsyncClient:
                    the resource name of the template has the following
                    format:
                    ``projects/{project_id}/locations/{location}/workflowTemplates/{template_id}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
