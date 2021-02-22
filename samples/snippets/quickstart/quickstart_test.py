@@ -45,9 +45,9 @@ def setup_teardown():
     @backoff.on_exception(backoff.expo,
                           ServiceUnavailable,
                           max_tries=5)
-    def create_bucket(): 
+    def create_bucket():
         return storage_client.create_bucket(STAGING_BUCKET)
-    
+
     bucket = create_bucket()
     blob = bucket.blob(JOB_FILE_NAME)
     blob.upload_from_string(SORT_CODE)
