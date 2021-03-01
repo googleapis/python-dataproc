@@ -9,7 +9,7 @@
 
 ### Features
 
-* **v1beta1:** remove DOCKER/FLINK from Component enum; adds HBASE ([#108](https://www.github.com/googleapis/python-dataproc/issues/108)) ([ee093a8](https://www.github.com/googleapis/python-dataproc/commit/ee093a88841c7f9c9ea41b066993e56b4abe267d))
+* **v1beta1:** BREAKING CHANGE: remove DOCKER/FLINK from Component enum; adds HBASE ([#108](https://www.github.com/googleapis/python-dataproc/issues/108)) ([ee093a8](https://www.github.com/googleapis/python-dataproc/commit/ee093a88841c7f9c9ea41b066993e56b4abe267d))
 
 
 ### Bug Fixes
