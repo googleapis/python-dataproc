@@ -20,7 +20,7 @@ Methods expect request objects. We provide a script that will convert most commo
 * Install the library
 
 ```py
-python3 -m pip install google-cloud-dataproc
+python3 -m pip install google-cloud-dataproc[libcst]
 ```
 
 * The script `fixup_dataproc_v1_keywords.py` is shipped with the library. It expects an input directory (with the code to convert) and an empty destination directory.
