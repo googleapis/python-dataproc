@@ -17,7 +17,7 @@ The 2.0.0 release requires Python 3.6+.
 
 Methods expect request objects. We provide a script that will convert most common use cases.
 
-* Install the library
+* Install the library with `libcst`.
 
 ```py
 python3 -m pip install google-cloud-dataproc[libcst]
