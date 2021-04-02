@@ -4,6 +4,30 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [2.3.1](https://www.github.com/googleapis/python-dataproc/compare/v2.3.0...v2.3.1) (2021-03-27)
+
+
+### Bug Fixes
+
+* (samples) fixing samples for new machine types ([#150](https://www.github.com/googleapis/python-dataproc/issues/150)) ([3343665](https://www.github.com/googleapis/python-dataproc/commit/334366546501833149479556b55bfbc3c9562236))
+
+
+### Documentation
+
+* adding backoff to quickstart test ([#135](https://www.github.com/googleapis/python-dataproc/issues/135)) ([a22df4c](https://www.github.com/googleapis/python-dataproc/commit/a22df4c0a15b2fa51cbe0f0cc2782def1a74c198))
+
+## [2.3.0](https://www.github.com/googleapis/python-dataproc/compare/v2.2.0...v2.3.0) (2021-03-01)
+
+
+### Features
+
+* **v1beta1:** BREAKING CHANGE: remove DOCKER/FLINK from Component enum; adds HBASE ([#108](https://www.github.com/googleapis/python-dataproc/issues/108)) ([ee093a8](https://www.github.com/googleapis/python-dataproc/commit/ee093a88841c7f9c9ea41b066993e56b4abe267d))
+
+
+### Bug Fixes
+
+* remove gRPC send/recv limits; expose client transport ([#117](https://www.github.com/googleapis/python-dataproc/issues/117)) ([6f27109](https://www.github.com/googleapis/python-dataproc/commit/6f27109faf03dd13f25294e57960f0d9e1a9fa27))
+
 ## [2.2.0](https://www.github.com/googleapis/python-dataproc/compare/v2.1.0...v2.2.0) (2020-11-16)
 
 

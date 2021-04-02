@@ -80,8 +80,36 @@ class ClusterControllerAsyncClient:
         ClusterControllerClient.parse_common_location_path
     )
 
-    from_service_account_info = ClusterControllerClient.from_service_account_info
-    from_service_account_file = ClusterControllerClient.from_service_account_file
+    @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            ClusterControllerAsyncClient: The constructed client.
+        """
+        return ClusterControllerClient.from_service_account_info.__func__(ClusterControllerAsyncClient, info, *args, **kwargs)  # type: ignore
+
+    @classmethod
+    def from_service_account_file(cls, filename: str, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+        file.
+
+        Args:
+            filename (str): The path to the service account private key json
+                file.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            ClusterControllerAsyncClient: The constructed client.
+        """
+        return ClusterControllerClient.from_service_account_file.__func__(ClusterControllerAsyncClient, filename, *args, **kwargs)  # type: ignore
+
     from_service_account_json = from_service_account_file
 
     @property
@@ -230,6 +258,7 @@ class ClusterControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -413,6 +442,7 @@ class ClusterControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -528,6 +558,7 @@ class ClusterControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -634,6 +665,7 @@ class ClusterControllerAsyncClient:
                     exceptions.InternalServerError,
                     exceptions.ServiceUnavailable,
                 ),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -757,6 +789,7 @@ class ClusterControllerAsyncClient:
                     exceptions.InternalServerError,
                     exceptions.ServiceUnavailable,
                 ),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -865,6 +898,7 @@ class ClusterControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=300.0,
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,

@@ -75,8 +75,36 @@ class JobControllerAsyncClient:
         JobControllerClient.parse_common_location_path
     )
 
-    from_service_account_info = JobControllerClient.from_service_account_info
-    from_service_account_file = JobControllerClient.from_service_account_file
+    @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            JobControllerAsyncClient: The constructed client.
+        """
+        return JobControllerClient.from_service_account_info.__func__(JobControllerAsyncClient, info, *args, **kwargs)  # type: ignore
+
+    @classmethod
+    def from_service_account_file(cls, filename: str, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials
+        file.
+
+        Args:
+            filename (str): The path to the service account private key json
+                file.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            JobControllerAsyncClient: The constructed client.
+        """
+        return JobControllerClient.from_service_account_file.__func__(JobControllerAsyncClient, filename, *args, **kwargs)  # type: ignore
+
     from_service_account_json = from_service_account_file
 
     @property
@@ -218,6 +246,7 @@ class JobControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -312,6 +341,7 @@ class JobControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -415,6 +445,7 @@ class JobControllerAsyncClient:
                     exceptions.InternalServerError,
                     exceptions.ServiceUnavailable,
                 ),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -529,6 +560,7 @@ class JobControllerAsyncClient:
                     exceptions.InternalServerError,
                     exceptions.ServiceUnavailable,
                 ),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -583,6 +615,7 @@ class JobControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -680,6 +713,7 @@ class JobControllerAsyncClient:
                     exceptions.InternalServerError,
                     exceptions.ServiceUnavailable,
                 ),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
@@ -766,6 +800,7 @@ class JobControllerAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
+                deadline=900.0,
             ),
             default_timeout=900.0,
             client_info=DEFAULT_CLIENT_INFO,
