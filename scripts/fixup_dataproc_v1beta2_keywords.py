@@ -42,7 +42,7 @@ class dataprocCallTransformer(cst.CSTTransformer):
     CTRL_PARAMS: Tuple[str] = ('retry', 'timeout', 'metadata')
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
     'cancel_job': ('project_id', 'region', 'job_id', ),
-    'create_autoscaling_policy': ('parent', 'policy', ),
+    'create_autoscaling_policy': ('parent', 'policy_', ),
     'create_cluster': ('project_id', 'region', 'cluster', 'request_id', ),
     'create_workflow_template': ('parent', 'template', ),
     'delete_autoscaling_policy': ('name', ),
@@ -62,7 +62,7 @@ class dataprocCallTransformer(cst.CSTTransformer):
     'list_workflow_templates': ('parent', 'page_size', 'page_token', ),
     'submit_job': ('project_id', 'region', 'job', 'request_id', ),
     'submit_job_as_operation': ('project_id', 'region', 'job', 'request_id', ),
-    'update_autoscaling_policy': ('policy', ),
+    'update_autoscaling_policy': ('policy_', ),
     'update_cluster': ('project_id', 'region', 'cluster_name', 'cluster', 'update_mask', 'graceful_decommission_timeout', 'request_id', ),
     'update_job': ('project_id', 'region', 'job_id', 'job', 'update_mask', ),
     'update_workflow_template': ('template', ),
