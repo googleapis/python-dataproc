@@ -660,7 +660,7 @@ def test_create_autoscaling_policy_flattened():
         # using the keyword arguments to the method.
         client.create_autoscaling_policy(
             parent="parent_value",
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
         # Establish that the underlying call was made with the expected
@@ -670,7 +670,7 @@ def test_create_autoscaling_policy_flattened():
 
         assert args[0].parent == "parent_value"
 
-        assert args[0].policy_ == autoscaling_policies.AutoscalingPolicy(id="id_value")
+        assert args[0].policy == autoscaling_policies.AutoscalingPolicy(id="id_value")
 
 
 def test_create_autoscaling_policy_flattened_error():
@@ -684,7 +684,7 @@ def test_create_autoscaling_policy_flattened_error():
         client.create_autoscaling_policy(
             autoscaling_policies.CreateAutoscalingPolicyRequest(),
             parent="parent_value",
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
 
@@ -708,7 +708,7 @@ async def test_create_autoscaling_policy_flattened_async():
         # using the keyword arguments to the method.
         response = await client.create_autoscaling_policy(
             parent="parent_value",
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
         # Establish that the underlying call was made with the expected
@@ -718,7 +718,7 @@ async def test_create_autoscaling_policy_flattened_async():
 
         assert args[0].parent == "parent_value"
 
-        assert args[0].policy_ == autoscaling_policies.AutoscalingPolicy(id="id_value")
+        assert args[0].policy == autoscaling_policies.AutoscalingPolicy(id="id_value")
 
 
 @pytest.mark.asyncio
@@ -733,7 +733,7 @@ async def test_create_autoscaling_policy_flattened_error_async():
         await client.create_autoscaling_policy(
             autoscaling_policies.CreateAutoscalingPolicyRequest(),
             parent="parent_value",
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
 
@@ -920,7 +920,7 @@ def test_update_autoscaling_policy_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.update_autoscaling_policy(
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
         # Establish that the underlying call was made with the expected
@@ -928,7 +928,7 @@ def test_update_autoscaling_policy_flattened():
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0].policy_ == autoscaling_policies.AutoscalingPolicy(id="id_value")
+        assert args[0].policy == autoscaling_policies.AutoscalingPolicy(id="id_value")
 
 
 def test_update_autoscaling_policy_flattened_error():
@@ -941,7 +941,7 @@ def test_update_autoscaling_policy_flattened_error():
     with pytest.raises(ValueError):
         client.update_autoscaling_policy(
             autoscaling_policies.UpdateAutoscalingPolicyRequest(),
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
 
@@ -964,7 +964,7 @@ async def test_update_autoscaling_policy_flattened_async():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         response = await client.update_autoscaling_policy(
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
         # Establish that the underlying call was made with the expected
@@ -972,7 +972,7 @@ async def test_update_autoscaling_policy_flattened_async():
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
 
-        assert args[0].policy_ == autoscaling_policies.AutoscalingPolicy(id="id_value")
+        assert args[0].policy == autoscaling_policies.AutoscalingPolicy(id="id_value")
 
 
 @pytest.mark.asyncio
@@ -986,7 +986,7 @@ async def test_update_autoscaling_policy_flattened_error_async():
     with pytest.raises(ValueError):
         await client.update_autoscaling_policy(
             autoscaling_policies.UpdateAutoscalingPolicyRequest(),
-            policy_=autoscaling_policies.AutoscalingPolicy(id="id_value"),
+            policy=autoscaling_policies.AutoscalingPolicy(id="id_value"),
         )
 
 

@@ -244,13 +244,13 @@ class CreateAutoscalingPolicyRequest(proto.Message):
             -  For ``projects.locations.autoscalingPolicies.create``,
                the resource name has the following format:
                ``projects/{project_id}/locations/{location}``
-        policy_ (google.cloud.dataproc_v1beta2.types.AutoscalingPolicy):
+        policy (google.cloud.dataproc_v1beta2.types.AutoscalingPolicy):
             Required. The autoscaling policy to create.
     """
 
     parent = proto.Field(proto.STRING, number=1)
 
-    policy_ = proto.Field(proto.MESSAGE, number=2, message="AutoscalingPolicy",)
+    policy = proto.Field(proto.MESSAGE, number=2, message="AutoscalingPolicy",)
 
 
 class GetAutoscalingPolicyRequest(proto.Message):
@@ -278,11 +278,11 @@ class UpdateAutoscalingPolicyRequest(proto.Message):
     r"""A request to update an autoscaling policy.
 
     Attributes:
-        policy_ (google.cloud.dataproc_v1beta2.types.AutoscalingPolicy):
+        policy (google.cloud.dataproc_v1beta2.types.AutoscalingPolicy):
             Required. The updated autoscaling policy.
     """
 
-    policy_ = proto.Field(proto.MESSAGE, number=1, message="AutoscalingPolicy",)
+    policy = proto.Field(proto.MESSAGE, number=1, message="AutoscalingPolicy",)
 
 
 class DeleteAutoscalingPolicyRequest(proto.Message):
