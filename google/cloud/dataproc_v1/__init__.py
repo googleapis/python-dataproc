@@ -44,16 +44,23 @@ from .types.clusters import EncryptionConfig
 from .types.clusters import EndpointConfig
 from .types.clusters import GceClusterConfig
 from .types.clusters import GetClusterRequest
+from .types.clusters import GkeClusterConfig
+from .types.clusters import IdentityConfig
 from .types.clusters import InstanceGroupConfig
 from .types.clusters import KerberosConfig
 from .types.clusters import LifecycleConfig
 from .types.clusters import ListClustersRequest
 from .types.clusters import ListClustersResponse
 from .types.clusters import ManagedGroupConfig
+from .types.clusters import MetastoreConfig
+from .types.clusters import NodeGroupAffinity
 from .types.clusters import NodeInitializationAction
 from .types.clusters import ReservationAffinity
 from .types.clusters import SecurityConfig
+from .types.clusters import ShieldedInstanceConfig
 from .types.clusters import SoftwareConfig
+from .types.clusters import StartClusterRequest
+from .types.clusters import StopClusterRequest
 from .types.clusters import UpdateClusterRequest
 from .types.jobs import CancelJobRequest
 from .types.jobs import DeleteJobRequest
@@ -109,7 +116,6 @@ __all__ = (
     "AcceleratorConfig",
     "AutoscalingConfig",
     "AutoscalingPolicy",
-    "AutoscalingPolicyServiceClient",
     "BasicAutoscalingAlgorithm",
     "BasicYarnAutoscalingConfig",
     "CancelJobRequest",
@@ -140,8 +146,10 @@ __all__ = (
     "GetClusterRequest",
     "GetJobRequest",
     "GetWorkflowTemplateRequest",
+    "GkeClusterConfig",
     "HadoopJob",
     "HiveJob",
+    "IdentityConfig",
     "InstanceGroupAutoscalingPolicyConfig",
     "InstanceGroupConfig",
     "InstantiateInlineWorkflowTemplateRequest",
@@ -166,6 +174,8 @@ __all__ = (
     "LoggingConfig",
     "ManagedCluster",
     "ManagedGroupConfig",
+    "MetastoreConfig",
+    "NodeGroupAffinity",
     "NodeInitializationAction",
     "OrderedJob",
     "ParameterValidation",
@@ -176,10 +186,13 @@ __all__ = (
     "RegexValidation",
     "ReservationAffinity",
     "SecurityConfig",
+    "ShieldedInstanceConfig",
     "SoftwareConfig",
     "SparkJob",
     "SparkRJob",
     "SparkSqlJob",
+    "StartClusterRequest",
+    "StopClusterRequest",
     "SubmitJobRequest",
     "TemplateParameter",
     "UpdateAutoscalingPolicyRequest",
@@ -192,6 +205,7 @@ __all__ = (
     "WorkflowNode",
     "WorkflowTemplate",
     "WorkflowTemplatePlacement",
-    "YarnApplication",
     "WorkflowTemplateServiceClient",
+    "YarnApplication",
+    "AutoscalingPolicyServiceClient",
 )

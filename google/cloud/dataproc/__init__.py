@@ -80,16 +80,23 @@ from google.cloud.dataproc_v1.types.clusters import EncryptionConfig
 from google.cloud.dataproc_v1.types.clusters import EndpointConfig
 from google.cloud.dataproc_v1.types.clusters import GceClusterConfig
 from google.cloud.dataproc_v1.types.clusters import GetClusterRequest
+from google.cloud.dataproc_v1.types.clusters import GkeClusterConfig
+from google.cloud.dataproc_v1.types.clusters import IdentityConfig
 from google.cloud.dataproc_v1.types.clusters import InstanceGroupConfig
 from google.cloud.dataproc_v1.types.clusters import KerberosConfig
 from google.cloud.dataproc_v1.types.clusters import LifecycleConfig
 from google.cloud.dataproc_v1.types.clusters import ListClustersRequest
 from google.cloud.dataproc_v1.types.clusters import ListClustersResponse
 from google.cloud.dataproc_v1.types.clusters import ManagedGroupConfig
+from google.cloud.dataproc_v1.types.clusters import MetastoreConfig
+from google.cloud.dataproc_v1.types.clusters import NodeGroupAffinity
 from google.cloud.dataproc_v1.types.clusters import NodeInitializationAction
 from google.cloud.dataproc_v1.types.clusters import ReservationAffinity
 from google.cloud.dataproc_v1.types.clusters import SecurityConfig
+from google.cloud.dataproc_v1.types.clusters import ShieldedInstanceConfig
 from google.cloud.dataproc_v1.types.clusters import SoftwareConfig
+from google.cloud.dataproc_v1.types.clusters import StartClusterRequest
+from google.cloud.dataproc_v1.types.clusters import StopClusterRequest
 from google.cloud.dataproc_v1.types.clusters import UpdateClusterRequest
 from google.cloud.dataproc_v1.types.jobs import CancelJobRequest
 from google.cloud.dataproc_v1.types.jobs import DeleteJobRequest
@@ -191,8 +198,10 @@ __all__ = (
     "GetClusterRequest",
     "GetJobRequest",
     "GetWorkflowTemplateRequest",
+    "GkeClusterConfig",
     "HadoopJob",
     "HiveJob",
+    "IdentityConfig",
     "InstanceGroupAutoscalingPolicyConfig",
     "InstanceGroupConfig",
     "InstantiateInlineWorkflowTemplateRequest",
@@ -218,6 +227,8 @@ __all__ = (
     "LoggingConfig",
     "ManagedCluster",
     "ManagedGroupConfig",
+    "MetastoreConfig",
+    "NodeGroupAffinity",
     "NodeInitializationAction",
     "OrderedJob",
     "ParameterValidation",
@@ -228,10 +239,13 @@ __all__ = (
     "RegexValidation",
     "ReservationAffinity",
     "SecurityConfig",
+    "ShieldedInstanceConfig",
     "SoftwareConfig",
     "SparkJob",
     "SparkRJob",
     "SparkSqlJob",
+    "StartClusterRequest",
+    "StopClusterRequest",
     "SubmitJobRequest",
     "TemplateParameter",
     "UpdateAutoscalingPolicyRequest",

@@ -2762,6 +2762,56 @@ def test_workflow_template_service_grpc_lro_async_client():
     assert transport.operations_client is transport.operations_client
 
 
+def test_cluster_path():
+    project = "squid"
+    location = "clam"
+    cluster = "whelk"
+
+    expected = "projects/{project}/locations/{location}/clusters/{cluster}".format(
+        project=project, location=location, cluster=cluster,
+    )
+    actual = WorkflowTemplateServiceClient.cluster_path(project, location, cluster)
+    assert expected == actual
+
+
+def test_parse_cluster_path():
+    expected = {
+        "project": "octopus",
+        "location": "oyster",
+        "cluster": "nudibranch",
+    }
+    path = WorkflowTemplateServiceClient.cluster_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = WorkflowTemplateServiceClient.parse_cluster_path(path)
+    assert expected == actual
+
+
+def test_service_path():
+    project = "cuttlefish"
+    location = "mussel"
+    service = "winkle"
+
+    expected = "projects/{project}/locations/{location}/services/{service}".format(
+        project=project, location=location, service=service,
+    )
+    actual = WorkflowTemplateServiceClient.service_path(project, location, service)
+    assert expected == actual
+
+
+def test_parse_service_path():
+    expected = {
+        "project": "nautilus",
+        "location": "scallop",
+        "service": "abalone",
+    }
+    path = WorkflowTemplateServiceClient.service_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = WorkflowTemplateServiceClient.parse_service_path(path)
+    assert expected == actual
+
+
 def test_workflow_template_path():
     project = "squid"
     region = "clam"

@@ -60,6 +60,8 @@ class dataprocCallTransformer(cst.CSTTransformer):
     'list_clusters': ('project_id', 'region', 'filter', 'page_size', 'page_token', ),
     'list_jobs': ('project_id', 'region', 'page_size', 'page_token', 'cluster_name', 'job_state_matcher', 'filter', ),
     'list_workflow_templates': ('parent', 'page_size', 'page_token', ),
+    'start_cluster': ('project_id', 'region', 'cluster_name', 'cluster_uuid', 'request_id', ),
+    'stop_cluster': ('project_id', 'region', 'cluster_name', 'cluster_uuid', 'request_id', ),
     'submit_job': ('project_id', 'region', 'job', 'request_id', ),
     'submit_job_as_operation': ('project_id', 'region', 'job', 'request_id', ),
     'update_autoscaling_policy': ('policy', ),

@@ -298,6 +298,58 @@ class ClusterControllerGrpcTransport(ClusterControllerTransport):
         return self._stubs["update_cluster"]
 
     @property
+    def stop_cluster(
+        self,
+    ) -> Callable[[clusters.StopClusterRequest], operations.Operation]:
+        r"""Return a callable for the stop cluster method over gRPC.
+
+        Stops a cluster in a project.
+
+        Returns:
+            Callable[[~.StopClusterRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "stop_cluster" not in self._stubs:
+            self._stubs["stop_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataproc.v1.ClusterController/StopCluster",
+                request_serializer=clusters.StopClusterRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["stop_cluster"]
+
+    @property
+    def start_cluster(
+        self,
+    ) -> Callable[[clusters.StartClusterRequest], operations.Operation]:
+        r"""Return a callable for the start cluster method over gRPC.
+
+        Starts a cluster in a project.
+
+        Returns:
+            Callable[[~.StartClusterRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "start_cluster" not in self._stubs:
+            self._stubs["start_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataproc.v1.ClusterController/StartCluster",
+                request_serializer=clusters.StartClusterRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["start_cluster"]
+
+    @property
     def delete_cluster(
         self,
     ) -> Callable[[clusters.DeleteClusterRequest], operations.Operation]:

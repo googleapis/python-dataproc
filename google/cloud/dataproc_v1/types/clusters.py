@@ -29,10 +29,13 @@ __protobuf__ = proto.module(
     manifest={
         "Cluster",
         "ClusterConfig",
+        "GkeClusterConfig",
         "EndpointConfig",
         "AutoscalingConfig",
         "EncryptionConfig",
         "GceClusterConfig",
+        "NodeGroupAffinity",
+        "ShieldedInstanceConfig",
         "InstanceGroupConfig",
         "ManagedGroupConfig",
         "AcceleratorConfig",
@@ -41,11 +44,15 @@ __protobuf__ = proto.module(
         "ClusterStatus",
         "SecurityConfig",
         "KerberosConfig",
+        "IdentityConfig",
         "SoftwareConfig",
         "LifecycleConfig",
+        "MetastoreConfig",
         "ClusterMetrics",
         "CreateClusterRequest",
         "UpdateClusterRequest",
+        "StopClusterRequest",
+        "StartClusterRequest",
         "DeleteClusterRequest",
         "GetClusterRequest",
         "ListClustersRequest",
@@ -130,18 +137,19 @@ class ClusterConfig(proto.Message):
             and manage this project-level, per-location bucket (see
             `Dataproc staging
             bucket <https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket>`__).
+            **This field requires a Cloud Storage bucket name, not a URI
+            to a Cloud Storage bucket.**
         temp_bucket (str):
-            Optional. A Cloud Storage bucket used to
-            store ephemeral cluster and jobs data, such as
-            Spark and MapReduce history files. If you do not
-            specify a temp bucket,
-            Dataproc will determine a Cloud Storage location
-            (US, ASIA, or EU) for your cluster's temp bucket
-            according to the Compute Engine zone where your
-            cluster is deployed, and then create and manage
-            this project-level, per-location bucket. The
-            default bucket has a TTL of 90 days, but you can
-            use any TTL (or none) if you specify a bucket.
+            Optional. A Cloud Storage bucket used to store ephemeral
+            cluster and jobs data, such as Spark and MapReduce history
+            files. If you do not specify a temp bucket, Dataproc will
+            determine a Cloud Storage location (US, ASIA, or EU) for
+            your cluster's temp bucket according to the Compute Engine
+            zone where your cluster is deployed, and then create and
+            manage this project-level, per-location bucket. The default
+            bucket has a TTL of 90 days, but you can use any TTL (or
+            none) if you specify a bucket. **This field requires a Cloud
+            Storage bucket name, not a URI to a Cloud Storage bucket.**
         gce_cluster_config (google.cloud.dataproc_v1.types.GceClusterConfig):
             Optional. The shared Compute Engine config
             settings for all instances in a cluster.
@@ -187,6 +195,15 @@ class ClusterConfig(proto.Message):
         endpoint_config (google.cloud.dataproc_v1.types.EndpointConfig):
             Optional. Port/endpoint configuration for
             this cluster
+        metastore_config (google.cloud.dataproc_v1.types.MetastoreConfig):
+            Optional. Metastore configuration.
+        gke_cluster_config (google.cloud.dataproc_v1.types.GkeClusterConfig):
+            Optional. BETA. The Kubernetes Engine config for Dataproc
+            clusters deployed to Kubernetes. Setting this is considered
+            mutually exclusive with Compute Engine-based options such as
+            ``gce_cluster_config``, ``master_config``,
+            ``worker_config``, ``secondary_worker_config``, and
+            ``autoscaling_config``.
     """
 
     config_bucket = proto.Field(proto.STRING, number=1)
@@ -226,6 +243,42 @@ class ClusterConfig(proto.Message):
     lifecycle_config = proto.Field(proto.MESSAGE, number=17, message="LifecycleConfig",)
 
     endpoint_config = proto.Field(proto.MESSAGE, number=19, message="EndpointConfig",)
+
+    metastore_config = proto.Field(proto.MESSAGE, number=20, message="MetastoreConfig",)
+
+    gke_cluster_config = proto.Field(
+        proto.MESSAGE, number=21, message="GkeClusterConfig",
+    )
+
+
+class GkeClusterConfig(proto.Message):
+    r"""The GKE config for this cluster.
+
+    Attributes:
+        namespaced_gke_deployment_target (google.cloud.dataproc_v1.types.GkeClusterConfig.NamespacedGkeDeploymentTarget):
+            Optional. A target for the deployment.
+    """
+
+    class NamespacedGkeDeploymentTarget(proto.Message):
+        r"""A full, namespace-isolated deployment target for an existing
+        GKE cluster.
+
+        Attributes:
+            target_gke_cluster (str):
+                Optional. The target GKE cluster to deploy to. Format:
+                'projects/{project}/locations/{location}/clusters/{cluster_id}'
+            cluster_namespace (str):
+                Optional. A namespace within the GKE cluster
+                to deploy into.
+        """
+
+        target_gke_cluster = proto.Field(proto.STRING, number=1)
+
+        cluster_namespace = proto.Field(proto.STRING, number=2)
+
+    namespaced_gke_deployment_target = proto.Field(
+        proto.MESSAGE, number=1, message=NamespacedGkeDeploymentTarget,
+    )
 
 
 class EndpointConfig(proto.Message):
@@ -329,6 +382,9 @@ class GceClusterConfig(proto.Message):
             subnetwork enabled networks, and all off-cluster
             dependencies must be configured to be accessible without
             external IP addresses.
+        private_ipv6_google_access (google.cloud.dataproc_v1.types.GceClusterConfig.PrivateIpv6GoogleAccess):
+            Optional. The type of IPv6 access for a
+            cluster.
         service_account (str):
             Optional. The `Dataproc service
             account <https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_dataproc>`__
@@ -367,7 +423,26 @@ class GceClusterConfig(proto.Message):
         reservation_affinity (google.cloud.dataproc_v1.types.ReservationAffinity):
             Optional. Reservation Affinity for consuming
             Zonal reservation.
+        node_group_affinity (google.cloud.dataproc_v1.types.NodeGroupAffinity):
+            Optional. Node Group Affinity for sole-tenant
+            clusters.
+        shielded_instance_config (google.cloud.dataproc_v1.types.ShieldedInstanceConfig):
+            Optional. Shielded Instance Config for clusters using
+            `Compute Engine Shielded
+            VMs <https://cloud.google.com/security/shielded-cloud/shielded-vm>`__.
     """
+
+    class PrivateIpv6GoogleAccess(proto.Enum):
+        r"""``PrivateIpv6GoogleAccess`` controls whether and how Dataproc
+        cluster nodes can communicate with Google Services through gRPC over
+        IPv6. These values are directly mapped to corresponding values in
+        the `Compute Engine Instance
+        fields <https://cloud.google.com/compute/docs/reference/rest/v1/instances>`__.
+        """
+        PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED = 0
+        INHERIT_FROM_SUBNETWORK = 1
+        OUTBOUND = 2
+        BIDIRECTIONAL = 3
 
     zone_uri = proto.Field(proto.STRING, number=1)
 
@@ -376,6 +451,10 @@ class GceClusterConfig(proto.Message):
     subnetwork_uri = proto.Field(proto.STRING, number=6)
 
     internal_ip_only = proto.Field(proto.BOOL, number=7)
+
+    private_ipv6_google_access = proto.Field(
+        proto.ENUM, number=12, enum=PrivateIpv6GoogleAccess,
+    )
 
     service_account = proto.Field(proto.STRING, number=8)
 
@@ -389,6 +468,58 @@ class GceClusterConfig(proto.Message):
         proto.MESSAGE, number=11, message="ReservationAffinity",
     )
 
+    node_group_affinity = proto.Field(
+        proto.MESSAGE, number=13, message="NodeGroupAffinity",
+    )
+
+    shielded_instance_config = proto.Field(
+        proto.MESSAGE, number=14, message="ShieldedInstanceConfig",
+    )
+
+
+class NodeGroupAffinity(proto.Message):
+    r"""Node Group Affinity for clusters using sole-tenant node
+    groups.
+
+    Attributes:
+        node_group_uri (str):
+            Required. The URI of a sole-tenant `node group
+            resource <https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups>`__
+            that the cluster will be created on.
+
+            A full URL, partial URI, or node group name are valid.
+            Examples:
+
+            -  ``https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1``
+            -  ``projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1``
+            -  ``node-group-1``
+    """
+
+    node_group_uri = proto.Field(proto.STRING, number=1)
+
+
+class ShieldedInstanceConfig(proto.Message):
+    r"""Shielded Instance Config for clusters using `Compute Engine Shielded
+    VMs <https://cloud.google.com/security/shielded-cloud/shielded-vm>`__.
+
+    Attributes:
+        enable_secure_boot (bool):
+            Optional. Defines whether instances have
+            Secure Boot enabled.
+        enable_vtpm (bool):
+            Optional. Defines whether instances have the
+            vTPM enabled.
+        enable_integrity_monitoring (bool):
+            Optional. Defines whether instances have
+            integrity monitoring enabled.
+    """
+
+    enable_secure_boot = proto.Field(proto.BOOL, number=1)
+
+    enable_vtpm = proto.Field(proto.BOOL, number=2)
+
+    enable_integrity_monitoring = proto.Field(proto.BOOL, number=3)
+
 
 class InstanceGroupConfig(proto.Message):
     r"""The config settings for Compute Engine resources in
@@ -396,9 +527,13 @@ class InstanceGroupConfig(proto.Message):
 
     Attributes:
         num_instances (int):
-            Optional. The number of VM instances in the
-            instance group. For master instance groups, must
-            be set to 1.
+            Optional. The number of VM instances in the instance group.
+            For `HA
+            cluster </dataproc/docs/concepts/configuring-clusters/high-availability>`__
+            `master_config <#FIELDS.master_config>`__ groups, **must be
+            set to 3**. For standard cluster
+            `master_config <#FIELDS.master_config>`__ groups, **must be
+            set to 1**.
         instance_names (Sequence[str]):
             Output only. The list of instance names. Dataproc derives
             the names from ``cluster_name``, ``num_instances``, and the
@@ -556,10 +691,12 @@ class DiskConfig(proto.Message):
 
     Attributes:
         boot_disk_type (str):
-            Optional. Type of the boot disk (default is
-            "pd-standard"). Valid values: "pd-ssd"
-            (Persistent Disk Solid State Drive) or "pd-
-            standard" (Persistent Disk Hard Disk Drive).
+            Optional. Type of the boot disk (default is "pd-standard").
+            Valid values: "pd-balanced" (Persistent Disk Balanced Solid
+            State Drive), "pd-ssd" (Persistent Disk Solid State Drive),
+            or "pd-standard" (Persistent Disk Hard Disk Drive). See
+            `Disk
+            types <https://cloud.google.com/compute/docs/disks#disk-types>`__.
         boot_disk_size_gb (int):
             Optional. Size in GB of the boot disk
             (default is 500GB).
@@ -630,6 +767,9 @@ class ClusterStatus(proto.Message):
         ERROR = 3
         DELETING = 4
         UPDATING = 5
+        STOPPING = 6
+        STOPPED = 7
+        STARTING = 8
 
     class Substate(proto.Enum):
         r"""The cluster substate."""
@@ -649,14 +789,21 @@ class ClusterStatus(proto.Message):
 
 
 class SecurityConfig(proto.Message):
-    r"""Security related configuration, including Kerberos.
+    r"""Security related configuration, including encryption,
+    Kerberos, etc.
 
     Attributes:
         kerberos_config (google.cloud.dataproc_v1.types.KerberosConfig):
-            Kerberos related configuration.
+            Optional. Kerberos related configuration.
+        identity_config (google.cloud.dataproc_v1.types.IdentityConfig):
+            Optional. Identity related configuration,
+            including service account based secure multi-
+            tenancy user mappings.
     """
 
     kerberos_config = proto.Field(proto.MESSAGE, number=1, message="KerberosConfig",)
+
+    identity_config = proto.Field(proto.MESSAGE, number=2, message="IdentityConfig",)
 
 
 class KerberosConfig(proto.Message):
@@ -668,11 +815,11 @@ class KerberosConfig(proto.Message):
             Kerberize the cluster (default: false). Set this
             field to true to enable Kerberos on a cluster.
         root_principal_password_uri (str):
-            Required. The Cloud Storage URI of a KMS
+            Optional. The Cloud Storage URI of a KMS
             encrypted file containing the root principal
             password.
         kms_key_uri (str):
-            Required. The uri of the KMS key used to
+            Optional. The uri of the KMS key used to
             encrypt various sensitive files.
         keystore_uri (str):
             Optional. The Cloud Storage URI of the
@@ -765,6 +912,18 @@ class KerberosConfig(proto.Message):
     realm = proto.Field(proto.STRING, number=15)
 
 
+class IdentityConfig(proto.Message):
+    r"""Identity related configuration, including service account
+    based secure multi-tenancy user mappings.
+
+    Attributes:
+        user_service_account_mapping (Sequence[google.cloud.dataproc_v1.types.IdentityConfig.UserServiceAccountMappingEntry]):
+            Required. Map of user to service account.
+    """
+
+    user_service_account_mapping = proto.MapField(proto.STRING, proto.STRING, number=1)
+
+
 class SoftwareConfig(proto.Message):
     r"""Specifies the selection and config of software inside the
     cluster.
@@ -818,10 +977,10 @@ class LifecycleConfig(proto.Message):
         idle_delete_ttl (google.protobuf.duration_pb2.Duration):
             Optional. The duration to keep the cluster alive while
             idling (when no jobs are running). Passing this threshold
-            will cause the cluster to be deleted. Minimum value is 10
+            will cause the cluster to be deleted. Minimum value is 5
             minutes; maximum value is 14 days (see JSON representation
             of
-            `Duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__.
+            `Duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__).
         auto_delete_time (google.protobuf.timestamp_pb2.Timestamp):
             Optional. The time when cluster will be auto-deleted (see
             JSON representation of
@@ -850,6 +1009,22 @@ class LifecycleConfig(proto.Message):
     )
 
     idle_start_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp,)
+
+
+class MetastoreConfig(proto.Message):
+    r"""Specifies a Metastore configuration.
+
+    Attributes:
+        dataproc_metastore_service (str):
+            Required. Resource name of an existing Dataproc Metastore
+            service.
+
+            Example:
+
+            -  ``projects/[project_id]/locations/[dataproc_region]/services/[service-name]``
+    """
+
+    dataproc_metastore_service = proto.Field(proto.STRING, number=1)
 
 
 class ClusterMetrics(proto.Message):
@@ -885,9 +1060,9 @@ class CreateClusterRequest(proto.Message):
         request_id (str):
             Optional. A unique id used to identify the request. If the
             server receives two
-            [CreateClusterRequest][google.cloud.dataproc.v1.CreateClusterRequest]
-            requests with the same id, then the second request will be
-            ignored and the first
+            `CreateClusterRequest <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest>`__\ s
+            with the same id, then the second request will be ignored
+            and the first
             [google.longrunning.Operation][google.longrunning.Operation]
             created and stored in the backend is returned.
 
@@ -998,9 +1173,9 @@ class UpdateClusterRequest(proto.Message):
         request_id (str):
             Optional. A unique id used to identify the request. If the
             server receives two
-            [UpdateClusterRequest][google.cloud.dataproc.v1.UpdateClusterRequest]
-            requests with the same id, then the second request will be
-            ignored and the first
+            `UpdateClusterRequest <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest>`__\ s
+            with the same id, then the second request will be ignored
+            and the first
             [google.longrunning.Operation][google.longrunning.Operation]
             created and stored in the backend is returned.
 
@@ -1029,6 +1204,94 @@ class UpdateClusterRequest(proto.Message):
     request_id = proto.Field(proto.STRING, number=7)
 
 
+class StopClusterRequest(proto.Message):
+    r"""A request to stop a cluster.
+
+    Attributes:
+        project_id (str):
+            Required. The ID of the Google Cloud Platform
+            project the cluster belongs to.
+        region (str):
+            Required. The Dataproc region in which to
+            handle the request.
+        cluster_name (str):
+            Required. The cluster name.
+        cluster_uuid (str):
+            Optional. Specifying the ``cluster_uuid`` means the RPC will
+            fail (with error NOT_FOUND) if a cluster with the specified
+            UUID does not exist.
+        request_id (str):
+            Optional. A unique id used to identify the request. If the
+            server receives two
+            `StopClusterRequest <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest>`__\ s
+            with the same id, then the second request will be ignored
+            and the first
+            [google.longrunning.Operation][google.longrunning.Operation]
+            created and stored in the backend is returned.
+
+            Recommendation: Set this value to a
+            `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
+
+            The id must contain only letters (a-z, A-Z), numbers (0-9),
+            underscores (_), and hyphens (-). The maximum length is 40
+            characters.
+    """
+
+    project_id = proto.Field(proto.STRING, number=1)
+
+    region = proto.Field(proto.STRING, number=2)
+
+    cluster_name = proto.Field(proto.STRING, number=3)
+
+    cluster_uuid = proto.Field(proto.STRING, number=4)
+
+    request_id = proto.Field(proto.STRING, number=5)
+
+
+class StartClusterRequest(proto.Message):
+    r"""A request to start a cluster.
+
+    Attributes:
+        project_id (str):
+            Required. The ID of the Google Cloud Platform
+            project the cluster belongs to.
+        region (str):
+            Required. The Dataproc region in which to
+            handle the request.
+        cluster_name (str):
+            Required. The cluster name.
+        cluster_uuid (str):
+            Optional. Specifying the ``cluster_uuid`` means the RPC will
+            fail (with error NOT_FOUND) if a cluster with the specified
+            UUID does not exist.
+        request_id (str):
+            Optional. A unique id used to identify the request. If the
+            server receives two
+            `StartClusterRequest <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest>`__\ s
+            with the same id, then the second request will be ignored
+            and the first
+            [google.longrunning.Operation][google.longrunning.Operation]
+            created and stored in the backend is returned.
+
+            Recommendation: Set this value to a
+            `UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier>`__.
+
+            The id must contain only letters (a-z, A-Z), numbers (0-9),
+            underscores (_), and hyphens (-). The maximum length is 40
+            characters.
+    """
+
+    project_id = proto.Field(proto.STRING, number=1)
+
+    region = proto.Field(proto.STRING, number=2)
+
+    cluster_name = proto.Field(proto.STRING, number=3)
+
+    cluster_uuid = proto.Field(proto.STRING, number=4)
+
+    request_id = proto.Field(proto.STRING, number=5)
+
+
 class DeleteClusterRequest(proto.Message):
     r"""A request to delete a cluster.
 
@@ -1048,9 +1311,9 @@ class DeleteClusterRequest(proto.Message):
         request_id (str):
             Optional. A unique id used to identify the request. If the
             server receives two
-            [DeleteClusterRequest][google.cloud.dataproc.v1.DeleteClusterRequest]
-            requests with the same id, then the second request will be
-            ignored and the first
+            `DeleteClusterRequest <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest>`__\ s
+            with the same id, then the second request will be ignored
+            and the first
             [google.longrunning.Operation][google.longrunning.Operation]
             created and stored in the backend is returned.
 
