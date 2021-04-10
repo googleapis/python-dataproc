@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-dataproc.git",
-        "sha": "e3feda8a464e4959e002524272c8dffc8424ef56"
+        "sha": "99aa4ca10ea065104ae17c0e1d0286ef6fb2bea8"
       }
     },
     {
@@ -107,7 +107,6 @@
     "CONTRIBUTING.rst",
     "LICENSE",
     "MANIFEST.in",
-    "dataproc-v1beta2-py.tar.gz",
     "docs/_static/custom.css",
     "docs/_templates/layout.html",
     "docs/conf.py",
