@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +18,7 @@ from .services.autoscaling_policy_service import AutoscalingPolicyServiceClient
 from .services.cluster_controller import ClusterControllerClient
 from .services.job_controller import JobControllerClient
 from .services.workflow_template_service import WorkflowTemplateServiceClient
+
 from .types.autoscaling_policies import AutoscalingPolicy
 from .types.autoscaling_policies import BasicAutoscalingAlgorithm
 from .types.autoscaling_policies import BasicYarnAutoscalingConfig
@@ -44,16 +44,23 @@ from .types.clusters import EncryptionConfig
 from .types.clusters import EndpointConfig
 from .types.clusters import GceClusterConfig
 from .types.clusters import GetClusterRequest
+from .types.clusters import GkeClusterConfig
+from .types.clusters import IdentityConfig
 from .types.clusters import InstanceGroupConfig
 from .types.clusters import KerberosConfig
 from .types.clusters import LifecycleConfig
 from .types.clusters import ListClustersRequest
 from .types.clusters import ListClustersResponse
 from .types.clusters import ManagedGroupConfig
+from .types.clusters import MetastoreConfig
+from .types.clusters import NodeGroupAffinity
 from .types.clusters import NodeInitializationAction
 from .types.clusters import ReservationAffinity
 from .types.clusters import SecurityConfig
+from .types.clusters import ShieldedInstanceConfig
 from .types.clusters import SoftwareConfig
+from .types.clusters import StartClusterRequest
+from .types.clusters import StopClusterRequest
 from .types.clusters import UpdateClusterRequest
 from .types.jobs import CancelJobRequest
 from .types.jobs import DeleteJobRequest
@@ -104,87 +111,95 @@ from .types.workflow_templates import WorkflowNode
 from .types.workflow_templates import WorkflowTemplate
 from .types.workflow_templates import WorkflowTemplatePlacement
 
-
 __all__ = (
-    "AcceleratorConfig",
-    "AutoscalingConfig",
-    "AutoscalingPolicy",
     "AutoscalingPolicyServiceClient",
+    "ClusterControllerClient",
+    "JobControllerClient",
+    "WorkflowTemplateServiceClient",
+    "AutoscalingPolicy",
     "BasicAutoscalingAlgorithm",
     "BasicYarnAutoscalingConfig",
-    "CancelJobRequest",
+    "CreateAutoscalingPolicyRequest",
+    "DeleteAutoscalingPolicyRequest",
+    "GetAutoscalingPolicyRequest",
+    "InstanceGroupAutoscalingPolicyConfig",
+    "ListAutoscalingPoliciesRequest",
+    "ListAutoscalingPoliciesResponse",
+    "UpdateAutoscalingPolicyRequest",
+    "AcceleratorConfig",
+    "AutoscalingConfig",
     "Cluster",
     "ClusterConfig",
-    "ClusterControllerClient",
     "ClusterMetrics",
-    "ClusterOperation",
-    "ClusterOperationMetadata",
-    "ClusterOperationStatus",
-    "ClusterSelector",
     "ClusterStatus",
-    "Component",
-    "CreateAutoscalingPolicyRequest",
     "CreateClusterRequest",
-    "CreateWorkflowTemplateRequest",
-    "DeleteAutoscalingPolicyRequest",
     "DeleteClusterRequest",
-    "DeleteJobRequest",
-    "DeleteWorkflowTemplateRequest",
     "DiagnoseClusterRequest",
     "DiagnoseClusterResults",
     "DiskConfig",
     "EncryptionConfig",
     "EndpointConfig",
     "GceClusterConfig",
-    "GetAutoscalingPolicyRequest",
     "GetClusterRequest",
+    "GkeClusterConfig",
+    "IdentityConfig",
+    "InstanceGroupConfig",
+    "KerberosConfig",
+    "LifecycleConfig",
+    "ListClustersRequest",
+    "ListClustersResponse",
+    "ManagedGroupConfig",
+    "MetastoreConfig",
+    "NodeGroupAffinity",
+    "NodeInitializationAction",
+    "ReservationAffinity",
+    "SecurityConfig",
+    "ShieldedInstanceConfig",
+    "SoftwareConfig",
+    "StartClusterRequest",
+    "StopClusterRequest",
+    "UpdateClusterRequest",
+    "CancelJobRequest",
+    "DeleteJobRequest",
     "GetJobRequest",
-    "GetWorkflowTemplateRequest",
     "HadoopJob",
     "HiveJob",
-    "InstanceGroupAutoscalingPolicyConfig",
-    "InstanceGroupConfig",
-    "InstantiateInlineWorkflowTemplateRequest",
-    "InstantiateWorkflowTemplateRequest",
     "Job",
-    "JobControllerClient",
     "JobMetadata",
     "JobPlacement",
     "JobReference",
     "JobScheduling",
     "JobStatus",
-    "KerberosConfig",
-    "LifecycleConfig",
-    "ListAutoscalingPoliciesRequest",
-    "ListAutoscalingPoliciesResponse",
-    "ListClustersRequest",
-    "ListClustersResponse",
     "ListJobsRequest",
     "ListJobsResponse",
-    "ListWorkflowTemplatesRequest",
-    "ListWorkflowTemplatesResponse",
     "LoggingConfig",
-    "ManagedCluster",
-    "ManagedGroupConfig",
-    "NodeInitializationAction",
-    "OrderedJob",
-    "ParameterValidation",
     "PigJob",
     "PrestoJob",
     "PySparkJob",
     "QueryList",
-    "RegexValidation",
-    "ReservationAffinity",
-    "SecurityConfig",
-    "SoftwareConfig",
     "SparkJob",
     "SparkRJob",
     "SparkSqlJob",
     "SubmitJobRequest",
-    "TemplateParameter",
-    "UpdateAutoscalingPolicyRequest",
-    "UpdateClusterRequest",
     "UpdateJobRequest",
+    "YarnApplication",
+    "ClusterOperationMetadata",
+    "ClusterOperationStatus",
+    "Component",
+    "ClusterOperation",
+    "ClusterSelector",
+    "CreateWorkflowTemplateRequest",
+    "DeleteWorkflowTemplateRequest",
+    "GetWorkflowTemplateRequest",
+    "InstantiateInlineWorkflowTemplateRequest",
+    "InstantiateWorkflowTemplateRequest",
+    "ListWorkflowTemplatesRequest",
+    "ListWorkflowTemplatesResponse",
+    "ManagedCluster",
+    "OrderedJob",
+    "ParameterValidation",
+    "RegexValidation",
+    "TemplateParameter",
     "UpdateWorkflowTemplateRequest",
     "ValueValidation",
     "WorkflowGraph",
@@ -192,6 +207,4 @@ __all__ = (
     "WorkflowNode",
     "WorkflowTemplate",
     "WorkflowTemplatePlacement",
-    "YarnApplication",
-    "WorkflowTemplateServiceClient",
 )

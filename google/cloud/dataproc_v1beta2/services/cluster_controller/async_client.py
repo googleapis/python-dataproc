@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -35,7 +33,6 @@ from google.cloud.dataproc_v1beta2.types import clusters
 from google.cloud.dataproc_v1beta2.types import operations
 from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
-
 from .transports.base import ClusterControllerTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import ClusterControllerGrpcAsyncIOTransport
 from .client import ClusterControllerClient
@@ -53,31 +50,26 @@ class ClusterControllerAsyncClient:
 
     cluster_path = staticmethod(ClusterControllerClient.cluster_path)
     parse_cluster_path = staticmethod(ClusterControllerClient.parse_cluster_path)
-
     common_billing_account_path = staticmethod(
         ClusterControllerClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         ClusterControllerClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(ClusterControllerClient.common_folder_path)
     parse_common_folder_path = staticmethod(
         ClusterControllerClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         ClusterControllerClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         ClusterControllerClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(ClusterControllerClient.common_project_path)
     parse_common_project_path = staticmethod(
         ClusterControllerClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(ClusterControllerClient.common_location_path)
     parse_common_location_path = staticmethod(
         ClusterControllerClient.parse_common_location_path
@@ -168,7 +160,6 @@ class ClusterControllerAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = ClusterControllerClient(
             credentials=credentials,
             transport=transport,
@@ -215,7 +206,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``cluster`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -244,7 +234,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -401,7 +390,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -432,7 +420,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -512,7 +499,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``cluster_name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -552,7 +538,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -627,7 +612,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``cluster_name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -655,7 +639,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -749,7 +732,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``filter`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -779,7 +761,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -861,7 +842,6 @@ class ClusterControllerAsyncClient:
                 This corresponds to the ``cluster_name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -901,7 +881,6 @@ class ClusterControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:

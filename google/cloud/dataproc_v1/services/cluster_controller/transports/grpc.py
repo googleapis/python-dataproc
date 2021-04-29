@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import warnings
-from typing import Callable, Dict, Optional, Sequence, Tuple
+from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 
 from google.api_core import grpc_helpers  # type: ignore
 from google.api_core import operations_v1  # type: ignore
@@ -29,7 +27,6 @@ import grpc  # type: ignore
 
 from google.cloud.dataproc_v1.types import clusters
 from google.longrunning import operations_pb2 as operations  # type: ignore
-
 from .base import ClusterControllerTransport, DEFAULT_CLIENT_INFO
 
 
@@ -67,7 +64,8 @@ class ClusterControllerGrpcTransport(ClusterControllerTransport):
         """Instantiate the transport.
 
         Args:
-            host (Optional[str]): The hostname to connect to.
+            host (Optional[str]):
+                 The hostname to connect to.
             credentials (Optional[google.auth.credentials.Credentials]): The
                 authorization credentials to attach to requests. These
                 credentials identify the application to the service; if none
@@ -209,13 +207,15 @@ class ClusterControllerGrpcTransport(ClusterControllerTransport):
             google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
               and ``credentials_file`` are passed.
         """
-        scopes = scopes or cls.AUTH_SCOPES
+
+        self_signed_jwt_kwargs = cls._get_self_signed_jwt_kwargs(host, scopes)
+
         return grpc_helpers.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes,
             quota_project_id=quota_project_id,
+            **self_signed_jwt_kwargs,
             **kwargs,
         )
 
@@ -296,6 +296,58 @@ class ClusterControllerGrpcTransport(ClusterControllerTransport):
                 response_deserializer=operations.Operation.FromString,
             )
         return self._stubs["update_cluster"]
+
+    @property
+    def stop_cluster(
+        self,
+    ) -> Callable[[clusters.StopClusterRequest], operations.Operation]:
+        r"""Return a callable for the stop cluster method over gRPC.
+
+        Stops a cluster in a project.
+
+        Returns:
+            Callable[[~.StopClusterRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "stop_cluster" not in self._stubs:
+            self._stubs["stop_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataproc.v1.ClusterController/StopCluster",
+                request_serializer=clusters.StopClusterRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["stop_cluster"]
+
+    @property
+    def start_cluster(
+        self,
+    ) -> Callable[[clusters.StartClusterRequest], operations.Operation]:
+        r"""Return a callable for the start cluster method over gRPC.
+
+        Starts a cluster in a project.
+
+        Returns:
+            Callable[[~.StartClusterRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "start_cluster" not in self._stubs:
+            self._stubs["start_cluster"] = self.grpc_channel.unary_unary(
+                "/google.cloud.dataproc.v1.ClusterController/StartCluster",
+                request_serializer=clusters.StartClusterRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["start_cluster"]
 
     @property
     def delete_cluster(
