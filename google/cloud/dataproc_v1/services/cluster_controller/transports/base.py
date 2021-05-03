@@ -130,6 +130,12 @@ class ClusterControllerTransport(abc.ABC):
                 default_timeout=300.0,
                 client_info=client_info,
             ),
+            self.stop_cluster: gapic_v1.method.wrap_method(
+                self.stop_cluster, default_timeout=None, client_info=client_info,
+            ),
+            self.start_cluster: gapic_v1.method.wrap_method(
+                self.start_cluster, default_timeout=None, client_info=client_info,
+            ),
             self.delete_cluster: gapic_v1.method.wrap_method(
                 self.delete_cluster,
                 default_retry=retries.Retry(
@@ -207,6 +213,24 @@ class ClusterControllerTransport(abc.ABC):
         self,
     ) -> typing.Callable[
         [clusters.UpdateClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def stop_cluster(
+        self,
+    ) -> typing.Callable[
+        [clusters.StopClusterRequest],
+        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def start_cluster(
+        self,
+    ) -> typing.Callable[
+        [clusters.StartClusterRequest],
         typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
     ]:
         raise NotImplementedError()

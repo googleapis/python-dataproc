@@ -51,6 +51,11 @@ class ClusterControllerAsyncClient:
     DEFAULT_ENDPOINT = ClusterControllerClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = ClusterControllerClient.DEFAULT_MTLS_ENDPOINT
 
+    cluster_path = staticmethod(ClusterControllerClient.cluster_path)
+    parse_cluster_path = staticmethod(ClusterControllerClient.parse_cluster_path)
+    service_path = staticmethod(ClusterControllerClient.service_path)
+    parse_service_path = staticmethod(ClusterControllerClient.parse_service_path)
+
     common_billing_account_path = staticmethod(
         ClusterControllerClient.common_billing_account_path
     )
@@ -445,6 +450,114 @@ class ClusterControllerAsyncClient:
                 deadline=300.0,
             ),
             default_timeout=300.0,
+            client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            clusters.Cluster,
+            metadata_type=operations.ClusterOperationMetadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    async def stop_cluster(
+        self,
+        request: clusters.StopClusterRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""Stops a cluster in a project.
+
+        Args:
+            request (:class:`google.cloud.dataproc_v1.types.StopClusterRequest`):
+                The request object. A request to stop a cluster.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.api_core.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
+                   a cluster of Compute Engine instances.
+
+        """
+        # Create or coerce a protobuf request object.
+
+        request = clusters.StopClusterRequest(request)
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.stop_cluster,
+            default_timeout=None,
+            client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            clusters.Cluster,
+            metadata_type=operations.ClusterOperationMetadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    async def start_cluster(
+        self,
+        request: clusters.StartClusterRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""Starts a cluster in a project.
+
+        Args:
+            request (:class:`google.cloud.dataproc_v1.types.StartClusterRequest`):
+                The request object. A request to start a cluster.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.api_core.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
+                   a cluster of Compute Engine instances.
+
+        """
+        # Create or coerce a protobuf request object.
+
+        request = clusters.StartClusterRequest(request)
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.start_cluster,
+            default_timeout=None,
             client_info=DEFAULT_CLIENT_INFO,
         )
 

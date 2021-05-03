@@ -32,6 +32,7 @@ from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
 from google.cloud.dataproc_v1.services.workflow_template_service import pagers
 from google.cloud.dataproc_v1.types import workflow_templates
+from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import empty_pb2 as empty  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -50,6 +51,10 @@ class WorkflowTemplateServiceAsyncClient:
     DEFAULT_ENDPOINT = WorkflowTemplateServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = WorkflowTemplateServiceClient.DEFAULT_MTLS_ENDPOINT
 
+    cluster_path = staticmethod(WorkflowTemplateServiceClient.cluster_path)
+    parse_cluster_path = staticmethod(WorkflowTemplateServiceClient.parse_cluster_path)
+    service_path = staticmethod(WorkflowTemplateServiceClient.service_path)
+    parse_service_path = staticmethod(WorkflowTemplateServiceClient.parse_service_path)
     workflow_template_path = staticmethod(
         WorkflowTemplateServiceClient.workflow_template_path
     )
@@ -442,7 +447,7 @@ class WorkflowTemplateServiceAsyncClient:
             parameters (:class:`Sequence[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest.ParametersEntry]`):
                 Optional. Map from parameter names to
                 values that should be used for those
-                parameters. Values may not exceed 100
+                parameters. Values may not exceed 1000
                 characters.
 
                 This corresponds to the ``parameters`` field

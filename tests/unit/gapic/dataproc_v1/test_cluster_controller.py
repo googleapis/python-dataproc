@@ -834,6 +834,174 @@ async def test_update_cluster_flattened_error_async():
         )
 
 
+def test_stop_cluster(
+    transport: str = "grpc", request_type=clusters.StopClusterRequest
+):
+    client = ClusterControllerClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.stop_cluster), "__call__") as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/spam")
+
+        response = client.stop_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StopClusterRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_stop_cluster_from_dict():
+    test_stop_cluster(request_type=dict)
+
+
+def test_stop_cluster_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = ClusterControllerClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.stop_cluster), "__call__") as call:
+        client.stop_cluster()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StopClusterRequest()
+
+
+@pytest.mark.asyncio
+async def test_stop_cluster_async(
+    transport: str = "grpc_asyncio", request_type=clusters.StopClusterRequest
+):
+    client = ClusterControllerAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.stop_cluster), "__call__") as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+
+        response = await client.stop_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StopClusterRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+@pytest.mark.asyncio
+async def test_stop_cluster_async_from_dict():
+    await test_stop_cluster_async(request_type=dict)
+
+
+def test_start_cluster(
+    transport: str = "grpc", request_type=clusters.StartClusterRequest
+):
+    client = ClusterControllerClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.start_cluster), "__call__") as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/spam")
+
+        response = client.start_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StartClusterRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_start_cluster_from_dict():
+    test_start_cluster(request_type=dict)
+
+
+def test_start_cluster_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = ClusterControllerClient(
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.start_cluster), "__call__") as call:
+        client.start_cluster()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StartClusterRequest()
+
+
+@pytest.mark.asyncio
+async def test_start_cluster_async(
+    transport: str = "grpc_asyncio", request_type=clusters.StartClusterRequest
+):
+    client = ClusterControllerAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.start_cluster), "__call__") as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+
+        response = await client.start_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == clusters.StartClusterRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+@pytest.mark.asyncio
+async def test_start_cluster_async_from_dict():
+    await test_start_cluster_async(request_type=dict)
+
+
 def test_delete_cluster(
     transport: str = "grpc", request_type=clusters.DeleteClusterRequest
 ):
@@ -1780,6 +1948,8 @@ def test_cluster_controller_base_transport():
     methods = (
         "create_cluster",
         "update_cluster",
+        "stop_cluster",
+        "start_cluster",
         "delete_cluster",
         "get_cluster",
         "list_clusters",
@@ -2063,6 +2233,56 @@ def test_cluster_controller_grpc_lro_async_client():
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
+
+
+def test_cluster_path():
+    project = "squid"
+    location = "clam"
+    cluster = "whelk"
+
+    expected = "projects/{project}/locations/{location}/clusters/{cluster}".format(
+        project=project, location=location, cluster=cluster,
+    )
+    actual = ClusterControllerClient.cluster_path(project, location, cluster)
+    assert expected == actual
+
+
+def test_parse_cluster_path():
+    expected = {
+        "project": "octopus",
+        "location": "oyster",
+        "cluster": "nudibranch",
+    }
+    path = ClusterControllerClient.cluster_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = ClusterControllerClient.parse_cluster_path(path)
+    assert expected == actual
+
+
+def test_service_path():
+    project = "cuttlefish"
+    location = "mussel"
+    service = "winkle"
+
+    expected = "projects/{project}/locations/{location}/services/{service}".format(
+        project=project, location=location, service=service,
+    )
+    actual = ClusterControllerClient.service_path(project, location, service)
+    assert expected == actual
+
+
+def test_parse_service_path():
+    expected = {
+        "project": "nautilus",
+        "location": "scallop",
+        "service": "abalone",
+    }
+    path = ClusterControllerClient.service_path(**expected)
+
+    # Check that the path construction is reversible.
+    actual = ClusterControllerClient.parse_service_path(path)
+    assert expected == actual
 
 
 def test_common_billing_account_path():

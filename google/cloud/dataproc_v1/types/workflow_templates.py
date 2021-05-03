@@ -20,6 +20,7 @@ import proto  # type: ignore
 
 from google.cloud.dataproc_v1.types import clusters
 from google.cloud.dataproc_v1.types import jobs as gcd_jobs
+from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
@@ -111,6 +112,18 @@ class WorkflowTemplate(proto.Message):
             are substituted into the template. Values for
             parameters must be provided when the template is
             instantiated.
+        dag_timeout (google.protobuf.duration_pb2.Duration):
+            Optional. Timeout duration for the DAG of jobs, expressed in
+            seconds (see `JSON representation of
+            duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__).
+            The timeout duration must be from 10 minutes ("600s") to 24
+            hours ("86400s"). The timer begins when the first job is
+            submitted. If the workflow is running at the end of the
+            timeout period, any remaining jobs are cancelled, the
+            workflow is ended, and if the workflow was running on a
+            `managed
+            cluster </dataproc/docs/concepts/workflows/using-workflows#configuring_or_selecting_a_cluster>`__,
+            the cluster is deleted.
     """
 
     id = proto.Field(proto.STRING, number=2)
@@ -134,6 +147,8 @@ class WorkflowTemplate(proto.Message):
     parameters = proto.RepeatedField(
         proto.MESSAGE, number=9, message="TemplateParameter",
     )
+
+    dag_timeout = proto.Field(proto.MESSAGE, number=10, message=duration.Duration,)
 
 
 class WorkflowTemplatePlacement(proto.Message):
@@ -486,6 +501,18 @@ class WorkflowMetadata(proto.Message):
             Output only. Workflow end time.
         cluster_uuid (str):
             Output only. The UUID of target cluster.
+        dag_timeout (google.protobuf.duration_pb2.Duration):
+            Output only. The timeout duration for the DAG of jobs,
+            expressed in seconds (see `JSON representation of
+            duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__).
+        dag_start_time (google.protobuf.timestamp_pb2.Timestamp):
+            Output only. DAG start time, only set for workflows with
+            [dag_timeout][google.cloud.dataproc.v1.WorkflowMetadata.dag_timeout]
+            when DAG begins.
+        dag_end_time (google.protobuf.timestamp_pb2.Timestamp):
+            Output only. DAG end time, only set for workflows with
+            [dag_timeout][google.cloud.dataproc.v1.WorkflowMetadata.dag_timeout]
+            when DAG ends.
     """
 
     class State(proto.Enum):
@@ -516,6 +543,12 @@ class WorkflowMetadata(proto.Message):
     end_time = proto.Field(proto.MESSAGE, number=10, message=timestamp.Timestamp,)
 
     cluster_uuid = proto.Field(proto.STRING, number=11)
+
+    dag_timeout = proto.Field(proto.MESSAGE, number=12, message=duration.Duration,)
+
+    dag_start_time = proto.Field(proto.MESSAGE, number=13, message=timestamp.Timestamp,)
+
+    dag_end_time = proto.Field(proto.MESSAGE, number=14, message=timestamp.Timestamp,)
 
 
 class ClusterOperation(proto.Message):
@@ -678,7 +711,7 @@ class InstantiateWorkflowTemplateRequest(proto.Message):
         parameters (Sequence[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest.ParametersEntry]):
             Optional. Map from parameter names to values
             that should be used for those parameters. Values
-            may not exceed 100 characters.
+            may not exceed 1000 characters.
     """
 
     name = proto.Field(proto.STRING, number=1)
