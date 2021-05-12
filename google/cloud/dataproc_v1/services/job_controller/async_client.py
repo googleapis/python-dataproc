@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,17 +20,16 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
 from google.cloud.dataproc_v1.services.job_controller import pagers
 from google.cloud.dataproc_v1.types import jobs
-
 from .transports.base import JobControllerTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import JobControllerGrpcAsyncIOTransport
 from .client import JobControllerClient
@@ -52,24 +49,20 @@ class JobControllerAsyncClient:
     parse_common_billing_account_path = staticmethod(
         JobControllerClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(JobControllerClient.common_folder_path)
     parse_common_folder_path = staticmethod(
         JobControllerClient.parse_common_folder_path
     )
-
     common_organization_path = staticmethod(
         JobControllerClient.common_organization_path
     )
     parse_common_organization_path = staticmethod(
         JobControllerClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(JobControllerClient.common_project_path)
     parse_common_project_path = staticmethod(
         JobControllerClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(JobControllerClient.common_location_path)
     parse_common_location_path = staticmethod(
         JobControllerClient.parse_common_location_path
@@ -123,7 +116,7 @@ class JobControllerAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, JobControllerTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -160,7 +153,6 @@ class JobControllerAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = JobControllerClient(
             credentials=credentials,
             transport=transport,
@@ -204,7 +196,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``job`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -229,7 +220,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -294,7 +284,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``job`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -324,7 +313,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -399,7 +387,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``job_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -424,7 +411,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -510,7 +496,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``filter`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -539,7 +524,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -591,7 +575,6 @@ class JobControllerAsyncClient:
         Args:
             request (:class:`google.cloud.dataproc_v1.types.UpdateJobRequest`):
                 The request object. A request to update a job.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -603,7 +586,6 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-
         request = jobs.UpdateJobRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -667,7 +649,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``job_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -692,7 +673,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
@@ -762,7 +742,6 @@ class JobControllerAsyncClient:
                 This corresponds to the ``job_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -783,7 +762,6 @@ class JobControllerAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if project_id is not None:
             request.project_id = project_id
         if region is not None:
