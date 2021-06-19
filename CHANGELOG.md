@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [2.4.1](https://www.github.com/googleapis/python-dataproc/compare/v2.4.0...v2.4.1) (2021-06-19)
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-dataproc/issues/1127)) ([#201](https://www.github.com/googleapis/python-dataproc/issues/201)) ([feea064](https://www.github.com/googleapis/python-dataproc/commit/feea0642ea6dbd6e08d4e52c89789a6b17e4de97))
+
 ## [2.4.0](https://www.github.com/googleapis/python-dataproc/compare/v2.3.1...v2.4.0) (2021-05-20)
 
 
