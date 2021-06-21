@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +15,14 @@
 #
 
 from .services.autoscaling_policy_service import AutoscalingPolicyServiceClient
+from .services.autoscaling_policy_service import AutoscalingPolicyServiceAsyncClient
 from .services.cluster_controller import ClusterControllerClient
+from .services.cluster_controller import ClusterControllerAsyncClient
 from .services.job_controller import JobControllerClient
+from .services.job_controller import JobControllerAsyncClient
 from .services.workflow_template_service import WorkflowTemplateServiceClient
+from .services.workflow_template_service import WorkflowTemplateServiceAsyncClient
+
 from .types.autoscaling_policies import AutoscalingPolicy
 from .types.autoscaling_policies import BasicAutoscalingAlgorithm
 from .types.autoscaling_policies import BasicYarnAutoscalingConfig
@@ -44,16 +48,23 @@ from .types.clusters import EncryptionConfig
 from .types.clusters import EndpointConfig
 from .types.clusters import GceClusterConfig
 from .types.clusters import GetClusterRequest
+from .types.clusters import GkeClusterConfig
+from .types.clusters import IdentityConfig
 from .types.clusters import InstanceGroupConfig
 from .types.clusters import KerberosConfig
 from .types.clusters import LifecycleConfig
 from .types.clusters import ListClustersRequest
 from .types.clusters import ListClustersResponse
 from .types.clusters import ManagedGroupConfig
+from .types.clusters import MetastoreConfig
+from .types.clusters import NodeGroupAffinity
 from .types.clusters import NodeInitializationAction
 from .types.clusters import ReservationAffinity
 from .types.clusters import SecurityConfig
+from .types.clusters import ShieldedInstanceConfig
 from .types.clusters import SoftwareConfig
+from .types.clusters import StartClusterRequest
+from .types.clusters import StopClusterRequest
 from .types.clusters import UpdateClusterRequest
 from .types.jobs import CancelJobRequest
 from .types.jobs import DeleteJobRequest
@@ -104,11 +115,15 @@ from .types.workflow_templates import WorkflowNode
 from .types.workflow_templates import WorkflowTemplate
 from .types.workflow_templates import WorkflowTemplatePlacement
 
-
 __all__ = (
+    "AutoscalingPolicyServiceAsyncClient",
+    "ClusterControllerAsyncClient",
+    "JobControllerAsyncClient",
+    "WorkflowTemplateServiceAsyncClient",
     "AcceleratorConfig",
     "AutoscalingConfig",
     "AutoscalingPolicy",
+    "AutoscalingPolicyServiceClient",
     "BasicAutoscalingAlgorithm",
     "BasicYarnAutoscalingConfig",
     "CancelJobRequest",
@@ -139,8 +154,10 @@ __all__ = (
     "GetClusterRequest",
     "GetJobRequest",
     "GetWorkflowTemplateRequest",
+    "GkeClusterConfig",
     "HadoopJob",
     "HiveJob",
+    "IdentityConfig",
     "InstanceGroupAutoscalingPolicyConfig",
     "InstanceGroupConfig",
     "InstantiateInlineWorkflowTemplateRequest",
@@ -165,6 +182,8 @@ __all__ = (
     "LoggingConfig",
     "ManagedCluster",
     "ManagedGroupConfig",
+    "MetastoreConfig",
+    "NodeGroupAffinity",
     "NodeInitializationAction",
     "OrderedJob",
     "ParameterValidation",
@@ -175,10 +194,13 @@ __all__ = (
     "RegexValidation",
     "ReservationAffinity",
     "SecurityConfig",
+    "ShieldedInstanceConfig",
     "SoftwareConfig",
     "SparkJob",
     "SparkRJob",
     "SparkSqlJob",
+    "StartClusterRequest",
+    "StopClusterRequest",
     "SubmitJobRequest",
     "TemplateParameter",
     "UpdateAutoscalingPolicyRequest",
@@ -193,5 +215,4 @@ __all__ = (
     "WorkflowTemplatePlacement",
     "WorkflowTemplateServiceClient",
     "YarnApplication",
-    "AutoscalingPolicyServiceClient",
 )
