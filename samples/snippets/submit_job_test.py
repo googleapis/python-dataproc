@@ -21,30 +21,24 @@ import pytest
 import submit_job
 
 
-PROJECT_ID = os.environ['GOOGLE_CLOUD_PROJECT']
-REGION = 'us-central1'
-CLUSTER_NAME = 'py-sj-test-{}'.format(str(uuid.uuid4()))
+PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
+REGION = "us-central1"
+CLUSTER_NAME = "py-sj-test-{}".format(str(uuid.uuid4()))
 CLUSTER = {
-    'project_id': PROJECT_ID,
-    'cluster_name': CLUSTER_NAME,
-    'config': {
-        'master_config': {
-            'num_instances': 1,
-            'machine_type_uri': 'n1-standard-2'
-        },
-        'worker_config': {
-            'num_instances': 2,
-            'machine_type_uri': 'n1-standard-2'
-        }
-    }
+    "project_id": PROJECT_ID,
+    "cluster_name": CLUSTER_NAME,
+    "config": {
+        "master_config": {"num_instances": 1, "machine_type_uri": "n1-standard-2"},
+        "worker_config": {"num_instances": 2, "machine_type_uri": "n1-standard-2"},
+    },
 }
 
 
 @pytest.fixture(autouse=True)
 def setup_teardown():
-    cluster_client = dataproc.ClusterControllerClient(client_options={
-        'api_endpoint': '{}-dataproc.googleapis.com:443'.format(REGION)
-    })
+    cluster_client = dataproc.ClusterControllerClient(
+        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
+    )
 
     # Create the cluster.
     operation = cluster_client.create_cluster(
@@ -54,13 +48,17 @@ def setup_teardown():
 
     yield
 
-    cluster_client.delete_cluster(request={
-        "project_id": PROJECT_ID, "region": REGION, "cluster_name": CLUSTER_NAME
-    })
+    cluster_client.delete_cluster(
+        request={
+            "project_id": PROJECT_ID,
+            "region": REGION,
+            "cluster_name": CLUSTER_NAME,
+        }
+    )
 
 
 def test_submit_job(capsys):
     submit_job.submit_job(PROJECT_ID, REGION, CLUSTER_NAME)
     out, _ = capsys.readouterr()
 
-    assert 'Job finished successfully' in out
+    assert "Job finished successfully" in out
