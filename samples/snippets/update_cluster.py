@@ -23,7 +23,7 @@ import sys
 from google.cloud import dataproc_v1 as dataproc
 
 
-def update_cluster(project_id, region, cluster_name):
+def update_cluster(project_id, region, cluster_name, new_num_instances):
     """This sample walks a user through updating a Cloud Dataproc cluster
     using the Python client library.
     Args:
@@ -40,7 +40,6 @@ def update_cluster(project_id, region, cluster_name):
         project_id=project_id, region=region, cluster_name=cluster_name
     )
     # Update number of clusters
-    new_num_instances = cluster.config.worker_config.num_instances * 2
     mask = {"paths": {"config.worker_config.num_instances": str(new_num_instances)}}
     # Update cluster config
     cluster.config.worker_config.num_instances = new_num_instances
@@ -58,10 +57,11 @@ def update_cluster(project_id, region, cluster_name):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         sys.exit("python update_cluster.py project_id region cluster_name")
 
         project_id = sys.argv[1]
         region = sys.argv[2]
         cluster_name = sys.argv[3]
+        new_num_instances = sys.argv[4]
         update_cluster(project_id, region, cluster_name)

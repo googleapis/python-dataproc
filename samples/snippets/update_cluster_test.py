@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from google.cloud.dataproc_v1.types.clusters import GceClusterConfig
 import os
 import uuid
 
@@ -26,6 +25,7 @@ import update_cluster
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 REGION = "us-central1"
 CLUSTER_NAME = "py-cc-test-{}".format(str(uuid.uuid4()))
+NEW_NUM_INSTANCES = 5
 
 
 @pytest.fixture(autouse=True)
@@ -50,7 +50,7 @@ def teardown():
 def test_update_cluster(capsys):
     # Wrapper function for client library function
     create_cluster.create_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
-    update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
+    update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME, NEW_NUM_INSTANCES)
 
     out, _ = capsys.readouterr()
     assert CLUSTER_NAME in out
