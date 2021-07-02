@@ -11,6 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# This sample walks a user through updating a Cloud Dataproc cluster using
+# the Python client library.
+#
+# This script can be run on its own:
+#  python update_cluster.py ${PROJECT_ID} ${REGION} ${CLUSTER_NAME}
+
 import sys
 
 # [START dataproc_update_cluster]
@@ -18,16 +24,22 @@ from google.cloud import dataproc_v1 as dataproc
 
 
 def update_cluster(project_id, region, cluster_name):
-    """Specify client with desired cluster"""
+    """This sample walks a user through updating a Cloud Dataproc cluster
+    using the Python client library.
+    Args:
+        project_id (string): Project to use for creating resources.
+        region (string): Region where the resources should live.
+        cluster_name (string): Name to use for creating a cluster.
+    """
+    # Create a client with the endpoint set to the desired cluster region.
     client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
-    # Get cluster
+    # Get cluster you wish to update.
     cluster = client.get_cluster(
         project_id=project_id, region=region, cluster_name=cluster_name
     )
     # Update number of clusters
-
     new_num_instances = cluster.config.worker_config.num_instances * 2
     mask = {"paths": {"config.worker_config.num_instances": str(new_num_instances)}}
     # Update cluster config
@@ -40,9 +52,9 @@ def update_cluster(project_id, region, cluster_name):
         cluster_name=cluster_name,
         update_mask=mask,
     )
-    # Return result of operation
+    # Output a success message.
     updated_cluster = operation.result()
-    print(f"result was: {updated_cluster}")
+    print(f"Cluster was updated successfully: {updated_cluster.cluster_name}")
 
 
 if __name__ == "__main__":
