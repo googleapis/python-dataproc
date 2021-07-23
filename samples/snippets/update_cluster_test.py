@@ -16,48 +16,64 @@
 # client library.
 
 
+from google.cloud.dataproc_v1.services.cluster_controller.client import ClusterControllerClient
+from google.cloud.dataproc_v1.services.cluster_controller import async_client
+from google.cloud.dataproc_v1.services import cluster_controller
+from google.cloud.dataproc_v1.types.clusters import GetClusterRequest
 import os
 import uuid
 
 from google.cloud import dataproc_v1 as dataproc
 import pytest
 
-import create_cluster
 import update_cluster
 
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 REGION = "us-central1"
-CLUSTER_NAME = "py-cc-test-{}".format(str(uuid.uuid4()))
+CLUSTER_NAME = f"py-cc-test-{str(uuid.uuid4())}"
 NEW_NUM_INSTANCES = 5
+CLUSTER = {
+    'project_id': PROJECT_ID,
+    'cluster_name': CLUSTER_NAME,
+    'config': {
+        'master_config': {
+            'num_instances': 1,
+            'machine_type_uri': 'n1-standard-2'
+        },
+        'worker_config': {
+            'num_instances': 2,
+            'machine_type_uri': 'n1-standard-2'
+        }
+    }
+}
 
 
 @pytest.fixture(autouse=True)
-def teardown():
+def setup_teardown():
+    cluster_client = dataproc.ClusterControllerClient(client_options={
+        'api_endpoint': '{}-dataproc.googleapis.com:443'.format(REGION)
+    })
+
+    # Create the cluster.
+    operation = cluster_client.create_cluster(
+        request={"project_id": PROJECT_ID, "region": REGION, "cluster": CLUSTER}
+    )
+    operation.result()
+
     yield
 
-    cluster_client = dataproc.ClusterControllerClient(
-        client_options={"api_endpoint": f"{REGION}-dataproc.googleapis.com:443"}
-    )
-    
-    # Client library function
-    operation = cluster_client.delete_cluster(
-        request={
-            "project_id": PROJECT_ID,
-            "region": REGION,
-            "cluster_name": CLUSTER_NAME,
-        }
-    )
-    
-    # Wait for cluster to delete
-    operation.result()
+    cluster_client.delete_cluster(request={
+        "project_id": PROJECT_ID, "region": REGION, "cluster_name": CLUSTER_NAME
+    })
 
 
 def test_update_cluster(capsys):
     
     # Wrapper function for client library function
-    create_cluster.create_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
     update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME, NEW_NUM_INSTANCES)
+    new_num_cluster = dataproc.ClusterControllerClient.get_cluster(PROJECT_ID)
 
     out, _ = capsys.readouterr()
     assert CLUSTER_NAME in out
+    assert new_num_cluster.config.worker_config.num_instances == 5
