@@ -28,9 +28,9 @@ def update_cluster(project_id, region, cluster_name, new_num_instances):
     """This sample walks a user through updating a Cloud Dataproc cluster
     using the Python client library.
     Args:
-        project_id (string): Project to use for creating resources.
-        region (string): Region where the resources should live.
-        cluster_name (string): Name to use for creating a cluster.
+        project_id (str): Project to use for creating resources.
+        region (str): Region where the resources should live.
+        cluster_name (str): Name to use for creating a cluster.
     """
     
     # Create a client with the endpoint set to the desired cluster region.
