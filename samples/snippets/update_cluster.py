@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+# Copyright 2021 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This sample walks a user through updating a Cloud Dataproc cluster using
-# the Python client library.
-#
-# This script can be run on its own:
-#  python update_cluster.py ${PROJECT_ID} ${REGION} ${CLUSTER_NAME}
+# This sample walks a user through updating the number of clusters using the Dataproc
+# client library.
+
+# Usage:
+#  python update_cluster.py --project_id <PROJECT_ID> --region <REGION> --cluster_name <CLUSTER_NAME>
 
 import sys
 
@@ -31,18 +32,23 @@ def update_cluster(project_id, region, cluster_name, new_num_instances):
         region (string): Region where the resources should live.
         cluster_name (string): Name to use for creating a cluster.
     """
+    
     # Create a client with the endpoint set to the desired cluster region.
     client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
+    
     # Get cluster you wish to update.
     cluster = client.get_cluster(
         project_id=project_id, region=region, cluster_name=cluster_name
     )
+    
     # Update number of clusters
     mask = {"paths": {"config.worker_config.num_instances": str(new_num_instances)}}
+    
     # Update cluster config
     cluster.config.worker_config.num_instances = new_num_instances
+    
     # Update cluster
     operation = client.update_cluster(
         project_id=project_id,
@@ -51,9 +57,12 @@ def update_cluster(project_id, region, cluster_name, new_num_instances):
         cluster_name=cluster_name,
         update_mask=mask,
     )
+    
     # Output a success message.
     updated_cluster = operation.result()
     print(f"Cluster was updated successfully: {updated_cluster.cluster_name}")
+# [END dataproc_update_cluster]
+
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,6 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# This sample walks a user through updating the number of clusters using the Dataproc
+# client library.
+
 
 import os
 import uuid
@@ -35,6 +39,7 @@ def teardown():
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{REGION}-dataproc.googleapis.com:443"}
     )
+    
     # Client library function
     operation = cluster_client.delete_cluster(
         request={
@@ -43,11 +48,13 @@ def teardown():
             "cluster_name": CLUSTER_NAME,
         }
     )
+    
     # Wait for cluster to delete
     operation.result()
 
 
 def test_update_cluster(capsys):
+    
     # Wrapper function for client library function
     create_cluster.create_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
     update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME, NEW_NUM_INSTANCES)
