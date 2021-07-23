@@ -27,6 +27,7 @@ from google.cloud import dataproc_v1 as dataproc
 def update_cluster(project_id, region, cluster_name, new_num_instances):
     """This sample walks a user through updating a Cloud Dataproc cluster
     using the Python client library.
+
     Args:
         project_id (str): Project to use for creating resources.
         region (str): Region where the resources should live.
