@@ -10,7 +10,6 @@
 ### Features
 
 * add always_use_jwt_access ([#209](https://www.github.com/googleapis/python-dataproc/issues/209)) ([6aec13c](https://www.github.com/googleapis/python-dataproc/commit/6aec13ce39a2afc0f36878bd61cff1614ec66972))
-* add Samples section to CONTRIBUTING.rst ([#228](https://www.github.com/googleapis/python-dataproc/issues/228)) ([3e248c2](https://www.github.com/googleapis/python-dataproc/commit/3e248c29470d635abf0d6fa7ae84dc8370a86bef))
 
 
 ### Bug Fixes
@@ -24,6 +23,8 @@
 ### Documentation
 
 * omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-dataproc/issues/1127)) ([#201](https://www.github.com/googleapis/python-dataproc/issues/201)) ([feea064](https://www.github.com/googleapis/python-dataproc/commit/feea0642ea6dbd6e08d4e52c89789a6b17e4de97))
+* add Samples section to CONTRIBUTING.rst ([#228](https://www.github.com/googleapis/python-dataproc/issues/228)) ([3e248c2](https://www.github.com/googleapis/python-dataproc/commit/3e248c29470d635abf0d6fa7ae84dc8370a86bef))
+
 
 ## [2.4.0](https://www.github.com/googleapis/python-dataproc/compare/v2.3.1...v2.4.0) (2021-05-20)
 
