@@ -44,6 +44,11 @@ CLUSTER = {
     },
 }
 
+# option 3
+"""cluster_client = dataproc.ClusterControllerClient(
+        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
+    )"""
+
 
 @pytest.fixture(autouse=True)
 def setup_teardown():
@@ -68,11 +73,23 @@ def setup_teardown():
     )
 
 
-def test_update_cluster(capsys):
+# option 2
+"""@pytest.fixture(autouse=True)
+def cluster_client():
+    cluster_client = dataproc.ClusterControllerClient(
+        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
+    )
+    return cluster_client"""
 
+
+def test_update_cluster(capsys):
+    # option 1
+    cluster_client = dataproc.ClusterControllerClient(
+        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
+    )
     # Wrapper function for client library function
     update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME, NEW_NUM_INSTANCES)
-    new_num_cluster = dataproc.ClusterControllerClient.get_cluster(
+    new_num_cluster = cluster_client.get_cluster(
         project_id=PROJECT_ID, region=REGION, cluster_name=CLUSTER_NAME
     )
 
