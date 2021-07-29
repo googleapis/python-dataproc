@@ -33,23 +33,23 @@ def update_cluster(project_id, region, cluster_name, new_num_instances):
         region (str): Region where the resources should live.
         cluster_name (str): Name to use for creating a cluster.
     """
-    
+
     # Create a client with the endpoint set to the desired cluster region.
     client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
-    
+
     # Get cluster you wish to update.
     cluster = client.get_cluster(
         project_id=project_id, region=region, cluster_name=cluster_name
     )
-    
+
     # Update number of clusters
     mask = {"paths": {"config.worker_config.num_instances": str(new_num_instances)}}
-    
+
     # Update cluster config
     cluster.config.worker_config.num_instances = new_num_instances
-    
+
     # Update cluster
     operation = client.update_cluster(
         project_id=project_id,
@@ -58,12 +58,13 @@ def update_cluster(project_id, region, cluster_name, new_num_instances):
         cluster_name=cluster_name,
         update_mask=mask,
     )
-    
+
     # Output a success message.
     updated_cluster = operation.result()
     print(f"Cluster was updated successfully: {updated_cluster.cluster_name}")
-# [END dataproc_update_cluster]
 
+
+# [END dataproc_update_cluster]
 
 
 if __name__ == "__main__":
