@@ -19,9 +19,6 @@
 from google.cloud.dataproc_v1.services.cluster_controller.client import (
     ClusterControllerClient,
 )
-from google.cloud.dataproc_v1.services.cluster_controller import async_client
-from google.cloud.dataproc_v1.services import cluster_controller
-from google.cloud.dataproc_v1.types.clusters import GetClusterRequest
 import os
 import uuid
 
@@ -44,18 +41,9 @@ CLUSTER = {
     },
 }
 
-# option 3
-"""cluster_client = dataproc.ClusterControllerClient(
-        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
-    )"""
-
 
 @pytest.fixture(autouse=True)
-def setup_teardown():
-    cluster_client = dataproc.ClusterControllerClient(
-        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
-    )
-
+def setup_teardown(cluster_client):
     # Create the cluster.
     operation = cluster_client.create_cluster(
         request={"project_id": PROJECT_ID, "region": REGION, "cluster": CLUSTER}
@@ -73,20 +61,15 @@ def setup_teardown():
     )
 
 
-# option 2
-"""@pytest.fixture(autouse=True)
+@pytest.fixture
 def cluster_client():
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
     )
-    return cluster_client"""
+    return cluster_client
 
 
-def test_update_cluster(capsys):
-    # option 1
-    cluster_client = dataproc.ClusterControllerClient(
-        client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
-    )
+def test_update_cluster(capsys, cluster_client: ClusterControllerClient):
     # Wrapper function for client library function
     update_cluster.update_cluster(PROJECT_ID, REGION, CLUSTER_NAME, NEW_NUM_INSTANCES)
     new_num_cluster = cluster_client.get_cluster(
