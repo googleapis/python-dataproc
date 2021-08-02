@@ -16,13 +16,12 @@
 # client library.
 
 
-from google.cloud.dataproc_v1.services.cluster_controller.client import (
-    ClusterControllerClient,
-)
 import os
 import uuid
 
-from google.cloud import dataproc_v1 as dataproc
+from google.cloud.dataproc_v1.services.cluster_controller.client import (
+    ClusterControllerClient,
+)
 import pytest
 
 import update_cluster
@@ -63,7 +62,7 @@ def setup_teardown(cluster_client):
 
 @pytest.fixture
 def cluster_client():
-    cluster_client = dataproc.ClusterControllerClient(
+    cluster_client = ClusterControllerClient(
         client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
     )
     return cluster_client
@@ -78,4 +77,4 @@ def test_update_cluster(capsys, cluster_client: ClusterControllerClient):
 
     out, _ = capsys.readouterr()
     assert CLUSTER_NAME in out
-    assert new_num_cluster.config.worker_config.num_instances == 5
+    assert new_num_cluster.config.worker_config.num_instances == NEW_NUM_INSTANCES
