@@ -1,8 +1,6 @@
 {
   "extends": [
-    "config:base",
-    ":preserveSemverRanges",
-    ":disableDependencyDashboard"
+    "config:base",  ":preserveSemverRanges"
   ],
   "ignorePaths": [".pre-commit-config.yaml"],
   "pip_requirements": {
