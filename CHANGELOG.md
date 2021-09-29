@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [2.6.1](https://www.github.com/googleapis/python-dataproc/compare/v2.6.0...v2.6.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([be5c115](https://www.github.com/googleapis/python-dataproc/commit/be5c11554f7accfe60dd5cb8da7c4888f688c282))
+
 ## [2.6.0](https://www.github.com/googleapis/python-dataproc/compare/v2.5.0...v2.6.0) (2021-09-21)
 
 
