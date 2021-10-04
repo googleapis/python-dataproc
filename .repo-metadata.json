@@ -12,5 +12,5 @@
     "api_id": "dataproc.googleapis.com",
     "requires_billing": true,
     "codeowner_team": "@googleapis/api-dataproc",
-    "default_version": ""
+    "default_version": "v1"
 }
