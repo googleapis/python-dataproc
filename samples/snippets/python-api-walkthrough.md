@@ -6,7 +6,7 @@ Estimated completion time: <walkthrough-tutorial-duration duration="5"></walkthr
 
 This [Cloud Shell](https://cloud.google.com/shell/docs/) walkthrough leads you
 through the steps to use the
-[Google Cloud Client Libraries for Python](https://googleapis.github.io/google-cloud-python/latest/dataproc/index.html)
+[Cloud Client Libraries for Python](https://googleapis.github.io/google-cloud-python/latest/dataproc/index.html)
 to programmatically interact with [Dataproc](https://cloud.google.com/dataproc/docs/).
 
 As you follow this walkthrough, you run Python code that calls
@@ -24,7 +24,7 @@ The `submit_job_to_cluster.py file` used in this walkthrough is opened in the
 Cloud Shell editor when you launch the walkthrough. You can view
 the code as your follow the walkthrough steps.
 
-**For more information**: See [Dataproc&rarr;Use the Python Client Library](https://cloud.google.com/dataproc/docs/tutorials/python-library-example) for
+**For more information**: See [Use the Python Client Library](https://cloud.google.com/dataproc/docs/tutorials/python-library-example) for
 an explanation of how the code works.
 
 **To reload this walkthrough:** Run the following command from the
@@ -41,13 +41,8 @@ an explanation of how the code works.
 1. Create or select a Google Cloud Platform project to use for this tutorial.
     * <walkthrough-project-billing-setup permissions=""></walkthrough-project-billing-setup>
 
-1. Click the link below to enable the Dataproc, Compute Engine, and Cloud Storage APIs
-   in a separate GCP console tab in your browser.
-    
-   **Note:** After you select your project and enable the APIs, return to this tutorial by clicking
-   on the **Cloud Shell** tab in your browser.
-    
-   * [Enable APIs](https://console.cloud.google.com/flows/enableapi?apiid=dataproc,compute_component,storage-component.googleapis.com&redirect=https://console.cloud.google.com)
+1. Enable the Dataproc, Compute Engine, and Cloud Storage APIs in your project.
+    * <walkthrough-enable-apis apis="dataproc.googleapis.com,compute.googleapis.com,storage-component.googleapis.com"></walkthrough-enable-apis>
 
 ## Prerequisites (2)
 
