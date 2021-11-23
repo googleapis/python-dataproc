@@ -52,6 +52,7 @@ __protobuf__ = proto.module(
 
 class LoggingConfig(proto.Message):
     r"""The runtime logging config of the job.
+
     Attributes:
         driver_log_levels (Sequence[google.cloud.dataproc_v1.types.LoggingConfig.DriverLogLevelsEntry]):
             The per-package log levels for the driver.
@@ -63,8 +64,8 @@ class LoggingConfig(proto.Message):
 
     class Level(proto.Enum):
         r"""The Log4j level for job execution. When running an `Apache
-        Hive <http://hive.apache.org/>`__ job, Cloud Dataproc configures the
-        Hive client to an equivalent verbosity level.
+        Hive <https://hive.apache.org/>`__ job, Cloud Dataproc configures
+        the Hive client to an equivalent verbosity level.
         """
         LEVEL_UNSPECIFIED = 0
         ALL = 1
@@ -85,6 +86,13 @@ class HadoopJob(proto.Message):
     jobs on `Apache Hadoop
     YARN <https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html>`__.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         main_jar_file_uri (str):
             The HCFS URI of the jar file containing the
@@ -94,10 +102,14 @@ class HadoopJob(proto.Message):
             samples/custom-wordcount.jar'
             'file:///home/usr/lib/hadoop-mapreduce/hadoop-
             mapreduce-examples.jar'
+
+            This field is a member of `oneof`_ ``driver``.
         main_class (str):
             The name of the driver's main class. The jar file containing
             the class must be in the default CLASSPATH or specified in
             ``jar_file_uris``.
+
+            This field is a member of `oneof`_ ``driver``.
         args (Sequence[str]):
             Optional. The arguments to pass to the driver. Do not
             include arguments, such as ``-libjars`` or ``-Dfoo=bar``,
@@ -141,14 +153,25 @@ class SparkJob(proto.Message):
     r"""A Dataproc job for running `Apache
     Spark <http://spark.apache.org/>`__ applications on YARN.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         main_jar_file_uri (str):
             The HCFS URI of the jar file that contains
             the main class.
+
+            This field is a member of `oneof`_ ``driver``.
         main_class (str):
             The name of the driver's main class. The jar file that
             contains the class must be in the default CLASSPATH or
             specified in ``jar_file_uris``.
+
+            This field is a member of `oneof`_ ``driver``.
         args (Sequence[str]):
             Optional. The arguments to pass to the driver. Do not
             include arguments, such as ``--conf``, that can be set as
@@ -243,6 +266,7 @@ class PySparkJob(proto.Message):
 
 class QueryList(proto.Message):
     r"""A list of queries to run on a cluster.
+
     Attributes:
         queries (Sequence[str]):
             Required. The queries to execute. You do not need to end a
@@ -271,12 +295,23 @@ class HiveJob(proto.Message):
     r"""A Dataproc job for running `Apache
     Hive <https://hive.apache.org/>`__ queries on YARN.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         query_file_uri (str):
             The HCFS URI of the script that contains Hive
             queries.
+
+            This field is a member of `oneof`_ ``queries``.
         query_list (google.cloud.dataproc_v1.types.QueryList):
             A list of queries.
+
+            This field is a member of `oneof`_ ``queries``.
         continue_on_failure (bool):
             Optional. Whether to continue executing queries if a query
             fails. The default value is ``false``. Setting to ``true``
@@ -311,12 +346,23 @@ class SparkSqlJob(proto.Message):
     r"""A Dataproc job for running `Apache Spark
     SQL <http://spark.apache.org/sql/>`__ queries.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         query_file_uri (str):
             The HCFS URI of the script that contains SQL
             queries.
+
+            This field is a member of `oneof`_ ``queries``.
         query_list (google.cloud.dataproc_v1.types.QueryList):
             A list of queries.
+
+            This field is a member of `oneof`_ ``queries``.
         script_variables (Sequence[google.cloud.dataproc_v1.types.SparkSqlJob.ScriptVariablesEntry]):
             Optional. Mapping of query variable names to values
             (equivalent to the Spark SQL command: SET
@@ -348,12 +394,23 @@ class PigJob(proto.Message):
     r"""A Dataproc job for running `Apache Pig <https://pig.apache.org/>`__
     queries on YARN.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         query_file_uri (str):
             The HCFS URI of the script that contains the
             Pig queries.
+
+            This field is a member of `oneof`_ ``queries``.
         query_list (google.cloud.dataproc_v1.types.QueryList):
             A list of queries.
+
+            This field is a member of `oneof`_ ``queries``.
         continue_on_failure (bool):
             Optional. Whether to continue executing queries if a query
             fails. The default value is ``false``. Setting to ``true``
@@ -438,12 +495,23 @@ class PrestoJob(proto.Message):
     must be enabled when the cluster is created to submit a Presto job
     to the cluster.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         query_file_uri (str):
             The HCFS URI of the script that contains SQL
             queries.
+
+            This field is a member of `oneof`_ ``queries``.
         query_list (google.cloud.dataproc_v1.types.QueryList):
             A list of queries.
+
+            This field is a member of `oneof`_ ``queries``.
         continue_on_failure (bool):
             Optional. Whether to continue executing queries if a query
             fails. The default value is ``false``. Setting to ``true``
@@ -478,6 +546,7 @@ class PrestoJob(proto.Message):
 
 class JobPlacement(proto.Message):
     r"""Dataproc job config.
+
     Attributes:
         cluster_name (str):
             Required. The name of the cluster where the
@@ -497,6 +566,7 @@ class JobPlacement(proto.Message):
 
 class JobStatus(proto.Message):
     r"""Dataproc job status.
+
     Attributes:
         state (google.cloud.dataproc_v1.types.JobStatus.State):
             Output only. A state message specifying the
@@ -543,6 +613,7 @@ class JobStatus(proto.Message):
 
 class JobReference(proto.Message):
     r"""Encapsulates the full scoping used to reference a job.
+
     Attributes:
         project_id (str):
             Optional. The ID of the Google Cloud Platform
@@ -611,6 +682,14 @@ class YarnApplication(proto.Message):
 
 class Job(proto.Message):
     r"""A Dataproc job resource.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         reference (google.cloud.dataproc_v1.types.JobReference):
             Optional. The fully qualified reference to the job, which
@@ -622,20 +701,36 @@ class Job(proto.Message):
             when, and where to run the job.
         hadoop_job (google.cloud.dataproc_v1.types.HadoopJob):
             Optional. Job is a Hadoop job.
+
+            This field is a member of `oneof`_ ``type_job``.
         spark_job (google.cloud.dataproc_v1.types.SparkJob):
             Optional. Job is a Spark job.
+
+            This field is a member of `oneof`_ ``type_job``.
         pyspark_job (google.cloud.dataproc_v1.types.PySparkJob):
             Optional. Job is a PySpark job.
+
+            This field is a member of `oneof`_ ``type_job``.
         hive_job (google.cloud.dataproc_v1.types.HiveJob):
             Optional. Job is a Hive job.
+
+            This field is a member of `oneof`_ ``type_job``.
         pig_job (google.cloud.dataproc_v1.types.PigJob):
             Optional. Job is a Pig job.
+
+            This field is a member of `oneof`_ ``type_job``.
         spark_r_job (google.cloud.dataproc_v1.types.SparkRJob):
             Optional. Job is a SparkR job.
+
+            This field is a member of `oneof`_ ``type_job``.
         spark_sql_job (google.cloud.dataproc_v1.types.SparkSqlJob):
             Optional. Job is a SparkSql job.
+
+            This field is a member of `oneof`_ ``type_job``.
         presto_job (google.cloud.dataproc_v1.types.PrestoJob):
             Optional. Job is a Presto job.
+
+            This field is a member of `oneof`_ ``type_job``.
         status (google.cloud.dataproc_v1.types.JobStatus):
             Output only. The job status. Additional application-specific
             status information may be contained in the type_job and
@@ -716,6 +811,7 @@ class Job(proto.Message):
 
 class JobScheduling(proto.Message):
     r"""Job scheduling options.
+
     Attributes:
         max_failures_per_hour (int):
             Optional. Maximum number of times per hour a
@@ -741,6 +837,7 @@ class JobScheduling(proto.Message):
 
 class SubmitJobRequest(proto.Message):
     r"""A request to submit a job.
+
     Attributes:
         project_id (str):
             Required. The ID of the Google Cloud Platform
@@ -774,6 +871,7 @@ class SubmitJobRequest(proto.Message):
 
 class JobMetadata(proto.Message):
     r"""Job Operation metadata.
+
     Attributes:
         job_id (str):
             Output only. The job id.
@@ -813,6 +911,7 @@ class GetJobRequest(proto.Message):
 
 class ListJobsRequest(proto.Message):
     r"""A request to list jobs in a project.
+
     Attributes:
         project_id (str):
             Required. The ID of the Google Cloud Platform
@@ -873,6 +972,7 @@ class ListJobsRequest(proto.Message):
 
 class UpdateJobRequest(proto.Message):
     r"""A request to update a job.
+
     Attributes:
         project_id (str):
             Required. The ID of the Google Cloud Platform
@@ -903,6 +1003,7 @@ class UpdateJobRequest(proto.Message):
 
 class ListJobsResponse(proto.Message):
     r"""A list of jobs in a project.
+
     Attributes:
         jobs (Sequence[google.cloud.dataproc_v1.types.Job]):
             Output only. Jobs list.
@@ -923,6 +1024,7 @@ class ListJobsResponse(proto.Message):
 
 class CancelJobRequest(proto.Message):
     r"""A request to cancel a job.
+
     Attributes:
         project_id (str):
             Required. The ID of the Google Cloud Platform
@@ -941,6 +1043,7 @@ class CancelJobRequest(proto.Message):
 
 class DeleteJobRequest(proto.Message):
     r"""A request to delete a job.
+
     Attributes:
         project_id (str):
             Required. The ID of the Google Cloud Platform

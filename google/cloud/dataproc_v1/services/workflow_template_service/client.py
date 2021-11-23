@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -324,8 +328,15 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -387,22 +398,23 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def create_workflow_template(
         self,
-        request: workflow_templates.CreateWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.CreateWorkflowTemplateRequest, dict] = None,
         *,
         parent: str = None,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
         r"""Creates new workflow template.
 
         Args:
-            request (google.cloud.dataproc_v1.types.CreateWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.CreateWorkflowTemplateRequest, dict]):
                 The request object. A request to create a workflow
                 template.
             parent (str):
@@ -482,10 +494,10 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def get_workflow_template(
         self,
-        request: workflow_templates.GetWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.GetWorkflowTemplateRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
@@ -494,7 +506,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         specifying optional version parameter.
 
         Args:
-            request (google.cloud.dataproc_v1.types.GetWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.GetWorkflowTemplateRequest, dict]):
                 The request object. A request to fetch a workflow
                 template.
             name (str):
@@ -566,13 +578,15 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def instantiate_workflow_template(
         self,
-        request: workflow_templates.InstantiateWorkflowTemplateRequest = None,
+        request: Union[
+            workflow_templates.InstantiateWorkflowTemplateRequest, dict
+        ] = None,
         *,
         name: str = None,
         parameters: Sequence[
             workflow_templates.InstantiateWorkflowTemplateRequest.ParametersEntry
         ] = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -599,7 +613,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         be [Empty][google.protobuf.Empty].
 
         Args:
-            request (google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate a workflow
                 template.
             name (str):
@@ -709,11 +723,13 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def instantiate_inline_workflow_template(
         self,
-        request: workflow_templates.InstantiateInlineWorkflowTemplateRequest = None,
+        request: Union[
+            workflow_templates.InstantiateInlineWorkflowTemplateRequest, dict
+        ] = None,
         *,
         parent: str = None,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -745,7 +761,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         be [Empty][google.protobuf.Empty].
 
         Args:
-            request (google.cloud.dataproc_v1.types.InstantiateInlineWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.InstantiateInlineWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate an inline
                 workflow template.
             parent (str):
@@ -854,10 +870,10 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def update_workflow_template(
         self,
-        request: workflow_templates.UpdateWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.UpdateWorkflowTemplateRequest, dict] = None,
         *,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
@@ -866,7 +882,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         server version.
 
         Args:
-            request (google.cloud.dataproc_v1.types.UpdateWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.UpdateWorkflowTemplateRequest, dict]):
                 The request object. A request to update a workflow
                 template.
             template (google.cloud.dataproc_v1.types.WorkflowTemplate):
@@ -931,10 +947,10 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def list_workflow_templates(
         self,
-        request: workflow_templates.ListWorkflowTemplatesRequest = None,
+        request: Union[workflow_templates.ListWorkflowTemplatesRequest, dict] = None,
         *,
         parent: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListWorkflowTemplatesPager:
@@ -942,7 +958,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         the request.
 
         Args:
-            request (google.cloud.dataproc_v1.types.ListWorkflowTemplatesRequest):
+            request (Union[google.cloud.dataproc_v1.types.ListWorkflowTemplatesRequest, dict]):
                 The request object. A request to list workflow templates
                 in a project.
             parent (str):
@@ -1022,10 +1038,10 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
     def delete_workflow_template(
         self,
-        request: workflow_templates.DeleteWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.DeleteWorkflowTemplateRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
@@ -1033,7 +1049,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         rogress workflows.
 
         Args:
-            request (google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest):
+            request (Union[google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest, dict]):
                 The request object. A request to delete a workflow
                 template.
                 Currently started workflows will remain running.
@@ -1097,6 +1113,19 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         rpc(
             request, retry=retry, timeout=timeout, metadata=metadata,
         )
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

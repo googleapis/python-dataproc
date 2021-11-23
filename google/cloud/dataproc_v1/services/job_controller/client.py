@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -265,8 +269,15 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -328,23 +339,24 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def submit_job(
         self,
-        request: jobs.SubmitJobRequest = None,
+        request: Union[jobs.SubmitJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job: jobs.Job = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
 
         Args:
-            request (google.cloud.dataproc_v1.types.SubmitJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
             project_id (str):
                 Required. The ID of the Google Cloud
@@ -413,19 +425,19 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def submit_job_as_operation(
         self,
-        request: jobs.SubmitJobRequest = None,
+        request: Union[jobs.SubmitJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job: jobs.Job = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Submits job to a cluster.
 
         Args:
-            request (google.cloud.dataproc_v1.types.SubmitJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
             project_id (str):
                 Required. The ID of the Google Cloud
@@ -507,12 +519,12 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def get_job(
         self,
-        request: jobs.GetJobRequest = None,
+        request: Union[jobs.GetJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
@@ -520,7 +532,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         project.
 
         Args:
-            request (google.cloud.dataproc_v1.types.GetJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.GetJobRequest, dict]):
                 The request object. A request to get the resource
                 representation for a job in a project.
             project_id (str):
@@ -590,19 +602,19 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def list_jobs(
         self,
-        request: jobs.ListJobsRequest = None,
+        request: Union[jobs.ListJobsRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         filter: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListJobsPager:
         r"""Lists regions/{region}/jobs in a project.
 
         Args:
-            request (google.cloud.dataproc_v1.types.ListJobsRequest):
+            request (Union[google.cloud.dataproc_v1.types.ListJobsRequest, dict]):
                 The request object. A request to list jobs in a project.
             project_id (str):
                 Required. The ID of the Google Cloud
@@ -698,16 +710,16 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def update_job(
         self,
-        request: jobs.UpdateJobRequest = None,
+        request: Union[jobs.UpdateJobRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Updates a job in a project.
 
         Args:
-            request (google.cloud.dataproc_v1.types.UpdateJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.UpdateJobRequest, dict]):
                 The request object. A request to update a job.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -739,12 +751,12 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def cancel_job(
         self,
-        request: jobs.CancelJobRequest = None,
+        request: Union[jobs.CancelJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
@@ -755,7 +767,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
         Args:
-            request (google.cloud.dataproc_v1.types.CancelJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.CancelJobRequest, dict]):
                 The request object. A request to cancel a job.
             project_id (str):
                 Required. The ID of the Google Cloud
@@ -824,12 +836,12 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def delete_job(
         self,
-        request: jobs.DeleteJobRequest = None,
+        request: Union[jobs.DeleteJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
@@ -837,7 +849,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         delete fails, and the response returns ``FAILED_PRECONDITION``.
 
         Args:
-            request (google.cloud.dataproc_v1.types.DeleteJobRequest):
+            request (Union[google.cloud.dataproc_v1.types.DeleteJobRequest, dict]):
                 The request object. A request to delete a job.
             project_id (str):
                 Required. The ID of the Google Cloud
@@ -898,6 +910,19 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         rpc(
             request, retry=retry, timeout=timeout, metadata=metadata,
         )
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

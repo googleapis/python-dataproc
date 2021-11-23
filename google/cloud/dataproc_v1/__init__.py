@@ -16,6 +16,8 @@
 
 from .services.autoscaling_policy_service import AutoscalingPolicyServiceClient
 from .services.autoscaling_policy_service import AutoscalingPolicyServiceAsyncClient
+from .services.batch_controller import BatchControllerClient
+from .services.batch_controller import BatchControllerAsyncClient
 from .services.cluster_controller import ClusterControllerClient
 from .services.cluster_controller import ClusterControllerAsyncClient
 from .services.job_controller import JobControllerClient
@@ -33,12 +35,23 @@ from .types.autoscaling_policies import InstanceGroupAutoscalingPolicyConfig
 from .types.autoscaling_policies import ListAutoscalingPoliciesRequest
 from .types.autoscaling_policies import ListAutoscalingPoliciesResponse
 from .types.autoscaling_policies import UpdateAutoscalingPolicyRequest
+from .types.batches import Batch
+from .types.batches import CreateBatchRequest
+from .types.batches import DeleteBatchRequest
+from .types.batches import GetBatchRequest
+from .types.batches import ListBatchesRequest
+from .types.batches import ListBatchesResponse
+from .types.batches import PySparkBatch
+from .types.batches import SparkBatch
+from .types.batches import SparkRBatch
+from .types.batches import SparkSqlBatch
 from .types.clusters import AcceleratorConfig
 from .types.clusters import AutoscalingConfig
 from .types.clusters import Cluster
 from .types.clusters import ClusterConfig
 from .types.clusters import ClusterMetrics
 from .types.clusters import ClusterStatus
+from .types.clusters import ConfidentialInstanceConfig
 from .types.clusters import CreateClusterRequest
 from .types.clusters import DeleteClusterRequest
 from .types.clusters import DiagnoseClusterRequest
@@ -90,9 +103,17 @@ from .types.jobs import SparkSqlJob
 from .types.jobs import SubmitJobRequest
 from .types.jobs import UpdateJobRequest
 from .types.jobs import YarnApplication
+from .types.operations import BatchOperationMetadata
 from .types.operations import ClusterOperationMetadata
 from .types.operations import ClusterOperationStatus
+from .types.shared import EnvironmentConfig
+from .types.shared import ExecutionConfig
+from .types.shared import PeripheralsConfig
+from .types.shared import RuntimeConfig
+from .types.shared import RuntimeInfo
+from .types.shared import SparkHistoryServerConfig
 from .types.shared import Component
+from .types.shared import FailureAction
 from .types.workflow_templates import ClusterOperation
 from .types.workflow_templates import ClusterSelector
 from .types.workflow_templates import CreateWorkflowTemplateRequest
@@ -117,6 +138,7 @@ from .types.workflow_templates import WorkflowTemplatePlacement
 
 __all__ = (
     "AutoscalingPolicyServiceAsyncClient",
+    "BatchControllerAsyncClient",
     "ClusterControllerAsyncClient",
     "JobControllerAsyncClient",
     "WorkflowTemplateServiceAsyncClient",
@@ -126,6 +148,9 @@ __all__ = (
     "AutoscalingPolicyServiceClient",
     "BasicAutoscalingAlgorithm",
     "BasicYarnAutoscalingConfig",
+    "Batch",
+    "BatchControllerClient",
+    "BatchOperationMetadata",
     "CancelJobRequest",
     "Cluster",
     "ClusterConfig",
@@ -137,10 +162,13 @@ __all__ = (
     "ClusterSelector",
     "ClusterStatus",
     "Component",
+    "ConfidentialInstanceConfig",
     "CreateAutoscalingPolicyRequest",
+    "CreateBatchRequest",
     "CreateClusterRequest",
     "CreateWorkflowTemplateRequest",
     "DeleteAutoscalingPolicyRequest",
+    "DeleteBatchRequest",
     "DeleteClusterRequest",
     "DeleteJobRequest",
     "DeleteWorkflowTemplateRequest",
@@ -149,8 +177,12 @@ __all__ = (
     "DiskConfig",
     "EncryptionConfig",
     "EndpointConfig",
+    "EnvironmentConfig",
+    "ExecutionConfig",
+    "FailureAction",
     "GceClusterConfig",
     "GetAutoscalingPolicyRequest",
+    "GetBatchRequest",
     "GetClusterRequest",
     "GetJobRequest",
     "GetWorkflowTemplateRequest",
@@ -173,6 +205,8 @@ __all__ = (
     "LifecycleConfig",
     "ListAutoscalingPoliciesRequest",
     "ListAutoscalingPoliciesResponse",
+    "ListBatchesRequest",
+    "ListBatchesResponse",
     "ListClustersRequest",
     "ListClustersResponse",
     "ListJobsRequest",
@@ -187,17 +221,25 @@ __all__ = (
     "NodeInitializationAction",
     "OrderedJob",
     "ParameterValidation",
+    "PeripheralsConfig",
     "PigJob",
     "PrestoJob",
+    "PySparkBatch",
     "PySparkJob",
     "QueryList",
     "RegexValidation",
     "ReservationAffinity",
+    "RuntimeConfig",
+    "RuntimeInfo",
     "SecurityConfig",
     "ShieldedInstanceConfig",
     "SoftwareConfig",
+    "SparkBatch",
+    "SparkHistoryServerConfig",
     "SparkJob",
+    "SparkRBatch",
     "SparkRJob",
+    "SparkSqlBatch",
     "SparkSqlJob",
     "StartClusterRequest",
     "StopClusterRequest",

@@ -85,7 +85,7 @@ def download_output(project, cluster_id, output_bucket, job_id):
     return bucket.blob(output_blob).download_as_string()
 
 
-# [START dataproc_create_cluster]
+# [START dataproc_submit_job_create_cluster]
 def create_cluster(dataproc, project, zone, region, cluster_name):
     """Create the cluster."""
     print("Creating cluster...")
@@ -110,7 +110,7 @@ def create_cluster(dataproc, project, zone, region, cluster_name):
     waiting_callback = True
 
 
-# [END dataproc_create_cluster]
+# [END dataproc_submit_job_create_cluster]
 
 
 def callback(operation_future):
@@ -139,7 +139,7 @@ def list_clusters_with_details(dataproc, project, region):
             (
                 "{} - {}".format(
                     cluster.cluster_name,
-                    cluster.status.State.Name(cluster.status.state),
+                    cluster.status.state.name,
                 )
             )
         )

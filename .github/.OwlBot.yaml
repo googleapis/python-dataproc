@@ -13,10 +13,13 @@
 # limitations under the License.
 
 docker:
-  image: gcr.io/repo-automation-bots/owlbot-python:latest
+  image: gcr.io/cloud-devrel-public-resources/owlbot-python:latest
 
 deep-remove-regex:
   - /owl-bot-staging
+
+deep-preserve-regex:
+  - /owl-bot-staging/v1beta2
 
 deep-copy-regex:
   - source: /google/cloud/dataproc/(v.*)/.*-py/(.*)

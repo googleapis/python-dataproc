@@ -39,6 +39,9 @@ class AutoscalingPolicy(proto.Message):
     r"""Describes an autoscaling policy for Dataproc cluster
     autoscaler.
 
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         id (str):
             Required. The policy id.
@@ -61,12 +64,22 @@ class AutoscalingPolicy(proto.Message):
                ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
         basic_algorithm (google.cloud.dataproc_v1.types.BasicAutoscalingAlgorithm):
 
+            This field is a member of `oneof`_ ``algorithm``.
         worker_config (google.cloud.dataproc_v1.types.InstanceGroupAutoscalingPolicyConfig):
             Required. Describes how the autoscaler will
             operate for primary workers.
         secondary_worker_config (google.cloud.dataproc_v1.types.InstanceGroupAutoscalingPolicyConfig):
             Optional. Describes how the autoscaler will
             operate for secondary workers.
+        labels (Sequence[google.cloud.dataproc_v1.types.AutoscalingPolicy.LabelsEntry]):
+            Optional. The labels to associate with this autoscaling
+            policy. Label **keys** must contain 1 to 63 characters, and
+            must conform to `RFC
+            1035 <https://www.ietf.org/rfc/rfc1035.txt>`__. Label
+            **values** may be empty, but, if present, must contain 1 to
+            63 characters, and must conform to `RFC
+            1035 <https://www.ietf.org/rfc/rfc1035.txt>`__. No more than
+            32 labels can be associated with an autoscaling policy.
     """
 
     id = proto.Field(proto.STRING, number=1,)
@@ -80,10 +93,12 @@ class AutoscalingPolicy(proto.Message):
     secondary_worker_config = proto.Field(
         proto.MESSAGE, number=5, message="InstanceGroupAutoscalingPolicyConfig",
     )
+    labels = proto.MapField(proto.STRING, proto.STRING, number=6,)
 
 
 class BasicAutoscalingAlgorithm(proto.Message):
     r"""Basic algorithm for autoscaling.
+
     Attributes:
         yarn_config (google.cloud.dataproc_v1.types.BasicYarnAutoscalingConfig):
             Required. YARN autoscaling configuration.
@@ -105,6 +120,7 @@ class BasicAutoscalingAlgorithm(proto.Message):
 
 class BasicYarnAutoscalingConfig(proto.Message):
     r"""Basic autoscaling configurations for YARN.
+
     Attributes:
         graceful_decommission_timeout (google.protobuf.duration_pb2.Duration):
             Required. Timeout for YARN graceful decommissioning of Node
@@ -216,6 +232,7 @@ class InstanceGroupAutoscalingPolicyConfig(proto.Message):
 
 class CreateAutoscalingPolicyRequest(proto.Message):
     r"""A request to create an autoscaling policy.
+
     Attributes:
         parent (str):
             Required. The "resource name" of the region or location, as
@@ -239,6 +256,7 @@ class CreateAutoscalingPolicyRequest(proto.Message):
 
 class GetAutoscalingPolicyRequest(proto.Message):
     r"""A request to fetch an autoscaling policy.
+
     Attributes:
         name (str):
             Required. The "resource name" of the autoscaling policy, as
@@ -259,6 +277,7 @@ class GetAutoscalingPolicyRequest(proto.Message):
 
 class UpdateAutoscalingPolicyRequest(proto.Message):
     r"""A request to update an autoscaling policy.
+
     Attributes:
         policy (google.cloud.dataproc_v1.types.AutoscalingPolicy):
             Required. The updated autoscaling policy.
@@ -292,6 +311,7 @@ class DeleteAutoscalingPolicyRequest(proto.Message):
 
 class ListAutoscalingPoliciesRequest(proto.Message):
     r"""A request to list autoscaling policies in a project.
+
     Attributes:
         parent (str):
             Required. The "resource name" of the region or location, as
