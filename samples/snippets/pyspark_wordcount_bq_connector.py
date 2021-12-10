@@ -1,3 +1,4 @@
+# [START dataproc_pyspark_wordcount_bq_connector]
 #!/usr/bin/env python
 
 """BigQuery I/O PySpark example."""
@@ -12,7 +13,7 @@ spark = SparkSession \
 
 # Use the Cloud Storage bucket for temporary BigQuery export data used
 # by the connector.
-bucket = "test-bucket"
+bucket = "[bucket]"
 spark.conf.set('temporaryGcsBucket', bucket)
 
 # Load data from BigQuery.
@@ -31,3 +32,4 @@ word_count.printSchema()
 word_count.write.format('bigquery') \
   .option('table', 'wordcount_dataset.wordcount_output') \
   .save()
+# [END dataproc_pyspark_wordcount_bq_connector]
