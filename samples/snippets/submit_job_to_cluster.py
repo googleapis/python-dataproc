@@ -204,7 +204,7 @@ def wait_for_job(dataproc, project, region, job_id):
         # Handle exceptions
         if job.status.State(job.status.state).name == "ERROR":
             raise Exception(job.status.details)
-        elif job.status.State(job.status.state).name == "DONE":
+        if job.status.State(job.status.state).name == "DONE":
             print("Job finished.")
             return job
 
