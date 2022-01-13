@@ -34,8 +34,8 @@ import os
 
 from google.cloud import dataproc_v1
 from google.cloud import storage
-from google.cloud.dataproc_v1.gapic.transports import cluster_controller_grpc_transport
-from google.cloud.dataproc_v1.gapic.transports import job_controller_grpc_transport
+from google.cloud.dataproc_v1.services.cluster_controller.transports.grpc import ClusterControllerGrpcTransport
+from google.cloud.dataproc_v1.services.job_controller.transports.grpc import JobControllerGrpcTransport
 
 
 DEFAULT_FILENAME = "pyspark_sort.py"
@@ -151,6 +151,7 @@ def list_clusters_with_details(dataproc, project, region):
 def get_cluster_id_by_name(dataproc, project_id, region, cluster_name):
     """Helper function to retrieve the ID and output bucket of a cluster by
     name."""
+    print(project_id, region, cluster_name)
     for cluster in dataproc.list_clusters(
         request={"project_id": project_id, "region": region}
     ):
@@ -222,6 +223,7 @@ def main(
     global_region=True,
 ):
 
+    # print(project_id, zone, cluster_name, bucket_name, pyspark_file)
     # [START dataproc_get_client]
     if global_region:
         region = "global"
@@ -233,11 +235,11 @@ def main(
         # Use a regional gRPC endpoint. See:
         # https://cloud.google.com/dataproc/docs/concepts/regional-endpoints
         client_transport = (
-            cluster_controller_grpc_transport.ClusterControllerGrpcTransport(
+            ClusterControllerGrpcTransport(
                 address="{}-dataproc.googleapis.com:443".format(region)
             )
         )
-        job_transport = job_controller_grpc_transport.JobControllerGrpcTransport(
+        job_transport = JobControllerGrpcTransport(
             address="{}-dataproc.googleapis.com:443".format(region)
         )
         dataproc_cluster_client = dataproc_v1.ClusterControllerClient(client_transport)
