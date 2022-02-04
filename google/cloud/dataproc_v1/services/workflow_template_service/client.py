@@ -454,6 +454,33 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
     ) -> workflow_templates.WorkflowTemplate:
         r"""Creates new workflow template.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_create_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.CreateWorkflowTemplateRequest(
+                    parent="parent_value",
+                    template=template,
+                )
+
+                # Make the request
+                response = client.create_workflow_template(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.CreateWorkflowTemplateRequest, dict]):
                 The request object. A request to create a workflow
@@ -495,7 +522,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, template])
         if request is not None and has_flattened_params:
@@ -546,6 +573,27 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         Can retrieve previously instantiated template by
         specifying optional version parameter.
 
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_workflow_template(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.GetWorkflowTemplateRequest, dict]):
                 The request object. A request to fetch a workflow
@@ -581,7 +629,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -653,6 +701,29 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_instantiate_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.InstantiateWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.instantiate_workflow_template(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate a workflow
@@ -712,7 +783,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name, parameters])
         if request is not None and has_flattened_params:
@@ -801,6 +872,36 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_instantiate_inline_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.InstantiateInlineWorkflowTemplateRequest(
+                    parent="parent_value",
+                    template=template,
+                )
+
+                # Make the request
+                operation = client.instantiate_inline_workflow_template(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.InstantiateInlineWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate an inline
@@ -857,7 +958,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, template])
         if request is not None and has_flattened_params:
@@ -922,6 +1023,33 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         template must contain version that matches the current
         server version.
 
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_update_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.UpdateWorkflowTemplateRequest(
+                    template=template,
+                )
+
+                # Make the request
+                response = client.update_workflow_template(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.UpdateWorkflowTemplateRequest, dict]):
                 The request object. A request to update a workflow
@@ -948,7 +1076,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([template])
         if request is not None and has_flattened_params:
@@ -998,6 +1126,26 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         r"""Lists workflows that match the specified filter in
         the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_workflow_templates():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListWorkflowTemplatesRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_workflow_templates(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.ListWorkflowTemplatesRequest, dict]):
                 The request object. A request to list workflow templates
@@ -1035,7 +1183,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -1086,8 +1234,26 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
-        r"""Deletes a workflow template. It does not cancel in-
-        rogress workflows.
+        r"""Deletes a workflow template. It does not cancel
+        in-progress workflows.
+
+
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.delete_workflow_template(request=request)
 
         Args:
             request (Union[google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest, dict]):
@@ -1120,7 +1286,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                 sent along with the request as metadata.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:

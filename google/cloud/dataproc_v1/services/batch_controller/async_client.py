@@ -223,6 +223,32 @@ class BatchControllerAsyncClient:
         r"""Creates a batch workload that executes
         asynchronously.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_create_batch():
+                # Create a client
+                client = dataproc_v1.BatchControllerClient()
+
+                # Initialize request argument(s)
+                batch = dataproc_v1.Batch()
+                batch.pyspark_batch.main_python_file_uri = "main_python_file_uri_value"
+
+                request = dataproc_v1.CreateBatchRequest(
+                    parent="parent_value",
+                    batch=batch,
+                )
+
+                # Make the request
+                operation = client.create_batch(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.CreateBatchRequest, dict]):
                 The request object. A request to create a batch
@@ -265,7 +291,7 @@ class BatchControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, batch, batch_id])
         if request is not None and has_flattened_params:
@@ -324,6 +350,25 @@ class BatchControllerAsyncClient:
     ) -> batches.Batch:
         r"""Gets the batch workload resource representation.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_batch():
+                # Create a client
+                client = dataproc_v1.BatchControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetBatchRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_batch(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.GetBatchRequest, dict]):
                 The request object. A request to get the resource
@@ -348,7 +393,7 @@ class BatchControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -395,6 +440,24 @@ class BatchControllerAsyncClient:
     ) -> pagers.ListBatchesAsyncPager:
         r"""Lists batch workloads.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_batches():
+                # Create a client
+                client = dataproc_v1.BatchControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListBatchesRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_batches(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.ListBatchesRequest, dict]):
                 The request object. A request to list batch workloads in
@@ -421,7 +484,7 @@ class BatchControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -476,6 +539,23 @@ class BatchControllerAsyncClient:
         terminal state, the delete fails and the response returns
         ``FAILED_PRECONDITION``.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_batch():
+                # Create a client
+                client = dataproc_v1.BatchControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteBatchRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.delete_batch(request=request)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.DeleteBatchRequest, dict]):
                 The request object. A request to delete a batch
@@ -494,7 +574,7 @@ class BatchControllerAsyncClient:
                 sent along with the request as metadata.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:

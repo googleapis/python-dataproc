@@ -215,6 +215,31 @@ class JobControllerAsyncClient:
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_submit_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.SubmitJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job=job,
+                )
+
+                # Make the request
+                response = client.submit_job(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
@@ -249,7 +274,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job])
         if request is not None and has_flattened_params:
@@ -305,6 +330,33 @@ class JobControllerAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Submits job to a cluster.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_submit_job_as_operation():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.SubmitJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job=job,
+                )
+
+                # Make the request
+                operation = client.submit_job_as_operation(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
@@ -344,7 +396,7 @@ class JobControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job])
         if request is not None and has_flattened_params:
@@ -409,6 +461,28 @@ class JobControllerAsyncClient:
         r"""Gets the resource representation for a job in a
         project.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                response = client.get_job(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.GetJobRequest, dict]):
                 The request object. A request to get the resource
@@ -444,7 +518,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
@@ -502,6 +576,25 @@ class JobControllerAsyncClient:
     ) -> pagers.ListJobsAsyncPager:
         r"""Lists regions/{region}/jobs in a project.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_jobs():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListJobsRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list_jobs(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.ListJobsRequest, dict]):
                 The request object. A request to list jobs in a project.
@@ -557,7 +650,7 @@ class JobControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, filter])
         if request is not None and has_flattened_params:
@@ -618,6 +711,32 @@ class JobControllerAsyncClient:
     ) -> jobs.Job:
         r"""Updates a job in a project.
 
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_update_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.UpdateJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                    job=job,
+                )
+
+                # Make the request
+                response = client.update_job(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.UpdateJobRequest, dict]):
                 The request object. A request to update a job.
@@ -674,6 +793,28 @@ class JobControllerAsyncClient:
         or
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_cancel_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.CancelJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                response = client.cancel_job(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.CancelJobRequest, dict]):
                 The request object. A request to cancel a job.
@@ -708,7 +849,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
@@ -767,6 +908,25 @@ class JobControllerAsyncClient:
         r"""Deletes the job from the project. If the job is active, the
         delete fails, and the response returns ``FAILED_PRECONDITION``.
 
+
+        .. code-block::
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                response = client.delete_job(request=request)
+
         Args:
             request (Union[google.cloud.dataproc_v1.types.DeleteJobRequest, dict]):
                 The request object. A request to delete a job.
@@ -797,7 +957,7 @@ class JobControllerAsyncClient:
                 sent along with the request as metadata.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
