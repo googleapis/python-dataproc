@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -419,8 +419,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Creates new autoscaling policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -544,8 +543,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         replacements.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -644,8 +642,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Retrieves autoscaling policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -747,8 +744,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
     ) -> pagers.ListAutoscalingPoliciesPager:
         r"""Lists autoscaling policies in the project.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -865,8 +861,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         more clusters.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 

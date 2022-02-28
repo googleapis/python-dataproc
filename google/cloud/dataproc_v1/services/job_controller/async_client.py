@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -215,7 +215,7 @@ class JobControllerAsyncClient:
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -330,7 +330,7 @@ class JobControllerAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Submits job to a cluster.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -464,7 +464,7 @@ class JobControllerAsyncClient:
         project.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -578,7 +578,7 @@ class JobControllerAsyncClient:
     ) -> pagers.ListJobsAsyncPager:
         r"""Lists regions/{region}/jobs in a project.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -715,7 +715,7 @@ class JobControllerAsyncClient:
     ) -> jobs.Job:
         r"""Updates a job in a project.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -798,7 +798,7 @@ class JobControllerAsyncClient:
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -913,7 +913,7 @@ class JobControllerAsyncClient:
         delete fails, and the response returns ``FAILED_PRECONDITION``.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 

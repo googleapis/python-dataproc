@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -226,7 +226,7 @@ class ClusterControllerAsyncClient:
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -366,7 +366,7 @@ class ClusterControllerAsyncClient:
         state or an error is returned.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -572,7 +572,7 @@ class ClusterControllerAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Stops a cluster in a project.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -649,7 +649,7 @@ class ClusterControllerAsyncClient:
     ) -> operation_async.AsyncOperation:
         r"""Starts a cluster in a project.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -733,7 +733,7 @@ class ClusterControllerAsyncClient:
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -873,7 +873,7 @@ class ClusterControllerAsyncClient:
         project.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -992,7 +992,7 @@ class ClusterControllerAsyncClient:
         alphabetically.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
@@ -1148,7 +1148,7 @@ class ClusterControllerAsyncClient:
         `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import dataproc_v1
 
