@@ -45,7 +45,7 @@ def teardown():
     operation.result()
 
 
-def test_cluster_create(capsys):
+def test_cluster_create(capsys, teardown):
     # Wrapper function for client library function
     create_cluster.create_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
 
