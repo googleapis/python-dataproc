@@ -37,14 +37,13 @@ SORT_CODE = (
     "sum = rdd.reduce(lambda x, y: x + y)\n"
 )
 
-
 @pytest.fixture(autouse=True)
-def setup_teardown():
+def blob():
     storage_client = storage.Client()
 
     @backoff.on_exception(backoff.expo,
-                          ServiceUnavailable,
-                          max_tries=5)
+                        ServiceUnavailable,
+                        max_tries=5)
     def create_bucket():
         return storage_client.create_bucket(STAGING_BUCKET)
 
@@ -54,12 +53,19 @@ def setup_teardown():
 
     yield
 
+    blob.delete()
+    bucket.delete()
+
+@pytest.fixture(autouse=True)
+def cluster():
+    yield
+
+    # The quickstart sample deletes the cluster, but if the test fails
+    # before cluster deletion occurs, it can be manually deleted here.
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(REGION)}
     )
 
-    # The quickstart sample deletes the cluster, but if the test fails
-    # before cluster deletion occurs, it can be manually deleted here.
     clusters = cluster_client.list_clusters(
         request={"project_id": PROJECT_ID, "region": REGION}
     )
@@ -73,9 +79,6 @@ def setup_teardown():
                     "cluster_name": CLUSTER_NAME,
                 }
             )
-
-    blob.delete()
-    bucket.delete()
 
 
 def test_quickstart(capsys):
