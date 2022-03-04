@@ -37,13 +37,12 @@ SORT_CODE = (
     "sum = rdd.reduce(lambda x, y: x + y)\n"
 )
 
+
 @pytest.fixture(autouse=True)
 def blob():
     storage_client = storage.Client()
 
-    @backoff.on_exception(backoff.expo,
-                        ServiceUnavailable,
-                        max_tries=5)
+    @backoff.on_exception(backoff.expo, ServiceUnavailable, max_tries=5)
     def create_bucket():
         return storage_client.create_bucket(STAGING_BUCKET)
 
@@ -55,6 +54,7 @@ def blob():
 
     blob.delete()
     bucket.delete()
+
 
 @pytest.fixture(autouse=True)
 def cluster():
