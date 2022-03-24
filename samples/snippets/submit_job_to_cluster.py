@@ -22,7 +22,7 @@ then delete the cluster after the job completes.
 
 Usage:
     python submit_job_to_cluster --project_id <PROJECT_ID> --region <REGION> \
-        --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
+      --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
 """
 
 import argparse
