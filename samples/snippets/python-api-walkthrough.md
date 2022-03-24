@@ -13,9 +13,9 @@ As you follow this walkthrough, you run Python code that calls
 [Dataproc gRPC APIs](https://cloud.google.com/dataproc/docs/reference/rpc/)
 to:
 
-* create a Dataproc cluster
-* submit a PySpark word sort job to the cluster
-* delete the cluster after job completion
+* Create a Dataproc cluster
+* Submit a PySpark word sort job to the cluster
+* Delete the cluster after job completion
 
 ## Using the walkthrough
 
