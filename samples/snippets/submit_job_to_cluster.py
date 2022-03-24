@@ -75,8 +75,10 @@ def quickstart(project_id, region, cluster_name, job_file_path):
     )
     response = operation.result()
 
-    # Dataproc job output is saved to the Cloud Storage bucket
-    # allocated to the job. Use regex to obtain the bucket and blob info.
+    """
+    Dataproc job output is saved to the Cloud Storage bucket
+    allocated to the job. Use regex to obtain the bucket and blob info.
+    """
     matches = re.match("gs://(.*?)/(.*)", response.driver_output_resource_uri)
 
     output = (
