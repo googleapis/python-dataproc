@@ -28,14 +28,7 @@ def list_clusters(dataproc, project, region):
     for cluster in dataproc.list_clusters(
         request={"project_id": project, "region": region}
     ):
-        print(
-            (
-                "{} - {}".format(
-                    cluster.cluster_name,
-                    cluster.status.state.name
-                )
-            )
-        )
+        print(("{} - {}".format(cluster.cluster_name, cluster.status.state.name)))
 
 
 # [END dataproc_list_clusters]
@@ -49,10 +42,8 @@ def main(project_id, region):
     else:
         # Use a regional gRPC endpoint. See:
         # https://cloud.google.com/dataproc/docs/concepts/regional-endpoints
-        client_transport = (
-            cluster_controller_grpc_transport.ClusterControllerGrpcTransport(
-                address="{}-dataproc.googleapis.com:443".format(region)
-            )
+        client_transport = cluster_controller_grpc_transport.ClusterControllerGrpcTransport(
+            address="{}-dataproc.googleapis.com:443".format(region)
         )
         dataproc_cluster_client = dataproc_v1.ClusterControllerClient(client_transport)
 
