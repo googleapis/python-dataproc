@@ -34,8 +34,6 @@ import os
 
 from google.cloud import dataproc_v1
 from google.cloud import storage
-from google.cloud.dataproc_v1.gapic.transports import cluster_controller_grpc_transport
-from google.cloud.dataproc_v1.gapic.transports import job_controller_grpc_transport
 
 
 DEFAULT_FILENAME = "pyspark_sort.py"
@@ -223,14 +221,12 @@ def main(
         region = get_region_from_zone(zone)
         # Use a regional gRPC endpoint. See:
         # https://cloud.google.com/dataproc/docs/concepts/regional-endpoints
-        client_transport = cluster_controller_grpc_transport.ClusterControllerGrpcTransport(
-            address="{}-dataproc.googleapis.com:443".format(region)
+        dataproc_cluster_client = dataproc_v1.ClusterControllerClient(
+            client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
         )
-        job_transport = job_controller_grpc_transport.JobControllerGrpcTransport(
-            address="{}-dataproc.googleapis.com:443".format(region)
+        dataproc_job_client = dataproc_v1.ClusterControllerClient(
+            client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
         )
-        dataproc_cluster_client = dataproc_v1.ClusterControllerClient(client_transport)
-        dataproc_job_client = dataproc_v1.JobControllerClient(job_transport)
     # [END dataproc_get_client]
 
     try:
