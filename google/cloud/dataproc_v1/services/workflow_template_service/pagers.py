@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
 #
 from typing import (
     Any,
-    AsyncIterable,
+    AsyncIterator,
     Awaitable,
     Callable,
-    Iterable,
     Sequence,
     Tuple,
     Optional,
+    Iterator,
 )
 
 from google.cloud.dataproc_v1.types import workflow_templates
@@ -74,14 +74,14 @@ class ListWorkflowTemplatesPager:
         return getattr(self._response, name)
 
     @property
-    def pages(self) -> Iterable[workflow_templates.ListWorkflowTemplatesResponse]:
+    def pages(self) -> Iterator[workflow_templates.ListWorkflowTemplatesResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __iter__(self) -> Iterable[workflow_templates.WorkflowTemplate]:
+    def __iter__(self) -> Iterator[workflow_templates.WorkflowTemplate]:
         for page in self.pages:
             yield from page.templates
 
@@ -140,14 +140,14 @@ class ListWorkflowTemplatesAsyncPager:
     @property
     async def pages(
         self,
-    ) -> AsyncIterable[workflow_templates.ListWorkflowTemplatesResponse]:
+    ) -> AsyncIterator[workflow_templates.ListWorkflowTemplatesResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = await self._method(self._request, metadata=self._metadata)
             yield self._response
 
-    def __aiter__(self) -> AsyncIterable[workflow_templates.WorkflowTemplate]:
+    def __aiter__(self) -> AsyncIterator[workflow_templates.WorkflowTemplate]:
         async def async_generator():
             async for page in self.pages:
                 for response in page.templates:

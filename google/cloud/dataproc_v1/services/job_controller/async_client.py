@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,20 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core.client_options import ClientOptions
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -101,6 +106,42 @@ class JobControllerAsyncClient:
 
     from_service_account_json = from_service_account_file
 
+    @classmethod
+    def get_mtls_endpoint_and_cert_source(
+        cls, client_options: Optional[ClientOptions] = None
+    ):
+        """Return the API endpoint and client cert source for mutual TLS.
+
+        The client cert source is determined in the following order:
+        (1) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is not "true", the
+        client cert source is None.
+        (2) if `client_options.client_cert_source` is provided, use the provided one; if the
+        default client cert source exists, use the default one; otherwise the client cert
+        source is None.
+
+        The API endpoint is determined in the following order:
+        (1) if `client_options.api_endpoint` if provided, use the provided one.
+        (2) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is "always", use the
+        default mTLS endpoint; if the environment variabel is "never", use the default API
+        endpoint; otherwise if client cert source exists, use the default mTLS endpoint, otherwise
+        use the default API endpoint.
+
+        More details can be found at https://google.aip.dev/auth/4114.
+
+        Args:
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+                client. Only the `api_endpoint` and `client_cert_source` properties may be used
+                in this method.
+
+        Returns:
+            Tuple[str, Callable[[], Tuple[bytes, bytes]]]: returns the API endpoint and the
+                client cert source to use.
+
+        Raises:
+            google.auth.exceptions.MutualTLSChannelError: If any errors happen.
+        """
+        return JobControllerClient.get_mtls_endpoint_and_cert_source(client_options)  # type: ignore
+
     @property
     def transport(self) -> JobControllerTransport:
         """Returns the transport used by the client instance.
@@ -163,19 +204,44 @@ class JobControllerAsyncClient:
 
     async def submit_job(
         self,
-        request: jobs.SubmitJobRequest = None,
+        request: Union[jobs.SubmitJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job: jobs.Job = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_submit_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.SubmitJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job=job,
+                )
+
+                # Make the request
+                response = client.submit_job(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.SubmitJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -208,7 +274,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job])
         if request is not None and has_flattened_params:
@@ -253,19 +319,48 @@ class JobControllerAsyncClient:
 
     async def submit_job_as_operation(
         self,
-        request: jobs.SubmitJobRequest = None,
+        request: Union[jobs.SubmitJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job: jobs.Job = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Submits job to a cluster.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_submit_job_as_operation():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.SubmitJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job=job,
+                )
+
+                # Make the request
+                operation = client.submit_job_as_operation(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.SubmitJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
                 The request object. A request to submit a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -303,7 +398,7 @@ class JobControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job])
         if request is not None and has_flattened_params:
@@ -356,20 +451,42 @@ class JobControllerAsyncClient:
 
     async def get_job(
         self,
-        request: jobs.GetJobRequest = None,
+        request: Union[jobs.GetJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Gets the resource representation for a job in a
         project.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                response = client.get_job(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.GetJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.GetJobRequest, dict]):
                 The request object. A request to get the resource
                 representation for a job in a project.
             project_id (:class:`str`):
@@ -403,7 +520,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
@@ -450,19 +567,40 @@ class JobControllerAsyncClient:
 
     async def list_jobs(
         self,
-        request: jobs.ListJobsRequest = None,
+        request: Union[jobs.ListJobsRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         filter: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListJobsAsyncPager:
         r"""Lists regions/{region}/jobs in a project.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_jobs():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListJobsRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list_jobs(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.ListJobsRequest`):
+            request (Union[google.cloud.dataproc_v1.types.ListJobsRequest, dict]):
                 The request object. A request to list jobs in a project.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -516,7 +654,7 @@ class JobControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, filter])
         if request is not None and has_flattened_params:
@@ -569,16 +707,42 @@ class JobControllerAsyncClient:
 
     async def update_job(
         self,
-        request: jobs.UpdateJobRequest = None,
+        request: Union[jobs.UpdateJobRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Updates a job in a project.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_update_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                job = dataproc_v1.Job()
+                job.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                job.placement.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.UpdateJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                    job=job,
+                )
+
+                # Make the request
+                response = client.update_job(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.UpdateJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.UpdateJobRequest, dict]):
                 The request object. A request to update a job.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -618,12 +782,12 @@ class JobControllerAsyncClient:
 
     async def cancel_job(
         self,
-        request: jobs.CancelJobRequest = None,
+        request: Union[jobs.CancelJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
@@ -633,8 +797,30 @@ class JobControllerAsyncClient:
         or
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_cancel_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.CancelJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                response = client.cancel_job(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.CancelJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.CancelJobRequest, dict]):
                 The request object. A request to cancel a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -667,7 +853,7 @@ class JobControllerAsyncClient:
                 A Dataproc job resource.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
@@ -714,20 +900,39 @@ class JobControllerAsyncClient:
 
     async def delete_job(
         self,
-        request: jobs.DeleteJobRequest = None,
+        request: Union[jobs.DeleteJobRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         job_id: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes the job from the project. If the job is active, the
         delete fails, and the response returns ``FAILED_PRECONDITION``.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_job():
+                # Create a client
+                client = dataproc_v1.JobControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteJobRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    job_id="job_id_value",
+                )
+
+                # Make the request
+                client.delete_job(request=request)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.DeleteJobRequest`):
+            request (Union[google.cloud.dataproc_v1.types.DeleteJobRequest, dict]):
                 The request object. A request to delete a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -756,7 +961,7 @@ class JobControllerAsyncClient:
                 sent along with the request as metadata.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, job_id])
         if request is not None and has_flattened_params:
@@ -797,6 +1002,12 @@ class JobControllerAsyncClient:
         await rpc(
             request, retry=retry, timeout=timeout, metadata=metadata,
         )
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.transport.close()
 
 
 try:

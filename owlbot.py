@@ -39,7 +39,7 @@ s.remove_staging_dirs()
 templated_files = common.py_library(
     samples=True,  # set to True only if there are samples
     microgenerator=True,
-    cov_level=99
+    cov_level=100
 )
 s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .coveragerc file
 
@@ -53,3 +53,4 @@ python.py_samples(skip_readmes=True)
 s.replace("noxfile.py", '[\"\']-W[\"\']', '# "-W"')
 
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
+

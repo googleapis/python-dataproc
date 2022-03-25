@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 #
 import os
 import mock
-import packaging.version
 
 import grpc
 from grpc.experimental import aio
@@ -30,8 +29,10 @@ from google.api_core import future
 from google.api_core import gapic_v1
 from google.api_core import grpc_helpers
 from google.api_core import grpc_helpers_async
+from google.api_core import operation
 from google.api_core import operation_async  # type: ignore
 from google.api_core import operations_v1
+from google.api_core import path_template
 from google.auth import credentials as ga_credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.dataproc_v1.services.workflow_template_service import (
@@ -42,9 +43,6 @@ from google.cloud.dataproc_v1.services.workflow_template_service import (
 )
 from google.cloud.dataproc_v1.services.workflow_template_service import pagers
 from google.cloud.dataproc_v1.services.workflow_template_service import transports
-from google.cloud.dataproc_v1.services.workflow_template_service.transports.base import (
-    _GOOGLE_AUTH_VERSION,
-)
 from google.cloud.dataproc_v1.types import clusters
 from google.cloud.dataproc_v1.types import jobs
 from google.cloud.dataproc_v1.types import shared
@@ -54,20 +52,6 @@ from google.oauth2 import service_account
 from google.protobuf import duration_pb2  # type: ignore
 from google.protobuf import timestamp_pb2  # type: ignore
 import google.auth
-
-
-# TODO(busunkim): Once google-auth >= 1.25.0 is required transitively
-# through google-api-core:
-# - Delete the auth "less than" test cases
-# - Delete these pytest markers (Make the "greater than or equal to" tests the default).
-requires_google_auth_lt_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) >= packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth < 1.25.0",
-)
-requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) < packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth >= 1.25.0",
-)
 
 
 def client_cert_source_callback():
@@ -133,25 +117,13 @@ def test_workflow_template_service_client_from_service_account_info(client_class
 
 
 @pytest.mark.parametrize(
-    "client_class", [WorkflowTemplateServiceClient, WorkflowTemplateServiceAsyncClient,]
-)
-def test_workflow_template_service_client_service_account_always_use_jwt(client_class):
-    with mock.patch.object(
-        service_account.Credentials, "with_always_use_jwt_access", create=True
-    ) as use_jwt:
-        creds = service_account.Credentials(None, None, None)
-        client = client_class(credentials=creds)
-        use_jwt.assert_not_called()
-
-
-@pytest.mark.parametrize(
     "transport_class,transport_name",
     [
         (transports.WorkflowTemplateServiceGrpcTransport, "grpc"),
         (transports.WorkflowTemplateServiceGrpcAsyncIOTransport, "grpc_asyncio"),
     ],
 )
-def test_workflow_template_service_client_service_account_always_use_jwt_true(
+def test_workflow_template_service_client_service_account_always_use_jwt(
     transport_class, transport_name
 ):
     with mock.patch.object(
@@ -160,6 +132,13 @@ def test_workflow_template_service_client_service_account_always_use_jwt_true(
         creds = service_account.Credentials(None, None, None)
         transport = transport_class(credentials=creds, always_use_jwt_access=True)
         use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize(
@@ -236,7 +215,7 @@ def test_workflow_template_service_client_client_options(
     options = client_options.ClientOptions(api_endpoint="squid.clam.whelk")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -245,6 +224,7 @@ def test_workflow_template_service_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -252,7 +232,7 @@ def test_workflow_template_service_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "never"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -261,6 +241,7 @@ def test_workflow_template_service_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -268,7 +249,7 @@ def test_workflow_template_service_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "always"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -277,26 +258,27 @@ def test_workflow_template_service_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT has
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -305,6 +287,7 @@ def test_workflow_template_service_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id="octopus",
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -364,7 +347,7 @@ def test_workflow_template_service_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -381,6 +364,7 @@ def test_workflow_template_service_client_mtls_env_auto(
                 client_cert_source_for_mtls=expected_client_cert_source,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case ADC client cert is provided. Whether client cert is used depends on
@@ -405,7 +389,7 @@ def test_workflow_template_service_client_mtls_env_auto(
                         expected_client_cert_source = client_cert_source_callback
 
                     patched.return_value = None
-                    client = client_class()
+                    client = client_class(transport=transport_name)
                     patched.assert_called_once_with(
                         credentials=None,
                         credentials_file=None,
@@ -414,6 +398,7 @@ def test_workflow_template_service_client_mtls_env_auto(
                         client_cert_source_for_mtls=expected_client_cert_source,
                         quota_project_id=None,
                         client_info=transports.base.DEFAULT_CLIENT_INFO,
+                        always_use_jwt_access=True,
                     )
 
     # Check the case client_cert_source and ADC client cert are not provided.
@@ -426,7 +411,7 @@ def test_workflow_template_service_client_mtls_env_auto(
                 return_value=False,
             ):
                 patched.return_value = None
-                client = client_class()
+                client = client_class(transport=transport_name)
                 patched.assert_called_once_with(
                     credentials=None,
                     credentials_file=None,
@@ -435,7 +420,91 @@ def test_workflow_template_service_client_mtls_env_auto(
                     client_cert_source_for_mtls=None,
                     quota_project_id=None,
                     client_info=transports.base.DEFAULT_CLIENT_INFO,
+                    always_use_jwt_access=True,
                 )
+
+
+@pytest.mark.parametrize(
+    "client_class", [WorkflowTemplateServiceClient, WorkflowTemplateServiceAsyncClient]
+)
+@mock.patch.object(
+    WorkflowTemplateServiceClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(WorkflowTemplateServiceClient),
+)
+@mock.patch.object(
+    WorkflowTemplateServiceAsyncClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(WorkflowTemplateServiceAsyncClient),
+)
+def test_workflow_template_service_client_get_mtls_endpoint_and_cert_source(
+    client_class,
+):
+    mock_client_cert_source = mock.Mock()
+
+    # Test the case GOOGLE_API_USE_CLIENT_CERTIFICATE is "true".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        mock_api_endpoint = "foo"
+        options = client_options.ClientOptions(
+            client_cert_source=mock_client_cert_source, api_endpoint=mock_api_endpoint
+        )
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source(
+            options
+        )
+        assert api_endpoint == mock_api_endpoint
+        assert cert_source == mock_client_cert_source
+
+    # Test the case GOOGLE_API_USE_CLIENT_CERTIFICATE is "false".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "false"}):
+        mock_client_cert_source = mock.Mock()
+        mock_api_endpoint = "foo"
+        options = client_options.ClientOptions(
+            client_cert_source=mock_client_cert_source, api_endpoint=mock_api_endpoint
+        )
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source(
+            options
+        )
+        assert api_endpoint == mock_api_endpoint
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "never".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "never"}):
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+        assert api_endpoint == client_class.DEFAULT_ENDPOINT
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "always".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "always"}):
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+        assert api_endpoint == client_class.DEFAULT_MTLS_ENDPOINT
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "auto" and default cert doesn't exist.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        with mock.patch(
+            "google.auth.transport.mtls.has_default_client_cert_source",
+            return_value=False,
+        ):
+            api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+            assert api_endpoint == client_class.DEFAULT_ENDPOINT
+            assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "auto" and default cert exists.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        with mock.patch(
+            "google.auth.transport.mtls.has_default_client_cert_source",
+            return_value=True,
+        ):
+            with mock.patch(
+                "google.auth.transport.mtls.default_client_cert_source",
+                return_value=mock_client_cert_source,
+            ):
+                (
+                    api_endpoint,
+                    cert_source,
+                ) = client_class.get_mtls_endpoint_and_cert_source()
+                assert api_endpoint == client_class.DEFAULT_MTLS_ENDPOINT
+                assert cert_source == mock_client_cert_source
 
 
 @pytest.mark.parametrize(
@@ -460,7 +529,7 @@ def test_workflow_template_service_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -469,32 +538,36 @@ def test_workflow_template_service_client_client_options_scopes(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
+    "client_class,transport_class,transport_name,grpc_helpers",
     [
         (
             WorkflowTemplateServiceClient,
             transports.WorkflowTemplateServiceGrpcTransport,
             "grpc",
+            grpc_helpers,
         ),
         (
             WorkflowTemplateServiceAsyncClient,
             transports.WorkflowTemplateServiceGrpcAsyncIOTransport,
             "grpc_asyncio",
+            grpc_helpers_async,
         ),
     ],
 )
 def test_workflow_template_service_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -503,6 +576,7 @@ def test_workflow_template_service_client_client_options_credentials_file(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -522,13 +596,80 @@ def test_workflow_template_service_client_client_options_from_dict():
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
-def test_create_workflow_template(
-    transport: str = "grpc",
-    request_type=workflow_templates.CreateWorkflowTemplateRequest,
+@pytest.mark.parametrize(
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [
+        (
+            WorkflowTemplateServiceClient,
+            transports.WorkflowTemplateServiceGrpcTransport,
+            "grpc",
+            grpc_helpers,
+        ),
+        (
+            WorkflowTemplateServiceAsyncClient,
+            transports.WorkflowTemplateServiceGrpcAsyncIOTransport,
+            "grpc_asyncio",
+            grpc_helpers_async,
+        ),
+    ],
+)
+def test_workflow_template_service_client_create_channel_credentials_file(
+    client_class, transport_class, transport_name, grpc_helpers
 ):
+    # Check the case credentials file is provided.
+    options = client_options.ClientOptions(credentials_file="credentials.json")
+
+    with mock.patch.object(transport_class, "__init__") as patched:
+        patched.return_value = None
+        client = client_class(client_options=options, transport=transport_name)
+        patched.assert_called_once_with(
+            credentials=None,
+            credentials_file="credentials.json",
+            host=client.DEFAULT_ENDPOINT,
+            scopes=None,
+            client_cert_source_for_mtls=None,
+            quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
+        )
+
+    # test that the credentials from file are saved and used as the credentials.
+    with mock.patch.object(
+        google.auth, "load_credentials_from_file", autospec=True
+    ) as load_creds, mock.patch.object(
+        google.auth, "default", autospec=True
+    ) as adc, mock.patch.object(
+        grpc_helpers, "create_channel"
+    ) as create_channel:
+        creds = ga_credentials.AnonymousCredentials()
+        file_creds = ga_credentials.AnonymousCredentials()
+        load_creds.return_value = (file_creds, None)
+        adc.return_value = (creds, None)
+        client = client_class(client_options=options, transport=transport_name)
+        create_channel.assert_called_with(
+            "dataproc.googleapis.com:443",
+            credentials=file_creds,
+            credentials_file=None,
+            quota_project_id=None,
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            scopes=None,
+            default_host="dataproc.googleapis.com",
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
+        )
+
+
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.CreateWorkflowTemplateRequest, dict,]
+)
+def test_create_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -557,10 +698,6 @@ def test_create_workflow_template(
     assert response.id == "id_value"
     assert response.name == "name_value"
     assert response.version == 774
-
-
-def test_create_workflow_template_from_dict():
-    test_create_workflow_template(request_type=dict)
 
 
 def test_create_workflow_template_empty_call():
@@ -703,8 +840,12 @@ def test_create_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 def test_create_workflow_template_flattened_error():
@@ -749,8 +890,12 @@ async def test_create_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -769,9 +914,10 @@ async def test_create_workflow_template_flattened_error_async():
         )
 
 
-def test_get_workflow_template(
-    transport: str = "grpc", request_type=workflow_templates.GetWorkflowTemplateRequest
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.GetWorkflowTemplateRequest, dict,]
+)
+def test_get_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -800,10 +946,6 @@ def test_get_workflow_template(
     assert response.id == "id_value"
     assert response.name == "name_value"
     assert response.version == 774
-
-
-def test_get_workflow_template_from_dict():
-    test_get_workflow_template(request_type=dict)
 
 
 def test_get_workflow_template_empty_call():
@@ -943,7 +1085,9 @@ def test_get_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 def test_get_workflow_template_flattened_error():
@@ -983,7 +1127,9 @@ async def test_get_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1000,10 +1146,10 @@ async def test_get_workflow_template_flattened_error_async():
         )
 
 
-def test_instantiate_workflow_template(
-    transport: str = "grpc",
-    request_type=workflow_templates.InstantiateWorkflowTemplateRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.InstantiateWorkflowTemplateRequest, dict,]
+)
+def test_instantiate_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1027,10 +1173,6 @@ def test_instantiate_workflow_template(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_instantiate_workflow_template_from_dict():
-    test_instantiate_workflow_template(request_type=dict)
 
 
 def test_instantiate_workflow_template_empty_call():
@@ -1167,8 +1309,12 @@ def test_instantiate_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
-        assert args[0].parameters == {"key_value": "value_value"}
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
+        arg = args[0].parameters
+        mock_val = {"key_value": "value_value"}
+        assert arg == mock_val
 
 
 def test_instantiate_workflow_template_flattened_error():
@@ -1212,8 +1358,12 @@ async def test_instantiate_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
-        assert args[0].parameters == {"key_value": "value_value"}
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
+        arg = args[0].parameters
+        mock_val = {"key_value": "value_value"}
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1232,10 +1382,10 @@ async def test_instantiate_workflow_template_flattened_error_async():
         )
 
 
-def test_instantiate_inline_workflow_template(
-    transport: str = "grpc",
-    request_type=workflow_templates.InstantiateInlineWorkflowTemplateRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.InstantiateInlineWorkflowTemplateRequest, dict,]
+)
+def test_instantiate_inline_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1259,10 +1409,6 @@ def test_instantiate_inline_workflow_template(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_instantiate_inline_workflow_template_from_dict():
-    test_instantiate_inline_workflow_template(request_type=dict)
 
 
 def test_instantiate_inline_workflow_template_empty_call():
@@ -1400,8 +1546,12 @@ def test_instantiate_inline_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 def test_instantiate_inline_workflow_template_flattened_error():
@@ -1446,8 +1596,12 @@ async def test_instantiate_inline_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1466,10 +1620,10 @@ async def test_instantiate_inline_workflow_template_flattened_error_async():
         )
 
 
-def test_update_workflow_template(
-    transport: str = "grpc",
-    request_type=workflow_templates.UpdateWorkflowTemplateRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.UpdateWorkflowTemplateRequest, dict,]
+)
+def test_update_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1498,10 +1652,6 @@ def test_update_workflow_template(
     assert response.id == "id_value"
     assert response.name == "name_value"
     assert response.version == 774
-
-
-def test_update_workflow_template_from_dict():
-    test_update_workflow_template(request_type=dict)
 
 
 def test_update_workflow_template_empty_call():
@@ -1647,7 +1797,9 @@ def test_update_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 def test_update_workflow_template_flattened_error():
@@ -1690,7 +1842,9 @@ async def test_update_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].template == workflow_templates.WorkflowTemplate(id="id_value")
+        arg = args[0].template
+        mock_val = workflow_templates.WorkflowTemplate(id="id_value")
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1708,10 +1862,10 @@ async def test_update_workflow_template_flattened_error_async():
         )
 
 
-def test_list_workflow_templates(
-    transport: str = "grpc",
-    request_type=workflow_templates.ListWorkflowTemplatesRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.ListWorkflowTemplatesRequest, dict,]
+)
+def test_list_workflow_templates(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1738,10 +1892,6 @@ def test_list_workflow_templates(
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListWorkflowTemplatesPager)
     assert response.next_page_token == "next_page_token_value"
-
-
-def test_list_workflow_templates_from_dict():
-    test_list_workflow_templates(request_type=dict)
 
 
 def test_list_workflow_templates_empty_call():
@@ -1879,7 +2029,9 @@ def test_list_workflow_templates_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
 
 
 def test_list_workflow_templates_flattened_error():
@@ -1919,7 +2071,9 @@ async def test_list_workflow_templates_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1936,9 +2090,9 @@ async def test_list_workflow_templates_flattened_error_async():
         )
 
 
-def test_list_workflow_templates_pager():
+def test_list_workflow_templates_pager(transport_name: str = "grpc"):
     client = WorkflowTemplateServiceClient(
-        credentials=ga_credentials.AnonymousCredentials,
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1984,9 +2138,9 @@ def test_list_workflow_templates_pager():
         assert all(isinstance(i, workflow_templates.WorkflowTemplate) for i in results)
 
 
-def test_list_workflow_templates_pages():
+def test_list_workflow_templates_pages(transport_name: str = "grpc"):
     client = WorkflowTemplateServiceClient(
-        credentials=ga_credentials.AnonymousCredentials,
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2116,10 +2270,10 @@ async def test_list_workflow_templates_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
-def test_delete_workflow_template(
-    transport: str = "grpc",
-    request_type=workflow_templates.DeleteWorkflowTemplateRequest,
-):
+@pytest.mark.parametrize(
+    "request_type", [workflow_templates.DeleteWorkflowTemplateRequest, dict,]
+)
+def test_delete_workflow_template(request_type, transport: str = "grpc"):
     client = WorkflowTemplateServiceClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2143,10 +2297,6 @@ def test_delete_workflow_template(
 
     # Establish that the response is the type that we expect.
     assert response is None
-
-
-def test_delete_workflow_template_from_dict():
-    test_delete_workflow_template(request_type=dict)
 
 
 def test_delete_workflow_template_empty_call():
@@ -2277,7 +2427,9 @@ def test_delete_workflow_template_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 def test_delete_workflow_template_flattened_error():
@@ -2315,7 +2467,9 @@ async def test_delete_workflow_template_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -2350,6 +2504,25 @@ def test_credentials_transport_error():
         client = WorkflowTemplateServiceClient(
             client_options={"credentials_file": "credentials.json"},
             transport=transport,
+        )
+
+    # It is an error to provide an api_key and a transport instance.
+    transport = transports.WorkflowTemplateServiceGrpcTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+    options = client_options.ClientOptions()
+    options.api_key = "api_key"
+    with pytest.raises(ValueError):
+        client = WorkflowTemplateServiceClient(
+            client_options=options, transport=transport,
+        )
+
+    # It is an error to provide an api_key and a credential.
+    options = mock.Mock()
+    options.api_key = "api_key"
+    with pytest.raises(ValueError):
+        client = WorkflowTemplateServiceClient(
+            client_options=options, credentials=ga_credentials.AnonymousCredentials()
         )
 
     # It is an error to provide scopes and a transport instance.
@@ -2445,13 +2618,15 @@ def test_workflow_template_service_base_transport():
         with pytest.raises(NotImplementedError):
             getattr(transport, method)(request=object())
 
+    with pytest.raises(NotImplementedError):
+        transport.close()
+
     # Additionally, the LRO client (a property) should
     # also raise NotImplementedError
     with pytest.raises(NotImplementedError):
         transport.operations_client
 
 
-@requires_google_auth_gte_1_25_0
 def test_workflow_template_service_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
     with mock.patch.object(
@@ -2472,26 +2647,6 @@ def test_workflow_template_service_base_transport_with_credentials_file():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_workflow_template_service_base_transport_with_credentials_file_old_google_auth():
-    # Instantiate the base transport with a credentials file
-    with mock.patch.object(
-        google.auth, "load_credentials_from_file", autospec=True
-    ) as load_creds, mock.patch(
-        "google.cloud.dataproc_v1.services.workflow_template_service.transports.WorkflowTemplateServiceTransport._prep_wrapped_messages"
-    ) as Transport:
-        Transport.return_value = None
-        load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport = transports.WorkflowTemplateServiceTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
-        )
-        load_creds.assert_called_once_with(
-            "credentials.json",
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id="octopus",
-        )
-
-
 def test_workflow_template_service_base_transport_with_adc():
     # Test the default credentials are used if credentials and credentials_file are None.
     with mock.patch.object(google.auth, "default", autospec=True) as adc, mock.patch(
@@ -2503,7 +2658,6 @@ def test_workflow_template_service_base_transport_with_adc():
         adc.assert_called_once()
 
 
-@requires_google_auth_gte_1_25_0
 def test_workflow_template_service_auth_adc():
     # If no credentials are provided, we should use ADC credentials.
     with mock.patch.object(google.auth, "default", autospec=True) as adc:
@@ -2516,18 +2670,6 @@ def test_workflow_template_service_auth_adc():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_workflow_template_service_auth_adc_old_google_auth():
-    # If no credentials are provided, we should use ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        WorkflowTemplateServiceClient()
-        adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id=None,
-        )
-
-
 @pytest.mark.parametrize(
     "transport_class",
     [
@@ -2535,7 +2677,6 @@ def test_workflow_template_service_auth_adc_old_google_auth():
         transports.WorkflowTemplateServiceGrpcAsyncIOTransport,
     ],
 )
-@requires_google_auth_gte_1_25_0
 def test_workflow_template_service_transport_auth_adc(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
@@ -2545,26 +2686,6 @@ def test_workflow_template_service_transport_auth_adc(transport_class):
         adc.assert_called_once_with(
             scopes=["1", "2"],
             default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id="octopus",
-        )
-
-
-@pytest.mark.parametrize(
-    "transport_class",
-    [
-        transports.WorkflowTemplateServiceGrpcTransport,
-        transports.WorkflowTemplateServiceGrpcAsyncIOTransport,
-    ],
-)
-@requires_google_auth_lt_1_25_0
-def test_workflow_template_service_transport_auth_adc_old_google_auth(transport_class):
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport_class(quota_project_id="octopus")
-        adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
             quota_project_id="octopus",
         )
 
@@ -2823,34 +2944,10 @@ def test_workflow_template_service_grpc_lro_async_client():
     assert transport.operations_client is transport.operations_client
 
 
-def test_cluster_path():
+def test_service_path():
     project = "squid"
     location = "clam"
-    cluster = "whelk"
-    expected = "projects/{project}/locations/{location}/clusters/{cluster}".format(
-        project=project, location=location, cluster=cluster,
-    )
-    actual = WorkflowTemplateServiceClient.cluster_path(project, location, cluster)
-    assert expected == actual
-
-
-def test_parse_cluster_path():
-    expected = {
-        "project": "octopus",
-        "location": "oyster",
-        "cluster": "nudibranch",
-    }
-    path = WorkflowTemplateServiceClient.cluster_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = WorkflowTemplateServiceClient.parse_cluster_path(path)
-    assert expected == actual
-
-
-def test_service_path():
-    project = "cuttlefish"
-    location = "mussel"
-    service = "winkle"
+    service = "whelk"
     expected = "projects/{project}/locations/{location}/services/{service}".format(
         project=project, location=location, service=service,
     )
@@ -2860,9 +2957,9 @@ def test_service_path():
 
 def test_parse_service_path():
     expected = {
-        "project": "nautilus",
-        "location": "scallop",
-        "service": "abalone",
+        "project": "octopus",
+        "location": "oyster",
+        "service": "nudibranch",
     }
     path = WorkflowTemplateServiceClient.service_path(**expected)
 
@@ -2872,9 +2969,9 @@ def test_parse_service_path():
 
 
 def test_workflow_template_path():
-    project = "squid"
-    region = "clam"
-    workflow_template = "whelk"
+    project = "cuttlefish"
+    region = "mussel"
+    workflow_template = "winkle"
     expected = "projects/{project}/regions/{region}/workflowTemplates/{workflow_template}".format(
         project=project, region=region, workflow_template=workflow_template,
     )
@@ -2886,9 +2983,9 @@ def test_workflow_template_path():
 
 def test_parse_workflow_template_path():
     expected = {
-        "project": "octopus",
-        "region": "oyster",
-        "workflow_template": "nudibranch",
+        "project": "nautilus",
+        "region": "scallop",
+        "workflow_template": "abalone",
     }
     path = WorkflowTemplateServiceClient.workflow_template_path(**expected)
 
@@ -2898,7 +2995,7 @@ def test_parse_workflow_template_path():
 
 
 def test_common_billing_account_path():
-    billing_account = "cuttlefish"
+    billing_account = "squid"
     expected = "billingAccounts/{billing_account}".format(
         billing_account=billing_account,
     )
@@ -2908,7 +3005,7 @@ def test_common_billing_account_path():
 
 def test_parse_common_billing_account_path():
     expected = {
-        "billing_account": "mussel",
+        "billing_account": "clam",
     }
     path = WorkflowTemplateServiceClient.common_billing_account_path(**expected)
 
@@ -2918,7 +3015,7 @@ def test_parse_common_billing_account_path():
 
 
 def test_common_folder_path():
-    folder = "winkle"
+    folder = "whelk"
     expected = "folders/{folder}".format(folder=folder,)
     actual = WorkflowTemplateServiceClient.common_folder_path(folder)
     assert expected == actual
@@ -2926,7 +3023,7 @@ def test_common_folder_path():
 
 def test_parse_common_folder_path():
     expected = {
-        "folder": "nautilus",
+        "folder": "octopus",
     }
     path = WorkflowTemplateServiceClient.common_folder_path(**expected)
 
@@ -2936,7 +3033,7 @@ def test_parse_common_folder_path():
 
 
 def test_common_organization_path():
-    organization = "scallop"
+    organization = "oyster"
     expected = "organizations/{organization}".format(organization=organization,)
     actual = WorkflowTemplateServiceClient.common_organization_path(organization)
     assert expected == actual
@@ -2944,7 +3041,7 @@ def test_common_organization_path():
 
 def test_parse_common_organization_path():
     expected = {
-        "organization": "abalone",
+        "organization": "nudibranch",
     }
     path = WorkflowTemplateServiceClient.common_organization_path(**expected)
 
@@ -2954,7 +3051,7 @@ def test_parse_common_organization_path():
 
 
 def test_common_project_path():
-    project = "squid"
+    project = "cuttlefish"
     expected = "projects/{project}".format(project=project,)
     actual = WorkflowTemplateServiceClient.common_project_path(project)
     assert expected == actual
@@ -2962,7 +3059,7 @@ def test_common_project_path():
 
 def test_parse_common_project_path():
     expected = {
-        "project": "clam",
+        "project": "mussel",
     }
     path = WorkflowTemplateServiceClient.common_project_path(**expected)
 
@@ -2972,8 +3069,8 @@ def test_parse_common_project_path():
 
 
 def test_common_location_path():
-    project = "whelk"
-    location = "octopus"
+    project = "winkle"
+    location = "nautilus"
     expected = "projects/{project}/locations/{location}".format(
         project=project, location=location,
     )
@@ -2983,8 +3080,8 @@ def test_common_location_path():
 
 def test_parse_common_location_path():
     expected = {
-        "project": "oyster",
-        "location": "nudibranch",
+        "project": "scallop",
+        "location": "abalone",
     }
     path = WorkflowTemplateServiceClient.common_location_path(**expected)
 
@@ -2993,7 +3090,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(
@@ -3012,3 +3109,85 @@ def test_client_withDEFAULT_CLIENT_INFO():
             credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
+
+
+@pytest.mark.asyncio
+async def test_transport_close_async():
+    client = WorkflowTemplateServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+    )
+    with mock.patch.object(
+        type(getattr(client.transport, "grpc_channel")), "close"
+    ) as close:
+        async with client:
+            close.assert_not_called()
+        close.assert_called_once()
+
+
+def test_transport_close():
+    transports = {
+        "grpc": "_grpc_channel",
+    }
+
+    for transport, close_name in transports.items():
+        client = WorkflowTemplateServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        with mock.patch.object(
+            type(getattr(client.transport, close_name)), "close"
+        ) as close:
+            with client:
+                close.assert_not_called()
+            close.assert_called_once()
+
+
+def test_client_ctx():
+    transports = [
+        "grpc",
+    ]
+    for transport in transports:
+        client = WorkflowTemplateServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        # Test client calls underlying transport.
+        with mock.patch.object(type(client.transport), "close") as close:
+            close.assert_not_called()
+            with client:
+                pass
+            close.assert_called()
+
+
+@pytest.mark.parametrize(
+    "client_class,transport_class",
+    [
+        (
+            WorkflowTemplateServiceClient,
+            transports.WorkflowTemplateServiceGrpcTransport,
+        ),
+        (
+            WorkflowTemplateServiceAsyncClient,
+            transports.WorkflowTemplateServiceGrpcAsyncIOTransport,
+        ),
+    ],
+)
+def test_api_key_credentials(client_class, transport_class):
+    with mock.patch.object(
+        google.auth._default, "get_api_key_credentials", create=True
+    ) as get_api_key_credentials:
+        mock_cred = mock.Mock()
+        get_api_key_credentials.return_value = mock_cred
+        options = client_options.ClientOptions()
+        options.api_key = "api_key"
+        with mock.patch.object(transport_class, "__init__") as patched:
+            patched.return_value = None
+            client = client_class(client_options=options)
+            patched.assert_called_once_with(
+                credentials=mock_cred,
+                credentials_file=None,
+                host=client.DEFAULT_ENDPOINT,
+                scopes=None,
+                client_cert_source_for_mtls=None,
+                quota_project_id=None,
+                client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
+            )

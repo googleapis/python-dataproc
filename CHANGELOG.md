@@ -4,6 +4,138 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [4.0.1](https://github.com/googleapis/python-dataproc/compare/v4.0.0...v4.0.1) (2022-03-05)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core>=1.31.5, >=2.3.2 ([#357](https://github.com/googleapis/python-dataproc/issues/357)) ([3c66f42](https://github.com/googleapis/python-dataproc/commit/3c66f4232d35f1e11807d29e169fe87e028c52eb))
+* **deps:** require proto-plus>=1.15.0 ([3c66f42](https://github.com/googleapis/python-dataproc/commit/3c66f4232d35f1e11807d29e169fe87e028c52eb))
+
+## [4.0.0](https://github.com/googleapis/python-dataproc/compare/v3.3.0...v4.0.0) (2022-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* add support for Virtual Dataproc cluster running on GKE cluster (#344)
+
+### Features
+
+* add support for Virtual Dataproc cluster running on GKE cluster ([#344](https://github.com/googleapis/python-dataproc/issues/344)) ([116077b](https://github.com/googleapis/python-dataproc/commit/116077b45abaccb1814002284e05e34ef387e045))
+
+
+### Bug Fixes
+
+* move GkeClusterConfig to google.cloud.dataproc_v1.types.shared ([116077b](https://github.com/googleapis/python-dataproc/commit/116077b45abaccb1814002284e05e34ef387e045))
+* remove namespaced_gke_deployment_target ([116077b](https://github.com/googleapis/python-dataproc/commit/116077b45abaccb1814002284e05e34ef387e045))
+
+## [3.3.0](https://github.com/googleapis/python-dataproc/compare/v3.2.0...v3.3.0) (2022-02-18)
+
+
+### Features
+
+* add api key support ([#336](https://github.com/googleapis/python-dataproc/issues/336)) ([ac22d7e](https://github.com/googleapis/python-dataproc/commit/ac22d7ef7040e85035a8d3cfc9fe0f69a014f238))
+
+
+### Bug Fixes
+
+* resolve DuplicateCredentialArgs error when using credentials_file ([452460f](https://github.com/googleapis/python-dataproc/commit/452460fe8e6af9e1a99d9636c5531e489e1e4852))
+
+
+### Documentation
+
+* add generated snippets ([#342](https://github.com/googleapis/python-dataproc/issues/342)) ([98810a9](https://github.com/googleapis/python-dataproc/commit/98810a9bc7674ea81397823f5da871cd30adcbd7))
+
+## [3.2.0](https://github.com/googleapis/python-dataproc/compare/v3.1.1...v3.2.0) (2022-01-17)
+
+
+### Features
+
+* add Spark runtime versioning for Spark batches ([#318](https://github.com/googleapis/python-dataproc/issues/318)) ([f2e35d9](https://github.com/googleapis/python-dataproc/commit/f2e35d9735cbd0dd5a0e32d78631d70820380846))
+* auto-diagnostic of failed Spark batches ([f2e35d9](https://github.com/googleapis/python-dataproc/commit/f2e35d9735cbd0dd5a0e32d78631d70820380846))
+* custom image containers for Spark batches ([f2e35d9](https://github.com/googleapis/python-dataproc/commit/f2e35d9735cbd0dd5a0e32d78631d70820380846))
+* local SSD NVME interface support for GCE clusters ([f2e35d9](https://github.com/googleapis/python-dataproc/commit/f2e35d9735cbd0dd5a0e32d78631d70820380846))
+
+### [3.1.1](https://www.github.com/googleapis/python-dataproc/compare/v3.1.0...v3.1.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* **deps:** drop packaging dependency ([d4919c0](https://www.github.com/googleapis/python-dataproc/commit/d4919c029ad12b5ee44942b55c5560aaf441f5a9))
+* **deps:** require google-api-core >= 1.28.0 ([d4919c0](https://www.github.com/googleapis/python-dataproc/commit/d4919c029ad12b5ee44942b55c5560aaf441f5a9))
+
+
+### Documentation
+
+* list oneofs in docstring ([d4919c0](https://www.github.com/googleapis/python-dataproc/commit/d4919c029ad12b5ee44942b55c5560aaf441f5a9))
+
+## [3.1.0](https://www.github.com/googleapis/python-dataproc/compare/v3.0.0...v3.1.0) (2021-10-26)
+
+
+### Features
+
+* add context manager support in client ([#285](https://www.github.com/googleapis/python-dataproc/issues/285)) ([b54fb76](https://www.github.com/googleapis/python-dataproc/commit/b54fb7647deaea64fe6ad553514c9d0ad62a0cbc))
+* add Dataproc Serverless for Spark Batches API ([#290](https://www.github.com/googleapis/python-dataproc/issues/290)) ([f0ed26c](https://www.github.com/googleapis/python-dataproc/commit/f0ed26c6ccd2e9f438d1d5f31c5512761b0e20b9))
+* Add support for dataproc BatchController service ([#291](https://www.github.com/googleapis/python-dataproc/issues/291)) ([24a6f7d](https://www.github.com/googleapis/python-dataproc/commit/24a6f7defee1e0fd2d195f934c004769d8f1a2b7))
+* add support for python 3.10 ([#289](https://www.github.com/googleapis/python-dataproc/issues/289)) ([229f919](https://www.github.com/googleapis/python-dataproc/commit/229f919e31c39bc028cd2e6062437b0a8d061556))
+
+## [3.0.0](https://www.github.com/googleapis/python-dataproc/compare/v2.6.0...v3.0.0) (2021-10-04)
+
+
+### Features
+
+* delete deprecated Dataproc v1beta2 API client ([3bdeaa7](https://www.github.com/googleapis/python-dataproc/commit/3bdeaa7e707ec2af445bf7c0321959b927c9c245))
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([be5c115](https://www.github.com/googleapis/python-dataproc/commit/be5c11554f7accfe60dd5cb8da7c4888f688c282))
+* improper types in pagers generation ([1ae784b](https://www.github.com/googleapis/python-dataproc/commit/1ae784bc1610aeb389eaa2cc7a6dc6f10c96788b))
+
+
+### Miscellaneous Chores
+
+* release as 3.0.0 ([#273](https://www.github.com/googleapis/python-dataproc/issues/273)) ([3bdeaa7](https://www.github.com/googleapis/python-dataproc/commit/3bdeaa7e707ec2af445bf7c0321959b927c9c245))
+
+
+### Documentation
+
+* update cluster sample ([3bdeaa7](https://www.github.com/googleapis/python-dataproc/commit/3bdeaa7e707ec2af445bf7c0321959b927c9c245))
+
+## [2.6.0](https://www.github.com/googleapis/python-dataproc/compare/v2.5.0...v2.6.0) (2021-09-21)
+
+
+### Features
+
+* delete deprecated Dataproc v1beta2 API client ([#253](https://www.github.com/googleapis/python-dataproc/issues/253)) ([b0db6da](https://www.github.com/googleapis/python-dataproc/commit/b0db6da6221ed37ab2d8903fff8befb788fa55d5))
+
+
+### Documentation
+
+* update cluster sample ([#218](https://www.github.com/googleapis/python-dataproc/issues/218)) ([80706f9](https://www.github.com/googleapis/python-dataproc/commit/80706f93b32007efe43ca4740a20f924fb6e9f54))
+
+## [2.5.0](https://www.github.com/googleapis/python-dataproc/compare/v2.4.0...v2.5.0) (2021-07-24)
+
+
+### Features
+
+* add always_use_jwt_access ([#209](https://www.github.com/googleapis/python-dataproc/issues/209)) ([6aec13c](https://www.github.com/googleapis/python-dataproc/commit/6aec13ce39a2afc0f36878bd61cff1614ec66972))
+
+
+### Bug Fixes
+
+* Attribute error Name while executing the sample code ([#205](https://www.github.com/googleapis/python-dataproc/issues/205)) ([cb0328f](https://www.github.com/googleapis/python-dataproc/commit/cb0328f3bfec416be9aec34d027fe0f48aab4242))
+* **deps:** pin 'google-{api,cloud}-core', 'google-auth' to allow 2.x versions ([#227](https://www.github.com/googleapis/python-dataproc/issues/227)) ([5acfcd0](https://www.github.com/googleapis/python-dataproc/commit/5acfcd019dede3684fdf23cbed8bfcebdce606af))
+* disable always_use_jwt_access ([#215](https://www.github.com/googleapis/python-dataproc/issues/215)) ([a57e253](https://www.github.com/googleapis/python-dataproc/commit/a57e25388691335b6672613210ee566ed91dc97b))
+* enable self signed jwt for grpc ([#233](https://www.github.com/googleapis/python-dataproc/issues/233)) ([7df4fef](https://www.github.com/googleapis/python-dataproc/commit/7df4fefdced730fffd9b994608575512efe8d72a))
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-dataproc/issues/1127)) ([#201](https://www.github.com/googleapis/python-dataproc/issues/201)) ([feea064](https://www.github.com/googleapis/python-dataproc/commit/feea0642ea6dbd6e08d4e52c89789a6b17e4de97))
+* add Samples section to CONTRIBUTING.rst ([#228](https://www.github.com/googleapis/python-dataproc/issues/228)) ([3e248c2](https://www.github.com/googleapis/python-dataproc/commit/3e248c29470d635abf0d6fa7ae84dc8370a86bef))
+
+
 ## [2.4.0](https://www.github.com/googleapis/python-dataproc/compare/v2.3.1...v2.4.0) (2021-05-20)
 
 

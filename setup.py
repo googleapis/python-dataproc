@@ -22,16 +22,18 @@ import setuptools
 
 name = "google-cloud-dataproc"
 description = "Google Cloud Dataproc API client library"
-version = "2.4.0"
+version = "4.0.1"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
 # 'Development Status :: 4 - Beta'
 # 'Development Status :: 5 - Production/Stable'
 release_status = "Development Status :: 5 - Production/Stable"
 dependencies = [
-    "google-api-core[grpc] >= 1.26.0, <2.0.0dev",
-    "proto-plus >= 1.4.0",
-    "packaging >= 14.3",
+    # NOTE: Maintainers, please do not require google-api-core>=2.x.x
+    # Until this issue is closed
+    # https://github.com/googleapis/google-cloud-python/issues/10566
+    "google-api-core[grpc] >= 1.31.5, <3.0.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0",
+    "proto-plus >= 1.15.0",
 ]
 extras = {"libcst": "libcst >= 0.2.5"}
 
@@ -76,6 +78,8 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
         "Topic :: Internet",
     ],
@@ -85,10 +89,7 @@ setuptools.setup(
     install_requires=dependencies,
     extras_require=extras,
     python_requires=">=3.6",
-    scripts=[
-        "scripts/fixup_dataproc_v1_keywords.py",
-        "scripts/fixup_dataproc_v1beta2_keywords.py",
-    ],
+    scripts=["scripts/fixup_dataproc_v1_keywords.py",],
     include_package_data=True,
     zip_safe=False,
 )

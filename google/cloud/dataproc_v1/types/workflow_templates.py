@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,6 +51,7 @@ __protobuf__ = proto.module(
 
 class WorkflowTemplate(proto.Message):
     r"""A Dataproc workflow template resource.
+
     Attributes:
         id (str):
 
@@ -143,15 +144,26 @@ class WorkflowTemplatePlacement(proto.Message):
 
     Either ``managed_cluster`` or ``cluster_selector`` is required.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         managed_cluster (google.cloud.dataproc_v1.types.ManagedCluster):
             A cluster that is managed by the workflow.
+
+            This field is a member of `oneof`_ ``placement``.
         cluster_selector (google.cloud.dataproc_v1.types.ClusterSelector):
             Optional. A selector that chooses target
             cluster for jobs based on metadata.
 
             The selector is evaluated at the time each job
             is submitted.
+
+            This field is a member of `oneof`_ ``placement``.
     """
 
     managed_cluster = proto.Field(
@@ -164,6 +176,7 @@ class WorkflowTemplatePlacement(proto.Message):
 
 class ManagedCluster(proto.Message):
     r"""Cluster that is managed by the workflow.
+
     Attributes:
         cluster_name (str):
             Required. The cluster name prefix. A unique
@@ -218,6 +231,14 @@ class ClusterSelector(proto.Message):
 
 class OrderedJob(proto.Message):
     r"""A job executed by the workflow.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         step_id (str):
             Required. The step id. The id must be unique among all jobs
@@ -234,20 +255,36 @@ class OrderedJob(proto.Message):
             characters.
         hadoop_job (google.cloud.dataproc_v1.types.HadoopJob):
             Optional. Job is a Hadoop job.
+
+            This field is a member of `oneof`_ ``job_type``.
         spark_job (google.cloud.dataproc_v1.types.SparkJob):
             Optional. Job is a Spark job.
+
+            This field is a member of `oneof`_ ``job_type``.
         pyspark_job (google.cloud.dataproc_v1.types.PySparkJob):
             Optional. Job is a PySpark job.
+
+            This field is a member of `oneof`_ ``job_type``.
         hive_job (google.cloud.dataproc_v1.types.HiveJob):
             Optional. Job is a Hive job.
+
+            This field is a member of `oneof`_ ``job_type``.
         pig_job (google.cloud.dataproc_v1.types.PigJob):
             Optional. Job is a Pig job.
+
+            This field is a member of `oneof`_ ``job_type``.
         spark_r_job (google.cloud.dataproc_v1.types.SparkRJob):
             Optional. Job is a SparkR job.
+
+            This field is a member of `oneof`_ ``job_type``.
         spark_sql_job (google.cloud.dataproc_v1.types.SparkSqlJob):
             Optional. Job is a SparkSql job.
+
+            This field is a member of `oneof`_ ``job_type``.
         presto_job (google.cloud.dataproc_v1.types.PrestoJob):
             Optional. Job is a Presto job.
+
+            This field is a member of `oneof`_ ``job_type``.
         labels (Sequence[google.cloud.dataproc_v1.types.OrderedJob.LabelsEntry]):
             Optional. The labels to associate with this job.
 
@@ -385,11 +422,23 @@ class TemplateParameter(proto.Message):
 
 class ParameterValidation(proto.Message):
     r"""Configuration for parameter validation.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         regex (google.cloud.dataproc_v1.types.RegexValidation):
             Validation based on regular expressions.
+
+            This field is a member of `oneof`_ ``validation_type``.
         values (google.cloud.dataproc_v1.types.ValueValidation):
             Validation based on a list of allowed values.
+
+            This field is a member of `oneof`_ ``validation_type``.
     """
 
     regex = proto.Field(
@@ -402,6 +451,7 @@ class ParameterValidation(proto.Message):
 
 class RegexValidation(proto.Message):
     r"""Validation based on regular expressions.
+
     Attributes:
         regexes (Sequence[str]):
             Required. RE2 regular expressions used to
@@ -415,6 +465,7 @@ class RegexValidation(proto.Message):
 
 class ValueValidation(proto.Message):
     r"""Validation based on a list of allowed values.
+
     Attributes:
         values (Sequence[str]):
             Required. List of allowed values for the
@@ -426,6 +477,7 @@ class ValueValidation(proto.Message):
 
 class WorkflowMetadata(proto.Message):
     r"""A Dataproc workflow template resource.
+
     Attributes:
         template (str):
             Output only. The resource name of the workflow template as
@@ -506,6 +558,7 @@ class WorkflowMetadata(proto.Message):
 
 class ClusterOperation(proto.Message):
     r"""The cluster operation triggered by a workflow.
+
     Attributes:
         operation_id (str):
             Output only. The id of the cluster operation.
@@ -522,6 +575,7 @@ class ClusterOperation(proto.Message):
 
 class WorkflowGraph(proto.Message):
     r"""The workflow graph.
+
     Attributes:
         nodes (Sequence[google.cloud.dataproc_v1.types.WorkflowNode]):
             Output only. The workflow nodes.
@@ -532,6 +586,7 @@ class WorkflowGraph(proto.Message):
 
 class WorkflowNode(proto.Message):
     r"""The workflow node.
+
     Attributes:
         step_id (str):
             Output only. The name of the node.
@@ -564,13 +619,14 @@ class WorkflowNode(proto.Message):
 
 class CreateWorkflowTemplateRequest(proto.Message):
     r"""A request to create a workflow template.
+
     Attributes:
         parent (str):
             Required. The resource name of the region or location, as
             described in
             https://cloud.google.com/apis/design/resource_names.
 
-            -  For ``projects.regions.workflowTemplates,create``, the
+            -  For ``projects.regions.workflowTemplates.create``, the
                resource name of the region has the following format:
                ``projects/{project_id}/regions/{region}``
 
@@ -588,6 +644,7 @@ class CreateWorkflowTemplateRequest(proto.Message):
 
 class GetWorkflowTemplateRequest(proto.Message):
     r"""A request to fetch a workflow template.
+
     Attributes:
         name (str):
             Required. The resource name of the workflow template, as
@@ -614,6 +671,7 @@ class GetWorkflowTemplateRequest(proto.Message):
 
 class InstantiateWorkflowTemplateRequest(proto.Message):
     r"""A request to instantiate a workflow template.
+
     Attributes:
         name (str):
             Required. The resource name of the workflow template, as
@@ -661,6 +719,7 @@ class InstantiateWorkflowTemplateRequest(proto.Message):
 
 class InstantiateInlineWorkflowTemplateRequest(proto.Message):
     r"""A request to instantiate an inline workflow template.
+
     Attributes:
         parent (str):
             Required. The resource name of the region or location, as
@@ -699,6 +758,7 @@ class InstantiateInlineWorkflowTemplateRequest(proto.Message):
 
 class UpdateWorkflowTemplateRequest(proto.Message):
     r"""A request to update a workflow template.
+
     Attributes:
         template (google.cloud.dataproc_v1.types.WorkflowTemplate):
             Required. The updated workflow template.
@@ -712,6 +772,7 @@ class UpdateWorkflowTemplateRequest(proto.Message):
 
 class ListWorkflowTemplatesRequest(proto.Message):
     r"""A request to list workflow templates in a project.
+
     Attributes:
         parent (str):
             Required. The resource name of the region or location, as

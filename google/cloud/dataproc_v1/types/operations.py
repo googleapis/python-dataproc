@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +20,55 @@ from google.protobuf import timestamp_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.cloud.dataproc.v1",
-    manifest={"ClusterOperationStatus", "ClusterOperationMetadata",},
+    manifest={
+        "BatchOperationMetadata",
+        "ClusterOperationStatus",
+        "ClusterOperationMetadata",
+    },
 )
+
+
+class BatchOperationMetadata(proto.Message):
+    r"""Metadata describing the Batch operation.
+
+    Attributes:
+        batch (str):
+            Name of the batch for the operation.
+        batch_uuid (str):
+            Batch UUID for the operation.
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
+            The time when the operation was created.
+        done_time (google.protobuf.timestamp_pb2.Timestamp):
+            The time when the operation finished.
+        operation_type (google.cloud.dataproc_v1.types.BatchOperationMetadata.BatchOperationType):
+            The operation type.
+        description (str):
+            Short description of the operation.
+        labels (Sequence[google.cloud.dataproc_v1.types.BatchOperationMetadata.LabelsEntry]):
+            Labels associated with the operation.
+        warnings (Sequence[str]):
+            Warnings encountered during operation
+            execution.
+    """
+
+    class BatchOperationType(proto.Enum):
+        r"""Operation type for Batch resources"""
+        BATCH_OPERATION_TYPE_UNSPECIFIED = 0
+        BATCH = 1
+
+    batch = proto.Field(proto.STRING, number=1,)
+    batch_uuid = proto.Field(proto.STRING, number=2,)
+    create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    done_time = proto.Field(proto.MESSAGE, number=4, message=timestamp_pb2.Timestamp,)
+    operation_type = proto.Field(proto.ENUM, number=6, enum=BatchOperationType,)
+    description = proto.Field(proto.STRING, number=7,)
+    labels = proto.MapField(proto.STRING, proto.STRING, number=8,)
+    warnings = proto.RepeatedField(proto.STRING, number=9,)
 
 
 class ClusterOperationStatus(proto.Message):
     r"""The status of the operation.
+
     Attributes:
         state (google.cloud.dataproc_v1.types.ClusterOperationStatus.State):
             Output only. A message containing the
@@ -57,6 +100,7 @@ class ClusterOperationStatus(proto.Message):
 
 class ClusterOperationMetadata(proto.Message):
     r"""Metadata describing the operation.
+
     Attributes:
         cluster_name (str):
             Output only. Name of the cluster for the

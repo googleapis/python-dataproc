@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,20 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core.client_options import ClientOptions
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -48,8 +53,6 @@ class WorkflowTemplateServiceAsyncClient:
     DEFAULT_ENDPOINT = WorkflowTemplateServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = WorkflowTemplateServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    cluster_path = staticmethod(WorkflowTemplateServiceClient.cluster_path)
-    parse_cluster_path = staticmethod(WorkflowTemplateServiceClient.parse_cluster_path)
     service_path = staticmethod(WorkflowTemplateServiceClient.service_path)
     parse_service_path = staticmethod(WorkflowTemplateServiceClient.parse_service_path)
     workflow_template_path = staticmethod(
@@ -120,6 +123,42 @@ class WorkflowTemplateServiceAsyncClient:
 
     from_service_account_json = from_service_account_file
 
+    @classmethod
+    def get_mtls_endpoint_and_cert_source(
+        cls, client_options: Optional[ClientOptions] = None
+    ):
+        """Return the API endpoint and client cert source for mutual TLS.
+
+        The client cert source is determined in the following order:
+        (1) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is not "true", the
+        client cert source is None.
+        (2) if `client_options.client_cert_source` is provided, use the provided one; if the
+        default client cert source exists, use the default one; otherwise the client cert
+        source is None.
+
+        The API endpoint is determined in the following order:
+        (1) if `client_options.api_endpoint` if provided, use the provided one.
+        (2) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is "always", use the
+        default mTLS endpoint; if the environment variabel is "never", use the default API
+        endpoint; otherwise if client cert source exists, use the default mTLS endpoint, otherwise
+        use the default API endpoint.
+
+        More details can be found at https://google.aip.dev/auth/4114.
+
+        Args:
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+                client. Only the `api_endpoint` and `client_cert_source` properties may be used
+                in this method.
+
+        Returns:
+            Tuple[str, Callable[[], Tuple[bytes, bytes]]]: returns the API endpoint and the
+                client cert source to use.
+
+        Raises:
+            google.auth.exceptions.MutualTLSChannelError: If any errors happen.
+        """
+        return WorkflowTemplateServiceClient.get_mtls_endpoint_and_cert_source(client_options)  # type: ignore
+
     @property
     def transport(self) -> WorkflowTemplateServiceTransport:
         """Returns the transport used by the client instance.
@@ -183,18 +222,44 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def create_workflow_template(
         self,
-        request: workflow_templates.CreateWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.CreateWorkflowTemplateRequest, dict] = None,
         *,
         parent: str = None,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
         r"""Creates new workflow template.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_create_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.CreateWorkflowTemplateRequest(
+                    parent="parent_value",
+                    template=template,
+                )
+
+                # Make the request
+                response = client.create_workflow_template(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.CreateWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.CreateWorkflowTemplateRequest, dict]):
                 The request object. A request to create a workflow
                 template.
             parent (:class:`str`):
@@ -202,7 +267,7 @@ class WorkflowTemplateServiceAsyncClient:
                 as described in
                 https://cloud.google.com/apis/design/resource_names.
 
-                -  For ``projects.regions.workflowTemplates,create``,
+                -  For ``projects.regions.workflowTemplates.create``,
                    the resource name of the region has the following
                    format: ``projects/{project_id}/regions/{region}``
 
@@ -234,7 +299,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, template])
         if request is not None and has_flattened_params:
@@ -283,10 +348,10 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def get_workflow_template(
         self,
-        request: workflow_templates.GetWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.GetWorkflowTemplateRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
@@ -294,8 +359,28 @@ class WorkflowTemplateServiceAsyncClient:
         Can retrieve previously instantiated template by
         specifying optional version parameter.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                response = client.get_workflow_template(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.GetWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.GetWorkflowTemplateRequest, dict]):
                 The request object. A request to fetch a workflow
                 template.
             name (:class:`str`):
@@ -329,7 +414,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -378,13 +463,15 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def instantiate_workflow_template(
         self,
-        request: workflow_templates.InstantiateWorkflowTemplateRequest = None,
+        request: Union[
+            workflow_templates.InstantiateWorkflowTemplateRequest, dict
+        ] = None,
         *,
         name: str = None,
         parameters: Sequence[
             workflow_templates.InstantiateWorkflowTemplateRequest.ParametersEntry
         ] = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -410,8 +497,32 @@ class WorkflowTemplateServiceAsyncClient:
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_instantiate_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.InstantiateWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                operation = client.instantiate_workflow_template(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate a workflow
                 template.
             name (:class:`str`):
@@ -469,7 +580,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name, parameters])
         if request is not None and has_flattened_params:
@@ -527,11 +638,13 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def instantiate_inline_workflow_template(
         self,
-        request: workflow_templates.InstantiateInlineWorkflowTemplateRequest = None,
+        request: Union[
+            workflow_templates.InstantiateInlineWorkflowTemplateRequest, dict
+        ] = None,
         *,
         parent: str = None,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -562,8 +675,39 @@ class WorkflowTemplateServiceAsyncClient:
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_instantiate_inline_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.InstantiateInlineWorkflowTemplateRequest(
+                    parent="parent_value",
+                    template=template,
+                )
+
+                # Make the request
+                operation = client.instantiate_inline_workflow_template(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.InstantiateInlineWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.InstantiateInlineWorkflowTemplateRequest, dict]):
                 The request object. A request to instantiate an inline
                 workflow template.
             parent (:class:`str`):
@@ -618,7 +762,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, template])
         if request is not None and has_flattened_params:
@@ -675,10 +819,10 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def update_workflow_template(
         self,
-        request: workflow_templates.UpdateWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.UpdateWorkflowTemplateRequest, dict] = None,
         *,
         template: workflow_templates.WorkflowTemplate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
@@ -686,8 +830,34 @@ class WorkflowTemplateServiceAsyncClient:
         template must contain version that matches the current
         server version.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_update_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                template = dataproc_v1.WorkflowTemplate()
+                template.id = "id_value"
+                template.placement.managed_cluster.cluster_name = "cluster_name_value"
+                template.jobs.hadoop_job.main_jar_file_uri = "main_jar_file_uri_value"
+                template.jobs.step_id = "step_id_value"
+
+                request = dataproc_v1.UpdateWorkflowTemplateRequest(
+                    template=template,
+                )
+
+                # Make the request
+                response = client.update_workflow_template(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.UpdateWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.UpdateWorkflowTemplateRequest, dict]):
                 The request object. A request to update a workflow
                 template.
             template (:class:`google.cloud.dataproc_v1.types.WorkflowTemplate`):
@@ -712,7 +882,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([template])
         if request is not None and has_flattened_params:
@@ -761,18 +931,39 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def list_workflow_templates(
         self,
-        request: workflow_templates.ListWorkflowTemplatesRequest = None,
+        request: Union[workflow_templates.ListWorkflowTemplatesRequest, dict] = None,
         *,
         parent: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListWorkflowTemplatesAsyncPager:
         r"""Lists workflows that match the specified filter in
         the request.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_workflow_templates():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListWorkflowTemplatesRequest(
+                    parent="parent_value",
+                )
+
+                # Make the request
+                page_result = client.list_workflow_templates(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.ListWorkflowTemplatesRequest`):
+            request (Union[google.cloud.dataproc_v1.types.ListWorkflowTemplatesRequest, dict]):
                 The request object. A request to list workflow templates
                 in a project.
             parent (:class:`str`):
@@ -808,7 +999,7 @@ class WorkflowTemplateServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -863,18 +1054,35 @@ class WorkflowTemplateServiceAsyncClient:
 
     async def delete_workflow_template(
         self,
-        request: workflow_templates.DeleteWorkflowTemplateRequest = None,
+        request: Union[workflow_templates.DeleteWorkflowTemplateRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
-        r"""Deletes a workflow template. It does not cancel in-
-        rogress workflows.
+        r"""Deletes a workflow template. It does not cancel
+        in-progress workflows.
+
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_workflow_template():
+                # Create a client
+                client = dataproc_v1.WorkflowTemplateServiceClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteWorkflowTemplateRequest(
+                    name="name_value",
+                )
+
+                # Make the request
+                client.delete_workflow_template(request=request)
 
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest`):
+            request (Union[google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest, dict]):
                 The request object. A request to delete a workflow
                 template.
                 Currently started workflows will remain running.
@@ -904,7 +1112,7 @@ class WorkflowTemplateServiceAsyncClient:
                 sent along with the request as metadata.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -947,6 +1155,12 @@ class WorkflowTemplateServiceAsyncClient:
         await rpc(
             request, retry=retry, timeout=timeout, metadata=metadata,
         )
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.transport.close()
 
 
 try:

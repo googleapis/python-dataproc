@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,15 +16,20 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core.client_options import ClientOptions
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -48,8 +53,6 @@ class ClusterControllerAsyncClient:
     DEFAULT_ENDPOINT = ClusterControllerClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = ClusterControllerClient.DEFAULT_MTLS_ENDPOINT
 
-    cluster_path = staticmethod(ClusterControllerClient.cluster_path)
-    parse_cluster_path = staticmethod(ClusterControllerClient.parse_cluster_path)
     service_path = staticmethod(ClusterControllerClient.service_path)
     parse_service_path = staticmethod(ClusterControllerClient.parse_service_path)
     common_billing_account_path = staticmethod(
@@ -109,6 +112,42 @@ class ClusterControllerAsyncClient:
         return ClusterControllerClient.from_service_account_file.__func__(ClusterControllerAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
+
+    @classmethod
+    def get_mtls_endpoint_and_cert_source(
+        cls, client_options: Optional[ClientOptions] = None
+    ):
+        """Return the API endpoint and client cert source for mutual TLS.
+
+        The client cert source is determined in the following order:
+        (1) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is not "true", the
+        client cert source is None.
+        (2) if `client_options.client_cert_source` is provided, use the provided one; if the
+        default client cert source exists, use the default one; otherwise the client cert
+        source is None.
+
+        The API endpoint is determined in the following order:
+        (1) if `client_options.api_endpoint` if provided, use the provided one.
+        (2) if `GOOGLE_API_USE_CLIENT_CERTIFICATE` environment variable is "always", use the
+        default mTLS endpoint; if the environment variabel is "never", use the default API
+        endpoint; otherwise if client cert source exists, use the default mTLS endpoint, otherwise
+        use the default API endpoint.
+
+        More details can be found at https://google.aip.dev/auth/4114.
+
+        Args:
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+                client. Only the `api_endpoint` and `client_cert_source` properties may be used
+                in this method.
+
+        Returns:
+            Tuple[str, Callable[[], Tuple[bytes, bytes]]]: returns the API endpoint and the
+                client cert source to use.
+
+        Raises:
+            google.auth.exceptions.MutualTLSChannelError: If any errors happen.
+        """
+        return ClusterControllerClient.get_mtls_endpoint_and_cert_source(client_options)  # type: ignore
 
     @property
     def transport(self) -> ClusterControllerTransport:
@@ -172,12 +211,12 @@ class ClusterControllerAsyncClient:
 
     async def create_cluster(
         self,
-        request: clusters.CreateClusterRequest = None,
+        request: Union[clusters.CreateClusterRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         cluster: clusters.Cluster = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -186,8 +225,38 @@ class ClusterControllerAsyncClient:
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_create_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                cluster = dataproc_v1.Cluster()
+                cluster.project_id = "project_id_value"
+                cluster.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.CreateClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster=cluster,
+                )
+
+                # Make the request
+                operation = client.create_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.CreateClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.CreateClusterRequest, dict]):
                 The request object. A request to create a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -220,11 +289,11 @@ class ClusterControllerAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
-                   a cluster of Compute Engine instances.
+                   a Dataproc cluster
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, cluster])
         if request is not None and has_flattened_params:
@@ -277,14 +346,14 @@ class ClusterControllerAsyncClient:
 
     async def update_cluster(
         self,
-        request: clusters.UpdateClusterRequest = None,
+        request: Union[clusters.UpdateClusterRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         cluster_name: str = None,
         cluster: clusters.Cluster = None,
         update_mask: field_mask_pb2.FieldMask = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -292,9 +361,43 @@ class ClusterControllerAsyncClient:
         [Operation.metadata][google.longrunning.Operation.metadata] will
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
+        The cluster must be in a
+        [``RUNNING``][google.cloud.dataproc.v1.ClusterStatus.State]
+        state or an error is returned.
+
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_update_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                cluster = dataproc_v1.Cluster()
+                cluster.project_id = "project_id_value"
+                cluster.cluster_name = "cluster_name_value"
+
+                request = dataproc_v1.UpdateClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                    cluster=cluster,
+                )
+
+                # Make the request
+                operation = client.update_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
 
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.UpdateClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.UpdateClusterRequest, dict]):
                 The request object. A request to update a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -398,11 +501,11 @@ class ClusterControllerAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
-                   a cluster of Compute Engine instances.
+                   a Dataproc cluster
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project_id, region, cluster_name, cluster, update_mask]
@@ -461,16 +564,41 @@ class ClusterControllerAsyncClient:
 
     async def stop_cluster(
         self,
-        request: clusters.StopClusterRequest = None,
+        request: Union[clusters.StopClusterRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Stops a cluster in a project.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_stop_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.StopClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                )
+
+                # Make the request
+                operation = client.stop_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.StopClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.StopClusterRequest, dict]):
                 The request object. A request to stop a cluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -483,7 +611,7 @@ class ClusterControllerAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
-                   a cluster of Compute Engine instances.
+                   a Dataproc cluster
 
         """
         # Create or coerce a protobuf request object.
@@ -513,16 +641,41 @@ class ClusterControllerAsyncClient:
 
     async def start_cluster(
         self,
-        request: clusters.StartClusterRequest = None,
+        request: Union[clusters.StartClusterRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Starts a cluster in a project.
 
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_start_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.StartClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                )
+
+                # Make the request
+                operation = client.start_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.StartClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.StartClusterRequest, dict]):
                 The request object. A request to start a cluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -535,7 +688,7 @@ class ClusterControllerAsyncClient:
                 An object representing a long-running operation.
 
                 The result type for the operation will be :class:`google.cloud.dataproc_v1.types.Cluster` Describes the identifying information, config, and status of
-                   a cluster of Compute Engine instances.
+                   a Dataproc cluster
 
         """
         # Create or coerce a protobuf request object.
@@ -565,12 +718,12 @@ class ClusterControllerAsyncClient:
 
     async def delete_cluster(
         self,
-        request: clusters.DeleteClusterRequest = None,
+        request: Union[clusters.DeleteClusterRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         cluster_name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -579,8 +732,34 @@ class ClusterControllerAsyncClient:
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_delete_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DeleteClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                )
+
+                # Make the request
+                operation = client.delete_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.DeleteClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.DeleteClusterRequest, dict]):
                 The request object. A request to delete a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -628,7 +807,7 @@ class ClusterControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, cluster_name])
         if request is not None and has_flattened_params:
@@ -681,20 +860,42 @@ class ClusterControllerAsyncClient:
 
     async def get_cluster(
         self,
-        request: clusters.GetClusterRequest = None,
+        request: Union[clusters.GetClusterRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         cluster_name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> clusters.Cluster:
         r"""Gets the resource representation for a cluster in a
         project.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_get_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.GetClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                )
+
+                # Make the request
+                response = client.get_cluster(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.GetClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.GetClusterRequest, dict]):
                 The request object. Request to get the resource
                 representation for a cluster in a project.
             project_id (:class:`str`):
@@ -727,11 +928,11 @@ class ClusterControllerAsyncClient:
             google.cloud.dataproc_v1.types.Cluster:
                 Describes the identifying
                 information, config, and status of a
-                cluster of Compute Engine instances.
+                Dataproc cluster
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, cluster_name])
         if request is not None and has_flattened_params:
@@ -778,20 +979,42 @@ class ClusterControllerAsyncClient:
 
     async def list_clusters(
         self,
-        request: clusters.ListClustersRequest = None,
+        request: Union[clusters.ListClustersRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         filter: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListClustersAsyncPager:
         r"""Lists all regions/{region}/clusters in a project
         alphabetically.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_list_clusters():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.ListClustersRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list_clusters(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.ListClustersRequest`):
+            request (Union[google.cloud.dataproc_v1.types.ListClustersRequest, dict]):
                 The request object. A request to list the clusters in a
                 project.
             project_id (:class:`str`):
@@ -853,7 +1076,7 @@ class ClusterControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, filter])
         if request is not None and has_flattened_params:
@@ -906,12 +1129,12 @@ class ClusterControllerAsyncClient:
 
     async def diagnose_cluster(
         self,
-        request: clusters.DiagnoseClusterRequest = None,
+        request: Union[clusters.DiagnoseClusterRequest, dict] = None,
         *,
         project_id: str = None,
         region: str = None,
         cluster_name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
@@ -924,8 +1147,34 @@ class ClusterControllerAsyncClient:
         contains
         `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
 
+
+        .. code-block:: python
+
+            from google.cloud import dataproc_v1
+
+            def sample_diagnose_cluster():
+                # Create a client
+                client = dataproc_v1.ClusterControllerClient()
+
+                # Initialize request argument(s)
+                request = dataproc_v1.DiagnoseClusterRequest(
+                    project_id="project_id_value",
+                    region="region_value",
+                    cluster_name="cluster_name_value",
+                )
+
+                # Make the request
+                operation = client.diagnose_cluster(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = operation.result()
+
+                # Handle the response
+                print(response)
+
         Args:
-            request (:class:`google.cloud.dataproc_v1.types.DiagnoseClusterRequest`):
+            request (Union[google.cloud.dataproc_v1.types.DiagnoseClusterRequest, dict]):
                 The request object. A request to collect cluster
                 diagnostic information.
             project_id (:class:`str`):
@@ -964,7 +1213,7 @@ class ClusterControllerAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project_id, region, cluster_name])
         if request is not None and has_flattened_params:
@@ -1014,6 +1263,12 @@ class ClusterControllerAsyncClient:
 
         # Done; return the response.
         return response
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.transport.close()
 
 
 try:

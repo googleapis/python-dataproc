@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 #
 import os
 import mock
-import packaging.version
 
 import grpc
 from grpc.experimental import aio
@@ -30,8 +29,10 @@ from google.api_core import future
 from google.api_core import gapic_v1
 from google.api_core import grpc_helpers
 from google.api_core import grpc_helpers_async
+from google.api_core import operation
 from google.api_core import operation_async  # type: ignore
 from google.api_core import operations_v1
+from google.api_core import path_template
 from google.auth import credentials as ga_credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.dataproc_v1.services.cluster_controller import (
@@ -40,9 +41,6 @@ from google.cloud.dataproc_v1.services.cluster_controller import (
 from google.cloud.dataproc_v1.services.cluster_controller import ClusterControllerClient
 from google.cloud.dataproc_v1.services.cluster_controller import pagers
 from google.cloud.dataproc_v1.services.cluster_controller import transports
-from google.cloud.dataproc_v1.services.cluster_controller.transports.base import (
-    _GOOGLE_AUTH_VERSION,
-)
 from google.cloud.dataproc_v1.types import clusters
 from google.cloud.dataproc_v1.types import operations
 from google.cloud.dataproc_v1.types import shared
@@ -52,20 +50,6 @@ from google.protobuf import duration_pb2  # type: ignore
 from google.protobuf import field_mask_pb2  # type: ignore
 from google.protobuf import timestamp_pb2  # type: ignore
 import google.auth
-
-
-# TODO(busunkim): Once google-auth >= 1.25.0 is required transitively
-# through google-api-core:
-# - Delete the auth "less than" test cases
-# - Delete these pytest markers (Make the "greater than or equal to" tests the default).
-requires_google_auth_lt_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) >= packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth < 1.25.0",
-)
-requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) < packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth >= 1.25.0",
-)
 
 
 def client_cert_source_callback():
@@ -131,25 +115,13 @@ def test_cluster_controller_client_from_service_account_info(client_class):
 
 
 @pytest.mark.parametrize(
-    "client_class", [ClusterControllerClient, ClusterControllerAsyncClient,]
-)
-def test_cluster_controller_client_service_account_always_use_jwt(client_class):
-    with mock.patch.object(
-        service_account.Credentials, "with_always_use_jwt_access", create=True
-    ) as use_jwt:
-        creds = service_account.Credentials(None, None, None)
-        client = client_class(credentials=creds)
-        use_jwt.assert_not_called()
-
-
-@pytest.mark.parametrize(
     "transport_class,transport_name",
     [
         (transports.ClusterControllerGrpcTransport, "grpc"),
         (transports.ClusterControllerGrpcAsyncIOTransport, "grpc_asyncio"),
     ],
 )
-def test_cluster_controller_client_service_account_always_use_jwt_true(
+def test_cluster_controller_client_service_account_always_use_jwt(
     transport_class, transport_name
 ):
     with mock.patch.object(
@@ -158,6 +130,13 @@ def test_cluster_controller_client_service_account_always_use_jwt_true(
         creds = service_account.Credentials(None, None, None)
         transport = transport_class(credentials=creds, always_use_jwt_access=True)
         use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize(
@@ -230,7 +209,7 @@ def test_cluster_controller_client_client_options(
     options = client_options.ClientOptions(api_endpoint="squid.clam.whelk")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -239,6 +218,7 @@ def test_cluster_controller_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -246,7 +226,7 @@ def test_cluster_controller_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "never"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -255,6 +235,7 @@ def test_cluster_controller_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -262,7 +243,7 @@ def test_cluster_controller_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "always"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -271,26 +252,27 @@ def test_cluster_controller_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT has
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -299,6 +281,7 @@ def test_cluster_controller_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id="octopus",
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -358,7 +341,7 @@ def test_cluster_controller_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -375,6 +358,7 @@ def test_cluster_controller_client_mtls_env_auto(
                 client_cert_source_for_mtls=expected_client_cert_source,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case ADC client cert is provided. Whether client cert is used depends on
@@ -399,7 +383,7 @@ def test_cluster_controller_client_mtls_env_auto(
                         expected_client_cert_source = client_cert_source_callback
 
                     patched.return_value = None
-                    client = client_class()
+                    client = client_class(transport=transport_name)
                     patched.assert_called_once_with(
                         credentials=None,
                         credentials_file=None,
@@ -408,6 +392,7 @@ def test_cluster_controller_client_mtls_env_auto(
                         client_cert_source_for_mtls=expected_client_cert_source,
                         quota_project_id=None,
                         client_info=transports.base.DEFAULT_CLIENT_INFO,
+                        always_use_jwt_access=True,
                     )
 
     # Check the case client_cert_source and ADC client cert are not provided.
@@ -420,7 +405,7 @@ def test_cluster_controller_client_mtls_env_auto(
                 return_value=False,
             ):
                 patched.return_value = None
-                client = client_class()
+                client = client_class(transport=transport_name)
                 patched.assert_called_once_with(
                     credentials=None,
                     credentials_file=None,
@@ -429,7 +414,89 @@ def test_cluster_controller_client_mtls_env_auto(
                     client_cert_source_for_mtls=None,
                     quota_project_id=None,
                     client_info=transports.base.DEFAULT_CLIENT_INFO,
+                    always_use_jwt_access=True,
                 )
+
+
+@pytest.mark.parametrize(
+    "client_class", [ClusterControllerClient, ClusterControllerAsyncClient]
+)
+@mock.patch.object(
+    ClusterControllerClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(ClusterControllerClient),
+)
+@mock.patch.object(
+    ClusterControllerAsyncClient,
+    "DEFAULT_ENDPOINT",
+    modify_default_endpoint(ClusterControllerAsyncClient),
+)
+def test_cluster_controller_client_get_mtls_endpoint_and_cert_source(client_class):
+    mock_client_cert_source = mock.Mock()
+
+    # Test the case GOOGLE_API_USE_CLIENT_CERTIFICATE is "true".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        mock_api_endpoint = "foo"
+        options = client_options.ClientOptions(
+            client_cert_source=mock_client_cert_source, api_endpoint=mock_api_endpoint
+        )
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source(
+            options
+        )
+        assert api_endpoint == mock_api_endpoint
+        assert cert_source == mock_client_cert_source
+
+    # Test the case GOOGLE_API_USE_CLIENT_CERTIFICATE is "false".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "false"}):
+        mock_client_cert_source = mock.Mock()
+        mock_api_endpoint = "foo"
+        options = client_options.ClientOptions(
+            client_cert_source=mock_client_cert_source, api_endpoint=mock_api_endpoint
+        )
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source(
+            options
+        )
+        assert api_endpoint == mock_api_endpoint
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "never".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "never"}):
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+        assert api_endpoint == client_class.DEFAULT_ENDPOINT
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "always".
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "always"}):
+        api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+        assert api_endpoint == client_class.DEFAULT_MTLS_ENDPOINT
+        assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "auto" and default cert doesn't exist.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        with mock.patch(
+            "google.auth.transport.mtls.has_default_client_cert_source",
+            return_value=False,
+        ):
+            api_endpoint, cert_source = client_class.get_mtls_endpoint_and_cert_source()
+            assert api_endpoint == client_class.DEFAULT_ENDPOINT
+            assert cert_source is None
+
+    # Test the case GOOGLE_API_USE_MTLS_ENDPOINT is "auto" and default cert exists.
+    with mock.patch.dict(os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "true"}):
+        with mock.patch(
+            "google.auth.transport.mtls.has_default_client_cert_source",
+            return_value=True,
+        ):
+            with mock.patch(
+                "google.auth.transport.mtls.default_client_cert_source",
+                return_value=mock_client_cert_source,
+            ):
+                (
+                    api_endpoint,
+                    cert_source,
+                ) = client_class.get_mtls_endpoint_and_cert_source()
+                assert api_endpoint == client_class.DEFAULT_MTLS_ENDPOINT
+                assert cert_source == mock_client_cert_source
 
 
 @pytest.mark.parametrize(
@@ -450,7 +517,7 @@ def test_cluster_controller_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -459,28 +526,36 @@ def test_cluster_controller_client_client_options_scopes(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
+    "client_class,transport_class,transport_name,grpc_helpers",
     [
-        (ClusterControllerClient, transports.ClusterControllerGrpcTransport, "grpc"),
+        (
+            ClusterControllerClient,
+            transports.ClusterControllerGrpcTransport,
+            "grpc",
+            grpc_helpers,
+        ),
         (
             ClusterControllerAsyncClient,
             transports.ClusterControllerGrpcAsyncIOTransport,
             "grpc_asyncio",
+            grpc_helpers_async,
         ),
     ],
 )
 def test_cluster_controller_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -489,6 +564,7 @@ def test_cluster_controller_client_client_options_credentials_file(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -508,12 +584,78 @@ def test_cluster_controller_client_client_options_from_dict():
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
-def test_create_cluster(
-    transport: str = "grpc", request_type=clusters.CreateClusterRequest
+@pytest.mark.parametrize(
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [
+        (
+            ClusterControllerClient,
+            transports.ClusterControllerGrpcTransport,
+            "grpc",
+            grpc_helpers,
+        ),
+        (
+            ClusterControllerAsyncClient,
+            transports.ClusterControllerGrpcAsyncIOTransport,
+            "grpc_asyncio",
+            grpc_helpers_async,
+        ),
+    ],
+)
+def test_cluster_controller_client_create_channel_credentials_file(
+    client_class, transport_class, transport_name, grpc_helpers
 ):
+    # Check the case credentials file is provided.
+    options = client_options.ClientOptions(credentials_file="credentials.json")
+
+    with mock.patch.object(transport_class, "__init__") as patched:
+        patched.return_value = None
+        client = client_class(client_options=options, transport=transport_name)
+        patched.assert_called_once_with(
+            credentials=None,
+            credentials_file="credentials.json",
+            host=client.DEFAULT_ENDPOINT,
+            scopes=None,
+            client_cert_source_for_mtls=None,
+            quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
+        )
+
+    # test that the credentials from file are saved and used as the credentials.
+    with mock.patch.object(
+        google.auth, "load_credentials_from_file", autospec=True
+    ) as load_creds, mock.patch.object(
+        google.auth, "default", autospec=True
+    ) as adc, mock.patch.object(
+        grpc_helpers, "create_channel"
+    ) as create_channel:
+        creds = ga_credentials.AnonymousCredentials()
+        file_creds = ga_credentials.AnonymousCredentials()
+        load_creds.return_value = (file_creds, None)
+        adc.return_value = (creds, None)
+        client = client_class(client_options=options, transport=transport_name)
+        create_channel.assert_called_with(
+            "dataproc.googleapis.com:443",
+            credentials=file_creds,
+            credentials_file=None,
+            quota_project_id=None,
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            scopes=None,
+            default_host="dataproc.googleapis.com",
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
+        )
+
+
+@pytest.mark.parametrize("request_type", [clusters.CreateClusterRequest, dict,])
+def test_create_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -535,10 +677,6 @@ def test_create_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_create_cluster_from_dict():
-    test_create_cluster(request_type=dict)
 
 
 def test_create_cluster_empty_call():
@@ -609,9 +747,15 @@ def test_create_cluster_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster == clusters.Cluster(project_id="project_id_value")
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster
+        mock_val = clusters.Cluster(project_id="project_id_value")
+        assert arg == mock_val
 
 
 def test_create_cluster_flattened_error():
@@ -654,9 +798,15 @@ async def test_create_cluster_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster == clusters.Cluster(project_id="project_id_value")
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster
+        mock_val = clusters.Cluster(project_id="project_id_value")
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -676,9 +826,8 @@ async def test_create_cluster_flattened_error_async():
         )
 
 
-def test_update_cluster(
-    transport: str = "grpc", request_type=clusters.UpdateClusterRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.UpdateClusterRequest, dict,])
+def test_update_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -700,10 +849,6 @@ def test_update_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_update_cluster_from_dict():
-    test_update_cluster(request_type=dict)
 
 
 def test_update_cluster_empty_call():
@@ -776,11 +921,21 @@ def test_update_cluster_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
-        assert args[0].cluster == clusters.Cluster(project_id="project_id_value")
-        assert args[0].update_mask == field_mask_pb2.FieldMask(paths=["paths_value"])
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
+        arg = args[0].cluster
+        mock_val = clusters.Cluster(project_id="project_id_value")
+        assert arg == mock_val
+        arg = args[0].update_mask
+        mock_val = field_mask_pb2.FieldMask(paths=["paths_value"])
+        assert arg == mock_val
 
 
 def test_update_cluster_flattened_error():
@@ -827,11 +982,21 @@ async def test_update_cluster_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
-        assert args[0].cluster == clusters.Cluster(project_id="project_id_value")
-        assert args[0].update_mask == field_mask_pb2.FieldMask(paths=["paths_value"])
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
+        arg = args[0].cluster
+        mock_val = clusters.Cluster(project_id="project_id_value")
+        assert arg == mock_val
+        arg = args[0].update_mask
+        mock_val = field_mask_pb2.FieldMask(paths=["paths_value"])
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -853,9 +1018,8 @@ async def test_update_cluster_flattened_error_async():
         )
 
 
-def test_stop_cluster(
-    transport: str = "grpc", request_type=clusters.StopClusterRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.StopClusterRequest, dict,])
+def test_stop_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -877,10 +1041,6 @@ def test_stop_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_stop_cluster_from_dict():
-    test_stop_cluster(request_type=dict)
 
 
 def test_stop_cluster_empty_call():
@@ -932,9 +1092,8 @@ async def test_stop_cluster_async_from_dict():
     await test_stop_cluster_async(request_type=dict)
 
 
-def test_start_cluster(
-    transport: str = "grpc", request_type=clusters.StartClusterRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.StartClusterRequest, dict,])
+def test_start_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -956,10 +1115,6 @@ def test_start_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_start_cluster_from_dict():
-    test_start_cluster(request_type=dict)
 
 
 def test_start_cluster_empty_call():
@@ -1011,9 +1166,8 @@ async def test_start_cluster_async_from_dict():
     await test_start_cluster_async(request_type=dict)
 
 
-def test_delete_cluster(
-    transport: str = "grpc", request_type=clusters.DeleteClusterRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.DeleteClusterRequest, dict,])
+def test_delete_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1035,10 +1189,6 @@ def test_delete_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_delete_cluster_from_dict():
-    test_delete_cluster(request_type=dict)
 
 
 def test_delete_cluster_empty_call():
@@ -1109,9 +1259,15 @@ def test_delete_cluster_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 def test_delete_cluster_flattened_error():
@@ -1154,9 +1310,15 @@ async def test_delete_cluster_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1176,7 +1338,8 @@ async def test_delete_cluster_flattened_error_async():
         )
 
 
-def test_get_cluster(transport: str = "grpc", request_type=clusters.GetClusterRequest):
+@pytest.mark.parametrize("request_type", [clusters.GetClusterRequest, dict,])
+def test_get_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1205,10 +1368,6 @@ def test_get_cluster(transport: str = "grpc", request_type=clusters.GetClusterRe
     assert response.project_id == "project_id_value"
     assert response.cluster_name == "cluster_name_value"
     assert response.cluster_uuid == "cluster_uuid_value"
-
-
-def test_get_cluster_from_dict():
-    test_get_cluster(request_type=dict)
 
 
 def test_get_cluster_empty_call():
@@ -1286,9 +1445,15 @@ def test_get_cluster_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 def test_get_cluster_flattened_error():
@@ -1329,9 +1494,15 @@ async def test_get_cluster_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1351,9 +1522,8 @@ async def test_get_cluster_flattened_error_async():
         )
 
 
-def test_list_clusters(
-    transport: str = "grpc", request_type=clusters.ListClustersRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.ListClustersRequest, dict,])
+def test_list_clusters(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1378,10 +1548,6 @@ def test_list_clusters(
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListClustersPager)
     assert response.next_page_token == "next_page_token_value"
-
-
-def test_list_clusters_from_dict():
-    test_list_clusters(request_type=dict)
 
 
 def test_list_clusters_empty_call():
@@ -1451,9 +1617,15 @@ def test_list_clusters_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].filter == "filter_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].filter
+        mock_val = "filter_value"
+        assert arg == mock_val
 
 
 def test_list_clusters_flattened_error():
@@ -1494,9 +1666,15 @@ async def test_list_clusters_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].filter == "filter_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].filter
+        mock_val = "filter_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1516,8 +1694,10 @@ async def test_list_clusters_flattened_error_async():
         )
 
 
-def test_list_clusters_pager():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials,)
+def test_list_clusters_pager(transport_name: str = "grpc"):
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
@@ -1547,8 +1727,10 @@ def test_list_clusters_pager():
         assert all(isinstance(i, clusters.Cluster) for i in results)
 
 
-def test_list_clusters_pages():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials,)
+def test_list_clusters_pages(transport_name: str = "grpc"):
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials, transport=transport_name,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
@@ -1639,9 +1821,8 @@ async def test_list_clusters_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
-def test_diagnose_cluster(
-    transport: str = "grpc", request_type=clusters.DiagnoseClusterRequest
-):
+@pytest.mark.parametrize("request_type", [clusters.DiagnoseClusterRequest, dict,])
+def test_diagnose_cluster(request_type, transport: str = "grpc"):
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1663,10 +1844,6 @@ def test_diagnose_cluster(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-def test_diagnose_cluster_from_dict():
-    test_diagnose_cluster(request_type=dict)
 
 
 def test_diagnose_cluster_empty_call():
@@ -1737,9 +1914,15 @@ def test_diagnose_cluster_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 def test_diagnose_cluster_flattened_error():
@@ -1782,9 +1965,15 @@ async def test_diagnose_cluster_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].project_id == "project_id_value"
-        assert args[0].region == "region_value"
-        assert args[0].cluster_name == "cluster_name_value"
+        arg = args[0].project_id
+        mock_val = "project_id_value"
+        assert arg == mock_val
+        arg = args[0].region
+        mock_val = "region_value"
+        assert arg == mock_val
+        arg = args[0].cluster_name
+        mock_val = "cluster_name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1822,6 +2011,23 @@ def test_credentials_transport_error():
         client = ClusterControllerClient(
             client_options={"credentials_file": "credentials.json"},
             transport=transport,
+        )
+
+    # It is an error to provide an api_key and a transport instance.
+    transport = transports.ClusterControllerGrpcTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+    options = client_options.ClientOptions()
+    options.api_key = "api_key"
+    with pytest.raises(ValueError):
+        client = ClusterControllerClient(client_options=options, transport=transport,)
+
+    # It is an error to provide an api_key and a credential.
+    options = mock.Mock()
+    options.api_key = "api_key"
+    with pytest.raises(ValueError):
+        client = ClusterControllerClient(
+            client_options=options, credentials=ga_credentials.AnonymousCredentials()
         )
 
     # It is an error to provide scopes and a transport instance.
@@ -1914,13 +2120,15 @@ def test_cluster_controller_base_transport():
         with pytest.raises(NotImplementedError):
             getattr(transport, method)(request=object())
 
+    with pytest.raises(NotImplementedError):
+        transport.close()
+
     # Additionally, the LRO client (a property) should
     # also raise NotImplementedError
     with pytest.raises(NotImplementedError):
         transport.operations_client
 
 
-@requires_google_auth_gte_1_25_0
 def test_cluster_controller_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
     with mock.patch.object(
@@ -1941,26 +2149,6 @@ def test_cluster_controller_base_transport_with_credentials_file():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_cluster_controller_base_transport_with_credentials_file_old_google_auth():
-    # Instantiate the base transport with a credentials file
-    with mock.patch.object(
-        google.auth, "load_credentials_from_file", autospec=True
-    ) as load_creds, mock.patch(
-        "google.cloud.dataproc_v1.services.cluster_controller.transports.ClusterControllerTransport._prep_wrapped_messages"
-    ) as Transport:
-        Transport.return_value = None
-        load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport = transports.ClusterControllerTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
-        )
-        load_creds.assert_called_once_with(
-            "credentials.json",
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id="octopus",
-        )
-
-
 def test_cluster_controller_base_transport_with_adc():
     # Test the default credentials are used if credentials and credentials_file are None.
     with mock.patch.object(google.auth, "default", autospec=True) as adc, mock.patch(
@@ -1972,7 +2160,6 @@ def test_cluster_controller_base_transport_with_adc():
         adc.assert_called_once()
 
 
-@requires_google_auth_gte_1_25_0
 def test_cluster_controller_auth_adc():
     # If no credentials are provided, we should use ADC credentials.
     with mock.patch.object(google.auth, "default", autospec=True) as adc:
@@ -1985,18 +2172,6 @@ def test_cluster_controller_auth_adc():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_cluster_controller_auth_adc_old_google_auth():
-    # If no credentials are provided, we should use ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        ClusterControllerClient()
-        adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id=None,
-        )
-
-
 @pytest.mark.parametrize(
     "transport_class",
     [
@@ -2004,7 +2179,6 @@ def test_cluster_controller_auth_adc_old_google_auth():
         transports.ClusterControllerGrpcAsyncIOTransport,
     ],
 )
-@requires_google_auth_gte_1_25_0
 def test_cluster_controller_transport_auth_adc(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
@@ -2014,26 +2188,6 @@ def test_cluster_controller_transport_auth_adc(transport_class):
         adc.assert_called_once_with(
             scopes=["1", "2"],
             default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
-            quota_project_id="octopus",
-        )
-
-
-@pytest.mark.parametrize(
-    "transport_class",
-    [
-        transports.ClusterControllerGrpcTransport,
-        transports.ClusterControllerGrpcAsyncIOTransport,
-    ],
-)
-@requires_google_auth_lt_1_25_0
-def test_cluster_controller_transport_auth_adc_old_google_auth(transport_class):
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport_class(quota_project_id="octopus")
-        adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
             quota_project_id="octopus",
         )
 
@@ -2288,34 +2442,10 @@ def test_cluster_controller_grpc_lro_async_client():
     assert transport.operations_client is transport.operations_client
 
 
-def test_cluster_path():
+def test_service_path():
     project = "squid"
     location = "clam"
-    cluster = "whelk"
-    expected = "projects/{project}/locations/{location}/clusters/{cluster}".format(
-        project=project, location=location, cluster=cluster,
-    )
-    actual = ClusterControllerClient.cluster_path(project, location, cluster)
-    assert expected == actual
-
-
-def test_parse_cluster_path():
-    expected = {
-        "project": "octopus",
-        "location": "oyster",
-        "cluster": "nudibranch",
-    }
-    path = ClusterControllerClient.cluster_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = ClusterControllerClient.parse_cluster_path(path)
-    assert expected == actual
-
-
-def test_service_path():
-    project = "cuttlefish"
-    location = "mussel"
-    service = "winkle"
+    service = "whelk"
     expected = "projects/{project}/locations/{location}/services/{service}".format(
         project=project, location=location, service=service,
     )
@@ -2325,9 +2455,9 @@ def test_service_path():
 
 def test_parse_service_path():
     expected = {
-        "project": "nautilus",
-        "location": "scallop",
-        "service": "abalone",
+        "project": "octopus",
+        "location": "oyster",
+        "service": "nudibranch",
     }
     path = ClusterControllerClient.service_path(**expected)
 
@@ -2337,7 +2467,7 @@ def test_parse_service_path():
 
 
 def test_common_billing_account_path():
-    billing_account = "squid"
+    billing_account = "cuttlefish"
     expected = "billingAccounts/{billing_account}".format(
         billing_account=billing_account,
     )
@@ -2347,7 +2477,7 @@ def test_common_billing_account_path():
 
 def test_parse_common_billing_account_path():
     expected = {
-        "billing_account": "clam",
+        "billing_account": "mussel",
     }
     path = ClusterControllerClient.common_billing_account_path(**expected)
 
@@ -2357,7 +2487,7 @@ def test_parse_common_billing_account_path():
 
 
 def test_common_folder_path():
-    folder = "whelk"
+    folder = "winkle"
     expected = "folders/{folder}".format(folder=folder,)
     actual = ClusterControllerClient.common_folder_path(folder)
     assert expected == actual
@@ -2365,7 +2495,7 @@ def test_common_folder_path():
 
 def test_parse_common_folder_path():
     expected = {
-        "folder": "octopus",
+        "folder": "nautilus",
     }
     path = ClusterControllerClient.common_folder_path(**expected)
 
@@ -2375,7 +2505,7 @@ def test_parse_common_folder_path():
 
 
 def test_common_organization_path():
-    organization = "oyster"
+    organization = "scallop"
     expected = "organizations/{organization}".format(organization=organization,)
     actual = ClusterControllerClient.common_organization_path(organization)
     assert expected == actual
@@ -2383,7 +2513,7 @@ def test_common_organization_path():
 
 def test_parse_common_organization_path():
     expected = {
-        "organization": "nudibranch",
+        "organization": "abalone",
     }
     path = ClusterControllerClient.common_organization_path(**expected)
 
@@ -2393,7 +2523,7 @@ def test_parse_common_organization_path():
 
 
 def test_common_project_path():
-    project = "cuttlefish"
+    project = "squid"
     expected = "projects/{project}".format(project=project,)
     actual = ClusterControllerClient.common_project_path(project)
     assert expected == actual
@@ -2401,7 +2531,7 @@ def test_common_project_path():
 
 def test_parse_common_project_path():
     expected = {
-        "project": "mussel",
+        "project": "clam",
     }
     path = ClusterControllerClient.common_project_path(**expected)
 
@@ -2411,8 +2541,8 @@ def test_parse_common_project_path():
 
 
 def test_common_location_path():
-    project = "winkle"
-    location = "nautilus"
+    project = "whelk"
+    location = "octopus"
     expected = "projects/{project}/locations/{location}".format(
         project=project, location=location,
     )
@@ -2422,8 +2552,8 @@ def test_common_location_path():
 
 def test_parse_common_location_path():
     expected = {
-        "project": "scallop",
-        "location": "abalone",
+        "project": "oyster",
+        "location": "nudibranch",
     }
     path = ClusterControllerClient.common_location_path(**expected)
 
@@ -2432,7 +2562,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(
@@ -2451,3 +2581,82 @@ def test_client_withDEFAULT_CLIENT_INFO():
             credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
+
+
+@pytest.mark.asyncio
+async def test_transport_close_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+    )
+    with mock.patch.object(
+        type(getattr(client.transport, "grpc_channel")), "close"
+    ) as close:
+        async with client:
+            close.assert_not_called()
+        close.assert_called_once()
+
+
+def test_transport_close():
+    transports = {
+        "grpc": "_grpc_channel",
+    }
+
+    for transport, close_name in transports.items():
+        client = ClusterControllerClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        with mock.patch.object(
+            type(getattr(client.transport, close_name)), "close"
+        ) as close:
+            with client:
+                close.assert_not_called()
+            close.assert_called_once()
+
+
+def test_client_ctx():
+    transports = [
+        "grpc",
+    ]
+    for transport in transports:
+        client = ClusterControllerClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        # Test client calls underlying transport.
+        with mock.patch.object(type(client.transport), "close") as close:
+            close.assert_not_called()
+            with client:
+                pass
+            close.assert_called()
+
+
+@pytest.mark.parametrize(
+    "client_class,transport_class",
+    [
+        (ClusterControllerClient, transports.ClusterControllerGrpcTransport),
+        (
+            ClusterControllerAsyncClient,
+            transports.ClusterControllerGrpcAsyncIOTransport,
+        ),
+    ],
+)
+def test_api_key_credentials(client_class, transport_class):
+    with mock.patch.object(
+        google.auth._default, "get_api_key_credentials", create=True
+    ) as get_api_key_credentials:
+        mock_cred = mock.Mock()
+        get_api_key_credentials.return_value = mock_cred
+        options = client_options.ClientOptions()
+        options.api_key = "api_key"
+        with mock.patch.object(transport_class, "__init__") as patched:
+            patched.return_value = None
+            client = client_class(client_options=options)
+            patched.assert_called_once_with(
+                credentials=mock_cred,
+                credentials_file=None,
+                host=client.DEFAULT_ENDPOINT,
+                scopes=None,
+                client_cert_source_for_mtls=None,
+                quota_project_id=None,
+                client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
+            )
