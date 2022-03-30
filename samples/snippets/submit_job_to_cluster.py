@@ -75,8 +75,10 @@ def download_output(project, cluster_id, output_bucket, job_id):
     print("Downloading output file.")
     client = storage.Client(project=project)
     bucket = client.get_bucket(output_bucket)
-    output_blob = "google-cloud-dataproc-metainfo/{}/jobs/{}/driveroutput.000000000".format(
-        cluster_id, job_id
+    output_blob = (
+        "google-cloud-dataproc-metainfo/{}/jobs/{}/driveroutput.000000000".format(
+            cluster_id, job_id
+        )
     )
     return bucket.blob(output_blob).download_as_string()
 
@@ -131,7 +133,14 @@ def list_clusters_with_details(dataproc, project, region):
     for cluster in dataproc.list_clusters(
         request={"project_id": project, "region": region}
     ):
-        print(("{} - {}".format(cluster.cluster_name, cluster.status.state.name,)))
+        print(
+            (
+                "{} - {}".format(
+                    cluster.cluster_name,
+                    cluster.status.state.name,
+                )
+            )
+        )
 
 
 # [END dataproc_list_clusters_with_detail]
@@ -224,7 +233,7 @@ def main(
         dataproc_cluster_client = dataproc_v1.ClusterControllerClient(
             client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
         )
-        dataproc_job_client = dataproc_v1.ClusterControllerClient(
+        dataproc_job_client = dataproc_v1.JobControllerClient(
             client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
         )
     # [END dataproc_get_client]
