@@ -183,7 +183,7 @@ def docfx(session):
         "alabaster",
         "recommonmark",
         "gcp-sphinx-docfx-yaml",
-        "Jinja2<3.1"
+        "Jinja2<3.1",
     )
 
     shutil.rmtree(os.path.join("docs", "_build"), ignore_errors=True)
