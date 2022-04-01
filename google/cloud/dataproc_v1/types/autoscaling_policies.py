@@ -69,16 +69,29 @@ class AutoscalingPolicy(proto.Message):
             operate for secondary workers.
     """
 
-    id = proto.Field(proto.STRING, number=1,)
-    name = proto.Field(proto.STRING, number=2,)
+    id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     basic_algorithm = proto.Field(
-        proto.MESSAGE, number=3, oneof="algorithm", message="BasicAutoscalingAlgorithm",
+        proto.MESSAGE,
+        number=3,
+        oneof="algorithm",
+        message="BasicAutoscalingAlgorithm",
     )
     worker_config = proto.Field(
-        proto.MESSAGE, number=4, message="InstanceGroupAutoscalingPolicyConfig",
+        proto.MESSAGE,
+        number=4,
+        message="InstanceGroupAutoscalingPolicyConfig",
     )
     secondary_worker_config = proto.Field(
-        proto.MESSAGE, number=5, message="InstanceGroupAutoscalingPolicyConfig",
+        proto.MESSAGE,
+        number=5,
+        message="InstanceGroupAutoscalingPolicyConfig",
     )
 
 
@@ -96,10 +109,14 @@ class BasicAutoscalingAlgorithm(proto.Message):
     """
 
     yarn_config = proto.Field(
-        proto.MESSAGE, number=1, message="BasicYarnAutoscalingConfig",
+        proto.MESSAGE,
+        number=1,
+        message="BasicYarnAutoscalingConfig",
     )
     cooldown_period = proto.Field(
-        proto.MESSAGE, number=2, message=duration_pb2.Duration,
+        proto.MESSAGE,
+        number=2,
+        message=duration_pb2.Duration,
     )
 
 
@@ -159,12 +176,26 @@ class BasicYarnAutoscalingConfig(proto.Message):
     """
 
     graceful_decommission_timeout = proto.Field(
-        proto.MESSAGE, number=5, message=duration_pb2.Duration,
+        proto.MESSAGE,
+        number=5,
+        message=duration_pb2.Duration,
     )
-    scale_up_factor = proto.Field(proto.DOUBLE, number=1,)
-    scale_down_factor = proto.Field(proto.DOUBLE, number=2,)
-    scale_up_min_worker_fraction = proto.Field(proto.DOUBLE, number=3,)
-    scale_down_min_worker_fraction = proto.Field(proto.DOUBLE, number=4,)
+    scale_up_factor = proto.Field(
+        proto.DOUBLE,
+        number=1,
+    )
+    scale_down_factor = proto.Field(
+        proto.DOUBLE,
+        number=2,
+    )
+    scale_up_min_worker_fraction = proto.Field(
+        proto.DOUBLE,
+        number=3,
+    )
+    scale_down_min_worker_fraction = proto.Field(
+        proto.DOUBLE,
+        number=4,
+    )
 
 
 class InstanceGroupAutoscalingPolicyConfig(proto.Message):
@@ -209,9 +240,18 @@ class InstanceGroupAutoscalingPolicyConfig(proto.Message):
             only and no secondary workers.
     """
 
-    min_instances = proto.Field(proto.INT32, number=1,)
-    max_instances = proto.Field(proto.INT32, number=2,)
-    weight = proto.Field(proto.INT32, number=3,)
+    min_instances = proto.Field(
+        proto.INT32,
+        number=1,
+    )
+    max_instances = proto.Field(
+        proto.INT32,
+        number=2,
+    )
+    weight = proto.Field(
+        proto.INT32,
+        number=3,
+    )
 
 
 class CreateAutoscalingPolicyRequest(proto.Message):
@@ -233,8 +273,15 @@ class CreateAutoscalingPolicyRequest(proto.Message):
             Required. The autoscaling policy to create.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    policy = proto.Field(proto.MESSAGE, number=2, message="AutoscalingPolicy",)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    policy = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="AutoscalingPolicy",
+    )
 
 
 class GetAutoscalingPolicyRequest(proto.Message):
@@ -254,7 +301,10 @@ class GetAutoscalingPolicyRequest(proto.Message):
                ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class UpdateAutoscalingPolicyRequest(proto.Message):
@@ -264,7 +314,11 @@ class UpdateAutoscalingPolicyRequest(proto.Message):
             Required. The updated autoscaling policy.
     """
 
-    policy = proto.Field(proto.MESSAGE, number=1, message="AutoscalingPolicy",)
+    policy = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="AutoscalingPolicy",
+    )
 
 
 class DeleteAutoscalingPolicyRequest(proto.Message):
@@ -287,7 +341,10 @@ class DeleteAutoscalingPolicyRequest(proto.Message):
                ``projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}``
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class ListAutoscalingPoliciesRequest(proto.Message):
@@ -315,9 +372,18 @@ class ListAutoscalingPoliciesRequest(proto.Message):
             results.
     """
 
-    parent = proto.Field(proto.STRING, number=1,)
-    page_size = proto.Field(proto.INT32, number=2,)
-    page_token = proto.Field(proto.STRING, number=3,)
+    parent = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=2,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 class ListAutoscalingPoliciesResponse(proto.Message):
@@ -337,9 +403,14 @@ class ListAutoscalingPoliciesResponse(proto.Message):
         return self
 
     policies = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AutoscalingPolicy",
+        proto.MESSAGE,
+        number=1,
+        message="AutoscalingPolicy",
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

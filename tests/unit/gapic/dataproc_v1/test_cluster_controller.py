@@ -114,7 +114,11 @@ def test__get_default_mtls_endpoint():
 
 
 @pytest.mark.parametrize(
-    "client_class", [ClusterControllerClient, ClusterControllerAsyncClient,]
+    "client_class",
+    [
+        ClusterControllerClient,
+        ClusterControllerAsyncClient,
+    ],
 )
 def test_cluster_controller_client_from_service_account_info(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -156,7 +160,11 @@ def test_cluster_controller_client_service_account_always_use_jwt(
 
 
 @pytest.mark.parametrize(
-    "client_class", [ClusterControllerClient, ClusterControllerAsyncClient,]
+    "client_class",
+    [
+        ClusterControllerClient,
+        ClusterControllerAsyncClient,
+    ],
 )
 def test_cluster_controller_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
@@ -449,7 +457,9 @@ def test_cluster_controller_client_client_options_scopes(
     client_class, transport_class, transport_name
 ):
     # Check the case scopes are provided.
-    options = client_options.ClientOptions(scopes=["1", "2"],)
+    options = client_options.ClientOptions(
+        scopes=["1", "2"],
+    )
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options)
@@ -520,7 +530,8 @@ def test_create_cluster(
     transport: str = "grpc", request_type=clusters.CreateClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -550,7 +561,8 @@ def test_create_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -566,7 +578,8 @@ async def test_create_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.CreateClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -596,7 +609,9 @@ async def test_create_cluster_async_from_dict():
 
 
 def test_create_cluster_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.create_cluster), "__call__") as call:
@@ -620,7 +635,9 @@ def test_create_cluster_flattened():
 
 
 def test_create_cluster_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -685,7 +702,8 @@ def test_update_cluster(
     transport: str = "grpc", request_type=clusters.UpdateClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -715,7 +733,8 @@ def test_update_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -731,7 +750,8 @@ async def test_update_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.UpdateClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -761,7 +781,9 @@ async def test_update_cluster_async_from_dict():
 
 
 def test_update_cluster_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.update_cluster), "__call__") as call:
@@ -789,7 +811,9 @@ def test_update_cluster_flattened():
 
 
 def test_update_cluster_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -862,7 +886,8 @@ def test_stop_cluster(
     transport: str = "grpc", request_type=clusters.StopClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -892,7 +917,8 @@ def test_stop_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -908,7 +934,8 @@ async def test_stop_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.StopClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -941,7 +968,8 @@ def test_start_cluster(
     transport: str = "grpc", request_type=clusters.StartClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -971,7 +999,8 @@ def test_start_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -987,7 +1016,8 @@ async def test_start_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.StartClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1020,7 +1050,8 @@ def test_delete_cluster(
     transport: str = "grpc", request_type=clusters.DeleteClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1050,7 +1081,8 @@ def test_delete_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1066,7 +1098,8 @@ async def test_delete_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.DeleteClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1096,7 +1129,9 @@ async def test_delete_cluster_async_from_dict():
 
 
 def test_delete_cluster_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.delete_cluster), "__call__") as call:
@@ -1120,7 +1155,9 @@ def test_delete_cluster_flattened():
 
 
 def test_delete_cluster_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1183,7 +1220,8 @@ async def test_delete_cluster_flattened_error_async():
 
 def test_get_cluster(transport: str = "grpc", request_type=clusters.GetClusterRequest):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1220,7 +1258,8 @@ def test_get_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1236,7 +1275,8 @@ async def test_get_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.GetClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1273,7 +1313,9 @@ async def test_get_cluster_async_from_dict():
 
 
 def test_get_cluster_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_cluster), "__call__") as call:
@@ -1297,7 +1339,9 @@ def test_get_cluster_flattened():
 
 
 def test_get_cluster_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1360,7 +1404,8 @@ def test_list_clusters(
     transport: str = "grpc", request_type=clusters.ListClustersRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1393,7 +1438,8 @@ def test_list_clusters_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1409,7 +1455,8 @@ async def test_list_clusters_async(
     transport: str = "grpc_asyncio", request_type=clusters.ListClustersRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1420,7 +1467,9 @@ async def test_list_clusters_async(
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            clusters.ListClustersResponse(next_page_token="next_page_token_value",)
+            clusters.ListClustersResponse(
+                next_page_token="next_page_token_value",
+            )
         )
         response = await client.list_clusters(request)
 
@@ -1440,7 +1489,9 @@ async def test_list_clusters_async_from_dict():
 
 
 def test_list_clusters_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
@@ -1449,7 +1500,9 @@ def test_list_clusters_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_clusters(
-            project_id="project_id_value", region="region_value", filter="filter_value",
+            project_id="project_id_value",
+            region="region_value",
+            filter="filter_value",
         )
 
         # Establish that the underlying call was made with the expected
@@ -1462,7 +1515,9 @@ def test_list_clusters_flattened():
 
 
 def test_list_clusters_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1492,7 +1547,9 @@ async def test_list_clusters_flattened_async():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         response = await client.list_clusters(
-            project_id="project_id_value", region="region_value", filter="filter_value",
+            project_id="project_id_value",
+            region="region_value",
+            filter="filter_value",
         )
 
         # Establish that the underlying call was made with the expected
@@ -1522,22 +1579,37 @@ async def test_list_clusters_flattened_error_async():
 
 
 def test_list_clusters_pager():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials,)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
                 next_page_token="abc",
             ),
-            clusters.ListClustersResponse(clusters=[], next_page_token="def",),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(),], next_page_token="ghi",
+                clusters=[],
+                next_page_token="def",
             ),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                ],
+                next_page_token="ghi",
+            ),
+            clusters.ListClustersResponse(
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
             ),
             RuntimeError,
         )
@@ -1553,22 +1625,37 @@ def test_list_clusters_pager():
 
 
 def test_list_clusters_pages():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials,)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials,
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
         # Set the response to a series of pages.
         call.side_effect = (
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
                 next_page_token="abc",
             ),
-            clusters.ListClustersResponse(clusters=[], next_page_token="def",),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(),], next_page_token="ghi",
+                clusters=[],
+                next_page_token="def",
             ),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                ],
+                next_page_token="ghi",
+            ),
+            clusters.ListClustersResponse(
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
             ),
             RuntimeError,
         )
@@ -1590,19 +1677,34 @@ async def test_list_clusters_async_pager():
         # Set the response to a series of pages.
         call.side_effect = (
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
                 next_page_token="abc",
             ),
-            clusters.ListClustersResponse(clusters=[], next_page_token="def",),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(),], next_page_token="ghi",
+                clusters=[],
+                next_page_token="def",
             ),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                ],
+                next_page_token="ghi",
+            ),
+            clusters.ListClustersResponse(
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
             ),
             RuntimeError,
         )
-        async_pager = await client.list_clusters(request={},)
+        async_pager = await client.list_clusters(
+            request={},
+        )
         assert async_pager.next_page_token == "abc"
         responses = []
         async for response in async_pager:
@@ -1625,15 +1727,28 @@ async def test_list_clusters_async_pages():
         # Set the response to a series of pages.
         call.side_effect = (
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
                 next_page_token="abc",
             ),
-            clusters.ListClustersResponse(clusters=[], next_page_token="def",),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(),], next_page_token="ghi",
+                clusters=[],
+                next_page_token="def",
             ),
             clusters.ListClustersResponse(
-                clusters=[clusters.Cluster(), clusters.Cluster(),],
+                clusters=[
+                    clusters.Cluster(),
+                ],
+                next_page_token="ghi",
+            ),
+            clusters.ListClustersResponse(
+                clusters=[
+                    clusters.Cluster(),
+                    clusters.Cluster(),
+                ],
             ),
             RuntimeError,
         )
@@ -1648,7 +1763,8 @@ def test_diagnose_cluster(
     transport: str = "grpc", request_type=clusters.DiagnoseClusterRequest
 ):
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1678,7 +1794,8 @@ def test_diagnose_cluster_empty_call():
     # This test is a coverage failsafe to make sure that totally empty calls,
     # i.e. request == None and no flattened fields passed, work.
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1694,7 +1811,8 @@ async def test_diagnose_cluster_async(
     transport: str = "grpc_asyncio", request_type=clusters.DiagnoseClusterRequest
 ):
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -1724,7 +1842,9 @@ async def test_diagnose_cluster_async_from_dict():
 
 
 def test_diagnose_cluster_flattened():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.diagnose_cluster), "__call__") as call:
@@ -1748,7 +1868,9 @@ def test_diagnose_cluster_flattened():
 
 
 def test_diagnose_cluster_flattened_error():
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
 
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
@@ -1816,7 +1938,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = ClusterControllerClient(
-            credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+            credentials=ga_credentials.AnonymousCredentials(),
+            transport=transport,
         )
 
     # It is an error to provide a credentials file and a transport instance.
@@ -1835,7 +1958,8 @@ def test_credentials_transport_error():
     )
     with pytest.raises(ValueError):
         client = ClusterControllerClient(
-            client_options={"scopes": ["1", "2"]}, transport=transport,
+            client_options={"scopes": ["1", "2"]},
+            transport=transport,
         )
 
 
@@ -1880,8 +2004,13 @@ def test_transport_adc(transport_class):
 
 def test_transport_grpc_default():
     # A client should use the gRPC transport by default.
-    client = ClusterControllerClient(credentials=ga_credentials.AnonymousCredentials(),)
-    assert isinstance(client.transport, transports.ClusterControllerGrpcTransport,)
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+    assert isinstance(
+        client.transport,
+        transports.ClusterControllerGrpcTransport,
+    )
 
 
 def test_cluster_controller_base_transport_error():
@@ -1936,7 +2065,8 @@ def test_cluster_controller_base_transport_with_credentials_file():
         Transport.return_value = None
         load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
         transport = transports.ClusterControllerTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
+            credentials_file="credentials.json",
+            quota_project_id="octopus",
         )
         load_creds.assert_called_once_with(
             "credentials.json",
@@ -1957,7 +2087,8 @@ def test_cluster_controller_base_transport_with_credentials_file_old_google_auth
         Transport.return_value = None
         load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
         transport = transports.ClusterControllerTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
+            credentials_file="credentials.json",
+            quota_project_id="octopus",
         )
         load_creds.assert_called_once_with(
             "credentials.json",
@@ -2148,7 +2279,8 @@ def test_cluster_controller_grpc_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.ClusterControllerGrpcTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2160,7 +2292,8 @@ def test_cluster_controller_grpc_asyncio_transport_channel():
 
     # Check that channel is used if provided.
     transport = transports.ClusterControllerGrpcAsyncIOTransport(
-        host="squid.clam.whelk", channel=channel,
+        host="squid.clam.whelk",
+        channel=channel,
     )
     assert transport.grpc_channel == channel
     assert transport._host == "squid.clam.whelk:443"
@@ -2269,12 +2402,16 @@ def test_cluster_controller_transport_channel_mtls_with_adc(transport_class):
 
 def test_cluster_controller_grpc_lro_client():
     client = ClusterControllerClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2282,12 +2419,16 @@ def test_cluster_controller_grpc_lro_client():
 
 def test_cluster_controller_grpc_lro_async_client():
     client = ClusterControllerAsyncClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+        credentials=ga_credentials.AnonymousCredentials(),
+        transport="grpc_asyncio",
     )
     transport = client.transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient,)
+    assert isinstance(
+        transport.operations_client,
+        operations_v1.OperationsAsyncClient,
+    )
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -2298,7 +2439,9 @@ def test_cluster_path():
     location = "clam"
     cluster = "whelk"
     expected = "projects/{project}/locations/{location}/clusters/{cluster}".format(
-        project=project, location=location, cluster=cluster,
+        project=project,
+        location=location,
+        cluster=cluster,
     )
     actual = ClusterControllerClient.cluster_path(project, location, cluster)
     assert expected == actual
@@ -2322,7 +2465,9 @@ def test_service_path():
     location = "mussel"
     service = "winkle"
     expected = "projects/{project}/locations/{location}/services/{service}".format(
-        project=project, location=location, service=service,
+        project=project,
+        location=location,
+        service=service,
     )
     actual = ClusterControllerClient.service_path(project, location, service)
     assert expected == actual
@@ -2363,7 +2508,9 @@ def test_parse_common_billing_account_path():
 
 def test_common_folder_path():
     folder = "whelk"
-    expected = "folders/{folder}".format(folder=folder,)
+    expected = "folders/{folder}".format(
+        folder=folder,
+    )
     actual = ClusterControllerClient.common_folder_path(folder)
     assert expected == actual
 
@@ -2381,7 +2528,9 @@ def test_parse_common_folder_path():
 
 def test_common_organization_path():
     organization = "oyster"
-    expected = "organizations/{organization}".format(organization=organization,)
+    expected = "organizations/{organization}".format(
+        organization=organization,
+    )
     actual = ClusterControllerClient.common_organization_path(organization)
     assert expected == actual
 
@@ -2399,7 +2548,9 @@ def test_parse_common_organization_path():
 
 def test_common_project_path():
     project = "cuttlefish"
-    expected = "projects/{project}".format(project=project,)
+    expected = "projects/{project}".format(
+        project=project,
+    )
     actual = ClusterControllerClient.common_project_path(project)
     assert expected == actual
 
@@ -2419,7 +2570,8 @@ def test_common_location_path():
     project = "winkle"
     location = "nautilus"
     expected = "projects/{project}/locations/{location}".format(
-        project=project, location=location,
+        project=project,
+        location=location,
     )
     actual = ClusterControllerClient.common_location_path(project, location)
     assert expected == actual
@@ -2444,7 +2596,8 @@ def test_client_withDEFAULT_CLIENT_INFO():
         transports.ClusterControllerTransport, "_prep_wrapped_messages"
     ) as prep:
         client = ClusterControllerClient(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
 
@@ -2453,6 +2606,7 @@ def test_client_withDEFAULT_CLIENT_INFO():
     ) as prep:
         transport_class = ClusterControllerClient.get_transport_class()
         transport = transport_class(
-            credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
+            credentials=ga_credentials.AnonymousCredentials(),
+            client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
