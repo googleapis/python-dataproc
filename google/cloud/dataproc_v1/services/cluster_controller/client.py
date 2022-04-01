@@ -57,7 +57,8 @@ class ClusterControllerClientMeta(type):
     _transport_registry["grpc_asyncio"] = ClusterControllerGrpcAsyncIOTransport
 
     def get_transport_class(
-        cls, label: str = None,
+        cls,
+        label: str = None,
     ) -> Type[ClusterControllerTransport]:
         """Returns an appropriate transport class.
 
@@ -165,10 +166,16 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return self._transport
 
     @staticmethod
-    def cluster_path(project: str, location: str, cluster: str,) -> str:
+    def cluster_path(
+        project: str,
+        location: str,
+        cluster: str,
+    ) -> str:
         """Returns a fully-qualified cluster string."""
         return "projects/{project}/locations/{location}/clusters/{cluster}".format(
-            project=project, location=location, cluster=cluster,
+            project=project,
+            location=location,
+            cluster=cluster,
         )
 
     @staticmethod
@@ -181,10 +188,16 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def service_path(project: str, location: str, service: str,) -> str:
+    def service_path(
+        project: str,
+        location: str,
+        service: str,
+    ) -> str:
         """Returns a fully-qualified service string."""
         return "projects/{project}/locations/{location}/services/{service}".format(
-            project=project, location=location, service=service,
+            project=project,
+            location=location,
+            service=service,
         )
 
     @staticmethod
@@ -197,7 +210,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -210,9 +225,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -221,9 +240,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -232,9 +255,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -243,10 +270,14 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -458,7 +489,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.create_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -633,7 +669,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.update_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -686,7 +727,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.stop_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -739,7 +785,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.start_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -846,7 +897,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.delete_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -940,7 +996,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.get_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
@@ -1051,12 +1112,20 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.list_clusters]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListClustersPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc,
+            request=request,
+            response=response,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -1151,7 +1220,12 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         rpc = self._transport._wrapped_methods[self._transport.diagnose_cluster]
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -1167,7 +1241,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-cloud-dataproc",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-dataproc",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

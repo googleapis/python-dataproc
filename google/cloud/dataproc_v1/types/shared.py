@@ -17,7 +17,10 @@ import proto  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.dataproc.v1", manifest={"Component",},
+    package="google.cloud.dataproc.v1",
+    manifest={
+        "Component",
+    },
 )
 
 
