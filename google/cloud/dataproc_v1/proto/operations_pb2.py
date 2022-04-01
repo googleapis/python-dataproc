@@ -167,7 +167,9 @@ _CLUSTEROPERATIONSTATUS = _descriptor.Descriptor(
     ],
     extensions=[],
     nested_types=[],
-    enum_types=[_CLUSTEROPERATIONSTATUS_STATE,],
+    enum_types=[
+        _CLUSTEROPERATIONSTATUS_STATE,
+    ],
     serialized_options=None,
     is_extendable=False,
     syntax="proto3",
@@ -399,7 +401,9 @@ _CLUSTEROPERATIONMETADATA = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_CLUSTEROPERATIONMETADATA_LABELSENTRY,],
+    nested_types=[
+        _CLUSTEROPERATIONMETADATA_LABELSENTRY,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,

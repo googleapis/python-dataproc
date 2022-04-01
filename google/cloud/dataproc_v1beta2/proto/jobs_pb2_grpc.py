@@ -12,8 +12,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 class JobControllerStub(object):
-    """The JobController provides methods to manage jobs.
-    """
+    """The JobController provides methods to manage jobs."""
 
     def __init__(self, channel):
         """Constructor.
@@ -59,40 +58,34 @@ class JobControllerStub(object):
 
 
 class JobControllerServicer(object):
-    """The JobController provides methods to manage jobs.
-    """
+    """The JobController provides methods to manage jobs."""
 
     def SubmitJob(self, request, context):
-        """Submits a job to a cluster.
-        """
+        """Submits a job to a cluster."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def SubmitJobAsOperation(self, request, context):
-        """Submits job to a cluster.
-        """
+        """Submits job to a cluster."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def GetJob(self, request, context):
-        """Gets the resource representation for a job in a project.
-        """
+        """Gets the resource representation for a job in a project."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def ListJobs(self, request, context):
-        """Lists regions/{region}/jobs in a project.
-        """
+        """Lists regions/{region}/jobs in a project."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def UpdateJob(self, request, context):
-        """Updates a job in a project.
-        """
+        """Updates a job in a project."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
@@ -163,8 +156,7 @@ def add_JobControllerServicer_to_server(servicer, server):
 
 # This class is part of an EXPERIMENTAL API.
 class JobController(object):
-    """The JobController provides methods to manage jobs.
-    """
+    """The JobController provides methods to manage jobs."""
 
     @staticmethod
     def SubmitJob(
