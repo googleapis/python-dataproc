@@ -65,8 +65,7 @@ class WorkflowTemplateServiceServicer(object):
     """
 
     def CreateWorkflowTemplate(self, request, context):
-        """Creates new workflow template.
-        """
+        """Creates new workflow template."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
@@ -146,15 +145,13 @@ class WorkflowTemplateServiceServicer(object):
         raise NotImplementedError("Method not implemented!")
 
     def ListWorkflowTemplates(self, request, context):
-        """Lists workflows that match the specified filter in the request.
-        """
+        """Lists workflows that match the specified filter in the request."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def DeleteWorkflowTemplate(self, request, context):
-        """Deletes a workflow template. It does not cancel in-progress workflows.
-        """
+        """Deletes a workflow template. It does not cancel in-progress workflows."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")

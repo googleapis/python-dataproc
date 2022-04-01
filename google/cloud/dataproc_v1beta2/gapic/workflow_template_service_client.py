@@ -104,7 +104,9 @@ class WorkflowTemplateServiceClient(object):
     def region_path(cls, project, region):
         """Return a fully-qualified region string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/regions/{region}", project=project, region=region,
+            "projects/{project}/regions/{region}",
+            project=project,
+            region=region,
         )
 
     @classmethod
@@ -204,7 +206,9 @@ class WorkflowTemplateServiceClient(object):
                 self.transport = transport
         else:
             self.transport = workflow_template_service_grpc_transport.WorkflowTemplateServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials,
+                address=api_endpoint,
+                channel=channel,
+                credentials=credentials,
             )
 
         if client_info is None:
@@ -579,7 +583,8 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.CreateWorkflowTemplateRequest(
-            parent=parent, template=template,
+            parent=parent,
+            template=template,
         )
         if metadata is None:
             metadata = []
@@ -668,7 +673,8 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.GetWorkflowTemplateRequest(
-            name=name, version=version,
+            name=name,
+            version=version,
         )
         if metadata is None:
             metadata = []
@@ -847,7 +853,8 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.ListWorkflowTemplatesRequest(
-            parent=parent, page_size=page_size,
+            parent=parent,
+            page_size=page_size,
         )
         if metadata is None:
             metadata = []
@@ -940,7 +947,8 @@ class WorkflowTemplateServiceClient(object):
             )
 
         request = workflow_templates_pb2.DeleteWorkflowTemplateRequest(
-            name=name, version=version,
+            name=name,
+            version=version,
         )
         if metadata is None:
             metadata = []

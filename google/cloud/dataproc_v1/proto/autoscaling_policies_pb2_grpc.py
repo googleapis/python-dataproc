@@ -52,8 +52,7 @@ class AutoscalingPolicyServiceServicer(object):
     """
 
     def CreateAutoscalingPolicy(self, request, context):
-        """Creates new autoscaling policy.
-        """
+        """Creates new autoscaling policy."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
@@ -69,15 +68,13 @@ class AutoscalingPolicyServiceServicer(object):
         raise NotImplementedError("Method not implemented!")
 
     def GetAutoscalingPolicy(self, request, context):
-        """Retrieves autoscaling policy.
-        """
+        """Retrieves autoscaling policy."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def ListAutoscalingPolicies(self, request, context):
-        """Lists autoscaling policies in the project.
-        """
+        """Lists autoscaling policies in the project."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")

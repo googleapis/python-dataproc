@@ -141,8 +141,10 @@ class TestWorkflowTemplateServiceClient(object):
         assert expected_response == result
 
         assert len(channel.requests) == 1
-        expected_request = workflow_templates_pb2.InstantiateInlineWorkflowTemplateRequest(
-            parent=parent, template=template
+        expected_request = (
+            workflow_templates_pb2.InstantiateInlineWorkflowTemplateRequest(
+                parent=parent, template=template
+            )
         )
         actual_request = channel.requests[0][1]
         assert expected_request == actual_request
