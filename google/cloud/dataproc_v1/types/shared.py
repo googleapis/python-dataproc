@@ -73,9 +73,19 @@ class RuntimeConfig(proto.Message):
             execution.
     """
 
-    version = proto.Field(proto.STRING, number=1,)
-    container_image = proto.Field(proto.STRING, number=2,)
-    properties = proto.MapField(proto.STRING, proto.STRING, number=3,)
+    version = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    container_image = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    properties = proto.MapField(
+        proto.STRING,
+        proto.STRING,
+        number=3,
+    )
 
 
 class EnvironmentConfig(proto.Message):
@@ -90,9 +100,15 @@ class EnvironmentConfig(proto.Message):
             workload has access to.
     """
 
-    execution_config = proto.Field(proto.MESSAGE, number=1, message="ExecutionConfig",)
+    execution_config = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="ExecutionConfig",
+    )
     peripherals_config = proto.Field(
-        proto.MESSAGE, number=2, message="PeripheralsConfig",
+        proto.MESSAGE,
+        number=2,
+        message="PeripheralsConfig",
     )
 
 
@@ -127,11 +143,28 @@ class ExecutionConfig(proto.Message):
             encryption.
     """
 
-    service_account = proto.Field(proto.STRING, number=2,)
-    network_uri = proto.Field(proto.STRING, number=4, oneof="network",)
-    subnetwork_uri = proto.Field(proto.STRING, number=5, oneof="network",)
-    network_tags = proto.RepeatedField(proto.STRING, number=6,)
-    kms_key = proto.Field(proto.STRING, number=7,)
+    service_account = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    network_uri = proto.Field(
+        proto.STRING,
+        number=4,
+        oneof="network",
+    )
+    subnetwork_uri = proto.Field(
+        proto.STRING,
+        number=5,
+        oneof="network",
+    )
+    network_tags = proto.RepeatedField(
+        proto.STRING,
+        number=6,
+    )
+    kms_key = proto.Field(
+        proto.STRING,
+        number=7,
+    )
 
 
 class SparkHistoryServerConfig(proto.Message):
@@ -147,7 +180,10 @@ class SparkHistoryServerConfig(proto.Message):
             -  ``projects/[project_id]/regions/[region]/clusters/[cluster_name]``
     """
 
-    dataproc_cluster = proto.Field(proto.STRING, number=1,)
+    dataproc_cluster = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class PeripheralsConfig(proto.Message):
@@ -166,9 +202,14 @@ class PeripheralsConfig(proto.Message):
             configuration for the workload.
     """
 
-    metastore_service = proto.Field(proto.STRING, number=1,)
+    metastore_service = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     spark_history_server_config = proto.Field(
-        proto.MESSAGE, number=2, message="SparkHistoryServerConfig",
+        proto.MESSAGE,
+        number=2,
+        message="SparkHistoryServerConfig",
     )
 
 
@@ -187,9 +228,19 @@ class RuntimeInfo(proto.Message):
             of the diagnostics tarball.
     """
 
-    endpoints = proto.MapField(proto.STRING, proto.STRING, number=1,)
-    output_uri = proto.Field(proto.STRING, number=2,)
-    diagnostic_output_uri = proto.Field(proto.STRING, number=3,)
+    endpoints = proto.MapField(
+        proto.STRING,
+        proto.STRING,
+        number=1,
+    )
+    output_uri = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    diagnostic_output_uri = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
