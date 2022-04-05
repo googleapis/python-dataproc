@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [3.3.1](https://github.com/googleapis/python-dataproc/compare/v3.3.0...v3.3.1) (2022-04-05)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core >= 1.31.5, >= 2.3.2 on v3 release ([#363](https://github.com/googleapis/python-dataproc/issues/363)) ([7125581](https://github.com/googleapis/python-dataproc/commit/7125581f43685e50b6b0bfc62e1deb137aa88069))
+
 ## [3.3.0](https://github.com/googleapis/python-dataproc/compare/v3.2.0...v3.3.0) (2022-02-18)
 
 
