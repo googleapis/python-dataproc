@@ -22,7 +22,6 @@
 #   python create_cluster.py ${PROJECT_ID} ${REGION} ${DP_CLUSTER_NAME}
 
 
-import sys
 from typing import Dict
 from venv import create
 # from urllib import response
