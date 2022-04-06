@@ -36,19 +36,19 @@ def teardown():
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{test_region}-dataproc.googleapis.com:443"}
     )
-    # Client library function
+    # Client library function to delete cluster.
     try:
         operation = cluster_client.delete_cluster(
             request={
                 "project_id": test_project_id,
                 "region": test_region,
-                "cluster_name": "TODO",
+                "cluster_name": test_dp_cluster_name,
             }
         )
         # Wait for cluster to delete
         operation.result()
     except NotFound:
-        print("Cluster already deleted")
+        print("Cluster already deleted")    
 
 
 def test_cluster_create_on_gke(capsys):
@@ -87,4 +87,4 @@ def test_cluster_create_on_gke(capsys):
     create_cluster_on_gke(test_project_id, test_region, test_virtual_cluster_config)
 
     out, _ = capsys.readouterr()
-    assert dp_cluster_name in out
+    assert test_dp_cluster_name in out
