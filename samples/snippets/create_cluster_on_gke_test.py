@@ -19,14 +19,14 @@ from google.cloud import dataproc_v1 as dataproc
 import pytest
 
 from . import create_cluster_on_gke
-from conftest import project_id, region, dp_cluster_name, gke_cluster_name, node_pool, phs_cluster, bucket
+from conftest import project_id, region, dp_cluster_name, gke_cluster_name, node_pool, bucket
 
 test_project_id = project_id()
 test_region = region()
 test_dp_cluster_name = dp_cluster_name()
 test_gke_cluster_name = gke_cluster_name()
 test_node_pool = node_pool()
-test_phs_cluster = phs_cluster()
+# test_phs_cluster = phs_cluster()
 test_bucket = bucket()
 
 @pytest.fixture(autouse=True) #TODO
@@ -72,16 +72,16 @@ def test_cluster_create_on_gke(capsys):
     },
         )
 
-    auxiliary_services_config = dataproc.AuxiliaryServicesConfig({
+    """auxiliary_services_config = dataproc.AuxiliaryServicesConfig({
     "sparkHistoryServerConfig":{
       "dataprocCluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
      }
-  })
+  })"""
 
     test_virtual_cluster_config = dataproc.VirtualClusterConfig({
         "staging_bucket": test_bucket,
         "kubernetes_cluster_config": kubernetes_cluster_config,
-        "auxiliary_services_config": auxiliary_services_config
+        # "auxiliary_services_config": auxiliary_services_config
     })
     # Wrapper function for client library function
     create_cluster_on_gke(test_project_id, test_region, test_virtual_cluster_config)

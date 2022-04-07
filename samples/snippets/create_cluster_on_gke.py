@@ -44,9 +44,9 @@ def main() -> None:
   # Developer (TODO): Replace with your desired node_pool. If unspecified, Dataproc will use your default node_pool.
   node_pool = "your_node_pool"
   # Developer (TODO): Replace with your phs_cluster name if you plan to run a Spark job.
-  phs_cluster = "your phs_cluster"
+  # phs_cluster = "your phs_cluster"
   # Developer (TODO): Replace with your gcs_bucket_name for staging.
-  bucket = "your_gcs_ bucket_name"
+  bucket = "your_gcs_bucket_name"
 
   # Create a Kubernetes cluster config for GKE set up to use Spark.
   kubernetes_cluster_config = dataproc.KubernetesClusterConfig({
@@ -70,17 +70,17 @@ def main() -> None:
         )
 
   # Create an auxiliary services config for GKE in order to submit Spark jobs.
-  auxiliary_services_config = dataproc.AuxiliaryServicesConfig({
+  """auxiliary_services_config = dataproc.AuxiliaryServicesConfig({
     "sparkHistoryServerConfig":{
       "dataprocCluster": f"projects/{project_id}/regions/{region}/clusters/{phs_cluster}"
      }
-  })
+  })"""
 
   # Create a virtual cluster config for GKE using your Kubernetes and auxiliary services configs.
   virtual_cluster_config = dataproc.VirtualClusterConfig({
         "staging_bucket": bucket,
         "kubernetes_cluster_config": kubernetes_cluster_config,
-        "auxiliary_services_config": auxiliary_services_config
+        # "auxiliary_services_config": auxiliary_services_config
     })
   create_cluster_on_gke(project_id=project_id, region=region, dp_cluster_name=dp_cluster_name, virtual_cluster_config=virtual_cluster_config)
 

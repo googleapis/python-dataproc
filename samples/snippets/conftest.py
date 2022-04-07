@@ -40,9 +40,9 @@ def gke_cluster_name() -> str:
 def node_pool() -> str:
     return os.environ["NODE_POOL"]
 
-@pytest.fixture(scope="session")
+"""@pytest.fixture(scope="session")
 def phs_cluster() -> str:
-    return os.environ["PHS_CLUSTER"]
+    return os.environ["PHS_CLUSTER"]"""
 
 @pytest.fixture(scope="session")
 def bucket() -> str:
