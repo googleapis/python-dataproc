@@ -116,9 +116,13 @@ class AutoscalingPolicy(proto.Message):
 class BasicAutoscalingAlgorithm(proto.Message):
     r"""Basic algorithm for autoscaling.
 
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         yarn_config (google.cloud.dataproc_v1.types.BasicYarnAutoscalingConfig):
             Required. YARN autoscaling configuration.
+
+            This field is a member of `oneof`_ ``config``.
         cooldown_period (google.protobuf.duration_pb2.Duration):
             Optional. Duration between scaling events. A scaling period
             starts after the update operation from the previous event
@@ -130,6 +134,7 @@ class BasicAutoscalingAlgorithm(proto.Message):
     yarn_config = proto.Field(
         proto.MESSAGE,
         number=1,
+        oneof="config",
         message="BasicYarnAutoscalingConfig",
     )
     cooldown_period = proto.Field(
