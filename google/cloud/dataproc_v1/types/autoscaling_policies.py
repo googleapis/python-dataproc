@@ -71,7 +71,7 @@ class AutoscalingPolicy(proto.Message):
         secondary_worker_config (google.cloud.dataproc_v1.types.InstanceGroupAutoscalingPolicyConfig):
             Optional. Describes how the autoscaler will
             operate for secondary workers.
-        labels (Sequence[google.cloud.dataproc_v1.types.AutoscalingPolicy.LabelsEntry]):
+        labels (Mapping[str, str]):
             Optional. The labels to associate with this autoscaling
             policy. Label **keys** must contain 1 to 63 characters, and
             must conform to `RFC

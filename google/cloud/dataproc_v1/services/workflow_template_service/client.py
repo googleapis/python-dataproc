@@ -693,9 +693,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         ] = None,
         *,
         name: str = None,
-        parameters: Sequence[
-            workflow_templates.InstantiateWorkflowTemplateRequest.ParametersEntry
-        ] = None,
+        parameters: Mapping[str, str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -770,7 +768,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            parameters (Sequence[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest.ParametersEntry]):
+            parameters (Mapping[str, str]):
                 Optional. Map from parameter names to
                 values that should be used for those
                 parameters. Values may not exceed 1000
