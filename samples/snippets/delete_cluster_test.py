@@ -53,7 +53,7 @@ def teardown() -> None:
 def test_cluster_delete(capsys) -> None:
     # Wrapper function for client library function
     create_cluster.create_cluster(test_project_id, test_region, test_dp_cluster_name)
-    delete_cluster.create_cluster(test_project_id, test_region, test_dp_cluster_name)
+    delete_cluster.delete_cluster(test_project_id, test_region, test_dp_cluster_name)
 
     out, _ = capsys.readouterr()
     assert test_dp_cluster_name in out

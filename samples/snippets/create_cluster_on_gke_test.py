@@ -27,13 +27,13 @@ from conftest import (
 )
 import create_cluster_on_gke
 
-test_project_id = project_id()
-test_region = region()
-test_dp_cluster_name = dp_cluster_name()
-test_gke_cluster_name = gke_cluster_name()
-test_node_pool = node_pool()
-test_phs_cluster = phs_cluster()
-test_bucket = bucket()
+test_project_id = project_id
+test_region = region
+test_dp_cluster_name = dp_cluster_name
+test_gke_cluster_name = gke_cluster_name
+test_node_pool = node_pool
+test_phs_cluster = phs_cluster
+test_bucket = bucket
 
 
 @pytest.fixture(autouse=True)
