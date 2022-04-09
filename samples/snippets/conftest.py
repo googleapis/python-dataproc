@@ -20,30 +20,36 @@ import pytest
 
 @pytest.fixture(scope="session")
 def project_id() -> str:
-    return os.environ["PROJECT_ID"]
+    return os.environ["GOOGLE_CLOUD_PROJECT"]
+
 
 @pytest.fixture(scope="session")
 def region() -> str:
-    return os.environ["REGION"]
+    return os.environ["DATAPROC_REGION"]
+
 
 @pytest.fixture(scope="session")
 def dp_cluster_name() -> str:
     dp_cluster_name = "py-cgkec-test-{}".format(str(uuid.uuid4()))
     return dp_cluster_name
 
+
 @pytest.fixture(scope="session")
 def gke_cluster_name() -> str:
-    return os.environ["GKE_CLUSTER"]
+    return os.environ["DATAPROC_GKE_CLUSTER"]
+
 
 @pytest.fixture(scope="session")
 def node_pool() -> str:
     node_pool = "py-cgkec-test-{}".format(str(uuid.uuid4()))
     return node_pool
 
+
 @pytest.fixture(scope="session")
 def phs_cluster() -> str:
-    return os.environ["PHS_CLUSTER"]
+    return os.environ["DATAPROC_PHS_CLUSTER"]
+
 
 @pytest.fixture(scope="session")
 def bucket() -> str:
-    return os.environ["BUCKET"]
+    return os.environ["DATAPROC_STAGING_BUCKET"]

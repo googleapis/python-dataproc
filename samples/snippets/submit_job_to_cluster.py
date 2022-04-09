@@ -57,9 +57,9 @@ def quickstart(project_id, region, cluster_name, job_file_path):
 
     print("Cluster created successfully: {}".format(result.cluster_name))
 
-# [END dataproc_create_cluster]
+    # [END dataproc_create_cluster]
 
-# [START dataproc_submit_job]
+    # [START dataproc_submit_job]
     # Create the job client.
     job_client = dataproc_v1.JobControllerClient(
         client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(region)}
@@ -102,6 +102,8 @@ def quickstart(project_id, region, cluster_name, job_file_path):
     operation.result()
 
     print("Cluster {} successfully deleted.".format(cluster_name))
+
+
 # [END dataproc_delete_cluster]
 
 

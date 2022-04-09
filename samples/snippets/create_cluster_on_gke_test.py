@@ -12,14 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-
 from google.api_core.exceptions import NotFound
 from google.cloud import dataproc_v1 as dataproc
 import pytest
 
+from conftest import (
+    bucket,
+    dp_cluster_name,
+    gke_cluster_name,
+    node_pool,
+    phs_cluster,
+    project_id,
+    region,
+)
 from . import create_cluster_on_gke
-from conftest import project_id, region, dp_cluster_name, gke_cluster_name, node_pool, phs_cluster, bucket
 
 test_project_id = project_id()
 test_region = region()
@@ -29,8 +35,9 @@ test_node_pool = node_pool()
 test_phs_cluster = phs_cluster()
 test_bucket = bucket()
 
-@pytest.fixture(autouse=True) #TODO
-def teardown():
+
+@pytest.fixture(autouse=True)
+def teardown() -> None:
     yield
 
     cluster_client = dataproc.ClusterControllerClient(
@@ -48,41 +55,40 @@ def teardown():
         # Wait for cluster to delete
         operation.result()
     except NotFound:
-        print("Cluster already deleted")    
+        print("Cluster already deleted")
 
 
-def test_cluster_create_on_gke(capsys):
-    kubernetes_cluster_config = dataproc.KubernetesClusterConfig({
-    "gkeClusterConfig": {
-    "gkeClusterTarget": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}",
-        "nodePoolTarget": [
-          {
-            "nodePool": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}/nodePools/{test_node_pool}",
-            "roles":[
-              "DEFAULT"
-            ]
-          }
-        ]
-      },
-      "kubernetesSoftwareConfig":{
-        "componentVersion":{
-          "SPARK":"3"
+def test_cluster_create_on_gke(capsys) -> None:
+    kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
+        {
+            "gkeClusterConfig": {
+                "gkeClusterTarget": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}",
+                "nodePoolTarget": [
+                    {
+                        "nodePool": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}/nodePools/{test_node_pool}",
+                        "roles": ["DEFAULT"],
+                    }
+                ],
+            },
+            "kubernetesSoftwareConfig": {"componentVersion": {"SPARK": "3"}},
+        },
+    )
+
+    auxiliary_services_config = dataproc.AuxiliaryServicesConfig(
+        {
+            "sparkHistoryServerConfig": {
+                "dataprocCluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
+            }
         }
-      }
-    },
-        )
+    )
 
-    auxiliary_services_config = dataproc.AuxiliaryServicesConfig({
-    "sparkHistoryServerConfig":{
-      "dataprocCluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
-     }
-  })
-
-    test_virtual_cluster_config = dataproc.VirtualClusterConfig({
-        "staging_bucket": test_bucket,
-        "kubernetes_cluster_config": kubernetes_cluster_config,
-        "auxiliary_services_config": auxiliary_services_config
-    })
+    test_virtual_cluster_config = dataproc.VirtualClusterConfig(
+        {
+            "staging_bucket": test_bucket,
+            "kubernetes_cluster_config": kubernetes_cluster_config,
+            "auxiliary_services_config": auxiliary_services_config,
+        }
+    )
     # Wrapper function for client library function
     create_cluster_on_gke(test_project_id, test_region, test_virtual_cluster_config)
 
