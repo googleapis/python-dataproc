@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -469,7 +469,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_create_workflow_template():
                 # Create a client
@@ -593,7 +593,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_get_workflow_template():
                 # Create a client
@@ -723,7 +723,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_instantiate_workflow_template():
                 # Create a client
@@ -900,7 +900,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_instantiate_inline_workflow_template():
                 # Create a client
@@ -1057,7 +1057,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_update_workflow_template():
                 # Create a client
@@ -1164,7 +1164,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_list_workflow_templates():
                 # Create a client
@@ -1284,7 +1284,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-            from google.cloud import dataproc_v1
+                    from google.cloud import dataproc_v1
 
             def sample_delete_workflow_template():
                 # Create a client
