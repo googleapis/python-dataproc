@@ -25,7 +25,7 @@ from conftest import (
     project_id,
     region,
 )
-from . import create_cluster_on_gke
+import create_cluster_on_gke
 
 test_project_id = project_id()
 test_region = region()
