@@ -29,9 +29,8 @@ import nox
 # WARNING - WARNING - WARNING - WARNING - WARNING
 # WARNING - WARNING - WARNING - WARNING - WARNING
 
-BLACK_VERSION = "black==22.3.0"
-
 # Copy `noxfile_config.py` to your directory and modify it instead.
+
 
 # `TEST_CONFIG` dict is a configuration hook that allows users to
 # modify the test configurations. The values here should be in sync
@@ -40,7 +39,7 @@ BLACK_VERSION = "black==22.3.0"
 
 TEST_CONFIG = {
     # You can opt out from the test for specific Python versions.
-    "ignored_versions": [],
+    "ignored_versions": ["2.7", "3.6"],
     # Old samples are opted out of enforcing Python type hints
     # All new samples should feature them
     "enforce_type_hints": False,
@@ -80,6 +79,7 @@ def get_pytest_env_vars() -> Dict[str, str]:
     env_key = TEST_CONFIG["gcloud_project_env"]
     # This should error out if not set.
     ret["GOOGLE_CLOUD_PROJECT"] = os.environ[env_key]
+    ret["GCLOUD_PROJECT"] = os.environ[env_key]  # deprecated
 
     # Apply user supplied envs.
     ret.update(TEST_CONFIG["envs"])
@@ -87,18 +87,15 @@ def get_pytest_env_vars() -> Dict[str, str]:
 
 
 # DO NOT EDIT - automatically generated.
-# All versions used to test samples.
-ALL_VERSIONS = ["3.6", "3.7", "3.8", "3.9", "3.10"]
+# All versions used to tested samples.
+ALL_VERSIONS = ["2.7", "3.6", "3.7", "3.8", "3.9", "3.10"]
 
 # Any default versions that should be ignored.
 IGNORED_VERSIONS = TEST_CONFIG["ignored_versions"]
 
 TESTED_VERSIONS = sorted([v for v in ALL_VERSIONS if v not in IGNORED_VERSIONS])
 
-INSTALL_LIBRARY_FROM_SOURCE = os.environ.get("INSTALL_LIBRARY_FROM_SOURCE", False) in (
-    "True",
-    "true",
-)
+INSTALL_LIBRARY_FROM_SOURCE = bool(os.environ.get("INSTALL_LIBRARY_FROM_SOURCE", False))
 
 # Error if a python version is missing
 nox.options.error_on_missing_interpreters = True
@@ -168,7 +165,7 @@ def lint(session: nox.sessions.Session) -> None:
 
 @nox.session
 def blacken(session: nox.sessions.Session) -> None:
-    session.install(BLACK_VERSION)
+    session.install("black")
     python_files = [path for path in os.listdir(".") if path.endswith(".py")]
 
     session.run("black", *python_files)
@@ -254,17 +251,13 @@ def py(session: nox.sessions.Session) -> None:
 
 def _get_repo_root() -> Optional[str]:
     """Returns the root folder of the project."""
-    # Get root of this repository. Assume we don't have directories nested deeper than 10 items.
+    # Get root of this repository.
+    # Assume we don't have directories nested deeper than 10 items.
     p = Path(os.getcwd())
     for i in range(10):
         if p is None:
             break
         if Path(p / ".git").exists():
-            return str(p)
-        # .git is not available in repos cloned via Cloud Build
-        # setup.py is always in the library's root, so use that instead
-        # https://github.com/googleapis/synthtool/issues/792
-        if Path(p / "setup.py").exists():
             return str(p)
         p = p.parent
     raise Exception("Unable to detect repository root.")
