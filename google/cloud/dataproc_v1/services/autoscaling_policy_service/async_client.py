@@ -353,7 +353,6 @@ class AutoscalingPolicyServiceAsyncClient:
         Disabled check for update_mask, because all updates will be full
         replacements.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -711,7 +710,6 @@ class AutoscalingPolicyServiceAsyncClient:
         r"""Deletes an autoscaling policy. It is an error to
         delete an autoscaling policy that is in use by one or
         more clusters.
-
 
         .. code-block:: python
 

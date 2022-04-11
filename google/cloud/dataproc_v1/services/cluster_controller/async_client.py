@@ -225,7 +225,6 @@ class ClusterControllerAsyncClient:
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -369,7 +368,6 @@ class ClusterControllerAsyncClient:
         The cluster must be in a
         [``RUNNING``][google.cloud.dataproc.v1.ClusterStatus.State]
         state or an error is returned.
-
 
         .. code-block:: python
 
@@ -752,7 +750,6 @@ class ClusterControllerAsyncClient:
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -897,7 +894,6 @@ class ClusterControllerAsyncClient:
         r"""Gets the resource representation for a cluster in a
         project.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -1018,7 +1014,6 @@ class ClusterControllerAsyncClient:
     ) -> pagers.ListClustersAsyncPager:
         r"""Lists all regions/{region}/clusters in a project
         alphabetically.
-
 
         .. code-block:: python
 
@@ -1180,7 +1175,6 @@ class ClusterControllerAsyncClient:
         [Operation.response][google.longrunning.Operation.response]
         contains
         `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
-
 
         .. code-block:: python
 

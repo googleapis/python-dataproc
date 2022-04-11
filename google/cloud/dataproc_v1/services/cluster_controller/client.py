@@ -449,10 +449,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_create_cluster():
                 # Create a client
@@ -585,10 +584,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         [``RUNNING``][google.cloud.dataproc.v1.ClusterStatus.State]
         state or an error is returned.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_update_cluster():
                 # Create a client
@@ -790,7 +788,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_stop_cluster():
                 # Create a client
@@ -873,7 +871,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_start_cluster():
                 # Create a client
@@ -960,10 +958,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         be
         `ClusterOperationMetadata <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata>`__.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_delete_cluster():
                 # Create a client
@@ -1096,10 +1093,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         r"""Gets the resource representation for a cluster in a
         project.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_get_cluster():
                 # Create a client
@@ -1209,10 +1205,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         r"""Lists all regions/{region}/clusters in a project
         alphabetically.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_list_clusters():
                 # Create a client
@@ -1362,10 +1357,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         contains
         `DiagnoseClusterResults <https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#diagnoseclusterresults>`__.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_diagnose_cluster():
                 # Create a client

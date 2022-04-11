@@ -447,10 +447,9 @@ class BatchControllerClient(metaclass=BatchControllerClientMeta):
         r"""Creates a batch workload that executes
         asynchronously.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_create_batch():
                 # Create a client
@@ -583,7 +582,7 @@ class BatchControllerClient(metaclass=BatchControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_get_batch():
                 # Create a client
@@ -678,7 +677,7 @@ class BatchControllerClient(metaclass=BatchControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_list_batches():
                 # Create a client
@@ -785,10 +784,9 @@ class BatchControllerClient(metaclass=BatchControllerClientMeta):
         terminal state, the delete fails and the response returns
         ``FAILED_PRECONDITION``.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_delete_batch():
                 # Create a client

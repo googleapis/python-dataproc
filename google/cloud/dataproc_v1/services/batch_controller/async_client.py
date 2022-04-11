@@ -223,7 +223,6 @@ class BatchControllerAsyncClient:
         r"""Creates a batch workload that executes
         asynchronously.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -560,7 +559,6 @@ class BatchControllerAsyncClient:
         r"""Deletes the batch workload resource. If the batch is not in
         terminal state, the delete fails and the response returns
         ``FAILED_PRECONDITION``.
-
 
         .. code-block:: python
 

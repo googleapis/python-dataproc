@@ -364,7 +364,6 @@ class WorkflowTemplateServiceAsyncClient:
         Can retrieve previously instantiated template by
         specifying optional version parameter.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -502,7 +501,6 @@ class WorkflowTemplateServiceAsyncClient:
         On successful completion,
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
-
 
         .. code-block:: python
 
@@ -686,7 +684,6 @@ class WorkflowTemplateServiceAsyncClient:
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -846,7 +843,6 @@ class WorkflowTemplateServiceAsyncClient:
         template must contain version that matches the current
         server version.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -961,7 +957,6 @@ class WorkflowTemplateServiceAsyncClient:
     ) -> pagers.ListWorkflowTemplatesAsyncPager:
         r"""Lists workflows that match the specified filter in
         the request.
-
 
         .. code-block:: python
 
@@ -1090,7 +1085,6 @@ class WorkflowTemplateServiceAsyncClient:
     ) -> None:
         r"""Deletes a workflow template. It does not cancel
         in-progress workflows.
-
 
         .. code-block:: python
 

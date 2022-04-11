@@ -444,7 +444,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_create_autoscaling_policy():
                 # Create a client
@@ -570,10 +570,9 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         Disabled check for update_mask, because all updates will be full
         replacements.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_update_autoscaling_policy():
                 # Create a client
@@ -677,7 +676,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_get_autoscaling_policy():
                 # Create a client
@@ -784,7 +783,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_list_autoscaling_policies():
                 # Create a client
@@ -906,10 +905,9 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         delete an autoscaling policy that is in use by one or
         more clusters.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_delete_autoscaling_policy():
                 # Create a client

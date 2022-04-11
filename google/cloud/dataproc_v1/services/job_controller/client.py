@@ -419,7 +419,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_submit_job():
                 # Create a client
@@ -530,7 +530,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_submit_job_as_operation():
                 # Create a client
@@ -657,10 +657,9 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         r"""Gets the resource representation for a job in a
         project.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_get_job():
                 # Create a client
@@ -768,7 +767,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_list_jobs():
                 # Create a client
@@ -902,7 +901,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_update_job():
                 # Create a client
@@ -979,10 +978,9 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         or
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_cancel_job():
                 # Create a client
@@ -1088,10 +1086,9 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         r"""Deletes the job from the project. If the job is active, the
         delete fails, and the response returns ``FAILED_PRECONDITION``.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_delete_job():
                 # Create a client

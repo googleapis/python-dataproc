@@ -473,7 +473,6 @@ class JobControllerAsyncClient:
         r"""Gets the resource representation for a job in a
         project.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -821,7 +820,6 @@ class JobControllerAsyncClient:
         or
         `regions/{region}/jobs.get <https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get>`__.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -938,7 +936,6 @@ class JobControllerAsyncClient:
     ) -> None:
         r"""Deletes the job from the project. If the job is active, the
         delete fails, and the response returns ``FAILED_PRECONDITION``.
-
 
         .. code-block:: python
 

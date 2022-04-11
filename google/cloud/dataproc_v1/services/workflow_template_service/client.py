@@ -469,7 +469,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_create_workflow_template():
                 # Create a client
@@ -590,10 +590,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         Can retrieve previously instantiated template by
         specifying optional version parameter.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_get_workflow_template():
                 # Create a client
@@ -720,10 +719,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_instantiate_workflow_template():
                 # Create a client
@@ -897,10 +895,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_instantiate_inline_workflow_template():
                 # Create a client
@@ -1054,10 +1051,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         template must contain version that matches the current
         server version.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_update_workflow_template():
                 # Create a client
@@ -1161,10 +1157,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         r"""Lists workflows that match the specified filter in
         the request.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_list_workflow_templates():
                 # Create a client
@@ -1281,10 +1276,9 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         r"""Deletes a workflow template. It does not cancel
         in-progress workflows.
 
-
         .. code-block:: python
 
-                    from google.cloud import dataproc_v1
+            from google.cloud import dataproc_v1
 
             def sample_delete_workflow_template():
                 # Create a client
