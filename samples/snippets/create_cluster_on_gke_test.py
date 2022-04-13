@@ -61,23 +61,23 @@ def teardown() -> None:
 def test_cluster_create_on_gke(capsys) -> None:
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
-            "gkeClusterConfig": {
-                "gkeClusterTarget": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}",
-                "nodePoolTarget": [
+            "gke_cluster_config": {
+                "gke_cluster_target": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}",
+                "node_pool_target": [
                     {
-                        "nodePool": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}/nodePools/{test_node_pool}",
+                        "node_pool": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}/nodePools/{test_node_pool}",
                         "roles": ["DEFAULT"],
                     }
                 ],
             },
-            "kubernetesSoftwareConfig": {"componentVersion": {"SPARK": "3"}},
+            "kubernetes_software_config": {"component_version": {"SPARK": "3"}},
         },
     )
 
     auxiliary_services_config = dataproc.AuxiliaryServicesConfig(
         {
-            "sparkHistoryServerConfig": {
-                "dataprocCluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
+            "spark_history_server_config": {
+                "dataproc_cluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
             }
         }
     )
