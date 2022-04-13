@@ -326,7 +326,7 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -443,7 +443,9 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.DeadlineExceeded,
+                    core_exceptions.InternalServerError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -612,7 +614,7 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -797,7 +799,7 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -919,7 +921,7 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -1040,7 +1042,9 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.DeadlineExceeded,
+                    core_exceptions.InternalServerError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
@@ -1158,7 +1162,7 @@ class WorkflowTemplateServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.GoogleAPICallError,
+                    core_exceptions.ServiceUnavailable,
                 ),
                 deadline=600.0,
             ),
