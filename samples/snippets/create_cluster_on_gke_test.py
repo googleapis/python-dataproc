@@ -82,7 +82,7 @@ def test_cluster_create_on_gke(
         }
     )
     # Wrapper function for client library function
-    create_cluster_on_gke(project_id, region, test_virtual_cluster_config)
+    create_cluster_on_gke.create_cluster_on_gke(project_id, region, test_virtual_cluster_config)
 
     out, _ = capsys.readouterr()
     assert dp_cluster_name in out
