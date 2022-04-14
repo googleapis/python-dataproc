@@ -27,13 +27,13 @@ from conftest import (
 )
 import create_cluster_on_gke
 
-test_project_id = project_id
-test_region = region
-test_dp_cluster_name = dp_cluster_name
-test_gke_cluster_name = gke_cluster_name
-test_node_pool = node_pool
-test_phs_cluster = phs_cluster
-test_bucket = bucket
+# test_project_id = project_id
+# test_region = region
+# test_dp_cluster_name = dp_cluster_name
+# test_gke_cluster_name = gke_cluster_name
+# test_node_pool = node_pool
+# test_phs_cluster = phs_cluster
+# test_bucket = bucket
 
 
 @pytest.fixture(autouse=True)
@@ -41,15 +41,15 @@ def teardown() -> None:
     yield
 
     cluster_client = dataproc.ClusterControllerClient(
-        client_options={"api_endpoint": f"{test_region}-dataproc.googleapis.com:443"}
+        client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
     # Client library function to delete cluster.
     try:
         operation = cluster_client.delete_cluster(
             request={
-                "project_id": test_project_id,
-                "region": test_region,
-                "cluster_name": test_dp_cluster_name,
+                "project_id": project_id,
+                "region": region,
+                "cluster_name": dp_cluster_name,
             }
         )
         # Wait for cluster to delete
@@ -58,14 +58,14 @@ def teardown() -> None:
         print("Cluster already deleted")
 
 
-def test_cluster_create_on_gke(capsys) -> None:
+def test_cluster_create_on_gke(capsys: pytest.CaptureFixture) -> None:
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
             "gke_cluster_config": {
-                "gke_cluster_target": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}",
+                "gke_cluster_target": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}",
                 "node_pool_target": [
                     {
-                        "node_pool": f"projects/{test_project_id}/locations/{test_region}/clusters/{test_gke_cluster_name}/nodePools/{test_node_pool}",
+                        "node_pool": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
                         "roles": ["DEFAULT"],
                     }
                 ],
@@ -77,20 +77,20 @@ def test_cluster_create_on_gke(capsys) -> None:
     auxiliary_services_config = dataproc.AuxiliaryServicesConfig(
         {
             "spark_history_server_config": {
-                "dataproc_cluster": f"projects/{test_project_id}/regions/{test_region}/clusters/{test_phs_cluster}"
+                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_cluster}"
             }
         }
     )
 
     test_virtual_cluster_config = dataproc.VirtualClusterConfig(
         {
-            "staging_bucket": test_bucket,
+            "staging_bucket": bucket,
             "kubernetes_cluster_config": kubernetes_cluster_config,
             "auxiliary_services_config": auxiliary_services_config,
         }
     )
     # Wrapper function for client library function
-    create_cluster_on_gke(test_project_id, test_region, test_virtual_cluster_config)
+    create_cluster_on_gke(project_id, region, test_virtual_cluster_config)
 
     out, _ = capsys.readouterr()
-    assert test_dp_cluster_name in out
+    assert dp_cluster_name in out
