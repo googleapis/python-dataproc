@@ -16,28 +16,11 @@ from google.api_core.exceptions import NotFound
 from google.cloud import dataproc_v1 as dataproc
 import pytest
 
-from conftest import (
-    bucket,
-    dp_cluster_name,
-    gke_cluster_name,
-    node_pool,
-    phs_cluster,
-    project_id,
-    region,
-)
 import create_cluster_on_gke
-
-# test_project_id = project_id
-# test_region = region
-# test_dp_cluster_name = dp_cluster_name
-# test_gke_cluster_name = gke_cluster_name
-# test_node_pool = node_pool
-# test_phs_cluster = phs_cluster
-# test_bucket = bucket
 
 
 @pytest.fixture(autouse=True)
-def teardown() -> None:
+def teardown(project_id: str, region: str, dp_cluster_name: str) -> None:
     yield
 
     cluster_client = dataproc.ClusterControllerClient(
@@ -58,7 +41,16 @@ def teardown() -> None:
         print("Cluster already deleted")
 
 
-def test_cluster_create_on_gke(capsys: pytest.CaptureFixture) -> None:
+def test_cluster_create_on_gke(
+    capsys: pytest.CaptureFixture,
+    project_id: str,
+    region: str,
+    gke_cluster_name: str,
+    node_pool: str,
+    phs_cluster: str,
+    bucket: str,
+    dp_cluster_name: str,
+) -> None:
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
             "gke_cluster_config": {
