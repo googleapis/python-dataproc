@@ -16,23 +16,67 @@
 
 # [START dataproc_quickstart]
 """
-Command-line program to create a Dataproc cluster, 
+Command-line program to create a Dataproc cluster,
 run a PySpark job located in Cloud Storage on the cluster,
 then delete the cluster after the job completes.
 
 Usage:
     python submit_job_to_cluster --project_id <PROJECT_ID> --region <REGION> \
-      --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
+        --cluster_name <CLUSTER_NAME> --job_file_path <GCS_JOB_FILE_PATH>
 """
 
 import argparse
+import os
 import re
 
 from google.cloud import dataproc_v1
 from google.cloud import storage
 
+DEFAULT_FILENAME = "pyspark_sort.py"
+waiting_callback = False
+
+
+def get_pyspark_file(pyspark_file=None):
+    if pyspark_file:
+        f = open(pyspark_file, "rb")
+        return f, os.path.basename(pyspark_file)
+    else:
+        """Gets the PySpark file from current directory."""
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        f = open(os.path.join(current_dir, DEFAULT_FILENAME), "rb")
+        return f, DEFAULT_FILENAME
+
+
+def get_region_from_zone(zone):
+    try:
+        region_as_list = zone.split("-")[:-1]
+        return "-".join(region_as_list)
+    except (AttributeError, IndexError, ValueError):
+        raise ValueError("Invalid zone provided, please check your input.")
+
+
+def upload_pyspark_file(project, bucket_name, filename, spark_file):
+    """Uploads the PySpark file in this directory to the configured input
+    bucket."""
+    print("Uploading pyspark file to Cloud Storage.")
+    client = storage.Client(project=project)
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.blob(filename)
+    blob.upload_from_file(spark_file)
+
+def download_output(project, cluster_id, output_bucket, job_id):
+    """Downloads the output file from Cloud Storage and returns it as a
+    string."""
+    print("Downloading output file.")
+    client = storage.Client(project=project)
+    bucket = client.get_bucket(output_bucket)
+    output_blob = "google-cloud-dataproc-metainfo/{}/jobs/{}/driveroutput.000000000".format(
+        cluster_id, job_id
+    )
+    return bucket.blob(output_blob).download_as_string()
+
 # [START dataproc_create_cluster]
-def quickstart(project_id, region, cluster_name, job_file_path):
+def quickstart(project_id, region, cluster_name, gcs_bucket, pyspark_file):
     # Create the cluster client.
     cluster_client = dataproc_v1.ClusterControllerClient(
         client_options={"api_endpoint": "{}-dataproc.googleapis.com:443".format(region)}
@@ -55,8 +99,11 @@ def quickstart(project_id, region, cluster_name, job_file_path):
     result = operation.result()
 
     print("Cluster created successfully: {}".format(result.cluster_name))
-    
+
 # [END dataproc_create_cluster]
+
+    spark_file, spark_filename = get_pyspark_file(pyspark_file)
+    upload_pyspark_file(project_id, gcs_bucket, spark_filename, spark_file)
 
 # [START dataproc_submit_job]
     # Create the job client.
@@ -67,7 +114,7 @@ def quickstart(project_id, region, cluster_name, job_file_path):
     # Create the job config.
     job = {
         "placement": {"cluster_name": cluster_name},
-        "pyspark_job": {"main_python_file_uri": job_file_path},
+        "pyspark_job": {"main_python_file_uri": "gs://{}/{}".format(gcs_bucket, spark_filename)},
     }
 
     operation = job_client.submit_job_as_operation(
@@ -75,10 +122,8 @@ def quickstart(project_id, region, cluster_name, job_file_path):
     )
     response = operation.result()
 
-    """
-    Dataproc job output is saved to the Cloud Storage bucket
-    allocated to the job. Use regex to obtain the bucket and blob info.
-    """
+    # Dataproc job output is saved to the Cloud Storage bucket
+    # allocated to the job. Use regex to obtain the bucket and blob info.
     matches = re.match("gs://(.*?)/(.*)", response.driver_output_resource_uri)
 
     output = (
@@ -88,10 +133,10 @@ def quickstart(project_id, region, cluster_name, job_file_path):
         .download_as_string()
     )
 
-    printf"Job finished successfully: {output}\r\n")
-# [END dataproc_submit_job]
+    print(f"Job finished successfully: {output}\r\n")
+    # [END dataproc_submit_job]
 
-# [START dataproc_delete_cluster]
+    # [START dataproc_delete_cluster]
     # Delete the cluster once the job has terminated.
     operation = cluster_client.delete_cluster(
         request={
@@ -108,7 +153,8 @@ def quickstart(project_id, region, cluster_name, job_file_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "--project_id",
@@ -128,13 +174,15 @@ if __name__ == "__main__":
         required=True,
         help="Name to use for creating a cluster.",
     )
+
     parser.add_argument(
-        "--job_file_path",
-        type=str,
-        required=True,
-        help="Job in Cloud Storage to run on the cluster.",
+        "--gcs_bucket", help="Bucket to upload Pyspark file to", required=True
+    )
+
+    parser.add_argument(
+        "--pyspark_file", help="Pyspark filename. Defaults to pyspark_sort.py"
     )
 
     args = parser.parse_args()
-    quickstart(args.project_id, args.region, args.cluster_name, args.job_file_path)
+    quickstart(args.project_id, args.region, args.cluster_name, args.gcs_bucket, args.pyspark_file)
 # [END dataproc_quickstart]
