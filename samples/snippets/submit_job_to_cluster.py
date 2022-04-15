@@ -64,6 +64,7 @@ def upload_pyspark_file(project, bucket_name, filename, spark_file):
     blob = bucket.blob(filename)
     blob.upload_from_file(spark_file)
 
+
 def download_output(project, cluster_id, output_bucket, job_id):
     """Downloads the output file from Cloud Storage and returns it as a
     string."""
@@ -74,6 +75,7 @@ def download_output(project, cluster_id, output_bucket, job_id):
         cluster_id, job_id
     )
     return bucket.blob(output_blob).download_as_string()
+
 
 # [START dataproc_create_cluster]
 def quickstart(project_id, region, cluster_name, gcs_bucket, pyspark_file):
