@@ -54,5 +54,4 @@ def test_cluster_delete(
     out, _ = capsys.readouterr()
     assert dp_cluster_name in out
     assert "Cluster created successfully" in out
-    assert "Job finished successfully" in out
     assert "successfully deleted" in out
