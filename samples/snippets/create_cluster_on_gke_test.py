@@ -86,6 +86,7 @@ def test_cluster_create_on_gke(
         project_id=project_id,
         region=region,
         virtual_cluster_config=test_virtual_cluster_config,
+        dp_cluster_name=dp_cluster_name,
     )
 
     out, _ = capsys.readouterr()
