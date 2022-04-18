@@ -110,7 +110,7 @@ def create_cluster_on_gke(
     operation = cluster_client.create_cluster(
         request={"project_id": project_id, "region": region, "cluster": gke_cluster}
     )
-    response = operation.result(60)
+    response = operation.result()
 
     # Output a success message.
     print(f"Cluster created successfully: {response.dp_cluster_name}")

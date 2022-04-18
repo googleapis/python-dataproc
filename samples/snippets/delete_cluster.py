@@ -49,7 +49,7 @@ def delete_cluster(project_id, region, cluster_name) -> None:
             "cluster_name": cluster_name,
         }
     )
-    operation.result(60)
+    operation.result()
 
     print("Cluster {} successfully deleted.".format(cluster_name))
 
