@@ -85,7 +85,7 @@ def test_cluster_create_on_gke(
     create_cluster_on_gke.create_cluster_on_gke(
         project_id=project_id,
         region=region,
-        virtual_cluster_confit=test_virtual_cluster_config,
+        virtual_cluster_config=test_virtual_cluster_config,
     )
 
     out, _ = capsys.readouterr()
