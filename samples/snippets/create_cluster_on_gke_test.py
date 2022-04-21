@@ -14,21 +14,24 @@
 
 from google.api_core.exceptions import NotFound
 from google.cloud import dataproc_v1 as dataproc
+from google.cloud import container_v1beta1 as container
 import pytest
 
 import create_cluster_on_gke
 
 
 @pytest.fixture(autouse=True)
-def teardown(project_id: str, region: str, dp_cluster_name: str) -> None:
+def teardown(project_id: str, region: str, dp_cluster_name: str, gke_cluster_name: str, node_pool: str) -> None:
     yield
 
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
+    container_client = container.ClusterManagerAsyncClient()
+    
     # Client library function to delete cluster.
     try:
-        operation = cluster_client.delete_cluster(
+        cluster_operation = cluster_client.delete_cluster(
             request={
                 "project_id": project_id,
                 "region": region,
@@ -36,9 +39,21 @@ def teardown(project_id: str, region: str, dp_cluster_name: str) -> None:
             }
         )
         # Wait for cluster to delete
-        operation.result()
+        cluster_operation.result()
     except NotFound:
         print("Cluster already deleted")
+    # Client library function from GKE Container API to delete node pools created on the GKE cluster.
+    try:
+        request = container.DeleteNodePoolRequest(
+        project_id=project_id,
+        # zone="zone_value",
+        cluster_id=gke_cluster_name,
+        node_pool_id=node_pool,
+        )
+        container_operation = container_client.delete_node_pool(request=request)
+        container_operation.result()
+    except NotFound:
+        print("NodePool already deleted.")
 
 
 def test_cluster_create_on_gke(
