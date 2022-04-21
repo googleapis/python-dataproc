@@ -29,8 +29,7 @@ import argparse
 import os
 import re
 
-from google.cloud import dataproc_v1
-from google.cloud import storage
+from google.cloud import dataproc_v1, storage
 
 DEFAULT_FILENAME = "pyspark_sort.py"
 waiting_callback = False

@@ -20,19 +20,15 @@ python submit_job_to_cluster.py --project_id=$PROJECT --gcs_bucket=$BUCKET \
   --cluster_name=$CLUSTER --zone=$ZONE --global_region
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 
 import argparse
 import os
 
-from google.cloud import dataproc_v1
-from google.cloud import storage
+from google.cloud import dataproc_v1, storage
 from google.cloud.dataproc_v1.gapic.transports import (
     workflow_template_service_grpc_transport,
 )
-
 
 DEFAULT_FILENAME = "pyspark_sort.py"
 waiting_callback = False
