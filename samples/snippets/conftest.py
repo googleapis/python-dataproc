@@ -14,6 +14,7 @@
 
 import os
 import uuid
+import json
 
 import pytest
 
@@ -57,4 +58,6 @@ def phs_cluster() -> str:
 
 @pytest.fixture(scope="session")
 def bucket() -> str:
-    return os.environ["DATAPROC_STAGING_BUCKET"]
+    bucket_options = json.loads(os.environ["DATAPROC_STAGING_BUCKET_OPTIONS"])
+    return bucket_options[project_id]
+
