@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import uuid
-import json
 
 import pytest
 
@@ -60,4 +60,3 @@ def phs_cluster() -> str:
 def bucket() -> str:
     bucket_options = json.loads(os.environ["DATAPROC_STAGING_BUCKET_OPTIONS"])
     return bucket_options[project_id]
-
