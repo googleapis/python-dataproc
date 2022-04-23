@@ -58,5 +58,7 @@ def phs_cluster() -> str:
 
 @pytest.fixture(scope="session")
 def bucket() -> str:
-    bucket_options = json.loads(os.environ["DATAPROC_STAGING_BUCKET_OPTIONS"])
+    staging_buckets = os.environ["DATAPROC_STAGING_BUCKET_OPTIONS"]
+    bucket_options = json.loads(staging_buckets)
+    print(bucket_options)
     return bucket_options[project_id]
