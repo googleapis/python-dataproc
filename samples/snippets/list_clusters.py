@@ -18,7 +18,7 @@ python list_clusters.py --project_id=my-project-id --region=global
 """
 import argparse
 
-from google.cloud import dataproc_v1
+from google.cloud import dataproc_v1 as dataproc
 
 
 # [START dataproc_list_clusters]
@@ -35,15 +35,9 @@ def list_clusters(dataproc, project, region):
 
 def main(project_id, region):
 
-    if region == "global":
-        # Use the default gRPC global endpoints.
-        dataproc_cluster_client = dataproc_v1.ClusterControllerClient()
-    else:
-        # Use a regional gRPC endpoint. See:
-        # https://cloud.google.com/dataproc/docs/concepts/regional-endpoints
-        dataproc_cluster_client = dataproc_v1.ClusterControllerClient(
-            client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
-        )
+    dataproc_cluster_client = dataproc.ClusterControllerClient(
+        client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
+    )
 
     list_clusters(dataproc_cluster_client, project_id, region)
 

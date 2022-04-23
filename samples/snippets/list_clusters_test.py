@@ -19,7 +19,7 @@ from google.api_core.exceptions import NotFound
 from google.cloud import dataproc_v1 as dataproc
 import pytest
 
-import create_cluster
+import list_clusters
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 REGION = "us-central1"
@@ -29,7 +29,6 @@ CLUSTER_NAME = "py-cc-test-{}".format(str(uuid.uuid4()))
 @pytest.fixture(autouse=True)
 def teardown():
     yield
-
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{REGION}-dataproc.googleapis.com:443"}
     )
@@ -50,7 +49,8 @@ def teardown():
 
 def test_cluster_create(capsys):
     # Wrapper function for client library function
-    create_cluster.create_cluster(PROJECT_ID, REGION, CLUSTER_NAME)
+    # TODO: create cluster
+    list_clusters.main(PROJECT_ID, REGION, CLUSTER_NAME)
 
     out, _ = capsys.readouterr()
     assert CLUSTER_NAME in out

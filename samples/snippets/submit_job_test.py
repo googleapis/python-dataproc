@@ -21,7 +21,6 @@ import pytest
 
 import submit_job
 
-
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 REGION = "us-central1"
 CLUSTER_NAME = "py-sj-test-{}".format(str(uuid.uuid4()))

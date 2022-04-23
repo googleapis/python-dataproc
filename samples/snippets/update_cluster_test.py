@@ -27,7 +27,6 @@ import pytest
 
 import update_cluster
 
-
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 REGION = "us-central1"
 CLUSTER_NAME = f"py-cc-test-{str(uuid.uuid4())}"

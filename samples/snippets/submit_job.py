@@ -27,10 +27,10 @@ import re
 # [END dataproc_submit_job]
 import sys
 
-# [START dataproc_submit_job]
-
 from google.cloud import dataproc_v1 as dataproc
 from google.cloud import storage
+
+# [START dataproc_submit_job]
 
 
 def submit_job(project_id, region, cluster_name):
