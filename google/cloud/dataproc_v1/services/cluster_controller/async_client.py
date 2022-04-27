@@ -229,9 +229,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_create_cluster():
+            async def sample_create_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 cluster = dataproc_v1.Cluster()
@@ -249,7 +249,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -329,6 +329,17 @@ class ClusterControllerAsyncClient:
             client_info=DEFAULT_CLIENT_INFO,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                )
+            ),
+        )
+
         # Send the request.
         response = await rpc(
             request,
@@ -373,9 +384,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_update_cluster():
+            async def sample_update_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 cluster = dataproc_v1.Cluster()
@@ -394,7 +405,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -551,6 +562,18 @@ class ClusterControllerAsyncClient:
             client_info=DEFAULT_CLIENT_INFO,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
+        )
+
         # Send the request.
         response = await rpc(
             request,
@@ -584,9 +607,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_stop_cluster():
+            async def sample_stop_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.StopClusterRequest(
@@ -600,7 +623,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -631,6 +654,18 @@ class ClusterControllerAsyncClient:
             self._client._transport.stop_cluster,
             default_timeout=None,
             client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
         )
 
         # Send the request.
@@ -666,9 +701,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_start_cluster():
+            async def sample_start_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.StartClusterRequest(
@@ -682,7 +717,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -713,6 +748,18 @@ class ClusterControllerAsyncClient:
             self._client._transport.start_cluster,
             default_timeout=None,
             client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
         )
 
         # Send the request.
@@ -754,9 +801,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_delete_cluster():
+            async def sample_delete_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.DeleteClusterRequest(
@@ -770,7 +817,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -861,6 +908,18 @@ class ClusterControllerAsyncClient:
             client_info=DEFAULT_CLIENT_INFO,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
+        )
+
         # Send the request.
         response = await rpc(
             request,
@@ -898,9 +957,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_get_cluster():
+            async def sample_get_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.GetClusterRequest(
@@ -910,7 +969,7 @@ class ClusterControllerAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_cluster(request=request)
+                response = await client.get_cluster(request=request)
 
                 # Handle the response
                 print(response)
@@ -992,6 +1051,18 @@ class ClusterControllerAsyncClient:
             client_info=DEFAULT_CLIENT_INFO,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
+        )
+
         # Send the request.
         response = await rpc(
             request,
@@ -1021,9 +1092,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_list_clusters():
+            async def sample_list_clusters():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.ListClustersRequest(
@@ -1035,7 +1106,7 @@ class ClusterControllerAsyncClient:
                 page_result = client.list_clusters(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -1140,6 +1211,17 @@ class ClusterControllerAsyncClient:
             client_info=DEFAULT_CLIENT_INFO,
         )
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                )
+            ),
+        )
+
         # Send the request.
         response = await rpc(
             request,
@@ -1184,9 +1266,9 @@ class ClusterControllerAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_diagnose_cluster():
+            async def sample_diagnose_cluster():
                 # Create a client
-                client = dataproc_v1.ClusterControllerClient()
+                client = dataproc_v1.ClusterControllerAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.DiagnoseClusterRequest(
@@ -1200,7 +1282,7 @@ class ClusterControllerAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -1280,6 +1362,18 @@ class ClusterControllerAsyncClient:
             ),
             default_timeout=300.0,
             client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("cluster_name", request.cluster_name),
+                )
+            ),
         )
 
         # Send the request.

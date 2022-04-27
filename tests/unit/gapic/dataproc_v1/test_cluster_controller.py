@@ -755,6 +755,69 @@ async def test_create_cluster_async_from_dict():
     await test_create_cluster_async(request_type=dict)
 
 
+def test_create_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.CreateClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.create_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.create_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_create_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.CreateClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.create_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.create_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value",
+    ) in kw["metadata"]
+
+
 def test_create_cluster_flattened():
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(),
@@ -938,6 +1001,71 @@ async def test_update_cluster_async(
 @pytest.mark.asyncio
 async def test_update_cluster_async_from_dict():
     await test_update_cluster_async(request_type=dict)
+
+
+def test_update_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.UpdateClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.update_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.update_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_update_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.UpdateClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.update_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.update_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
 
 
 def test_update_cluster_flattened():
@@ -1145,6 +1273,71 @@ async def test_stop_cluster_async_from_dict():
     await test_stop_cluster_async(request_type=dict)
 
 
+def test_stop_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.StopClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.stop_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.stop_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_stop_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.StopClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.stop_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.stop_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
 @pytest.mark.parametrize(
     "request_type",
     [
@@ -1228,6 +1421,71 @@ async def test_start_cluster_async_from_dict():
     await test_start_cluster_async(request_type=dict)
 
 
+def test_start_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.StartClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.start_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.start_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_start_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.StartClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.start_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.start_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
 @pytest.mark.parametrize(
     "request_type",
     [
@@ -1309,6 +1567,71 @@ async def test_delete_cluster_async(
 @pytest.mark.asyncio
 async def test_delete_cluster_async_from_dict():
     await test_delete_cluster_async(request_type=dict)
+
+
+def test_delete_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.DeleteClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.delete_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.delete_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_delete_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.DeleteClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.delete_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.delete_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
 
 
 def test_delete_cluster_flattened():
@@ -1510,6 +1833,69 @@ async def test_get_cluster_async_from_dict():
     await test_get_cluster_async(request_type=dict)
 
 
+def test_get_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.GetClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.get_cluster), "__call__") as call:
+        call.return_value = clusters.Cluster()
+        client.get_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_get_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.GetClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.get_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(clusters.Cluster())
+        await client.get_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
 def test_get_cluster_flattened():
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(),
@@ -1699,6 +2085,69 @@ async def test_list_clusters_async_from_dict():
     await test_list_clusters_async(request_type=dict)
 
 
+def test_list_clusters_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.ListClustersRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
+        call.return_value = clusters.ListClustersResponse()
+        client.list_clusters(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_list_clusters_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.ListClustersRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.list_clusters), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            clusters.ListClustersResponse()
+        )
+        await client.list_clusters(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value",
+    ) in kw["metadata"]
+
+
 def test_list_clusters_flattened():
     client = ClusterControllerClient(
         credentials=ga_credentials.AnonymousCredentials(),
@@ -1839,11 +2288,19 @@ def test_list_clusters_pager(transport_name: str = "grpc"):
         )
 
         metadata = ()
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", ""),
+                    ("region", ""),
+                )
+            ),
+        )
         pager = client.list_clusters(request={})
 
         assert pager._metadata == metadata
 
-        results = [i for i in pager]
+        results = list(pager)
         assert len(results) == 6
         assert all(isinstance(i, clusters.Cluster) for i in results)
 
@@ -2067,6 +2524,71 @@ async def test_diagnose_cluster_async(
 @pytest.mark.asyncio
 async def test_diagnose_cluster_async_from_dict():
     await test_diagnose_cluster_async(request_type=dict)
+
+
+def test_diagnose_cluster_field_headers():
+    client = ClusterControllerClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.DiagnoseClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.diagnose_cluster), "__call__") as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.diagnose_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_diagnose_cluster_field_headers_async():
+    client = ClusterControllerAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = clusters.DiagnoseClusterRequest()
+
+    request.project_id = "project_id_value"
+    request.region = "region_value"
+    request.cluster_name = "cluster_name_value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(type(client.transport.diagnose_cluster), "__call__") as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.diagnose_cluster(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "project_id=project_id_value&region=region_value&cluster_name=cluster_name_value",
+    ) in kw["metadata"]
 
 
 def test_diagnose_cluster_flattened():

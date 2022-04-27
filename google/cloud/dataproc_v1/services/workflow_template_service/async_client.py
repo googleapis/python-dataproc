@@ -236,9 +236,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_create_workflow_template():
+            async def sample_create_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 template = dataproc_v1.WorkflowTemplate()
@@ -253,7 +253,7 @@ class WorkflowTemplateServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.create_workflow_template(request=request)
+                response = await client.create_workflow_template(request=request)
 
                 # Handle the response
                 print(response)
@@ -368,9 +368,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_get_workflow_template():
+            async def sample_get_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.GetWorkflowTemplateRequest(
@@ -378,7 +378,7 @@ class WorkflowTemplateServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.get_workflow_template(request=request)
+                response = await client.get_workflow_template(request=request)
 
                 # Handle the response
                 print(response)
@@ -508,9 +508,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_instantiate_workflow_template():
+            async def sample_instantiate_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.InstantiateWorkflowTemplateRequest(
@@ -522,7 +522,7 @@ class WorkflowTemplateServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -690,9 +690,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_instantiate_inline_workflow_template():
+            async def sample_instantiate_inline_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 template = dataproc_v1.WorkflowTemplate()
@@ -711,7 +711,7 @@ class WorkflowTemplateServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = operation.result()
+                response = await operation.result()
 
                 # Handle the response
                 print(response)
@@ -849,9 +849,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_update_workflow_template():
+            async def sample_update_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 template = dataproc_v1.WorkflowTemplate()
@@ -865,7 +865,7 @@ class WorkflowTemplateServiceAsyncClient:
                 )
 
                 # Make the request
-                response = client.update_workflow_template(request=request)
+                response = await client.update_workflow_template(request=request)
 
                 # Handle the response
                 print(response)
@@ -964,9 +964,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_list_workflow_templates():
+            async def sample_list_workflow_templates():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.ListWorkflowTemplatesRequest(
@@ -977,7 +977,7 @@ class WorkflowTemplateServiceAsyncClient:
                 page_result = client.list_workflow_templates(request=request)
 
                 # Handle the response
-                for response in page_result:
+                async for response in page_result:
                     print(response)
 
         Args:
@@ -1094,9 +1094,9 @@ class WorkflowTemplateServiceAsyncClient:
 
             from google.cloud import dataproc_v1
 
-            def sample_delete_workflow_template():
+            async def sample_delete_workflow_template():
                 # Create a client
-                client = dataproc_v1.WorkflowTemplateServiceClient()
+                client = dataproc_v1.WorkflowTemplateServiceAsyncClient()
 
                 # Initialize request argument(s)
                 request = dataproc_v1.DeleteWorkflowTemplateRequest(
@@ -1104,7 +1104,7 @@ class WorkflowTemplateServiceAsyncClient:
                 )
 
                 # Make the request
-                client.delete_workflow_template(request=request)
+                await client.delete_workflow_template(request=request)
 
         Args:
             request (Union[google.cloud.dataproc_v1.types.DeleteWorkflowTemplateRequest, dict]):

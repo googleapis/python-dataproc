@@ -504,6 +504,17 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.submit_job]
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                )
+            ),
+        )
+
         # Send the request.
         response = rpc(
             request,
@@ -624,6 +635,17 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.submit_job_as_operation]
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                )
+            ),
+        )
+
         # Send the request.
         response = rpc(
             request,
@@ -740,6 +762,18 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.get_job]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("job_id", request.job_id),
+                )
+            ),
+        )
 
         # Send the request.
         response = rpc(
@@ -869,6 +903,17 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.list_jobs]
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                )
+            ),
+        )
+
         # Send the request.
         response = rpc(
             request,
@@ -949,6 +994,18 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.update_job]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("job_id", request.job_id),
+                )
+            ),
+        )
 
         # Send the request.
         response = rpc(
@@ -1061,6 +1118,18 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.cancel_job]
 
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("job_id", request.job_id),
+                )
+            ),
+        )
+
         # Send the request.
         response = rpc(
             request,
@@ -1161,6 +1230,18 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.delete_job]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (
+                    ("project_id", request.project_id),
+                    ("region", request.region),
+                    ("job_id", request.job_id),
+                )
+            ),
+        )
 
         # Send the request.
         rpc(
