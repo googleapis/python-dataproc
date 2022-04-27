@@ -74,4 +74,5 @@ def bucket() -> str:
         py_project39: py_project39_bucket,
         py_project310: py_project310_bucket
     }
-    return staging_bucket_options[project_id]
+    current_project = project_id()
+    return staging_bucket_options[current_project]
