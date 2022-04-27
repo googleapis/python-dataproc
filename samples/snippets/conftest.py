@@ -57,7 +57,7 @@ def phs_cluster() -> str:
 
 @pytest.fixture(scope="session")
 def bucket() -> str:
-    py_project = os.envrion["DATAPROC_PY_PROJECT"]
+    py_project = os.environ["DATAPROC_PY_PROJECT"]
     py_project_bucket = os.environ["DATAPROC_PY_PROJECT_BUCKET"]
     py_project37 = os.environ["DATAPROC_PY_PROJECT37"]
     py_project37_bucket = os.environ["DATAPROC_PY_PROJECT37_BUCKET"]
