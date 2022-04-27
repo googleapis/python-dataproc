@@ -4,6 +4,14 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+### [4.0.3](https://github.com/googleapis/python-dataproc/compare/v4.0.2...v4.0.3) (2022-04-27)
+
+
+### Documentation
+
+* Dataproc ebay walkthrough update ([#405](https://github.com/googleapis/python-dataproc/issues/405)) ([c84d365](https://github.com/googleapis/python-dataproc/commit/c84d365e56c459d018d9c114e72aa0e94f9101b4))
+* fix lint errors. ([c84d365](https://github.com/googleapis/python-dataproc/commit/c84d365e56c459d018d9c114e72aa0e94f9101b4))
+
 ### [4.0.2](https://github.com/googleapis/python-dataproc/compare/v4.0.1...v4.0.2) (2022-04-06)
 
 
