@@ -76,21 +76,3 @@ def bucket() -> str:
         py_project310: py_project310_bucket
     }
     return staging_bucket_options[project_id]
-"""
-export DATAPROC_PY_PROJECT="python-docs-samples-tests"
-export DATAPROC_PY_PROJECT_BUCKET="test-dpgke-bucket"
-export DATAPROC_PY_PROJECT37="python-docs-samples-tests-py37"
-export DATAPROC_PY_PROJECT37_BUCKET="test-dpgke-bucket-py37"
-export DATAPROC_PY_PROJECT38="python-docs-samples-tests-py38"
-export DATAPROC_PY_PROJECT38_BUCKET="test-dpgke-bucket-py38"
-export DATAPROC_PY_PROJECT39="python-docs-samples-tests-py39"
-export DATAPROC_PY_PROJECT39_BUCKET="test-dpgke-bucket-py39"
-export DATAPROC_PY_PROJECT310="python-docs-samples-tests-310"
-export DATAPROC_PY_PROJECT310_BUCKET="test-dpgke-bucket-310"
-
-
-
-
-
-{"python-docs-samples-tests":"test-dpgke-bucket","python-docs-samples-tests-py37":"test-dpgke-bucket-py37","python-docs-samples-tests-py38":"test-dpgke-bucket-py38","python-docs-samples-tests-py39":"test-dpgke-bucket-py39","python-docs-samples-tests-310":"test-dpgke-bucket-310"}
-"""
