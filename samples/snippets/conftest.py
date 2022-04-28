@@ -56,7 +56,7 @@ def phs_cluster() -> str:
 
 
 @pytest.fixture(scope="session")
-def bucket() -> str:
+def bucket(project_id: str) -> str:
     py_project = os.environ["DATAPROC_PY_PROJECT"]
     py_project_bucket = os.environ["DATAPROC_PY_PROJECT_BUCKET"]
     py_project37 = os.environ["DATAPROC_PY_PROJECT37"]
@@ -74,5 +74,4 @@ def bucket() -> str:
         py_project39: py_project39_bucket,
         py_project310: py_project310_bucket
     }
-    current_project = project_id()
-    return staging_bucket_options[current_project]
+    return staging_bucket_options[project_id]
