@@ -30,42 +30,42 @@ from google.cloud import dataproc_v1 as dataproc
 
 def main() -> None:
     # Developer (TODO): Replace with your project_id.
-    project_id = "your project_id"
+    project_id = "your project-id"
     # Developer (TODO): Replace with the region you are using.
     region = "your region"
     # Developer (TODO): Replace with the cluster_name of the Dataproc cluster on which you want to run a virtual cluster on GKE.
-    dp_cluster_name = "your_dp_cluster_name"
+    dp_cluster_name = "your-dp-cluster-name"
     # Developer (TODO): You may find it helpful to create a Dict object with other needed pieces of information.
     # Developer (TODO): Replace with gke_cluster_name for the virtual cluster you will run on GKE.
-    gke_cluster_name = "your_gke_cluster_name"
+    gke_cluster_name = "your-gke-cluster-name"
     # Developer (TODO): Replace with your desired node_pool. If unspecified, Dataproc will use your default node_pool.
-    node_pool = "your_node_pool"
+    node_pool = "your-node-pool"
     # Developer (TODO): Replace with your phs_cluster name if you plan to run a Spark job.
-    phs_cluster = "your phs_cluster"
+    phs_cluster = "your phs-cluster"
     # Developer (TODO): Replace with your gcs_bucket_name for staging.
-    bucket = "your_gcs_bucket_name"
+    bucket = "your-gcs-bucket-name"
 
     # Create a Kubernetes cluster config for GKE set up to use Spark.
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
-            "gkeClusterConfig": {
-                "gkeClusterTarget": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}",
-                "nodePoolTarget": [
+            "gke_cluster_config": {
+                "gke_cluster_target": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}",
+                "node_pool_target": [
                     {
-                        "nodePool": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
+                        "node_pool": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
                         "roles": ["DEFAULT"],
                     }
                 ],
             },
-            "kubernetesSoftwareConfig": {"componentVersion": {"SPARK": "3"}},
+            "kubernetes_software_config": {"component_version": {"SPARK": "3"}},
         },
     )
 
     # Create an auxiliary services config for GKE in order to submit Spark jobs.
     auxiliary_services_config = dataproc.AuxiliaryServicesConfig(
         {
-            "sparkHistoryServerConfig": {
-                "dataprocCluster": f"projects/{project_id}/regions/{region}/clusters/{phs_cluster}"
+            "spark_history_server_config": {
+                "dataproc_cluster": f"projects/{project_id}/regions/{region}/clusters/{phs_cluster}"
             }
         }
     )

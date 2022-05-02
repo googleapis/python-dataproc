@@ -35,7 +35,7 @@ def zone() -> str:
 
 @pytest.fixture(scope="session")
 def dp_cluster_name() -> str:
-    dp_cluster_name = "py-cgkec-test-{}".format(str(uuid.uuid4()))
+    dp_cluster_name = "py-cgkec-dpc-test-{}".format(str(uuid.uuid4()))
     return dp_cluster_name
 
 
@@ -46,7 +46,7 @@ def gke_cluster_name() -> str:
 
 @pytest.fixture(scope="session")
 def node_pool() -> str:
-    node_pool = "py-cgkec-test-{}".format(str(uuid.uuid4()))
+    node_pool = "py-cgkec-np-test-{}".format(str(uuid.uuid4()))
     return node_pool
 
 
@@ -72,6 +72,6 @@ def bucket(project_id: str) -> str:
         py_project37: py_project37_bucket,
         py_project38: py_project38_bucket,
         py_project39: py_project39_bucket,
-        py_project310: py_project310_bucket
+        py_project310: py_project310_bucket,
     }
     return staging_bucket_options[project_id]
