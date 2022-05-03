@@ -35,7 +35,7 @@ def zone() -> str:
 
 @pytest.fixture(scope="session")
 def dp_cluster_name() -> str:
-    dp_cluster_name_uuid = str(uuid.uuid4())[0, 9]
+    dp_cluster_name_uuid = str(uuid.uuid4())[0:9]
     dp_cluster_name = f"py-dp-test-{dp_cluster_name_uuid}"
     return dp_cluster_name
 
@@ -47,7 +47,7 @@ def gke_cluster_name() -> str:
 
 @pytest.fixture(scope="session")
 def node_pool() -> str:
-    node_pool_uuid = str(uuid.uuid4())[0, 9]
+    node_pool_uuid = str(uuid.uuid4())[0:9]
     node_pool = f"py-np-test-{node_pool_uuid}"
     return node_pool
 
