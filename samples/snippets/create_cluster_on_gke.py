@@ -31,9 +31,9 @@ from google.cloud import dataproc_v1 as dataproc
 def main() -> None:
     # Developer (TODO): You may find it helpful to create a Dict object with other needed pieces of information.
     # Developer (TODO): Replace with your project_id.
-    project_id = "your project-id"
+    project_id = "your-project-id"
     # Developer (TODO): Replace with the region you are using.
-    region = "your region"
+    region = "your-region"
     # Developer (TODO): Replace with the cluster_name of the Dataproc cluster on which you want to run a virtual cluster on GKE.
     dp_cluster_name = "your-dp-cluster-name"
     # Developer (TODO): Replace with gke_cluster_name for the virtual cluster you will run on GKE.
@@ -41,9 +41,9 @@ def main() -> None:
     # Developer (TODO): Replace with your desired node_pool. If unspecified, Dataproc will use your default node_pool.
     node_pool = "your-node-pool"
     # Developer (TODO): Replace with your phs_cluster name if you plan to run a Spark job.
-    phs_cluster = "your phs-cluster"
+    phs_cluster = "your-phs-cluster"
     # Developer (TODO): Replace with your gcs_bucket_name for staging.
-    bucket = "your-gcs-bucket-name"
+    bucket = "your-staging-bucket"
 
     # Create a Kubernetes cluster config for GKE set up to use Spark.
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
@@ -116,3 +116,7 @@ def create_cluster_on_gke(
     print(f"Cluster created successfully: {response.cluster_name}")
 
     # [END dataproc_create_cluster_on_gke]
+
+
+if __name__ == "__main__":
+    main()
