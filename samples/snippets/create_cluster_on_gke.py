@@ -17,8 +17,8 @@
 # This sample walks a user through creating a Cloud Dataproc cluster using
 # the Python client library.
 #
-# This script can be run on its own:
-#   python create_cluster.py ${PROJECT_ID} ${REGION} ${DP_CLUSTER_NAME}
+# This script can be run on its own once you have replaced the variables in main():
+#   python create_cluster_on_gke.py
 
 
 # [START dataproc_create_cluster_on_gke]
@@ -29,13 +29,13 @@ from google.cloud import dataproc_v1 as dataproc
 
 
 def main() -> None:
+    # Developer (TODO): You may find it helpful to create a Dict object with other needed pieces of information.
     # Developer (TODO): Replace with your project_id.
     project_id = "your project-id"
     # Developer (TODO): Replace with the region you are using.
     region = "your region"
     # Developer (TODO): Replace with the cluster_name of the Dataproc cluster on which you want to run a virtual cluster on GKE.
     dp_cluster_name = "your-dp-cluster-name"
-    # Developer (TODO): You may find it helpful to create a Dict object with other needed pieces of information.
     # Developer (TODO): Replace with gke_cluster_name for the virtual cluster you will run on GKE.
     gke_cluster_name = "your-gke-cluster-name"
     # Developer (TODO): Replace with your desired node_pool. If unspecified, Dataproc will use your default node_pool.
@@ -113,6 +113,6 @@ def create_cluster_on_gke(
     response = operation.result()
 
     # Output a success message.
-    print(f"Cluster created successfully: {response.dp_cluster_name}")
+    print(f"Cluster created successfully: {response.cluster_name}")
 
     # [END dataproc_create_cluster_on_gke]
