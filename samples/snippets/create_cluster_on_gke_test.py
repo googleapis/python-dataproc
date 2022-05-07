@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from google.api_core.exceptions import NotFound
-from google.cloud import dataproc_v1 as dataproc
 from google.cloud import container_v1 as container
+from google.cloud import dataproc_v1 as dataproc
 
 # from google.cloud import container_v1beta1 as container
 import pytest
@@ -54,10 +54,10 @@ def teardown(
     # Client library function from GKE Container API to delete node pools created on the GKE cluster by the Dataproc cluster.
     try:
         request = container.DeleteNodePoolRequest(
-        project_id=project_id,
-        zone=zone,
-        cluster_id=gke_cluster_name,
-        node_pool_id=node_pool,
+            project_id=project_id,
+            zone=zone,
+            cluster_id=gke_cluster_name,
+            node_pool_id=node_pool,
         )
         container_operation = container_client.delete_node_pool(request=request)
         container_operation.result()
