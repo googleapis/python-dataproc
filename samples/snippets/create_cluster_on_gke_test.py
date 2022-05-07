@@ -14,6 +14,7 @@
 
 from google.api_core.exceptions import NotFound
 from google.cloud import dataproc_v1 as dataproc
+from google.cloud import container_v1 as container
 
 # from google.cloud import container_v1beta1 as container
 import pytest
@@ -26,15 +27,16 @@ def teardown(
     project_id: str,
     region: str,
     dp_cluster_name: str,
-    # gke_cluster_name: str,
-    # node_pool: str,
+    gke_cluster_name: str,
+    node_pool: str,
+    zone: str
 ) -> None:
     yield
 
     cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )
-    # container_client = container.ClusterManagerClient()
+    container_client = container.ClusterManagerClient()
 
     # Client library function to delete cluster.
     try:
@@ -50,17 +52,17 @@ def teardown(
     except NotFound:
         print("Cluster already deleted")
     # Client library function from GKE Container API to delete node pools created on the GKE cluster by the Dataproc cluster.
-    """try:
+    try:
         request = container.DeleteNodePoolRequest(
         project_id=project_id,
-        # zone="zone_value",
+        zone=zone,
         cluster_id=gke_cluster_name,
         node_pool_id=node_pool,
         )
         container_operation = container_client.delete_node_pool(request=request)
         container_operation.result()
     except NotFound:
-        print("NodePool already deleted.")"""
+        print("NodePool already deleted.")
 
 
 def test_cluster_create_on_gke(

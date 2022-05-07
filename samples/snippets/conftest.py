@@ -28,9 +28,9 @@ def region() -> str:
     return os.environ["DATAPROC_REGION"]
 
 
-"""@pytest.fixture(scope="session")
+@pytest.fixture(scope="session")
 def zone() -> str:
-    return os.environ["DATAPROC_NODE_ZONE"]"""
+    return os.environ["DATAPROC_NODE_ZONE"]
 
 
 @pytest.fixture(scope="session")
