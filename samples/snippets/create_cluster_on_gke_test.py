@@ -60,7 +60,8 @@ def teardown(
             node_pool_id=node_pool,
         )
         container_operation = container_client.delete_node_pool(request=request)
-        container_operation.result()
+        # Wait for node to delete
+        container_operation.status
     except NotFound:
         print("NodePool already deleted.")
 
