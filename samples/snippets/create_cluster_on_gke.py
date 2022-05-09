@@ -34,6 +34,8 @@ def main() -> None:
     project_id = "your-project-id"
     # Developer (TODO): Replace with the region you are using.
     region = "your-region"
+    # Developer (TODO): Replace with the region and zone you are using to use as a location for your GKE cluster.
+    gke_zone = "your-zone"
     # Developer (TODO): Replace with the cluster_name of the Dataproc cluster on which you want to run a virtual cluster on GKE.
     dp_cluster_name = "your-dp-cluster-name"
     # Developer (TODO): Replace with gke_cluster_name for the virtual cluster you will run on GKE.
@@ -49,10 +51,10 @@ def main() -> None:
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
             "gke_cluster_config": {
-                "gke_cluster_target": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}",
+                "gke_cluster_target": f"projects/{project_id}/locations/{gke_zone}/clusters/{gke_cluster_name}",
                 "node_pool_target": [
                     {
-                        "node_pool": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
+                        "node_pool": f"projects/{project_id}/locations/{gke_zone}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
                         "roles": ["DEFAULT"],
                     }
                 ],

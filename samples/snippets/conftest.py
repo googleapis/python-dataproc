@@ -29,7 +29,7 @@ def region() -> str:
 
 
 @pytest.fixture(scope="session")
-def zone() -> str:
+def gke_zone() -> str:
     return os.environ["DATAPROC_NODE_ZONE"]
 
 
