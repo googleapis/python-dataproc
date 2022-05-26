@@ -12,11 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# from pprint import pprint
+# from googleapiclient import discovery
+
+# from oauth2client.client import GoogleCredentials
+
 from google.api_core.exceptions import NotFound
-from google.cloud import container_v1 as container
+from google.cloud import container_v1beta1 as container
 from google.cloud import dataproc_v1 as dataproc
 
-# from google.cloud import container_v1beta1 as container
 import pytest
 
 import create_cluster_on_gke
@@ -36,10 +40,16 @@ def teardown(
     """cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
     )"""
+    # credentials = GoogleCredentials.get_application_default()
+
+    # container_service = discovery.build('container', 'v1', credentials=credentials)
     container_client = container.ClusterManagerClient()
 
     # Client library function from GKE Container API to delete node pools created on the GKE cluster by the Dataproc cluster.
     try:
+        # request = container_service.projects().zones().clusters().nodePools().delete(projectId=project_id, zone=gke_zone, clusterId=gke_cluster_name, nodePoolId=node_pool)
+        # response = request.execute()
+        # pprint(response)
         request = container.DeleteNodePoolRequest(
             project_id=project_id,
             zone=gke_zone,
@@ -50,6 +60,8 @@ def teardown(
         # Wait for node to delete
         container_operation.status
         print(container_operation.status)
+    except NotFound:
+        print("NodePool already deleted.")
     except NotFound:
         print("NodePool already deleted.")
 
