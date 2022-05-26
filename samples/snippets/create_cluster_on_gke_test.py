@@ -33,9 +33,9 @@ def teardown(
 ) -> None:
     yield
 
-    cluster_client = dataproc.ClusterControllerClient(
+    """cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
-    )
+    )"""
     container_client = container.ClusterManagerClient()
 
     # Client library function from GKE Container API to delete node pools created on the GKE cluster by the Dataproc cluster.
@@ -49,11 +49,12 @@ def teardown(
         container_operation = container_client.delete_node_pool(request=request)
         # Wait for node to delete
         container_operation.status
+        print(container_operation.status)
     except NotFound:
         print("NodePool already deleted.")
 
     # Client library function to delete cluster.
-    try:
+    """try:
         cluster_operation = cluster_client.delete_cluster(
             request={
                 "project_id": project_id,
@@ -64,7 +65,7 @@ def teardown(
         # Wait for cluster to delete
         cluster_operation.result()
     except NotFound:
-        print("Cluster already deleted")
+        print("Cluster already deleted")"""
 
 
 def test_cluster_create_on_gke(
