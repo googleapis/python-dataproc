@@ -18,7 +18,6 @@
 # from oauth2client.client import GoogleCredentials
 
 from google.api_core.exceptions import NotFound
-from google.cloud import container_v1beta1 as container
 from google.cloud import dataproc_v1 as dataproc
 
 import pytest
