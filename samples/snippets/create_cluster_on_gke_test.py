@@ -29,44 +29,17 @@ import create_cluster_on_gke
 @pytest.fixture(autouse=True)
 def teardown(
     project_id: str,
-    region: str,
     dp_cluster_name: str,
-    gke_cluster_name: str,
-    node_pool: str,
-    gke_zone: str,
+    region: str,
 ) -> None:
     yield
 
-    """cluster_client = dataproc.ClusterControllerClient(
+    cluster_client = dataproc.ClusterControllerClient(
         client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
-    )"""
-    # credentials = GoogleCredentials.get_application_default()
-
-    # container_service = discovery.build('container', 'v1', credentials=credentials)
-    container_client = container.ClusterManagerClient()
-
-    # Client library function from GKE Container API to delete node pools created on the GKE cluster by the Dataproc cluster.
-    try:
-        # request = container_service.projects().zones().clusters().nodePools().delete(projectId=project_id, zone=gke_zone, clusterId=gke_cluster_name, nodePoolId=node_pool)
-        # response = request.execute()
-        # pprint(response)
-        request = container.DeleteNodePoolRequest(
-            project_id=project_id,
-            zone=gke_zone,
-            cluster_id=gke_cluster_name,
-            node_pool_id=node_pool,
-        )
-        container_operation = container_client.delete_node_pool(request=request)
-        # Wait for node to delete
-        container_operation.status
-        print(container_operation.status)
-    except NotFound:
-        print("NodePool already deleted.")
-    except NotFound:
-        print("NodePool already deleted.")
+    )
 
     # Client library function to delete cluster.
-    """try:
+    try:
         cluster_operation = cluster_client.delete_cluster(
             request={
                 "project_id": project_id,
@@ -77,7 +50,7 @@ def teardown(
         # Wait for cluster to delete
         cluster_operation.result()
     except NotFound:
-        print("Cluster already deleted")"""
+        print("Cluster already deleted")
 
 
 def test_cluster_create_on_gke(
