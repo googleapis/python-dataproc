@@ -27,6 +27,7 @@ def project_id() -> str:
 def region() -> str:
     return os.environ["DATAPROC_REGION"]
 
+
 @pytest.fixture(scope="session")
 def dp_cluster_name() -> str:
     dp_cluster_name_uuid = str(uuid.uuid4())[0:8]
