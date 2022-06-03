@@ -56,7 +56,6 @@ def test_cluster_create_on_gke(
     capsys: pytest.CaptureFixture,
     project_id: str,
     region: str,
-    gke_zone: str,
     gke_cluster_name: str,
     node_pool: str,
     phs_cluster: str,
@@ -66,10 +65,10 @@ def test_cluster_create_on_gke(
     kubernetes_cluster_config = dataproc.KubernetesClusterConfig(
         {
             "gke_cluster_config": {
-                "gke_cluster_target": f"projects/{project_id}/locations/{gke_zone}/clusters/{gke_cluster_name}",
+                "gke_cluster_target": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}",
                 "node_pool_target": [
                     {
-                        "node_pool": f"projects/{project_id}/locations/{gke_zone}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
+                        "node_pool": f"projects/{project_id}/locations/{region}/clusters/{gke_cluster_name}/nodePools/{node_pool}",
                         "roles": ["DEFAULT"],
                     }
                 ],
