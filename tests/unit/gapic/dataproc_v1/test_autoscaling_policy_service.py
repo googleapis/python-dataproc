@@ -2403,7 +2403,6 @@ def test_autoscaling_policy_service_transport_auth_adc(transport_class):
     [
         transports.AutoscalingPolicyServiceGrpcTransport,
         transports.AutoscalingPolicyServiceGrpcAsyncIOTransport,
-        transports.AutoscalingPolicyServiceRestTransport,
     ],
 )
 def test_autoscaling_policy_service_transport_auth_gdch_credentials(transport_class):

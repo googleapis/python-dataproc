@@ -2964,7 +2964,6 @@ def test_cluster_controller_transport_auth_adc(transport_class):
     [
         transports.ClusterControllerGrpcTransport,
         transports.ClusterControllerGrpcAsyncIOTransport,
-        transports.ClusterControllerRestTransport,
     ],
 )
 def test_cluster_controller_transport_auth_gdch_credentials(transport_class):

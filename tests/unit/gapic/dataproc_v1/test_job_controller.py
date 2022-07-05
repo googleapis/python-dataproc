@@ -2833,7 +2833,6 @@ def test_job_controller_transport_auth_adc(transport_class):
     [
         transports.JobControllerGrpcTransport,
         transports.JobControllerGrpcAsyncIOTransport,
-        transports.JobControllerRestTransport,
     ],
 )
 def test_job_controller_transport_auth_gdch_credentials(transport_class):

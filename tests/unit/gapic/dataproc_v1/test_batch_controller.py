@@ -2073,7 +2073,6 @@ def test_batch_controller_transport_auth_adc(transport_class):
     [
         transports.BatchControllerGrpcTransport,
         transports.BatchControllerGrpcAsyncIOTransport,
-        transports.BatchControllerRestTransport,
     ],
 )
 def test_batch_controller_transport_auth_gdch_credentials(transport_class):
