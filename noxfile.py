@@ -31,7 +31,7 @@ LINT_PATHS = ["docs", "google", "tests", "noxfile.py", "setup.py"]
 
 DEFAULT_PYTHON_VERSION = "3.8"
 
-UNIT_TEST_PYTHON_VERSIONS = ["3.6", "3.7", "3.8", "3.9", "3.10"]
+UNIT_TEST_PYTHON_VERSIONS = ["3.7", "3.8", "3.9", "3.10"]
 UNIT_TEST_STANDARD_DEPENDENCIES = [
     "mock",
     "asyncmock",
@@ -331,28 +331,16 @@ def docfx(session):
 def prerelease_deps(session):
     """Run all tests with prerelease versions of dependencies installed."""
 
-    prerel_deps = [
-        "protobuf",
-        "googleapis-common-protos",
-        "google-auth",
-        "grpcio",
-        "grpcio-status",
-        "google-api-core",
-        "proto-plus",
-        # dependencies of google-auth
-        "cryptography",
-        "pyasn1",
-    ]
-
-    for dep in prerel_deps:
-        session.install("--pre", "--no-deps", "--upgrade", dep)
-
-    # Remaining dependencies
-    other_deps = ["requests"]
-    session.install(*other_deps)
-
-    session.install(*UNIT_TEST_STANDARD_DEPENDENCIES)
-    session.install(*SYSTEM_TEST_STANDARD_DEPENDENCIES)
+    # Install all dependencies
+    session.install("-e", ".[all, tests, tracing]")
+    unit_deps_all = UNIT_TEST_STANDARD_DEPENDENCIES + UNIT_TEST_EXTERNAL_DEPENDENCIES
+    session.install(*unit_deps_all)
+    system_deps_all = (
+        SYSTEM_TEST_STANDARD_DEPENDENCIES
+        + SYSTEM_TEST_EXTERNAL_DEPENDENCIES
+        + SYSTEM_TEST_EXTRAS
+    )
+    session.install(*system_deps_all)
 
     # Because we test minimum dependency versions on the minimum Python
     # version, the first version we test with in the unit tests sessions has a
@@ -366,19 +354,38 @@ def prerelease_deps(session):
         constraints_text = constraints_file.read()
 
     # Ignore leading whitespace and comment lines.
-    deps = [
+    constraints_deps = [
         match.group(1)
         for match in re.finditer(
             r"^\s*(\S+)(?===\S+)", constraints_text, flags=re.MULTILINE
         )
     ]
 
-    # Don't overwrite prerelease packages.
-    deps = [dep for dep in deps if dep not in prerel_deps]
-    # We use --no-deps to ensure that pre-release versions aren't overwritten
-    # by the version ranges in setup.py.
-    session.install(*deps)
-    session.install("--no-deps", "-e", ".[all]")
+    session.install(*constraints_deps)
+
+    prerel_deps = [
+        "protobuf",
+        # dependency of grpc
+        "six",
+        "googleapis-common-protos",
+        "grpcio",
+        "grpcio-status",
+        "google-api-core",
+        "proto-plus",
+        "google-cloud-testutils",
+        # dependencies of google-cloud-testutils"
+        "click",
+    ]
+
+    for dep in prerel_deps:
+        session.install("--pre", "--no-deps", "--upgrade", dep)
+
+    # Remaining dependencies
+    other_deps = [
+        "requests",
+        "google-auth",
+    ]
+    session.install(*other_deps)
 
     # Print out prerelease package versions
     session.run(
@@ -387,5 +394,24 @@ def prerelease_deps(session):
     session.run("python", "-c", "import grpc; print(grpc.__version__)")
 
     session.run("py.test", "tests/unit")
-    session.run("py.test", "tests/system")
-    session.run("py.test", "samples/snippets")
+
+    system_test_path = os.path.join("tests", "system.py")
+    system_test_folder_path = os.path.join("tests", "system")
+
+    # Only run system tests if found.
+    if os.path.exists(system_test_path):
+        session.run(
+            "py.test",
+            "--verbose",
+            f"--junitxml=system_{session.python}_sponge_log.xml",
+            system_test_path,
+            *session.posargs,
+        )
+    if os.path.exists(system_test_folder_path):
+        session.run(
+            "py.test",
+            "--verbose",
+            f"--junitxml=system_{session.python}_sponge_log.xml",
+            system_test_folder_path,
+            *session.posargs,
+        )

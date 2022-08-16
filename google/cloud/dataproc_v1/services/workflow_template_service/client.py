@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -453,6 +453,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
                 always_use_jwt_access=True,
+                api_audience=client_options.api_audience,
             )
 
     def create_workflow_template(
@@ -590,7 +591,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         Can retrieve previously instantiated template by
         specifying optional version parameter.
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -693,9 +693,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         ] = None,
         *,
         name: str = None,
-        parameters: Sequence[
-            workflow_templates.InstantiateWorkflowTemplateRequest.ParametersEntry
-        ] = None,
+        parameters: Mapping[str, str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -721,7 +719,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         On successful completion,
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
-
 
         .. code-block:: python
 
@@ -770,7 +767,7 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            parameters (Sequence[google.cloud.dataproc_v1.types.InstantiateWorkflowTemplateRequest.ParametersEntry]):
+            parameters (Mapping[str, str]):
                 Optional. Map from parameter names to
                 values that should be used for those
                 parameters. Values may not exceed 1000
@@ -799,9 +796,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
                          (google.protobuf.Empty);
 
                       }
-
-                   The JSON representation for Empty is empty JSON
-                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -899,7 +893,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         [Operation.response][google.longrunning.Operation.response] will
         be [Empty][google.protobuf.Empty].
 
-
         .. code-block:: python
 
             from google.cloud import dataproc_v1
@@ -981,9 +974,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
 
                       }
 
-                   The JSON representation for Empty is empty JSON
-                   object {}.
-
         """
         # Create or coerce a protobuf request object.
         # Quick check: If we got a request object, we should *not* have
@@ -1055,7 +1045,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
         r"""Updates (replaces) workflow template. The updated
         template must contain version that matches the current
         server version.
-
 
         .. code-block:: python
 
@@ -1162,7 +1151,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
     ) -> pagers.ListWorkflowTemplatesPager:
         r"""Lists workflows that match the specified filter in
         the request.
-
 
         .. code-block:: python
 
@@ -1282,7 +1270,6 @@ class WorkflowTemplateServiceClient(metaclass=WorkflowTemplateServiceClientMeta)
     ) -> None:
         r"""Deletes a workflow template. It does not cancel
         in-progress workflows.
-
 
         .. code-block:: python
 
