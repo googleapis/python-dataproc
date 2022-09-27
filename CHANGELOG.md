@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-dataproc/#history
 
+## [5.1.0](https://github.com/googleapis/python-dataproc/compare/v5.0.1...v5.1.0) (2022-09-27)
+
+
+### Features
+
+* Add support for Dataproc metric configuration ([#481](https://github.com/googleapis/python-dataproc/issues/481)) ([6d0e404](https://github.com/googleapis/python-dataproc/commit/6d0e404927e9af4f7f8b07ca76604a22cc57b787))
+
 ## [5.0.1](https://github.com/googleapis/python-dataproc/compare/v5.0.0...v5.0.1) (2022-08-11)
 
 
