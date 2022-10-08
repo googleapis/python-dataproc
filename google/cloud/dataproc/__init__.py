@@ -90,6 +90,7 @@ from google.cloud.dataproc_v1.types.clusters import ClusterMetrics
 from google.cloud.dataproc_v1.types.clusters import ClusterStatus
 from google.cloud.dataproc_v1.types.clusters import ConfidentialInstanceConfig
 from google.cloud.dataproc_v1.types.clusters import CreateClusterRequest
+from google.cloud.dataproc_v1.types.clusters import DataprocMetricConfig
 from google.cloud.dataproc_v1.types.clusters import DeleteClusterRequest
 from google.cloud.dataproc_v1.types.clusters import DiagnoseClusterRequest
 from google.cloud.dataproc_v1.types.clusters import DiagnoseClusterResults
@@ -232,6 +233,7 @@ __all__ = (
     "ClusterStatus",
     "ConfidentialInstanceConfig",
     "CreateClusterRequest",
+    "DataprocMetricConfig",
     "DeleteClusterRequest",
     "DiagnoseClusterRequest",
     "DiagnoseClusterResults",

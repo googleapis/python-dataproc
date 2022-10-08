@@ -54,6 +54,7 @@ from .types.clusters import ClusterMetrics
 from .types.clusters import ClusterStatus
 from .types.clusters import ConfidentialInstanceConfig
 from .types.clusters import CreateClusterRequest
+from .types.clusters import DataprocMetricConfig
 from .types.clusters import DeleteClusterRequest
 from .types.clusters import DiagnoseClusterRequest
 from .types.clusters import DiagnoseClusterResults
@@ -174,6 +175,7 @@ __all__ = (
     "CreateBatchRequest",
     "CreateClusterRequest",
     "CreateWorkflowTemplateRequest",
+    "DataprocMetricConfig",
     "DeleteAutoscalingPolicyRequest",
     "DeleteBatchRequest",
     "DeleteClusterRequest",
