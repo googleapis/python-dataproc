@@ -21,7 +21,7 @@
 
 import sys
 
-# [START instantiate_inline_workflow_template_cluster_selector]
+# [START dataproc_instantiate_inline_workflow_template_cluster_selector]
 from google.cloud import dataproc_v1 as dataproc
 
 
@@ -57,7 +57,9 @@ def instantiate_inline_workflow_template_cluster_selector(project_id, region, la
                         "step_id": "test-job-1",
                         "spark_job": 
                             {
-                                "main_jar_file_uri": "file:///usr/lib/spark/examples/jars/spark-examples.jar"
+                               "main_class": "org.apache.spark.examples.SparkPi",
+                                "jar_file_uris": ["file:///usr/lib/spark/examples/jars/spark-examples.jar"],
+                                "args": ["1000"]
                             }
                         ,
                     }
@@ -74,7 +76,7 @@ def instantiate_inline_workflow_template_cluster_selector(project_id, region, la
 
     # Output a success message.
     print("Workflow ran successfully.")
-    # [END instantiate_inline_workflow_template_cluster_selector]
+    # [END dataproc_instantiate_inline_workflow_template_cluster_selector]
 
 
 if __name__ == "__main__":
