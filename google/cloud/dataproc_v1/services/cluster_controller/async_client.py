@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -165,9 +175,9 @@ class ClusterControllerAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, ClusterControllerTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the cluster controller client.
@@ -211,13 +221,13 @@ class ClusterControllerAsyncClient:
 
     async def create_cluster(
         self,
-        request: Union[clusters.CreateClusterRequest, dict] = None,
+        request: Optional[Union[clusters.CreateClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster: clusters.Cluster = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster: Optional[clusters.Cluster] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Creates a cluster in a project. The returned
@@ -262,7 +272,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.CreateClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.CreateClusterRequest, dict]]):
                 The request object. A request to create a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -368,15 +378,15 @@ class ClusterControllerAsyncClient:
 
     async def update_cluster(
         self,
-        request: Union[clusters.UpdateClusterRequest, dict] = None,
+        request: Optional[Union[clusters.UpdateClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
-        cluster: clusters.Cluster = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
+        cluster: Optional[clusters.Cluster] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Updates a cluster in a project. The returned
@@ -425,7 +435,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.UpdateClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.UpdateClusterRequest, dict]]):
                 The request object. A request to update a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -609,10 +619,10 @@ class ClusterControllerAsyncClient:
 
     async def stop_cluster(
         self,
-        request: Union[clusters.StopClusterRequest, dict] = None,
+        request: Optional[Union[clusters.StopClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Stops a cluster in a project.
@@ -650,7 +660,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.StopClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.StopClusterRequest, dict]]):
                 The request object. A request to stop a cluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -710,10 +720,10 @@ class ClusterControllerAsyncClient:
 
     async def start_cluster(
         self,
-        request: Union[clusters.StartClusterRequest, dict] = None,
+        request: Optional[Union[clusters.StartClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Starts a cluster in a project.
@@ -751,7 +761,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.StartClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.StartClusterRequest, dict]]):
                 The request object. A request to start a cluster.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -811,13 +821,13 @@ class ClusterControllerAsyncClient:
 
     async def delete_cluster(
         self,
-        request: Union[clusters.DeleteClusterRequest, dict] = None,
+        request: Optional[Union[clusters.DeleteClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Deletes a cluster in a project. The returned
@@ -858,7 +868,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.DeleteClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.DeleteClusterRequest, dict]]):
                 The request object. A request to delete a cluster.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -973,13 +983,13 @@ class ClusterControllerAsyncClient:
 
     async def get_cluster(
         self,
-        request: Union[clusters.GetClusterRequest, dict] = None,
+        request: Optional[Union[clusters.GetClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> clusters.Cluster:
         r"""Gets the resource representation for a cluster in a
@@ -1014,7 +1024,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.GetClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.GetClusterRequest, dict]]):
                 The request object. Request to get the resource
                 representation for a cluster in a project.
             project_id (:class:`str`):
@@ -1115,13 +1125,13 @@ class ClusterControllerAsyncClient:
 
     async def list_clusters(
         self,
-        request: Union[clusters.ListClustersRequest, dict] = None,
+        request: Optional[Union[clusters.ListClustersRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        filter: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListClustersAsyncPager:
         r"""Lists all regions/{region}/clusters in a project
@@ -1156,7 +1166,7 @@ class ClusterControllerAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.ListClustersRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.ListClustersRequest, dict]]):
                 The request object. A request to list the clusters in a
                 project.
             project_id (:class:`str`):
@@ -1290,13 +1300,13 @@ class ClusterControllerAsyncClient:
 
     async def diagnose_cluster(
         self,
-        request: Union[clusters.DiagnoseClusterRequest, dict] = None,
+        request: Optional[Union[clusters.DiagnoseClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Gets cluster diagnostic information. The returned
@@ -1341,7 +1351,7 @@ class ClusterControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.DiagnoseClusterRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.DiagnoseClusterRequest, dict]]):
                 The request object. A request to collect cluster
                 diagnostic information.
             project_id (:class:`str`):

@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -62,7 +73,7 @@ class ClusterControllerClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ClusterControllerTransport]:
         """Returns an appropriate transport class.
 
@@ -339,7 +350,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ClusterControllerTransport, None] = None,
+        transport: Optional[Union[str, ClusterControllerTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -437,13 +448,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def create_cluster(
         self,
-        request: Union[clusters.CreateClusterRequest, dict] = None,
+        request: Optional[Union[clusters.CreateClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster: clusters.Cluster = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster: Optional[clusters.Cluster] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a cluster in a project. The returned
@@ -585,15 +596,15 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def update_cluster(
         self,
-        request: Union[clusters.UpdateClusterRequest, dict] = None,
+        request: Optional[Union[clusters.UpdateClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
-        cluster: clusters.Cluster = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
+        cluster: Optional[clusters.Cluster] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Updates a cluster in a project. The returned
@@ -817,10 +828,10 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def stop_cluster(
         self,
-        request: Union[clusters.StopClusterRequest, dict] = None,
+        request: Optional[Union[clusters.StopClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Stops a cluster in a project.
@@ -919,10 +930,10 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def start_cluster(
         self,
-        request: Union[clusters.StartClusterRequest, dict] = None,
+        request: Optional[Union[clusters.StartClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Starts a cluster in a project.
@@ -1021,13 +1032,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def delete_cluster(
         self,
-        request: Union[clusters.DeleteClusterRequest, dict] = None,
+        request: Optional[Union[clusters.DeleteClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a cluster in a project. The returned
@@ -1174,13 +1185,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def get_cluster(
         self,
-        request: Union[clusters.GetClusterRequest, dict] = None,
+        request: Optional[Union[clusters.GetClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> clusters.Cluster:
         r"""Gets the resource representation for a cluster in a
@@ -1305,13 +1316,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def list_clusters(
         self,
-        request: Union[clusters.ListClustersRequest, dict] = None,
+        request: Optional[Union[clusters.ListClustersRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        filter: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListClustersPager:
         r"""Lists all regions/{region}/clusters in a project
@@ -1469,13 +1480,13 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
 
     def diagnose_cluster(
         self,
-        request: Union[clusters.DiagnoseClusterRequest, dict] = None,
+        request: Optional[Union[clusters.DiagnoseClusterRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        cluster_name: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Gets cluster diagnostic information. The returned

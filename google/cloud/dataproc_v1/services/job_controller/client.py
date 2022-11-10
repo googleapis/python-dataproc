@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -57,7 +68,7 @@ class JobControllerClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[JobControllerTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, JobControllerTransport, None] = None,
+        transport: Optional[Union[str, JobControllerTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -408,13 +419,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def submit_job(
         self,
-        request: Union[jobs.SubmitJobRequest, dict] = None,
+        request: Optional[Union[jobs.SubmitJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job: jobs.Job = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
@@ -537,13 +548,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def submit_job_as_operation(
         self,
-        request: Union[jobs.SubmitJobRequest, dict] = None,
+        request: Optional[Union[jobs.SubmitJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job: jobs.Job = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Submits job to a cluster.
@@ -683,13 +694,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def get_job(
         self,
-        request: Union[jobs.GetJobRequest, dict] = None,
+        request: Optional[Union[jobs.GetJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Gets the resource representation for a job in a
@@ -811,13 +822,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def list_jobs(
         self,
-        request: Union[jobs.ListJobsRequest, dict] = None,
+        request: Optional[Union[jobs.ListJobsRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        filter: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListJobsPager:
         r"""Lists regions/{region}/jobs in a project.
@@ -966,10 +977,10 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def update_job(
         self,
-        request: Union[jobs.UpdateJobRequest, dict] = None,
+        request: Optional[Union[jobs.UpdateJobRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Updates a job in a project.
@@ -1057,13 +1068,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def cancel_job(
         self,
-        request: Union[jobs.CancelJobRequest, dict] = None,
+        request: Optional[Union[jobs.CancelJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Starts a job cancellation request. To access the job resource
@@ -1187,13 +1198,13 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
 
     def delete_job(
         self,
-        request: Union[jobs.DeleteJobRequest, dict] = None,
+        request: Optional[Union[jobs.DeleteJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes the job from the project. If the job is active, the

@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -57,7 +68,7 @@ class AutoscalingPolicyServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[AutoscalingPolicyServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -334,7 +345,7 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, AutoscalingPolicyServiceTransport, None] = None,
+        transport: Optional[Union[str, AutoscalingPolicyServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -432,14 +443,14 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
     def create_autoscaling_policy(
         self,
-        request: Union[
-            autoscaling_policies.CreateAutoscalingPolicyRequest, dict
+        request: Optional[
+            Union[autoscaling_policies.CreateAutoscalingPolicyRequest, dict]
         ] = None,
         *,
-        parent: str = None,
-        policy: autoscaling_policies.AutoscalingPolicy = None,
+        parent: Optional[str] = None,
+        policy: Optional[autoscaling_policies.AutoscalingPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Creates new autoscaling policy.
@@ -565,13 +576,13 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
     def update_autoscaling_policy(
         self,
-        request: Union[
-            autoscaling_policies.UpdateAutoscalingPolicyRequest, dict
+        request: Optional[
+            Union[autoscaling_policies.UpdateAutoscalingPolicyRequest, dict]
         ] = None,
         *,
-        policy: autoscaling_policies.AutoscalingPolicy = None,
+        policy: Optional[autoscaling_policies.AutoscalingPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Updates (replaces) autoscaling policy.
@@ -681,11 +692,13 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
     def get_autoscaling_policy(
         self,
-        request: Union[autoscaling_policies.GetAutoscalingPolicyRequest, dict] = None,
+        request: Optional[
+            Union[autoscaling_policies.GetAutoscalingPolicyRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Retrieves autoscaling policy.
@@ -793,13 +806,13 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
     def list_autoscaling_policies(
         self,
-        request: Union[
-            autoscaling_policies.ListAutoscalingPoliciesRequest, dict
+        request: Optional[
+            Union[autoscaling_policies.ListAutoscalingPoliciesRequest, dict]
         ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListAutoscalingPoliciesPager:
         r"""Lists autoscaling policies in the project.
@@ -922,13 +935,13 @@ class AutoscalingPolicyServiceClient(metaclass=AutoscalingPolicyServiceClientMet
 
     def delete_autoscaling_policy(
         self,
-        request: Union[
-            autoscaling_policies.DeleteAutoscalingPolicyRequest, dict
+        request: Optional[
+            Union[autoscaling_policies.DeleteAutoscalingPolicyRequest, dict]
         ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes an autoscaling policy. It is an error to

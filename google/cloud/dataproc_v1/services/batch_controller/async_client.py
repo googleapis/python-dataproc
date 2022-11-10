@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -165,9 +175,9 @@ class BatchControllerAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, BatchControllerTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the batch controller client.
@@ -211,13 +221,13 @@ class BatchControllerAsyncClient:
 
     async def create_batch(
         self,
-        request: Union[batches.CreateBatchRequest, dict] = None,
+        request: Optional[Union[batches.CreateBatchRequest, dict]] = None,
         *,
-        parent: str = None,
-        batch: batches.Batch = None,
-        batch_id: str = None,
+        parent: Optional[str] = None,
+        batch: Optional[batches.Batch] = None,
+        batch_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Creates a batch workload that executes
@@ -258,7 +268,7 @@ class BatchControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.CreateBatchRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.CreateBatchRequest, dict]]):
                 The request object. A request to create a batch
                 workload.
             parent (:class:`str`):
@@ -354,11 +364,11 @@ class BatchControllerAsyncClient:
 
     async def get_batch(
         self,
-        request: Union[batches.GetBatchRequest, dict] = None,
+        request: Optional[Union[batches.GetBatchRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> batches.Batch:
         r"""Gets the batch workload resource representation.
@@ -390,7 +400,7 @@ class BatchControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.GetBatchRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.GetBatchRequest, dict]]):
                 The request object. A request to get the resource
                 representation for a batch workload.
             name (:class:`str`):
@@ -456,11 +466,11 @@ class BatchControllerAsyncClient:
 
     async def list_batches(
         self,
-        request: Union[batches.ListBatchesRequest, dict] = None,
+        request: Optional[Union[batches.ListBatchesRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListBatchesAsyncPager:
         r"""Lists batch workloads.
@@ -493,7 +503,7 @@ class BatchControllerAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.ListBatchesRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.ListBatchesRequest, dict]]):
                 The request object. A request to list batch workloads in
                 a project.
             parent (:class:`str`):
@@ -570,11 +580,11 @@ class BatchControllerAsyncClient:
 
     async def delete_batch(
         self,
-        request: Union[batches.DeleteBatchRequest, dict] = None,
+        request: Optional[Union[batches.DeleteBatchRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes the batch workload resource. If the batch is not in
@@ -605,7 +615,7 @@ class BatchControllerAsyncClient:
                 await client.delete_batch(request=request)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.DeleteBatchRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.DeleteBatchRequest, dict]]):
                 The request object. A request to delete a batch
                 workload.
             name (:class:`str`):

@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -158,9 +168,9 @@ class JobControllerAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, JobControllerTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the job controller client.
@@ -204,13 +214,13 @@ class JobControllerAsyncClient:
 
     async def submit_job(
         self,
-        request: Union[jobs.SubmitJobRequest, dict] = None,
+        request: Optional[Union[jobs.SubmitJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job: jobs.Job = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
@@ -248,7 +258,7 @@ class JobControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]]):
                 The request object. A request to submit a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -342,13 +352,13 @@ class JobControllerAsyncClient:
 
     async def submit_job_as_operation(
         self,
-        request: Union[jobs.SubmitJobRequest, dict] = None,
+        request: Optional[Union[jobs.SubmitJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job: jobs.Job = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Submits job to a cluster.
@@ -390,7 +400,7 @@ class JobControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.SubmitJobRequest, dict]]):
                 The request object. A request to submit a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -497,13 +507,13 @@ class JobControllerAsyncClient:
 
     async def get_job(
         self,
-        request: Union[jobs.GetJobRequest, dict] = None,
+        request: Optional[Union[jobs.GetJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Gets the resource representation for a job in a
@@ -538,7 +548,7 @@ class JobControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.GetJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.GetJobRequest, dict]]):
                 The request object. A request to get the resource
                 representation for a job in a project.
             project_id (:class:`str`):
@@ -636,13 +646,13 @@ class JobControllerAsyncClient:
 
     async def list_jobs(
         self,
-        request: Union[jobs.ListJobsRequest, dict] = None,
+        request: Optional[Union[jobs.ListJobsRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        filter: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListJobsAsyncPager:
         r"""Lists regions/{region}/jobs in a project.
@@ -676,7 +686,7 @@ class JobControllerAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.ListJobsRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.ListJobsRequest, dict]]):
                 The request object. A request to list jobs in a project.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -802,10 +812,10 @@ class JobControllerAsyncClient:
 
     async def update_job(
         self,
-        request: Union[jobs.UpdateJobRequest, dict] = None,
+        request: Optional[Union[jobs.UpdateJobRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Updates a job in a project.
@@ -844,7 +854,7 @@ class JobControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.UpdateJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.UpdateJobRequest, dict]]):
                 The request object. A request to update a job.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -901,13 +911,13 @@ class JobControllerAsyncClient:
 
     async def cancel_job(
         self,
-        request: Union[jobs.CancelJobRequest, dict] = None,
+        request: Optional[Union[jobs.CancelJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Starts a job cancellation request. To access the job resource
@@ -945,7 +955,7 @@ class JobControllerAsyncClient:
                 print(response)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.CancelJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.CancelJobRequest, dict]]):
                 The request object. A request to cancel a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
@@ -1042,13 +1052,13 @@ class JobControllerAsyncClient:
 
     async def delete_job(
         self,
-        request: Union[jobs.DeleteJobRequest, dict] = None,
+        request: Optional[Union[jobs.DeleteJobRequest, dict]] = None,
         *,
-        project_id: str = None,
-        region: str = None,
-        job_id: str = None,
+        project_id: Optional[str] = None,
+        region: Optional[str] = None,
+        job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes the job from the project. If the job is active, the
@@ -1080,7 +1090,7 @@ class JobControllerAsyncClient:
                 await client.delete_job(request=request)
 
         Args:
-            request (Union[google.cloud.dataproc_v1.types.DeleteJobRequest, dict]):
+            request (Optional[Union[google.cloud.dataproc_v1.types.DeleteJobRequest, dict]]):
                 The request object. A request to delete a job.
             project_id (:class:`str`):
                 Required. The ID of the Google Cloud
