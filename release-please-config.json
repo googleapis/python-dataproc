@@ -9,6 +9,11 @@
           "type": "json",
           "path": "samples/generated_samples/snippet_metadata_dataproc_v1.json",
           "jsonpath": "$.clientLibrary.version"
+        },
+        {
+          "type": "json",
+          "path": "samples/generated_samples/snippet_metadata_google.cloud.dataproc.v1.json",
+          "jsonpath": "$.clientLibrary.version"
         }
       ]
     }
