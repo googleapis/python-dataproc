@@ -27,7 +27,8 @@ from typing import (
     Type,
     Union,
 )
-import pkg_resources
+
+from google.cloud.dataproc_v1 import gapic_version as package_version
 
 from google.api_core.client_options import ClientOptions
 from google.api_core import exceptions as core_exceptions
@@ -239,7 +240,7 @@ class WorkflowTemplateServiceAsyncClient:
         parent: Optional[str] = None,
         template: Optional[workflow_templates.WorkflowTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
         r"""Creates new workflow template.
@@ -378,7 +379,7 @@ class WorkflowTemplateServiceAsyncClient:
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
         r"""Retrieves the latest workflow template.
@@ -507,7 +508,7 @@ class WorkflowTemplateServiceAsyncClient:
         name: Optional[str] = None,
         parameters: Optional[MutableMapping[str, str]] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Instantiates a template and begins execution.
@@ -557,7 +558,7 @@ class WorkflowTemplateServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = await operation.result()
+                response = (await operation).result()
 
                 # Handle the response
                 print(response)
@@ -688,7 +689,7 @@ class WorkflowTemplateServiceAsyncClient:
         parent: Optional[str] = None,
         template: Optional[workflow_templates.WorkflowTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation_async.AsyncOperation:
         r"""Instantiates a template and begins execution.
@@ -750,7 +751,7 @@ class WorkflowTemplateServiceAsyncClient:
 
                 print("Waiting for operation to complete...")
 
-                response = await operation.result()
+                response = (await operation).result()
 
                 # Handle the response
                 print(response)
@@ -876,7 +877,7 @@ class WorkflowTemplateServiceAsyncClient:
         *,
         template: Optional[workflow_templates.WorkflowTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> workflow_templates.WorkflowTemplate:
         r"""Updates (replaces) workflow template. The updated
@@ -1001,7 +1002,7 @@ class WorkflowTemplateServiceAsyncClient:
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListWorkflowTemplatesAsyncPager:
         r"""Lists workflows that match the specified filter in
@@ -1140,7 +1141,7 @@ class WorkflowTemplateServiceAsyncClient:
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes a workflow template. It does not cancel
@@ -1254,14 +1255,9 @@ class WorkflowTemplateServiceAsyncClient:
         await self.transport.close()
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-cloud-dataproc",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("WorkflowTemplateServiceAsyncClient",)

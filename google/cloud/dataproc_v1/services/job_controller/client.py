@@ -28,7 +28,8 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
+
+from google.cloud.dataproc_v1 import gapic_version as package_version
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -425,7 +426,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Submits a job to a cluster.
@@ -554,7 +555,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         job: Optional[jobs.Job] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Submits job to a cluster.
@@ -700,7 +701,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Gets the resource representation for a job in a
@@ -828,7 +829,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListJobsPager:
         r"""Lists regions/{region}/jobs in a project.
@@ -980,7 +981,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         request: Optional[Union[jobs.UpdateJobRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Updates a job in a project.
@@ -1074,7 +1075,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> jobs.Job:
         r"""Starts a job cancellation request. To access the job resource
@@ -1204,7 +1205,7 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         region: Optional[str] = None,
         job_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes the job from the project. If the job is active, the
@@ -1327,14 +1328,9 @@ class JobControllerClient(metaclass=JobControllerClientMeta):
         self.transport.close()
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-cloud-dataproc",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("JobControllerClient",)

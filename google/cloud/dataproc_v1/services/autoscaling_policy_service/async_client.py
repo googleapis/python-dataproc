@@ -27,7 +27,8 @@ from typing import (
     Type,
     Union,
 )
-import pkg_resources
+
+from google.cloud.dataproc_v1 import gapic_version as package_version
 
 from google.api_core.client_options import ClientOptions
 from google.api_core import exceptions as core_exceptions
@@ -232,7 +233,7 @@ class AutoscalingPolicyServiceAsyncClient:
         parent: Optional[str] = None,
         policy: Optional[autoscaling_policies.AutoscalingPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Creates new autoscaling policy.
@@ -362,7 +363,7 @@ class AutoscalingPolicyServiceAsyncClient:
         *,
         policy: Optional[autoscaling_policies.AutoscalingPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Updates (replaces) autoscaling policy.
@@ -486,7 +487,7 @@ class AutoscalingPolicyServiceAsyncClient:
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> autoscaling_policies.AutoscalingPolicy:
         r"""Retrieves autoscaling policy.
@@ -610,7 +611,7 @@ class AutoscalingPolicyServiceAsyncClient:
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListAutoscalingPoliciesAsyncPager:
         r"""Lists autoscaling policies in the project.
@@ -747,7 +748,7 @@ class AutoscalingPolicyServiceAsyncClient:
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes an autoscaling policy. It is an error to
@@ -854,14 +855,9 @@ class AutoscalingPolicyServiceAsyncClient:
         await self.transport.close()
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-cloud-dataproc",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("AutoscalingPolicyServiceAsyncClient",)

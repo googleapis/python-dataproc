@@ -28,7 +28,8 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
+
+from google.cloud.dataproc_v1 import gapic_version as package_version
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -454,7 +455,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         region: Optional[str] = None,
         cluster: Optional[clusters.Cluster] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a cluster in a project. The returned
@@ -604,7 +605,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         cluster: Optional[clusters.Cluster] = None,
         update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Updates a cluster in a project. The returned
@@ -831,7 +832,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         request: Optional[Union[clusters.StopClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Stops a cluster in a project.
@@ -933,7 +934,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         request: Optional[Union[clusters.StartClusterRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Starts a cluster in a project.
@@ -1038,7 +1039,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         region: Optional[str] = None,
         cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a cluster in a project. The returned
@@ -1191,7 +1192,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         region: Optional[str] = None,
         cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> clusters.Cluster:
         r"""Gets the resource representation for a cluster in a
@@ -1322,7 +1323,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         region: Optional[str] = None,
         filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListClustersPager:
         r"""Lists all regions/{region}/clusters in a project
@@ -1486,7 +1487,7 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         region: Optional[str] = None,
         cluster_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Gets cluster diagnostic information. The returned
@@ -1643,14 +1644,9 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         self.transport.close()
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-cloud-dataproc",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("ClusterControllerClient",)
