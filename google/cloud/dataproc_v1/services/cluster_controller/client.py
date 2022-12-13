@@ -182,6 +182,30 @@ class ClusterControllerClient(metaclass=ClusterControllerClientMeta):
         return self._transport
 
     @staticmethod
+    def node_group_path(
+        project: str,
+        region: str,
+        cluster: str,
+        node_group: str,
+    ) -> str:
+        """Returns a fully-qualified node_group string."""
+        return "projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}".format(
+            project=project,
+            region=region,
+            cluster=cluster,
+            node_group=node_group,
+        )
+
+    @staticmethod
+    def parse_node_group_path(path: str) -> Dict[str, str]:
+        """Parses a node_group path into its component segments."""
+        m = re.match(
+            r"^projects/(?P<project>.+?)/regions/(?P<region>.+?)/clusters/(?P<cluster>.+?)/nodeGroups/(?P<node_group>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def service_path(
         project: str,
         location: str,

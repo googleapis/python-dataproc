@@ -64,6 +64,8 @@ class ClusterControllerAsyncClient:
     DEFAULT_ENDPOINT = ClusterControllerClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = ClusterControllerClient.DEFAULT_MTLS_ENDPOINT
 
+    node_group_path = staticmethod(ClusterControllerClient.node_group_path)
+    parse_node_group_path = staticmethod(ClusterControllerClient.parse_node_group_path)
     service_path = staticmethod(ClusterControllerClient.service_path)
     parse_service_path = staticmethod(ClusterControllerClient.parse_service_path)
     common_billing_account_path = staticmethod(

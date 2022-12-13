@@ -41,6 +41,8 @@ __protobuf__ = proto.module(
         "ManagedGroupConfig",
         "AcceleratorConfig",
         "DiskConfig",
+        "AuxiliaryNodeGroup",
+        "NodeGroup",
         "NodeInitializationAction",
         "ClusterStatus",
         "SecurityConfig",
@@ -75,23 +77,28 @@ class Cluster(proto.Message):
             Required. The Google Cloud Platform project
             ID that the cluster belongs to.
         cluster_name (str):
-            Required. The cluster name. Cluster names
-            within a project must be unique. Names of
-            deleted clusters can be reused.
+            Required. The cluster name, which must be
+            unique within a project. The name must start
+            with a lowercase letter, and can contain up to
+            51 lowercase letters, numbers, and hyphens. It
+            cannot end with a hyphen. The name of a deleted
+            cluster can be reused.
         config (google.cloud.dataproc_v1.types.ClusterConfig):
             Optional. The cluster config for a cluster of
             Compute Engine Instances. Note that Dataproc may
             set default values, and values may change when
             clusters are updated.
         virtual_cluster_config (google.cloud.dataproc_v1.types.VirtualClusterConfig):
-            Optional. The virtual cluster config, used when creating a
+            Optional. The virtual cluster config is used when creating a
             Dataproc cluster that does not directly control the
             underlying compute resources, for example, when creating a
             `Dataproc-on-GKE
-            cluster <https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster>`__.
-            Note that Dataproc may set default values, and values may
-            change when clusters are updated. Exactly one of config or
-            virtualClusterConfig must be specified.
+            cluster <https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke>`__.
+            Dataproc may set default values, and values may change when
+            clusters are updated. Exactly one of
+            [config][google.cloud.dataproc.v1.Cluster.config] or
+            [virtual_cluster_config][google.cloud.dataproc.v1.Cluster.virtual_cluster_config]
+            must be specified.
         labels (MutableMapping[str, str]):
             Optional. The labels to associate with this cluster. Label
             **keys** must contain 1 to 63 characters, and must conform
@@ -239,6 +246,8 @@ class ClusterConfig(proto.Message):
             Optional. Metastore configuration.
         dataproc_metric_config (google.cloud.dataproc_v1.types.DataprocMetricConfig):
             Optional. The config for Dataproc metrics.
+        auxiliary_node_groups (MutableSequence[google.cloud.dataproc_v1.types.AuxiliaryNodeGroup]):
+            Optional. The node group settings.
     """
 
     config_bucket: str = proto.Field(
@@ -316,26 +325,31 @@ class ClusterConfig(proto.Message):
         number=23,
         message="DataprocMetricConfig",
     )
+    auxiliary_node_groups: MutableSequence["AuxiliaryNodeGroup"] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=25,
+        message="AuxiliaryNodeGroup",
+    )
 
 
 class VirtualClusterConfig(proto.Message):
-    r"""Dataproc cluster config for a cluster that does not directly control
-    the underlying compute resources, such as a `Dataproc-on-GKE
-    cluster <https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster>`__.
+    r"""The Dataproc cluster config for a cluster that does not directly
+    control the underlying compute resources, such as a `Dataproc-on-GKE
+    cluster <https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke>`__.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
         staging_bucket (str):
-            Optional. A Storage bucket used to stage job dependencies,
-            config files, and job driver console output. If you do not
-            specify a staging bucket, Cloud Dataproc will determine a
-            Cloud Storage location (US, ASIA, or EU) for your cluster's
-            staging bucket according to the Compute Engine zone where
-            your cluster is deployed, and then create and manage this
-            project-level, per-location bucket (see `Dataproc staging
-            and temp
+            Optional. A Cloud Storage bucket used to stage job
+            dependencies, config files, and job driver console output.
+            If you do not specify a staging bucket, Cloud Dataproc will
+            determine a Cloud Storage location (US, ASIA, or EU) for
+            your cluster's staging bucket according to the Compute
+            Engine zone where your cluster is deployed, and then create
+            and manage this project-level, per-location bucket (see
+            `Dataproc staging and temp
             buckets <https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket>`__).
             **This field requires a Cloud Storage bucket name, not a
             ``gs://...`` URI to a Cloud Storage bucket.**
@@ -630,8 +644,9 @@ class GceClusterConfig(proto.Message):
 
 
 class NodeGroupAffinity(proto.Message):
-    r"""Node Group Affinity for clusters using sole-tenant node
-    groups.
+    r"""Node Group Affinity for clusters using sole-tenant node groups.
+    **The Dataproc ``NodeGroupAffinity`` resource is not related to the
+    Dataproc [NodeGroup][google.cloud.dataproc.v1.NodeGroup] resource.**
 
     Attributes:
         node_group_uri (str):
@@ -780,10 +795,7 @@ class InstanceGroupConfig(proto.Message):
     """
 
     class Preemptibility(proto.Enum):
-        r"""Controls the use of [preemptible instances]
-        (https://cloud.google.com/compute/docs/instances/preemptible) within
-        the group.
-        """
+        r"""Controls the use of preemptible instances within the group."""
         PREEMPTIBILITY_UNSPECIFIED = 0
         NON_PREEMPTIBLE = 1
         PREEMPTIBLE = 2
@@ -910,7 +922,7 @@ class DiskConfig(proto.Message):
             Optional. Size in GB of the boot disk
             (default is 500GB).
         num_local_ssds (int):
-            Optional. Number of attached SSDs, from 0 to 4 (default is
+            Optional. Number of attached SSDs, from 0 to 8 (default is
             0). If SSDs are not attached, the boot disk is used to store
             runtime logs and
             `HDFS <https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html>`__
@@ -937,6 +949,84 @@ class DiskConfig(proto.Message):
         number=2,
     )
     local_ssd_interface: str = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+
+
+class AuxiliaryNodeGroup(proto.Message):
+    r"""Node group identification and configuration information.
+
+    Attributes:
+        node_group (google.cloud.dataproc_v1.types.NodeGroup):
+            Required. Node group configuration.
+        node_group_id (str):
+            Optional. A node group ID. Generated if not specified.
+
+            The ID must contain only letters (a-z, A-Z), numbers (0-9),
+            underscores (_), and hyphens (-). Cannot begin or end with
+            underscore or hyphen. Must consist of from 3 to 33
+            characters.
+    """
+
+    node_group: "NodeGroup" = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="NodeGroup",
+    )
+    node_group_id: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+
+
+class NodeGroup(proto.Message):
+    r"""Dataproc Node Group. **The Dataproc ``NodeGroup`` resource is not
+    related to the Dataproc
+    [NodeGroupAffinity][google.cloud.dataproc.v1.NodeGroupAffinity]
+    resource.**
+
+    Attributes:
+        name (str):
+            The Node group `resource name <https://aip.dev/122>`__.
+        roles (MutableSequence[google.cloud.dataproc_v1.types.NodeGroup.Role]):
+            Required. Node group roles.
+        node_group_config (google.cloud.dataproc_v1.types.InstanceGroupConfig):
+            Optional. The node group instance group
+            configuration.
+        labels (MutableMapping[str, str]):
+            Optional. Node group labels.
+
+            -  Label **keys** must consist of from 1 to 63 characters
+               and conform to `RFC
+               1035 <https://www.ietf.org/rfc/rfc1035.txt>`__.
+            -  Label **values** can be empty. If specified, they must
+               consist of from 1 to 63 characters and conform to [RFC
+               1035] (https://www.ietf.org/rfc/rfc1035.txt).
+            -  The node group must have no more than 32 labels.
+    """
+
+    class Role(proto.Enum):
+        r"""Node group roles."""
+        ROLE_UNSPECIFIED = 0
+        DRIVER = 1
+
+    name: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    roles: MutableSequence[Role] = proto.RepeatedField(
+        proto.ENUM,
+        number=2,
+        enum=Role,
+    )
+    node_group_config: "InstanceGroupConfig" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="InstanceGroupConfig",
+    )
+    labels: MutableMapping[str, str] = proto.MapField(
+        proto.STRING,
         proto.STRING,
         number=4,
     )

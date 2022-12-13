@@ -39,6 +39,7 @@ __protobuf__ = proto.module(
         "JobReference",
         "YarnApplication",
         "Job",
+        "DriverSchedulingConfig",
         "JobScheduling",
         "SubmitJobRequest",
         "JobMetadata",
@@ -184,7 +185,7 @@ class HadoopJob(proto.Message):
 
 class SparkJob(proto.Message):
     r"""A Dataproc job for running `Apache
-    Spark <http://spark.apache.org/>`__ applications on YARN.
+    Spark <https://spark.apache.org/>`__ applications on YARN.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -455,7 +456,7 @@ class HiveJob(proto.Message):
 
 class SparkSqlJob(proto.Message):
     r"""A Dataproc job for running `Apache Spark
-    SQL <http://spark.apache.org/sql/>`__ queries.
+    SQL <https://spark.apache.org/sql/>`__ queries.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -1014,6 +1015,8 @@ class Job(proto.Message):
             value is ``false``, the job is still in progress. If
             ``true``, the job is completed, and ``status.state`` field
             will indicate if it was successful, failed, or cancelled.
+        driver_scheduling_config (google.cloud.dataproc_v1.types.DriverSchedulingConfig):
+            Optional. Driver scheduling configuration.
     """
 
     reference: "JobReference" = proto.Field(
@@ -1115,6 +1118,33 @@ class Job(proto.Message):
         proto.BOOL,
         number=24,
     )
+    driver_scheduling_config: "DriverSchedulingConfig" = proto.Field(
+        proto.MESSAGE,
+        number=27,
+        message="DriverSchedulingConfig",
+    )
+
+
+class DriverSchedulingConfig(proto.Message):
+    r"""Driver scheduling configuration.
+
+    Attributes:
+        memory_mb (int):
+            Required. The amount of memory in MB the
+            driver is requesting.
+        vcores (int):
+            Required. The number of vCPUs the driver is
+            requesting.
+    """
+
+    memory_mb: int = proto.Field(
+        proto.INT32,
+        number=1,
+    )
+    vcores: int = proto.Field(
+        proto.INT32,
+        number=2,
+    )
 
 
 class JobScheduling(proto.Message):
@@ -1126,24 +1156,25 @@ class JobScheduling(proto.Message):
             restarted as a result of driver exiting with non-zero code
             before job is reported failed.
 
-            A job may be reported as thrashing if driver exits with
-            non-zero code 4 times within 10 minute window.
+            A job may be reported as thrashing if the driver exits with
+            a non-zero code four times within a 10-minute window.
 
             Maximum value is 10.
 
-            **Note:** Currently, this restartable job option is not
-            supported in Dataproc `workflow
-            template <https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template>`__
-            jobs.
+            **Note:** This restartable job option is not supported in
+            Dataproc [workflow templates]
+            (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template).
         max_failures_total (int):
-            Optional. Maximum number of times in total a driver may be
-            restarted as a result of driver exiting with non-zero code
-            before job is reported failed. Maximum value is 240.
+            Optional. Maximum total number of times a driver may be
+            restarted as a result of the driver exiting with a non-zero
+            code. After the maximum number is reached, the job will be
+            reported as failed.
+
+            Maximum value is 240.
 
             **Note:** Currently, this restartable job option is not
             supported in Dataproc `workflow
-            template <https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template>`__
-            jobs.
+            templates <https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template>`__.
     """
 
     max_failures_per_hour: int = proto.Field(
