@@ -36,10 +36,6 @@ for library in s.get_staging_dirs(default_version):
         shutil.rmtree("samples/generated_samples", ignore_errors=True)
         clean_up_generated_samples = False
 
-    # Rename `policy_` to `policy` to avoid breaking change in a GA library
-    # Only replace if a non-alphanumeric (\W) character follows `policy_`
-    s.replace(library / "**/*.py", "policy_(\W)", "policy\g<1>")
-
     s.move(library, excludes=["**/gapic_version.py"])
 s.remove_staging_dirs()
 
@@ -55,6 +51,10 @@ templated_files = gcp.CommonTemplates().py_library(
 s.move(templated_files, excludes=[".coveragerc", ".github/release-please.yml"])
 
 python.py_samples(skip_readmes=True)
+
+# Temporarily disable warnings due to
+# https://github.com/googleapis/gapic-generator-python/issues/525
+s.replace("noxfile.py", '[\"\']-W[\"\']', '# "-W"')
 
 # run format session for all directories which have a noxfile
 for noxfile in Path(".").glob("**/noxfile.py"):
