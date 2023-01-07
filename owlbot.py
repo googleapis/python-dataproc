@@ -41,7 +41,7 @@ templated_files = common.py_library(
     microgenerator=True,
     cov_level=100
 )
-s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .coveragerc file
+s.move(templated_files, excludes=[".coveragerc", ".github/release-please.yml"])  # microgenerator has a good .coveragerc file
 
 # ----------------------------------------------------------------------------
 # Samples templates
