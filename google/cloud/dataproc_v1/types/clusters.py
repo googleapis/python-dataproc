@@ -799,6 +799,7 @@ class InstanceGroupConfig(proto.Message):
         PREEMPTIBILITY_UNSPECIFIED = 0
         NON_PREEMPTIBLE = 1
         PREEMPTIBLE = 2
+        SPOT = 3
 
     num_instances: int = proto.Field(
         proto.INT32,
