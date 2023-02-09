@@ -15,7 +15,7 @@
 # limitations under the License.
 
 import os
-import time
+import pytest
 
 from google.cloud import dataproc_v1
 
