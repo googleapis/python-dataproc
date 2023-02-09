@@ -20,11 +20,12 @@ import time
 from google.cloud import dataproc_v1
 
 
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
 class TestSystemClusterController(object):
-    def test_list_clusters(self):
+    def test_list_clusters(self, transport):
         project_id = os.environ["PROJECT_ID"]
 
-        client = dataproc_v1.ClusterControllerClient()
+        client = dataproc_v1.ClusterControllerClient(transport=transport)
         project_id_2 = project_id
         region = "global"
         response = client.list_clusters(
