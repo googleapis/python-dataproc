@@ -101,7 +101,6 @@ from .jobs import (
     SparkRJob,
     SparkSqlJob,
     SubmitJobRequest,
-    TrinoJob,
     UpdateJobRequest,
     YarnApplication,
 )
@@ -128,8 +127,6 @@ from .shared import (
     RuntimeConfig,
     RuntimeInfo,
     SparkHistoryServerConfig,
-    UsageMetrics,
-    UsageSnapshot,
     Component,
     FailureAction,
 )
@@ -239,7 +236,6 @@ __all__ = (
     "SparkRJob",
     "SparkSqlJob",
     "SubmitJobRequest",
-    "TrinoJob",
     "UpdateJobRequest",
     "YarnApplication",
     "CreateNodeGroupRequest",
@@ -260,8 +256,6 @@ __all__ = (
     "RuntimeConfig",
     "RuntimeInfo",
     "SparkHistoryServerConfig",
-    "UsageMetrics",
-    "UsageSnapshot",
     "Component",
     "FailureAction",
     "ClusterOperation",

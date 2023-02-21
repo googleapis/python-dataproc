@@ -152,7 +152,6 @@ from google.cloud.dataproc_v1.types.jobs import SparkJob
 from google.cloud.dataproc_v1.types.jobs import SparkRJob
 from google.cloud.dataproc_v1.types.jobs import SparkSqlJob
 from google.cloud.dataproc_v1.types.jobs import SubmitJobRequest
-from google.cloud.dataproc_v1.types.jobs import TrinoJob
 from google.cloud.dataproc_v1.types.jobs import UpdateJobRequest
 from google.cloud.dataproc_v1.types.jobs import YarnApplication
 from google.cloud.dataproc_v1.types.node_groups import CreateNodeGroupRequest
@@ -173,8 +172,6 @@ from google.cloud.dataproc_v1.types.shared import PeripheralsConfig
 from google.cloud.dataproc_v1.types.shared import RuntimeConfig
 from google.cloud.dataproc_v1.types.shared import RuntimeInfo
 from google.cloud.dataproc_v1.types.shared import SparkHistoryServerConfig
-from google.cloud.dataproc_v1.types.shared import UsageMetrics
-from google.cloud.dataproc_v1.types.shared import UsageSnapshot
 from google.cloud.dataproc_v1.types.shared import Component
 from google.cloud.dataproc_v1.types.shared import FailureAction
 from google.cloud.dataproc_v1.types.workflow_templates import ClusterOperation
@@ -307,7 +304,6 @@ __all__ = (
     "SparkRJob",
     "SparkSqlJob",
     "SubmitJobRequest",
-    "TrinoJob",
     "UpdateJobRequest",
     "YarnApplication",
     "CreateNodeGroupRequest",
@@ -328,8 +324,6 @@ __all__ = (
     "RuntimeConfig",
     "RuntimeInfo",
     "SparkHistoryServerConfig",
-    "UsageMetrics",
-    "UsageSnapshot",
     "Component",
     "FailureAction",
     "ClusterOperation",
