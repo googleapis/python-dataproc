@@ -117,8 +117,10 @@ from .operations import (
     NodeGroupOperationMetadata,
 )
 from .shared import (
+    Component,
     EnvironmentConfig,
     ExecutionConfig,
+    FailureAction,
     GkeClusterConfig,
     GkeNodePoolConfig,
     GkeNodePoolTarget,
@@ -130,8 +132,6 @@ from .shared import (
     SparkHistoryServerConfig,
     UsageMetrics,
     UsageSnapshot,
-    Component,
-    FailureAction,
 )
 from .workflow_templates import (
     ClusterOperation,
