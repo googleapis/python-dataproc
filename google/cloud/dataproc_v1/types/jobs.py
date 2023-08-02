@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,8 +64,10 @@ class LoggingConfig(proto.Message):
             The per-package log levels for the driver.
             This may include "root" package name to
             configure rootLogger. Examples:
-              'com.google = FATAL', 'root = INFO',
-            'org.apache = DEBUG'
+
+            - 'com.google = FATAL'
+            - 'root = INFO'
+            - 'org.apache = DEBUG'
     """
 
     class Level(proto.Enum):
@@ -129,6 +131,7 @@ class HadoopJob(proto.Message):
         main_jar_file_uri (str):
             The HCFS URI of the jar file containing the
             main class. Examples:
+
             'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar'
             'hdfs:/tmp/test-samples/custom-wordcount.jar'
             'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'
@@ -156,13 +159,14 @@ class HadoopJob(proto.Message):
         archive_uris (MutableSequence[str]):
             Optional. HCFS URIs of archives to be
             extracted in the working directory of Hadoop
-            drivers and tasks. Supported file types: .jar,
-            .tar, .tar.gz, .tgz, or .zip.
+            drivers and tasks. Supported file types:
+
+            .jar, .tar, .tar.gz, .tgz, or .zip.
         properties (MutableMapping[str, str]):
             Optional. A mapping of property names to values, used to
             configure Hadoop. Properties that conflict with values set
             by the Dataproc API may be overwritten. Can include
-            properties set in /etc/hadoop/conf/*-site and classes in
+            properties set in ``/etc/hadoop/conf/*-site`` and classes in
             user code.
         logging_config (google.cloud.dataproc_v1.types.LoggingConfig):
             Optional. The runtime log config for job
@@ -245,8 +249,9 @@ class SparkJob(proto.Message):
         archive_uris (MutableSequence[str]):
             Optional. HCFS URIs of archives to be
             extracted into the working directory of each
-            executor. Supported file types: .jar, .tar,
-            .tar.gz, .tgz, and .zip.
+            executor. Supported file types:
+
+            .jar, .tar, .tar.gz, .tgz, and .zip.
         properties (MutableMapping[str, str]):
             Optional. A mapping of property names to
             values, used to configure Spark. Properties that
@@ -325,8 +330,9 @@ class PySparkJob(proto.Message):
         archive_uris (MutableSequence[str]):
             Optional. HCFS URIs of archives to be
             extracted into the working directory of each
-            executor. Supported file types: .jar, .tar,
-            .tar.gz, .tgz, and .zip.
+            executor. Supported file types:
+
+            .jar, .tar, .tar.gz, .tgz, and .zip.
         properties (MutableMapping[str, str]):
             Optional. A mapping of property names to
             values, used to configure PySpark. Properties
@@ -438,7 +444,7 @@ class HiveJob(proto.Message):
             Optional. A mapping of property names and values, used to
             configure Hive. Properties that conflict with values set by
             the Dataproc API may be overwritten. Can include properties
-            set in /etc/hadoop/conf/*-site.xml,
+            set in ``/etc/hadoop/conf/*-site.xml``,
             /etc/hive/conf/hive-site.xml, and classes in user code.
         jar_file_uris (MutableSequence[str]):
             Optional. HCFS URIs of jar files to add to
@@ -580,7 +586,7 @@ class PigJob(proto.Message):
             Optional. A mapping of property names to values, used to
             configure Pig. Properties that conflict with values set by
             the Dataproc API may be overwritten. Can include properties
-            set in /etc/hadoop/conf/*-site.xml,
+            set in ``/etc/hadoop/conf/*-site.xml``,
             /etc/pig/conf/pig.properties, and classes in user code.
         jar_file_uris (MutableSequence[str]):
             Optional. HCFS URIs of jar files to add to
@@ -648,8 +654,9 @@ class SparkRJob(proto.Message):
         archive_uris (MutableSequence[str]):
             Optional. HCFS URIs of archives to be
             extracted into the working directory of each
-            executor. Supported file types: .jar, .tar,
-            .tar.gz, .tgz, and .zip.
+            executor. Supported file types:
+
+            .jar, .tar, .tar.gz, .tgz, and .zip.
         properties (MutableMapping[str, str]):
             Optional. A mapping of property names to
             values, used to configure SparkR. Properties

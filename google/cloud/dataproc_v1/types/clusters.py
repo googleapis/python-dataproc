@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1284,8 +1284,10 @@ class KerberosConfig(proto.Message):
     Attributes:
         enable_kerberos (bool):
             Optional. Flag to indicate whether to
-            Kerberize the cluster (default: false). Set this
-            field to true to enable Kerberos on a cluster.
+            Kerberize the cluster (default:
+
+            false). Set this field to true to enable
+            Kerberos on a cluster.
         root_principal_password_uri (str):
             Optional. The Cloud Storage URI of a KMS
             encrypted file containing the root principal
