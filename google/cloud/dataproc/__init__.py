@@ -64,108 +64,17 @@ from google.cloud.dataproc_v1.types.autoscaling_policies import (
     ListAutoscalingPoliciesResponse,
     UpdateAutoscalingPolicyRequest,
 )
-from google.cloud.dataproc_v1.types.batches import Batch
-from google.cloud.dataproc_v1.types.batches import CreateBatchRequest
-from google.cloud.dataproc_v1.types.batches import DeleteBatchRequest
-from google.cloud.dataproc_v1.types.batches import GetBatchRequest
-from google.cloud.dataproc_v1.types.batches import ListBatchesRequest
-from google.cloud.dataproc_v1.types.batches import ListBatchesResponse
-from google.cloud.dataproc_v1.types.batches import PySparkBatch
-from google.cloud.dataproc_v1.types.batches import SparkBatch
-from google.cloud.dataproc_v1.types.batches import SparkRBatch
-from google.cloud.dataproc_v1.types.batches import SparkSqlBatch
-from google.cloud.dataproc_v1.types.clusters import AcceleratorConfig
-from google.cloud.dataproc_v1.types.clusters import AutoscalingConfig
-from google.cloud.dataproc_v1.types.clusters import AuxiliaryNodeGroup
-from google.cloud.dataproc_v1.types.clusters import AuxiliaryServicesConfig
-from google.cloud.dataproc_v1.types.clusters import Cluster
-from google.cloud.dataproc_v1.types.clusters import ClusterConfig
-from google.cloud.dataproc_v1.types.clusters import ClusterMetrics
-from google.cloud.dataproc_v1.types.clusters import ClusterStatus
-from google.cloud.dataproc_v1.types.clusters import ConfidentialInstanceConfig
-from google.cloud.dataproc_v1.types.clusters import CreateClusterRequest
-from google.cloud.dataproc_v1.types.clusters import DataprocMetricConfig
-from google.cloud.dataproc_v1.types.clusters import DeleteClusterRequest
-from google.cloud.dataproc_v1.types.clusters import DiagnoseClusterRequest
-from google.cloud.dataproc_v1.types.clusters import DiagnoseClusterResults
-from google.cloud.dataproc_v1.types.clusters import DiskConfig
-from google.cloud.dataproc_v1.types.clusters import EncryptionConfig
-from google.cloud.dataproc_v1.types.clusters import EndpointConfig
-from google.cloud.dataproc_v1.types.clusters import GceClusterConfig
-from google.cloud.dataproc_v1.types.clusters import GetClusterRequest
-from google.cloud.dataproc_v1.types.clusters import IdentityConfig
-from google.cloud.dataproc_v1.types.clusters import InstanceFlexibilityPolicy
-from google.cloud.dataproc_v1.types.clusters import InstanceGroupConfig
-from google.cloud.dataproc_v1.types.clusters import InstanceReference
-from google.cloud.dataproc_v1.types.clusters import KerberosConfig
-from google.cloud.dataproc_v1.types.clusters import LifecycleConfig
-from google.cloud.dataproc_v1.types.clusters import ListClustersRequest
-from google.cloud.dataproc_v1.types.clusters import ListClustersResponse
-from google.cloud.dataproc_v1.types.clusters import ManagedGroupConfig
-from google.cloud.dataproc_v1.types.clusters import MetastoreConfig
-from google.cloud.dataproc_v1.types.clusters import NodeGroup
-from google.cloud.dataproc_v1.types.clusters import NodeGroupAffinity
-from google.cloud.dataproc_v1.types.clusters import NodeInitializationAction
-from google.cloud.dataproc_v1.types.clusters import ReservationAffinity
-from google.cloud.dataproc_v1.types.clusters import SecurityConfig
-from google.cloud.dataproc_v1.types.clusters import ShieldedInstanceConfig
-from google.cloud.dataproc_v1.types.clusters import SoftwareConfig
-from google.cloud.dataproc_v1.types.clusters import StartClusterRequest
-from google.cloud.dataproc_v1.types.clusters import StopClusterRequest
-from google.cloud.dataproc_v1.types.clusters import UpdateClusterRequest
-from google.cloud.dataproc_v1.types.clusters import VirtualClusterConfig
-from google.cloud.dataproc_v1.types.jobs import CancelJobRequest
-from google.cloud.dataproc_v1.types.jobs import DeleteJobRequest
-from google.cloud.dataproc_v1.types.jobs import DriverSchedulingConfig
-from google.cloud.dataproc_v1.types.jobs import GetJobRequest
-from google.cloud.dataproc_v1.types.jobs import HadoopJob
-from google.cloud.dataproc_v1.types.jobs import HiveJob
-from google.cloud.dataproc_v1.types.jobs import Job
-from google.cloud.dataproc_v1.types.jobs import JobMetadata
-from google.cloud.dataproc_v1.types.jobs import JobPlacement
-from google.cloud.dataproc_v1.types.jobs import JobReference
-from google.cloud.dataproc_v1.types.jobs import JobScheduling
-from google.cloud.dataproc_v1.types.jobs import JobStatus
-from google.cloud.dataproc_v1.types.jobs import ListJobsRequest
-from google.cloud.dataproc_v1.types.jobs import ListJobsResponse
-from google.cloud.dataproc_v1.types.jobs import LoggingConfig
-from google.cloud.dataproc_v1.types.jobs import PigJob
-from google.cloud.dataproc_v1.types.jobs import PrestoJob
-from google.cloud.dataproc_v1.types.jobs import PySparkJob
-from google.cloud.dataproc_v1.types.jobs import QueryList
-from google.cloud.dataproc_v1.types.jobs import SparkJob
-from google.cloud.dataproc_v1.types.jobs import SparkRJob
-from google.cloud.dataproc_v1.types.jobs import SparkSqlJob
-from google.cloud.dataproc_v1.types.jobs import SubmitJobRequest
-from google.cloud.dataproc_v1.types.jobs import TrinoJob
-from google.cloud.dataproc_v1.types.jobs import UpdateJobRequest
-from google.cloud.dataproc_v1.types.jobs import YarnApplication
-from google.cloud.dataproc_v1.types.node_groups import CreateNodeGroupRequest
-from google.cloud.dataproc_v1.types.node_groups import GetNodeGroupRequest
-from google.cloud.dataproc_v1.types.node_groups import ResizeNodeGroupRequest
-from google.cloud.dataproc_v1.types.operations import BatchOperationMetadata
-from google.cloud.dataproc_v1.types.operations import ClusterOperationMetadata
-from google.cloud.dataproc_v1.types.operations import ClusterOperationStatus
-from google.cloud.dataproc_v1.types.operations import NodeGroupOperationMetadata
-from google.cloud.dataproc_v1.types.shared import EnvironmentConfig
-from google.cloud.dataproc_v1.types.shared import ExecutionConfig
-from google.cloud.dataproc_v1.types.shared import GkeClusterConfig
-from google.cloud.dataproc_v1.types.shared import GkeNodePoolConfig
-from google.cloud.dataproc_v1.types.shared import GkeNodePoolTarget
-from google.cloud.dataproc_v1.types.shared import KubernetesClusterConfig
-from google.cloud.dataproc_v1.types.shared import KubernetesSoftwareConfig
-from google.cloud.dataproc_v1.types.shared import PeripheralsConfig
-from google.cloud.dataproc_v1.types.shared import RuntimeConfig
-from google.cloud.dataproc_v1.types.shared import RuntimeInfo
-from google.cloud.dataproc_v1.types.shared import SparkHistoryServerConfig
-from google.cloud.dataproc_v1.types.shared import UsageMetrics
-from google.cloud.dataproc_v1.types.shared import UsageSnapshot
-from google.cloud.dataproc_v1.types.shared import Component
-from google.cloud.dataproc_v1.types.shared import FailureAction
-from google.cloud.dataproc_v1.types.workflow_templates import ClusterOperation
-from google.cloud.dataproc_v1.types.workflow_templates import ClusterSelector
-from google.cloud.dataproc_v1.types.workflow_templates import (
-    CreateWorkflowTemplateRequest,
+from google.cloud.dataproc_v1.types.batches import (
+    Batch,
+    CreateBatchRequest,
+    DeleteBatchRequest,
+    GetBatchRequest,
+    ListBatchesRequest,
+    ListBatchesResponse,
+    PySparkBatch,
+    SparkBatch,
+    SparkRBatch,
+    SparkSqlBatch,
 )
 from google.cloud.dataproc_v1.types.clusters import (
     AcceleratorConfig,
@@ -188,7 +97,9 @@ from google.cloud.dataproc_v1.types.clusters import (
     GceClusterConfig,
     GetClusterRequest,
     IdentityConfig,
+    InstanceFlexibilityPolicy,
     InstanceGroupConfig,
+    InstanceReference,
     KerberosConfig,
     LifecycleConfig,
     ListClustersRequest,
